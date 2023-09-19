@@ -1,0 +1,139 @@
+syntax = "proto3";
+package com.wiseasy.ecr.hub.data;
+option java_package = "com.wiseasy.ecr.hub.sdk.protobuf";
+option java_outer_classname = "ECRHubRequestProto";
+message ECRHubRequest {
+  /**
+  主题类型：ecrhub.init：初始化（握手）；ecrhub.pay.order：支付；ecrhub.pay.query：查询；ecrhub.pay.close：关闭订单；ecrhub.heartbeat：心跳
+   */
+  string topic = 1;
+  /**
+  消息id，用于跟踪交易的上下文
+   */
+  string msg_id = 2;
+  /**
+  支付应用的appID
+   */
+  string  app_id = 3;
+  /**
+  时间戳
+   */
+  string timestamp = 4;
+  /**
+  SDK版本
+   */
+  string version = 5;
+  /**
+ 请求的业务数据
+  */
+  RequestBizData biz_data = 6;
+  /**
+  声音
+   */
+  VoiceData voice_data = 7;
+  /**
+  打印
+   */
+  PrinterData printer_data = 8;
+  /**
+  通知
+   */
+  NotifyData notify_data = 9;
+}
+
+message RequestBizData {
+  /**
+  商户订单号
+   */
+  string merchant_order_no = 1;
+  /**
+ 原商户订单号，退款等后续交易必传
+ */
+  string orig_merchant_order_no = 2;
+  /**
+标价币种
+*/
+  string price_currency = 3;
+  /**
+  订单金额
+   */
+  string order_amount = 4;
+  /**
+    消费金额
+     */
+  string tip_amount = 5;
+  /**
+    消费金额
+     */
+  string trans_type = 6;
+  /**
+    支付方式类目：QR_C_SCAN_B:主扫；QR_B_SCAN_C：扫码被扫；BANKCARD:银行卡；OTP:OTP一次性密码支付
+     */
+  string pay_method_category = 7;
+  /**
+  附加信息
+   */
+  string attach = 8;
+  /**
+  描述信息
+   */
+  string description = 9;
+  /**
+  通知回调地址
+   */
+  string notify_url = 10;
+  /**
+  token，确认返回数据的客户端
+   */
+  string token = 11;
+  /**
+ 扩展参数
+ */
+  map<string, string> extends_params = 12;
+}
+
+message VoiceData {
+  /**
+  语音内容
+   */
+  string content = 1;
+  /**
+  语言语种
+   */
+  string content_locale = 2;
+  /**
+  语言地址
+   */
+  string content_url = 3;
+}
+
+message PrinterData {
+  /**
+  打印文本内容
+   */
+  string content = 1;
+  /**
+  打印文本地址
+   */
+  string content_url = 2;
+}
+
+message NotifyData {
+  /**
+  通知的title
+   */
+  string title = 1;
+  /**
+  通知的body
+   */
+  string body = 2;
+  /**
+  通知显示图片地址
+   */
+  string image_url = 3;
+  /**
+  通知声音
+   */
+  string sound = 4;
+}
+
