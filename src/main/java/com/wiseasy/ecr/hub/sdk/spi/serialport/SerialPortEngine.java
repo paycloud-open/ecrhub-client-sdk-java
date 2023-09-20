@@ -51,16 +51,40 @@ public class SerialPortEngine {
 
     public SerialPort getCommPort(String portName) throws ECRHubException {
         SerialPort serialPort = null;
-        try {
-            serialPort = SerialPort.getCommPort(portName);
-        } catch (Exception e) {
-            log.error("Invalid serial port name:{}", portName);
-            throw new ECRHubException(e);
+        if (StrUtil.isBlank(portName)) {
+            serialPort = findSerialPort();
+            if (serialPort == null) {
+                throw new ECRHubException("The serial port name cannot be empty.");
+            }
+        } else {
+            try {
+                serialPort = SerialPort.getCommPort(portName);
+            } catch (Exception e) {
+                log.error("Invalid serial port name:{}", portName);
+                throw new ECRHubException(e);
+            }
         }
         if (serialPort.isOpen()) {
-            throw new ECRHubException("This serial port name is already occupied.");
+            throw new ECRHubException("This serial port is already occupied.");
         }
         return serialPort;
+    }
+
+    private SerialPort findSerialPort() {
+        SerialPort[] serialPorts = SerialPort.getCommPorts();//查找所有串口
+        for(SerialPort port:serialPorts){
+            System.out.println("Port:"+port.getSystemPortName());//打印串口名称，如COM4
+            System.out.println("PortDesc:"+port.getPortDescription());//打印串口类型，如USB Serial
+            System.out.println("PortDesc:"+port.getDescriptivePortName());//打印串口的完整类型，如USB-SERIAL CH340(COM4)
+        }
+
+        for(SerialPort serialPort : serialPorts) {
+            String descriptivePortName = serialPort.getDescriptivePortName();
+            if (descriptivePortName.contains("GPS")) {
+                return serialPort;
+            }
+        }
+        return null;
     }
 
     public boolean connect() throws ECRHubException {
@@ -97,9 +121,9 @@ public class SerialPortEngine {
         serialPort.setComPortParameters(cfg.getBaudRate(), cfg.getDataBits(), cfg.getStopBits(), cfg.getParity());
         serialPort.setComPortTimeouts(cfg.getTimeoutMode(), cfg.getReadTimeout(), cfg.getWriteTimeout());
         if (serialPort.openPort()) {
-            log.info("Successfully open the serial port:{}", serialPort.getSystemPortPath());
+            log.info("Successfully open the serial port:{}", serialPort.getSystemPortName());
         } else {
-            throw new ECRHubException("Failed to open the serial port:" + serialPort.getSystemPortPath());
+            throw new ECRHubException("Failed to open the serial port:" + serialPort.getSystemPortName());
         }
     }
 
