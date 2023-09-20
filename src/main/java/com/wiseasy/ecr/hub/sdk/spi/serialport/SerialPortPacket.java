@@ -1,7 +1,8 @@
 package com.wiseasy.ecr.hub.sdk.spi.serialport;
 
-
 import com.wiseasy.ecr.hub.sdk.utils.HexUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
 
@@ -11,29 +12,31 @@ import java.nio.ByteBuffer;
  * @author: jzj
  * @create: 2023-09-08 12:05
  **/
-public class SerialPortPackage {
+public class SerialPortPacket {
 
-    public static final byte PACKAGETYPE_COMMON = 0x00;
-    public static final byte PACKAGETYPE_HANDSHAKE = 0x01;
-    public static final byte PACKAGETYPE_HANDSHAKE_CONFIRM = 0x02;
+    private static final Logger log = LoggerFactory.getLogger(SerialPortPacket.class);
+
+    public static final byte PACK_TYPE_COMMON = 0x00;
+    public static final byte PACK_TYPE_HANDSHAKE = 0x01;
+    public static final byte PACK_TYPE_HANDSHAKE_CONFIRM = 0x02;
 
     public static final String PACK_HEAD = "55AA";
     public static final String PACK_TAIL = "CC33";
 
     private int maxLength = 1024;//定义一个包的最大长度，2个字节表示的最大长度
     private int starCodeLength = 2;//起始符
-    private int packageTypeLength = 1;//包类型
+    private int packetTypeLength = 1;//包类型
     private int ackLength = 1;//ack
-    private int packageIdLength = 1;//包id
+    private int packetIdLength = 1;//包id
     private int dataLength = 2;//包长度
-    private int headerLength = starCodeLength + packageTypeLength + ackLength + packageIdLength + dataLength;//协议头长度，有效数据之前的长度
+    private int headerLength = starCodeLength + packetTypeLength + ackLength + packetIdLength + dataLength;//协议头长度，有效数据之前的长度
     private int checkCodeLength = 1;//校验和长度1
     private int endCodeLength = 2;//终止符
 
     private static volatile int msgId; //消息id in 1..255
 
     protected byte[] head = HexUtil.hex2byte(PACK_HEAD);
-    private byte packageType;
+    private byte packType;
     protected byte ack;
     protected byte id;
     protected byte[] dataLen;
@@ -41,19 +44,19 @@ public class SerialPortPackage {
     protected byte checkCode;
     protected byte[] end = HexUtil.hex2byte(PACK_TAIL);
 
-    public SerialPortPackage() {
+    public SerialPortPacket() {
     }
 
-    public SerialPortPackage(byte packageType, byte ack, byte id, byte[] dataLen, byte[] data) {
-        this.packageType = packageType;
+    public SerialPortPacket(byte packType, byte ack, byte id, byte[] dataLen, byte[] data) {
+        this.packType = packType;
         this.ack = ack;
         this.id = id;
         this.dataLen = dataLen;
         this.data = data;
     }
 
-    public byte getPackageType() {
-        return packageType;
+    public byte getPackType() {
+        return packType;
     }
 
     public byte getAck() {
@@ -104,7 +107,7 @@ public class SerialPortPackage {
      */
     private byte[] getDataLen(byte[] pack) {
         byte[] data = new byte[dataLength];
-        System.arraycopy(pack, starCodeLength + packageTypeLength + ackLength + packageIdLength, data, 0, dataLength);
+        System.arraycopy(pack, starCodeLength + packetTypeLength + ackLength + packetIdLength, data, 0, dataLength);
         return data;
     }
 
@@ -125,7 +128,7 @@ public class SerialPortPackage {
         int dataRealLength = data != null ? data.length : 0;
         int checkLength = headerLength - starCodeLength + dataRealLength;
         ByteBuffer bufferCheck = ByteBuffer.allocate(checkLength);
-        bufferCheck.put(packageType);
+        bufferCheck.put(packType);
         bufferCheck.put(ack);
         bufferCheck.put(id);
         bufferCheck.put(dataLen);
@@ -145,7 +148,7 @@ public class SerialPortPackage {
      * 拆包
      * @return
      */
-    public SerialPortPackage decode(byte[] pack) {
+    public SerialPortPacket decode(byte[] pack) {
         int checkDataLen = pack.length - starCodeLength - checkCodeLength - endCodeLength;
         byte[] checkDataBuffer = new byte[checkDataLen];
         System.arraycopy(pack, starCodeLength, checkDataBuffer, 0, checkDataLen);
@@ -155,9 +158,9 @@ public class SerialPortPackage {
             // 校验包有问题不做处理
         } else {
             // 校验包没有问题
-            this.packageType = pack[starCodeLength];
-            this.ack = pack[starCodeLength + packageTypeLength];
-            this.id = pack[starCodeLength + packageTypeLength + ackLength];
+            this.packType = pack[starCodeLength];
+            this.ack = pack[starCodeLength + packetTypeLength];
+            this.id = pack[starCodeLength + packetTypeLength + ackLength];
             this.dataLen = getDataLen(pack);
             int dataLen2 = parseLen(dataLen[0], dataLen[1]);
             this.data = new byte[dataLen2];
@@ -169,48 +172,58 @@ public class SerialPortPackage {
         return this;
     }
 
+    public SerialPortPacket decode(String hexPack) {
+        SerialPortPacket pack = null;
+        try {
+            pack = decode(HexUtil.hex2byte(hexPack));
+        } catch (Exception e) {
+            log.warn("Decode Hex packet[{}] error:{}", hexPack, e);
+        }
+        return pack;
+    }
+
     /**
      * 握手包
      */
-    public static class HandshakePackage extends SerialPortPackage {
-        public HandshakePackage() {
-            super((byte)0x01, (byte)0x00, (byte)0x00, getLen(0), null);
+    public static class HandshakePacket extends SerialPortPacket {
+        public HandshakePacket() {
+            super(PACK_TYPE_HANDSHAKE, (byte)0x00, (byte)0x00, getLen(0), null);
         }
     }
 
     /**
      * 握手确认包
      */
-    public static class HandshakeConfirmPackage extends SerialPortPackage {
-        public HandshakeConfirmPackage() {
-            super((byte)0x02, (byte)0x00, (byte)0x00, getLen(0), null);
+    public static class HandshakeConfirmPacket extends SerialPortPacket {
+        public HandshakeConfirmPacket() {
+            super(PACK_TYPE_HANDSHAKE_CONFIRM, (byte)0x00, (byte)0x00, getLen(0), null);
         }
     }
 
     /**
      * 心跳包
      */
-    public static class HeartBeatPackage extends SerialPortPackage {
-        public HeartBeatPackage() {
-            super((byte)0x00, (byte)0x00, (byte)0x00, getLen(0), null);
+    public static class HeartBeatPacket extends SerialPortPacket {
+        public HeartBeatPacket() {
+            super(PACK_TYPE_COMMON, (byte)0x00, (byte)0x00, getLen(0), null);
         }
     }
 
     /**
-     * 普通x消息包
+     * 普通消息包
      */
-    public static class MsgPackage extends SerialPortPackage {
-        public MsgPackage(byte[] data) {
-            super((byte)0x00, (byte)0x00, getMsgId(), getLen((data != null) ? data.length : 0), data);
+    public static class MsgPacket extends SerialPortPacket {
+        public MsgPacket(byte[] data) {
+            super(PACK_TYPE_COMMON, (byte)0x00, getMsgId(), getLen((data != null) ? data.length : 0), data);
         }
     }
 
     /**
      * acK包：ack字段非0，数据包id为0，有效数据长度为0
      */
-    public static class AckPackage extends SerialPortPackage {
-        public AckPackage(byte ack) {
-            super((byte)0x00, ack, (byte)0x00, getLen(0), null);
+    public static class AckPacket extends SerialPortPacket {
+        public AckPacket(byte ack) {
+            super(PACK_TYPE_COMMON, ack, (byte)0x00, getLen(0), null);
         }
     }
 }

@@ -85,6 +85,10 @@ public class ECRHubConfig {
          * Read timeout (milliseconds)
          */
         private int readTimeout = 60 * 1000;
+        /**
+         * Connection timeout (milliseconds)
+         */
+        private int connTimeout = 10 * 1000;
 
         public int getBaudRate() {
             return baudRate;
@@ -140,6 +144,14 @@ public class ECRHubConfig {
 
         public void setWriteTimeout(int writeTimeout) {
             this.writeTimeout = writeTimeout;
+        }
+
+        public int getConnTimeout() {
+            return connTimeout;
+        }
+
+        public void setConnTimeout(int connTimeout) {
+            this.connTimeout = connTimeout;
         }
     }
 

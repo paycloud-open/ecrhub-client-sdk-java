@@ -5,7 +5,7 @@ import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.spi.serialport.SerialPortEngine;
-import com.wiseasy.ecr.hub.sdk.spi.serialport.SerialPortPackage;
+import com.wiseasy.ecr.hub.sdk.spi.serialport.SerialPortPacket;
 import com.wiseasy.ecr.hub.sdk.utils.HexUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     private static final Logger log = LoggerFactory.getLogger(ECRHubSerialPortClient.class);
 
-    private SerialPortEngine engine;
+    private final SerialPortEngine engine;
 
     public ECRHubSerialPortClient(String port, ECRHubConfig config) throws ECRHubException {
         super(config);
@@ -23,12 +23,12 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     @Override
     public boolean connect() throws ECRHubException {
-        return engine.open();
+        return engine.connect();
     }
 
     @Override
     public boolean isConnected() throws ECRHubException {
-        return engine.isOpen();
+        return engine.isConnected();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     @Override
     protected void sendReq(ECRHubRequest request) throws ECRHubException {
         byte[] msg = ECRHubProtobufHelper.pack(getConfig(), request);
-        byte[] pack = new SerialPortPackage.MsgPackage(msg).encode();
+        byte[] pack = new SerialPortPacket.MsgPacket(msg).encode();
         log.debug("Send data packet:{}", HexUtil.byte2hex(pack));
         engine.write(pack);
     }
