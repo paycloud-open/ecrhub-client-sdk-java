@@ -31,6 +31,7 @@ public class SerialPortEngine {
 
     private static final Logger log = LoggerFactory.getLogger(SerialPortEngine.class);
 
+    private static final String PORT_NAME_TAG = "GPS";
     private volatile boolean isConnected = false;
     private final Lock lock = new ReentrantLock();
     private final ECRHubConfig config;
@@ -52,7 +53,7 @@ public class SerialPortEngine {
     public SerialPort getCommPort(String portName) throws ECRHubException {
         SerialPort serialPort = null;
         if (StrUtil.isBlank(portName)) {
-            serialPort = findSerialPort();
+            serialPort = findSerialPort(PORT_NAME_TAG);
             if (serialPort == null) {
                 throw new ECRHubException("The serial port name cannot be empty.");
             }
@@ -70,17 +71,11 @@ public class SerialPortEngine {
         return serialPort;
     }
 
-    private SerialPort findSerialPort() {
+    private SerialPort findSerialPort(String portNameTag) {
         SerialPort[] serialPorts = SerialPort.getCommPorts();//查找所有串口
-        for(SerialPort port:serialPorts){
-            System.out.println("Port:"+port.getSystemPortName());//打印串口名称，如COM4
-            System.out.println("PortDesc:"+port.getPortDescription());//打印串口类型，如USB Serial
-            System.out.println("PortDesc:"+port.getDescriptivePortName());//打印串口的完整类型，如USB-SERIAL CH340(COM4)
-        }
-
         for(SerialPort serialPort : serialPorts) {
-            String descriptivePortName = serialPort.getDescriptivePortName();
-            if (descriptivePortName.contains("GPS")) {
+            String portName = serialPort.getDescriptivePortName();
+            if (StrUtil.containsIgnoreCase(portName, portNameTag)) {
                 return serialPort;
             }
         }
