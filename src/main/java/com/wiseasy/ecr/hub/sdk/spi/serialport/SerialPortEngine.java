@@ -151,10 +151,6 @@ public class SerialPortEngine {
         return false;
     }
 
-    public boolean isConnected() {
-        return serialPort.isOpen() && isConnected;
-    }
-
     public boolean close() {
         if (!isConnected) {
             return true;
@@ -177,6 +173,10 @@ public class SerialPortEngine {
         }
     }
 
+    public boolean isConnected() {
+        return serialPort.isOpen() && isConnected;
+    }
+
     public void safeWrite(byte[] bytes) {
         if (isConnected()) {
             outQueue.add(bytes);
@@ -187,7 +187,7 @@ public class SerialPortEngine {
         if (isConnected()) {
             outQueue.add(bytes);
         } else {
-            throw new ECRHubException("Serial port not opened");
+            throw new ECRHubException("The serial port is not connected.");
         }
     }
 
