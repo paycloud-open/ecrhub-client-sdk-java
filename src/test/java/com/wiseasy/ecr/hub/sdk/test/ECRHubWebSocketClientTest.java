@@ -26,7 +26,6 @@ public class ECRHubWebSocketClientTest {
         InitRequest initRequest = new InitRequest();
         client.execute(initRequest);
 
-        // 支付
         PurchaseRequest request = new PurchaseRequest();
         request.setAttach("");
         request.setDescription("Apple");

@@ -23,17 +23,17 @@ public class SerialPortPacket {
     public static final String PACK_HEAD = "55AA";
     public static final String PACK_TAIL = "CC33";
 
-    private int maxLength = 1024;//定义一个包的最大长度，2个字节表示的最大长度
-    private int starCodeLength = 2;//起始符
-    private int packetTypeLength = 1;//包类型
+    private int maxLength = 1024;//Defines the maximum length of a packet, the maximum length expressed in 2 bytes
+    private int starCodeLength = 2;//start symbol
+    private int packetTypeLength = 1;//Package type
     private int ackLength = 1;//ack
-    private int packetIdLength = 1;//包id
-    private int dataLength = 2;//包长度
-    private int headerLength = starCodeLength + packetTypeLength + ackLength + packetIdLength + dataLength;//协议头长度，有效数据之前的长度
-    private int checkCodeLength = 1;//校验和长度1
-    private int endCodeLength = 2;//终止符
+    private int packetIdLength = 1;//Package id
+    private int dataLength = 2;//Package length
+    private int headerLength = starCodeLength + packetTypeLength + ackLength + packetIdLength + dataLength;//Protocol header length, length before valid data
+    private int checkCodeLength = 1;//check code length
+    private int endCodeLength = 2;//end symbol
 
-    private static volatile int msgId; //消息id in 1..255
+    private static volatile int msgId; //messageId in 1..255
 
     protected byte[] head = HexUtil.hex2byte(PACK_HEAD);
     private byte packType;
@@ -72,7 +72,7 @@ public class SerialPortPacket {
     }
 
     /**
-     * msgId in 1..255
+     * messageId in 1..255
      */
     private static byte getMsgId() {
         if (++msgId > 255) {
@@ -82,7 +82,7 @@ public class SerialPortPacket {
     }
 
     /**
-     * Int 类型转2字节长度
+     * Int type to 2-byte length
      */
     private static byte[] getLen(int length) {
          byte[] len = new byte[2];
@@ -92,7 +92,7 @@ public class SerialPortPacket {
      }
 
     /**
-     * 校验和
+     * Get check code
      */
      private byte getCheckCode(byte[] datas) {
          byte temp = datas[0];
@@ -103,7 +103,7 @@ public class SerialPortPacket {
      }
 
     /**
-     * 获取数据长度
+     * Get data length
      */
     private byte[] getDataLen(byte[] pack) {
         byte[] data = new byte[dataLength];
@@ -112,7 +112,7 @@ public class SerialPortPacket {
     }
 
     /**
-     * 获取数据长度
+     * Parse data length
      */
     private int parseLen(byte a, byte b) {
         int rlt = (a & 0xFF) << 8;
@@ -121,7 +121,8 @@ public class SerialPortPacket {
     }
 
     /**
-     * 组包
+     * Encoding
+     *
      * @return
      */
     public byte[] encode() {
@@ -145,7 +146,8 @@ public class SerialPortPacket {
     }
 
     /**
-     * 拆包
+     * Decoding
+     *
      * @return
      */
     public SerialPortPacket decode(byte[] pack) {
@@ -155,9 +157,8 @@ public class SerialPortPacket {
 
         this.checkCode = pack[pack.length - 1 - endCodeLength];
         if (getCheckCode(checkDataBuffer) != checkCode) {
-            // 校验包有问题不做处理
+            // Faulty calibration packets are not handled
         } else {
-            // 校验包没有问题
             this.packType = pack[starCodeLength];
             this.ack = pack[starCodeLength + packetTypeLength];
             this.id = pack[starCodeLength + packetTypeLength + ackLength];
@@ -183,7 +184,7 @@ public class SerialPortPacket {
     }
 
     /**
-     * 握手包
+     * Handshake packet
      */
     public static class HandshakePacket extends SerialPortPacket {
         public HandshakePacket() {
@@ -192,7 +193,7 @@ public class SerialPortPacket {
     }
 
     /**
-     * 握手确认包
+     * Handshake confirm packet
      */
     public static class HandshakeConfirmPacket extends SerialPortPacket {
         public HandshakeConfirmPacket() {
@@ -201,7 +202,7 @@ public class SerialPortPacket {
     }
 
     /**
-     * 心跳包
+     * HeartBeat packet
      */
     public static class HeartBeatPacket extends SerialPortPacket {
         public HeartBeatPacket() {
@@ -210,7 +211,7 @@ public class SerialPortPacket {
     }
 
     /**
-     * 普通消息包
+     * Message packet
      */
     public static class MsgPacket extends SerialPortPacket {
         public MsgPacket(byte[] data) {
@@ -219,7 +220,7 @@ public class SerialPortPacket {
     }
 
     /**
-     * acK包：ack字段非0，数据包id为0，有效数据长度为0
+     * ACK packet：The ack field is non-zero, the packet id is 0, and the effective data length is 0
      */
     public static class AckPacket extends SerialPortPacket {
         public AckPacket(byte ack) {

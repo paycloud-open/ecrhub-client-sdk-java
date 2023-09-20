@@ -72,10 +72,10 @@ public class SerialPortEngine {
     }
 
     private SerialPort findSerialPort(String portNameTag) {
-        for (SerialPort serialPort : SerialPort.getCommPorts()) {
-            String portName = serialPort.getDescriptivePortName();
+        for (SerialPort port : SerialPort.getCommPorts()) {
+            String portName = port.getDescriptivePortName();
             if (StrUtil.contains(portName, portNameTag)) {
-                return serialPort;
+                return port;
             }
         }
         return null;

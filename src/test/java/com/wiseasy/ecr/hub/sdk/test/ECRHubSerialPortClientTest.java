@@ -55,13 +55,15 @@ public class ECRHubSerialPortClientTest {
     @Test
     @DisplayName("purchase async")
     public void purchase_async() throws ECRHubException {
-        // 支付
+        // Purchase
         PurchaseRequest request = new PurchaseRequest();
         request.setMerchant_order_no("O" + System.currentTimeMillis());
         request.setOrder_amount("10");
         request.setTip_amount("2");
         request.setPay_method_category("BANKCARD");
 
+        // Execute purchase request
+        // Asynchronous return result
         client.asyncExecute(request, new ECRHubResponseCallBack<PurchaseResponse>() {
             @Override
             public void onResponse(PurchaseResponse response) {
@@ -94,8 +96,8 @@ public class ECRHubSerialPortClientTest {
     }
 
     @Test
-    @DisplayName("order close")
-    public void close() throws ECRHubException {
+    @DisplayName("closeOrder")
+    public void closeOrder() throws ECRHubException {
         CloseRequest request = new CloseRequest();
         request.setMerchant_order_no("O1695032342508");
 
@@ -104,8 +106,8 @@ public class ECRHubSerialPortClientTest {
     }
 
     @Test
-    @DisplayName("order query")
-    public void query() throws ECRHubException {
+    @DisplayName("queryOrder")
+    public void queryOrder() throws ECRHubException {
         QueryRequest request = new QueryRequest();
         request.setMerchant_order_no("O1695032342508");
 
