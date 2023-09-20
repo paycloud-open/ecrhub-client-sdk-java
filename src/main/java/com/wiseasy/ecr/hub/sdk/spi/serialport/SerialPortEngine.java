@@ -217,7 +217,7 @@ public class SerialPortEngine {
             if (System.currentTimeMillis() - before > timeout) {
                 throw new ECRHubTimeoutException();
             }
-            ThreadUtil.safeSleep(50);
+            ThreadUtil.safeSleep(100);
             msg = MSG_CACHE.get(msgId);
         }
 
