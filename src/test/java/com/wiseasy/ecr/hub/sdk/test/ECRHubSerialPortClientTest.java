@@ -36,12 +36,18 @@ public class ECRHubSerialPortClientTest {
     @Test
     @DisplayName("purchase")
     public void purchase() throws ECRHubException {
-        // 支付
+        // Purchase
         PurchaseRequest request = new PurchaseRequest();
         request.setMerchant_order_no("O" + System.currentTimeMillis());
         request.setOrder_amount("10");
         request.setPay_method_category("BANKCARD");
 
+        // Setting read timeout,the timeout set here is valid for this request
+        ECRHubConfig requestConfig = new ECRHubConfig();
+        requestConfig.getSerialPortConfig().setReadTimeout(2 * 60 * 1000);
+        request.setConfig(requestConfig);
+
+        // Execute purchase request
         PurchaseResponse response = client.execute(request);
         System.out.println("Purchase Response:" + response);
     }
