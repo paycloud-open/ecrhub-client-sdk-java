@@ -4,8 +4,8 @@
 Help Java developers quickly use ECRHubClient SDK to achieve LAN cross-device service calls. Developers do not need to care about the complexity of the internal logic , just call a method to complete a functional operation .
 
 ## Features
-- Multiple connection mode: This SDK provides multiple ways to connect to Cashier, including serial port and websocket. You can choose the applicable connection method according to your ECR system environment.
-- Payments type supported: This SDK provides a variety of payment methods, including bank card code scanning, and also provides a lot of intermediary payment capabilities, such as consumption, revocation, refund, pre-authorization, pre-authorization completion and so on.
+- **Multiple connection mode:** This SDK provides multiple ways to connect to Cashier, including serial port and websocket. You can choose the applicable connection method according to your ECR system environment.
+- **Payments type supported:** This SDK provides a variety of payment methods, including bank card code scanning, and also provides a lot of intermediary payment capabilities, such as consumption, revocation, refund, pre-authorization, pre-authorization completion and so on.
 
 ## Getting Started
 
