@@ -30,7 +30,6 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
 
     @Override
     public boolean connect() throws ECRHubException {
-        // 异步连接
         engine.connect();
 
         int timeout = getConfig().getSocketConfig().getConnTimeout();

@@ -21,16 +21,13 @@ public class ECRHubWebSocketClientTest {
     public static void main(String[] args) throws ECRHubException {
         ECRHubConfig config = new ECRHubConfig(APP_ID);
         ECRHubClient client = ECRHubClientFactory.create("ws://192.168.100.30:35779", config);
-        client.connect();
+        client.connect(); // Must
 
         InitRequest initRequest = new InitRequest();
         client.execute(initRequest);
 
         PurchaseRequest request = new PurchaseRequest();
-        request.setAttach("");
-        request.setDescription("Apple");
         request.setMerchant_order_no(RandomUtil.randomNumbers(20));
-        request.setNotify_url("");
         request.setOrder_amount("400");
         request.setTip_amount("200");
         request.setPay_method_category("BANKCARD");
@@ -42,6 +39,5 @@ public class ECRHubWebSocketClientTest {
             queryRequest.setMerchant_order_no(request.getMerchant_order_no());
             QueryResponse execute1 = client.execute(queryRequest);
         }
-
     }
 }
