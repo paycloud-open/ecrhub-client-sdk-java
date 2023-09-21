@@ -5,12 +5,12 @@ Help Java developers quickly use ECRHubClient SDK to achieve LAN cross-device se
 
 ## Getting Started
 
-### 1 Requirements
+### 1. Requirements
 - Suitable for Java language, JDK version 1.8 and above development environment.
 
-### 2 Steps
-1. Download the jar package and add it to your project, please refer to github source code. <a href = "https://github.com/paycloud-open/ecrhub-client-sdk-java" target = "_blank">ecrhub-client-sdk-java</a>
-2. This JAR depends on some open source third party JARs. If these JARs are not integrated in your project, you will need to manually add dependencies to your project.
+### 2. Steps
+- Download the jar package and add it to your project, please refer to github source code. <a href = "https://github.com/paycloud-open/ecrhub-client-sdk-java" target = "_blank">ecrhub-client-sdk-java</a>
+- This JAR depends on some open source third party JARs. If these JARs are not integrated in your project, you will need to manually add dependencies to your project.
 
 ```XML
 <!-- mandatory -->
@@ -73,7 +73,7 @@ Help Java developers quickly use ECRHubClient SDK to achieve LAN cross-device se
 ```
 
 ### 3. Example
-This example of initiating a purchase transaction via serial port
+Here's an example purchase transaction.
 
 ```java
 import com.wiseasy.ecr.hub.sdk.ECRHubClient;
