@@ -57,19 +57,18 @@ public class WebSocketClientEngine extends WebSocketClient {
     }
 
     public String receive(String msgId, long timeout) throws ECRHubTimeoutException {
-        String msg = MSG_CACHE.get(msgId);
-
         long before = System.currentTimeMillis();
-        while (StrUtil.isBlank(msg)) {
-            if (System.currentTimeMillis() - before > timeout) {
-                throw new ECRHubTimeoutException();
+        while (true) {
+            String msg = MSG_CACHE.get(msgId);
+            if (StrUtil.isNotBlank(msg)) {
+                MSG_CACHE.remove(msgId);
+                return msg;
+            } else {
+                ThreadUtil.safeSleep(100);
+                if (System.currentTimeMillis() - before > timeout) {
+                    throw new ECRHubTimeoutException();
+                }
             }
-            ThreadUtil.safeSleep(100);
-            msg = MSG_CACHE.get(msgId);
         }
-
-        MSG_CACHE.remove(msg);
-
-        return msg;
     }
 }

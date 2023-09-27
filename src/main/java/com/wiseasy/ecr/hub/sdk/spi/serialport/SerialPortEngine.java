@@ -31,9 +31,9 @@ public class SerialPortEngine {
 
     private static final Logger log = LoggerFactory.getLogger(SerialPortEngine.class);
 
-    private static final String PORT_NAME_TAG = "GPS";
     private volatile boolean isConnected = false;
     private final Lock lock = new ReentrantLock();
+    private final String PORT_NAME_TAG = "GPS";
     private final ECRHubConfig config;
     private final SerialPort serialPort;
     private final SerialPortPacketDecoder packDecoder;
@@ -124,15 +124,17 @@ public class SerialPortEngine {
     private void handshake() throws ECRHubException {
         int timeout = config.getSerialPortConfig().getConnTimeout();
         long before = System.currentTimeMillis();
-        while (!doHandshake()) {
-            if (System.currentTimeMillis() - before > timeout) {
-                throw new ECRHubException("Connection timeout");
+        while (true) {
+            if (doHandshake()) {
+                log.info("Connection successful");
+                return;
             } else {
-                log.info("connecting...");
                 ThreadUtil.safeSleep(10);
+                if (System.currentTimeMillis() - before > timeout) {
+                    throw new ECRHubException("Connection timeout");
+                }
             }
         }
-        log.info("Connection successful");
     }
 
     private boolean doHandshake() {
@@ -210,20 +212,19 @@ public class SerialPortEngine {
     }
 
     public byte[] read(String msgId, long timeout) throws ECRHubTimeoutException {
-        String msg = MSG_CACHE.get(msgId);
-
         long before = System.currentTimeMillis();
-        while (StrUtil.isBlank(msg)) {
-            if (System.currentTimeMillis() - before > timeout) {
-                throw new ECRHubTimeoutException();
+        while (true) {
+            String msg = MSG_CACHE.get(msgId);
+            if (StrUtil.isNotBlank(msg)) {
+                MSG_CACHE.remove(msgId);
+                return HexUtil.hex2byte(msg);
+            } else {
+                ThreadUtil.safeSleep(100);
+                if (System.currentTimeMillis() - before > timeout) {
+                    throw new ECRHubTimeoutException();
+                }
             }
-            ThreadUtil.safeSleep(100);
-            msg = MSG_CACHE.get(msgId);
         }
-
-        MSG_CACHE.remove(msgId);
-
-        return HexUtil.hex2byte(msg);
     }
 
     private class WriteThread implements Runnable {

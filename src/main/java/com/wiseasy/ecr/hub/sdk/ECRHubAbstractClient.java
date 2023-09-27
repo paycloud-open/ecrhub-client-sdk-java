@@ -15,6 +15,9 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
 
     private static final Logger log = LoggerFactory.getLogger(ECRHubAbstractClient.class);
 
+    /**
+     * Default synchronous read data timeout (milliseconds)
+     */
     public static final long DEF_READ_TIMEOUT = 5 * 60 * 1000;
 
     private final ECRHubConfig config;
@@ -45,6 +48,8 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
                 callback.onTimeout(e);
             } catch (ECRHubException e) {
                 callback.onError(e);
+            } catch (Exception e) {
+                callback.onError(new ECRHubException(e));
             }
         });
     }
