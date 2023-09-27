@@ -114,7 +114,7 @@ public class SerialPortEngine {
         ECRHubConfig.SerialPortConfig cfg = config.getSerialPortConfig();
         serialPort.setComPortParameters(cfg.getBaudRate(), cfg.getDataBits(), cfg.getStopBits(), cfg.getParity());
         serialPort.setComPortTimeouts(cfg.getTimeoutMode(), cfg.getReadTimeout(), cfg.getWriteTimeout());
-        if (serialPort.openPort()) {
+        if (serialPort.openPort(100)) {
             log.info("Successfully open the serial port:{}", serialPort.getSystemPortName());
         } else {
             throw new ECRHubException("Failed to open the serial port:" + serialPort.getSystemPortName());
@@ -125,6 +125,7 @@ public class SerialPortEngine {
         int timeout = config.getSerialPortConfig().getConnTimeout();
         long before = System.currentTimeMillis();
         while (true) {
+            log.info("connecting...");
             if (doHandshake()) {
                 log.info("Connection successful");
                 return;
@@ -146,16 +147,12 @@ public class SerialPortEngine {
         }
 
         // read handshake confirm packet
+        ThreadUtil.safeSleep(1000);
         byte[] buffer = new byte[0];
-        for (int i = 0; i < 10; i++) {
-            int bytesAvailable = serialPort.bytesAvailable();
-            if (bytesAvailable <= 0) {
-                ThreadUtil.safeSleep(100);
-            } else {
-                buffer = new byte[bytesAvailable];
-                serialPort.readBytes(buffer, buffer.length);
-                break;
-            }
+        int bytesAvailable = serialPort.bytesAvailable();
+        if (bytesAvailable > 0) {
+            buffer = new byte[bytesAvailable];
+            serialPort.readBytes(buffer, buffer.length);
         }
 
         // decode handshake confirm packet

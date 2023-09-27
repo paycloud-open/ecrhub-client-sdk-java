@@ -84,11 +84,11 @@ public class ECRHubConfig {
         /**
          * Read timeout (milliseconds)
          */
-        private int readTimeout = 60 * 1000;
+        private int readTimeout = 10 * 1000;
         /**
          * Connection timeout (milliseconds)
          */
-        private int connTimeout = 10 * 1000;
+        private int connTimeout = 30 * 1000;
 
         public int getBaudRate() {
             return baudRate;
@@ -162,11 +162,11 @@ public class ECRHubConfig {
         /**
          * Connection timeout (milliseconds)
          */
-        private int connTimeout = 10 * 1000;
+        private int connTimeout = 30 * 1000;
         /**
          * Read/write timeout (milliseconds)
          */
-        private int socketTimeout = 60 * 1000;
+        private int socketTimeout = 10 * 1000;
 
         public int getConnTimeout() {
             return connTimeout;
