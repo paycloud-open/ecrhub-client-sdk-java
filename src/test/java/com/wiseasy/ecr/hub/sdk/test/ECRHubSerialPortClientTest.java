@@ -38,7 +38,7 @@ public class ECRHubSerialPortClientTest {
     public void purchase() throws ECRHubException {
         // Setting read timeout,the timeout set here is valid for this request
         ECRHubConfig requestConfig = new ECRHubConfig();
-        requestConfig.getSerialPortConfig().setReadTimeout(2 * 60 * 1000);
+        requestConfig.getSerialPortConfig().setReadTimeout(5 * 60 * 1000);
 
         // Purchase
         PurchaseRequest request = new PurchaseRequest();
