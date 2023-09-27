@@ -21,17 +21,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *主题类型：ecrhub.init：初始化（握手）；ecrhub.pay.order：支付；ecrhub.pay.query：查询；ecrhub.pay.close：关闭订单；ecrhub.heartbeat：心跳
+     *topic ：ecrhub.init：init（Handshake）；ecrhub.pay.order：payment；ecrhub.pay.query：query；ecrhub.pay.close：close order；ecrhub.heartbeat：heart beat
      * </pre>
      *
      * <code>string topic = 1;</code>
      * @return The topic.
      */
-    java.lang.String getTopic();
+    String getTopic();
     /**
      * <pre>
      **
-     *主题类型：ecrhub.init：初始化（握手）；ecrhub.pay.order：支付；ecrhub.pay.query：查询；ecrhub.pay.close：关闭订单；ecrhub.heartbeat：心跳
+     *topic ：ecrhub.init：init（Handshake）；ecrhub.pay.order：payment；ecrhub.pay.query：query；ecrhub.pay.close：close order；ecrhub.heartbeat：heart beat
      * </pre>
      *
      * <code>string topic = 1;</code>
@@ -43,17 +43,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *消息id，用于跟踪交易的上下文
+     *Message ID, used to track the sending and returning of orders
      * </pre>
      *
      * <code>string msg_id = 2;</code>
      * @return The msgId.
      */
-    java.lang.String getMsgId();
+    String getMsgId();
     /**
      * <pre>
      **
-     *消息id，用于跟踪交易的上下文
+     *Message ID, used to track the sending and returning of orders
      * </pre>
      *
      * <code>string msg_id = 2;</code>
@@ -65,17 +65,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *支付应用的appID
+     *AppID of payment application
      * </pre>
      *
      * <code>string app_id = 3;</code>
      * @return The appId.
      */
-    java.lang.String getAppId();
+    String getAppId();
     /**
      * <pre>
      **
-     *支付应用的appID
+     *AppID of payment application
      * </pre>
      *
      * <code>string app_id = 3;</code>
@@ -87,17 +87,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *时间戳
+     *time stamp
      * </pre>
      *
      * <code>string timestamp = 4;</code>
      * @return The timestamp.
      */
-    java.lang.String getTimestamp();
+    String getTimestamp();
     /**
      * <pre>
      **
-     *时间戳
+     *time stamp
      * </pre>
      *
      * <code>string timestamp = 4;</code>
@@ -109,17 +109,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *SDK版本
+     *SDK version
      * </pre>
      *
      * <code>string version = 5;</code>
      * @return The version.
      */
-    java.lang.String getVersion();
+    String getVersion();
     /**
      * <pre>
      **
-     *SDK版本
+     *SDK version
      * </pre>
      *
      * <code>string version = 5;</code>
@@ -131,7 +131,7 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *请求的业务数据
+     *Requested Business Data
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
@@ -141,27 +141,27 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *请求的业务数据
+     *Requested Business Data
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
      * @return The bizData.
      */
-    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData getBizData();
+    RequestBizData getBizData();
     /**
      * <pre>
      **
-     *请求的业务数据
+     *Requested Business Data
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
      */
-    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizDataOrBuilder getBizDataOrBuilder();
+    RequestBizDataOrBuilder getBizDataOrBuilder();
 
     /**
      * <pre>
      **
-     *声音
+     *voice
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
@@ -171,27 +171,27 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *声音
+     *voice
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
      * @return The voiceData.
      */
-    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData getVoiceData();
+    VoiceData getVoiceData();
     /**
      * <pre>
      **
-     *声音
+     *voice
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
      */
-    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceDataOrBuilder getVoiceDataOrBuilder();
+    VoiceDataOrBuilder getVoiceDataOrBuilder();
 
     /**
      * <pre>
      **
-     *打印
+     *printer
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
@@ -201,27 +201,27 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *打印
+     *printer
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
      * @return The printerData.
      */
-    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData getPrinterData();
+    PrinterData getPrinterData();
     /**
      * <pre>
      **
-     *打印
+     *printer
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
      */
-    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterDataOrBuilder getPrinterDataOrBuilder();
+    PrinterDataOrBuilder getPrinterDataOrBuilder();
 
     /**
      * <pre>
      **
-     *通知
+     *notice
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
@@ -231,22 +231,22 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *通知
+     *notice
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
      * @return The notifyData.
      */
-    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData getNotifyData();
+    NotifyData getNotifyData();
     /**
      * <pre>
      **
-     *通知
+     *notice
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
      */
-    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyDataOrBuilder getNotifyDataOrBuilder();
+    NotifyDataOrBuilder getNotifyDataOrBuilder();
   }
   /**
    * Protobuf type {@code com.wiseasy.ecr.hub.data.ECRHubRequest}
@@ -268,172 +268,48 @@ public final class ECRHubRequestProto {
       version_ = "";
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new ECRHubRequest();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ECRHubRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              topic_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              msgId_ = s;
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              appId_ = s;
-              break;
-            }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              timestamp_ = s;
-              break;
-            }
-            case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              version_ = s;
-              break;
-            }
-            case 50: {
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.Builder subBuilder = null;
-              if (bizData_ != null) {
-                subBuilder = bizData_.toBuilder();
-              }
-              bizData_ = input.readMessage(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(bizData_);
-                bizData_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 58: {
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.Builder subBuilder = null;
-              if (voiceData_ != null) {
-                subBuilder = voiceData_.toBuilder();
-              }
-              voiceData_ = input.readMessage(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(voiceData_);
-                voiceData_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 66: {
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.Builder subBuilder = null;
-              if (printerData_ != null) {
-                subBuilder = printerData_.toBuilder();
-              }
-              printerData_ = input.readMessage(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(printerData_);
-                printerData_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 74: {
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.Builder subBuilder = null;
-              if (notifyData_ != null) {
-                subBuilder = notifyData_.toBuilder();
-              }
-              notifyData_ = input.readMessage(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(notifyData_);
-                notifyData_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_ECRHubRequest_descriptor;
+      return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_ECRHubRequest_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_ECRHubRequest_fieldAccessorTable
+      return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_ECRHubRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest.Builder.class);
+              ECRHubRequest.class, Builder.class);
     }
 
+    private int bitField0_;
     public static final int TOPIC_FIELD_NUMBER = 1;
-    private volatile java.lang.Object topic_;
+    @SuppressWarnings("serial")
+    private volatile Object topic_ = "";
     /**
      * <pre>
      **
-     *主题类型：ecrhub.init：初始化（握手）；ecrhub.pay.order：支付；ecrhub.pay.query：查询；ecrhub.pay.close：关闭订单；ecrhub.heartbeat：心跳
+     *topic ：ecrhub.init：init（Handshake）；ecrhub.pay.order：payment；ecrhub.pay.query：query；ecrhub.pay.close：close order；ecrhub.heartbeat：heart beat
      * </pre>
      *
      * <code>string topic = 1;</code>
      * @return The topic.
      */
-    @java.lang.Override
-    public java.lang.String getTopic() {
-      java.lang.Object ref = topic_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getTopic() {
+      Object ref = topic_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         topic_ = s;
         return s;
       }
@@ -441,20 +317,20 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *主题类型：ecrhub.init：初始化（握手）；ecrhub.pay.order：支付；ecrhub.pay.query：查询；ecrhub.pay.close：关闭订单；ecrhub.heartbeat：心跳
+     *topic ：ecrhub.init：init（Handshake）；ecrhub.pay.order：payment；ecrhub.pay.query：query；ecrhub.pay.close：close order；ecrhub.heartbeat：heart beat
      * </pre>
      *
      * <code>string topic = 1;</code>
      * @return The bytes for topic.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getTopicBytes() {
-      java.lang.Object ref = topic_;
-      if (ref instanceof java.lang.String) {
+      Object ref = topic_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         topic_ = b;
         return b;
       } else {
@@ -463,25 +339,26 @@ public final class ECRHubRequestProto {
     }
 
     public static final int MSG_ID_FIELD_NUMBER = 2;
-    private volatile java.lang.Object msgId_;
+    @SuppressWarnings("serial")
+    private volatile Object msgId_ = "";
     /**
      * <pre>
      **
-     *消息id，用于跟踪交易的上下文
+     *Message ID, used to track the sending and returning of orders
      * </pre>
      *
      * <code>string msg_id = 2;</code>
      * @return The msgId.
      */
-    @java.lang.Override
-    public java.lang.String getMsgId() {
-      java.lang.Object ref = msgId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getMsgId() {
+      Object ref = msgId_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         msgId_ = s;
         return s;
       }
@@ -489,20 +366,20 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *消息id，用于跟踪交易的上下文
+     *Message ID, used to track the sending and returning of orders
      * </pre>
      *
      * <code>string msg_id = 2;</code>
      * @return The bytes for msgId.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getMsgIdBytes() {
-      java.lang.Object ref = msgId_;
-      if (ref instanceof java.lang.String) {
+      Object ref = msgId_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         msgId_ = b;
         return b;
       } else {
@@ -511,25 +388,26 @@ public final class ECRHubRequestProto {
     }
 
     public static final int APP_ID_FIELD_NUMBER = 3;
-    private volatile java.lang.Object appId_;
+    @SuppressWarnings("serial")
+    private volatile Object appId_ = "";
     /**
      * <pre>
      **
-     *支付应用的appID
+     *AppID of payment application
      * </pre>
      *
      * <code>string app_id = 3;</code>
      * @return The appId.
      */
-    @java.lang.Override
-    public java.lang.String getAppId() {
-      java.lang.Object ref = appId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getAppId() {
+      Object ref = appId_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         appId_ = s;
         return s;
       }
@@ -537,20 +415,20 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *支付应用的appID
+     *AppID of payment application
      * </pre>
      *
      * <code>string app_id = 3;</code>
      * @return The bytes for appId.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getAppIdBytes() {
-      java.lang.Object ref = appId_;
-      if (ref instanceof java.lang.String) {
+      Object ref = appId_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         appId_ = b;
         return b;
       } else {
@@ -559,25 +437,26 @@ public final class ECRHubRequestProto {
     }
 
     public static final int TIMESTAMP_FIELD_NUMBER = 4;
-    private volatile java.lang.Object timestamp_;
+    @SuppressWarnings("serial")
+    private volatile Object timestamp_ = "";
     /**
      * <pre>
      **
-     *时间戳
+     *time stamp
      * </pre>
      *
      * <code>string timestamp = 4;</code>
      * @return The timestamp.
      */
-    @java.lang.Override
-    public java.lang.String getTimestamp() {
-      java.lang.Object ref = timestamp_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getTimestamp() {
+      Object ref = timestamp_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         timestamp_ = s;
         return s;
       }
@@ -585,20 +464,20 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *时间戳
+     *time stamp
      * </pre>
      *
      * <code>string timestamp = 4;</code>
      * @return The bytes for timestamp.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getTimestampBytes() {
-      java.lang.Object ref = timestamp_;
-      if (ref instanceof java.lang.String) {
+      Object ref = timestamp_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         timestamp_ = b;
         return b;
       } else {
@@ -607,25 +486,26 @@ public final class ECRHubRequestProto {
     }
 
     public static final int VERSION_FIELD_NUMBER = 5;
-    private volatile java.lang.Object version_;
+    @SuppressWarnings("serial")
+    private volatile Object version_ = "";
     /**
      * <pre>
      **
-     *SDK版本
+     *SDK version
      * </pre>
      *
      * <code>string version = 5;</code>
      * @return The version.
      */
-    @java.lang.Override
-    public java.lang.String getVersion() {
-      java.lang.Object ref = version_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getVersion() {
+      Object ref = version_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         version_ = s;
         return s;
       }
@@ -633,20 +513,20 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *SDK版本
+     *SDK version
      * </pre>
      *
      * <code>string version = 5;</code>
      * @return The bytes for version.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getVersionBytes() {
-      java.lang.Object ref = version_;
-      if (ref instanceof java.lang.String) {
+      Object ref = version_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         version_ = b;
         return b;
       } else {
@@ -655,171 +535,171 @@ public final class ECRHubRequestProto {
     }
 
     public static final int BIZ_DATA_FIELD_NUMBER = 6;
-    private com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData bizData_;
+    private RequestBizData bizData_;
     /**
      * <pre>
      **
-     *请求的业务数据
+     *Requested Business Data
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
      * @return Whether the bizData field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasBizData() {
-      return bizData_ != null;
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
      * <pre>
      **
-     *请求的业务数据
+     *Requested Business Data
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
      * @return The bizData.
      */
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData getBizData() {
-      return bizData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.getDefaultInstance() : bizData_;
+    @Override
+    public RequestBizData getBizData() {
+      return bizData_ == null ? RequestBizData.getDefaultInstance() : bizData_;
     }
     /**
      * <pre>
      **
-     *请求的业务数据
+     *Requested Business Data
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
      */
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizDataOrBuilder getBizDataOrBuilder() {
-      return getBizData();
+    @Override
+    public RequestBizDataOrBuilder getBizDataOrBuilder() {
+      return bizData_ == null ? RequestBizData.getDefaultInstance() : bizData_;
     }
 
     public static final int VOICE_DATA_FIELD_NUMBER = 7;
-    private com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData voiceData_;
+    private VoiceData voiceData_;
     /**
      * <pre>
      **
-     *声音
+     *voice
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
      * @return Whether the voiceData field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasVoiceData() {
-      return voiceData_ != null;
+      return ((bitField0_ & 0x00000002) != 0);
     }
     /**
      * <pre>
      **
-     *声音
+     *voice
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
      * @return The voiceData.
      */
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData getVoiceData() {
-      return voiceData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.getDefaultInstance() : voiceData_;
+    @Override
+    public VoiceData getVoiceData() {
+      return voiceData_ == null ? VoiceData.getDefaultInstance() : voiceData_;
     }
     /**
      * <pre>
      **
-     *声音
+     *voice
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
      */
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceDataOrBuilder getVoiceDataOrBuilder() {
-      return getVoiceData();
+    @Override
+    public VoiceDataOrBuilder getVoiceDataOrBuilder() {
+      return voiceData_ == null ? VoiceData.getDefaultInstance() : voiceData_;
     }
 
     public static final int PRINTER_DATA_FIELD_NUMBER = 8;
-    private com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData printerData_;
+    private PrinterData printerData_;
     /**
      * <pre>
      **
-     *打印
+     *printer
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
      * @return Whether the printerData field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasPrinterData() {
-      return printerData_ != null;
+      return ((bitField0_ & 0x00000004) != 0);
     }
     /**
      * <pre>
      **
-     *打印
+     *printer
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
      * @return The printerData.
      */
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData getPrinterData() {
-      return printerData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.getDefaultInstance() : printerData_;
+    @Override
+    public PrinterData getPrinterData() {
+      return printerData_ == null ? PrinterData.getDefaultInstance() : printerData_;
     }
     /**
      * <pre>
      **
-     *打印
+     *printer
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
      */
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterDataOrBuilder getPrinterDataOrBuilder() {
-      return getPrinterData();
+    @Override
+    public PrinterDataOrBuilder getPrinterDataOrBuilder() {
+      return printerData_ == null ? PrinterData.getDefaultInstance() : printerData_;
     }
 
     public static final int NOTIFY_DATA_FIELD_NUMBER = 9;
-    private com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData notifyData_;
+    private NotifyData notifyData_;
     /**
      * <pre>
      **
-     *通知
+     *notice
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
      * @return Whether the notifyData field is set.
      */
-    @java.lang.Override
+    @Override
     public boolean hasNotifyData() {
-      return notifyData_ != null;
+      return ((bitField0_ & 0x00000008) != 0);
     }
     /**
      * <pre>
      **
-     *通知
+     *notice
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
      * @return The notifyData.
      */
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData getNotifyData() {
-      return notifyData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.getDefaultInstance() : notifyData_;
+    @Override
+    public NotifyData getNotifyData() {
+      return notifyData_ == null ? NotifyData.getDefaultInstance() : notifyData_;
     }
     /**
      * <pre>
      **
-     *通知
+     *notice
      * </pre>
      *
      * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
      */
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyDataOrBuilder getNotifyDataOrBuilder() {
-      return getNotifyData();
+    @Override
+    public NotifyDataOrBuilder getNotifyDataOrBuilder() {
+      return notifyData_ == null ? NotifyData.getDefaultInstance() : notifyData_;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -829,7 +709,7 @@ public final class ECRHubRequestProto {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(topic_)) {
@@ -847,22 +727,22 @@ public final class ECRHubRequestProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(version_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, version_);
       }
-      if (bizData_ != null) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         output.writeMessage(6, getBizData());
       }
-      if (voiceData_ != null) {
+      if (((bitField0_ & 0x00000002) != 0)) {
         output.writeMessage(7, getVoiceData());
       }
-      if (printerData_ != null) {
+      if (((bitField0_ & 0x00000004) != 0)) {
         output.writeMessage(8, getPrinterData());
       }
-      if (notifyData_ != null) {
+      if (((bitField0_ & 0x00000008) != 0)) {
         output.writeMessage(9, getNotifyData());
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -883,36 +763,36 @@ public final class ECRHubRequestProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(version_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, version_);
       }
-      if (bizData_ != null) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, getBizData());
       }
-      if (voiceData_ != null) {
+      if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, getVoiceData());
       }
-      if (printerData_ != null) {
+      if (((bitField0_ & 0x00000004) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(8, getPrinterData());
       }
-      if (notifyData_ != null) {
+      if (((bitField0_ & 0x00000008) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, getNotifyData());
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest)) {
+      if (!(obj instanceof ECRHubRequest)) {
         return super.equals(obj);
       }
-      com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest other = (com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest) obj;
+      ECRHubRequest other = (ECRHubRequest) obj;
 
       if (!getTopic()
           .equals(other.getTopic())) return false;
@@ -944,11 +824,11 @@ public final class ECRHubRequestProto {
         if (!getNotifyData()
             .equals(other.getNotifyData())) return false;
       }
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -981,74 +861,76 @@ public final class ECRHubRequestProto {
         hash = (37 * hash) + NOTIFY_DATA_FIELD_NUMBER;
         hash = (53 * hash) + getNotifyData().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parseFrom(
+    public static ECRHubRequest parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parseFrom(
+    public static ECRHubRequest parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parseFrom(
+    public static ECRHubRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parseFrom(
+    public static ECRHubRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parseFrom(byte[] data)
+    public static ECRHubRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parseFrom(
+    public static ECRHubRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parseFrom(java.io.InputStream input)
+    public static ECRHubRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parseFrom(
+    public static ECRHubRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parseDelimitedFrom(java.io.InputStream input)
+
+    public static ECRHubRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parseDelimitedFrom(
+
+    public static ECRHubRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parseFrom(
+    public static ECRHubRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parseFrom(
+    public static ECRHubRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1056,23 +938,23 @@ public final class ECRHubRequestProto {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest prototype) {
+    public static Builder newBuilder(ECRHubRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1082,18 +964,18 @@ public final class ECRHubRequestProto {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.wiseasy.ecr.hub.data.ECRHubRequest)
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequestOrBuilder {
+        ECRHubRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_ECRHubRequest_descriptor;
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_ECRHubRequest_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_ECRHubRequest_fieldAccessorTable
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_ECRHubRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest.Builder.class);
+                ECRHubRequest.class, Builder.class);
       }
 
       // Construct using com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest.newBuilder()
@@ -1102,169 +984,191 @@ public final class ECRHubRequestProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getBizDataFieldBuilder();
+          getVoiceDataFieldBuilder();
+          getPrinterDataFieldBuilder();
+          getNotifyDataFieldBuilder();
         }
       }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         topic_ = "";
-
         msgId_ = "";
-
         appId_ = "";
-
         timestamp_ = "";
-
         version_ = "";
-
-        if (bizDataBuilder_ == null) {
-          bizData_ = null;
-        } else {
-          bizData_ = null;
+        bizData_ = null;
+        if (bizDataBuilder_ != null) {
+          bizDataBuilder_.dispose();
           bizDataBuilder_ = null;
         }
-        if (voiceDataBuilder_ == null) {
-          voiceData_ = null;
-        } else {
-          voiceData_ = null;
+        voiceData_ = null;
+        if (voiceDataBuilder_ != null) {
+          voiceDataBuilder_.dispose();
           voiceDataBuilder_ = null;
         }
-        if (printerDataBuilder_ == null) {
-          printerData_ = null;
-        } else {
-          printerData_ = null;
+        printerData_ = null;
+        if (printerDataBuilder_ != null) {
+          printerDataBuilder_.dispose();
           printerDataBuilder_ = null;
         }
-        if (notifyDataBuilder_ == null) {
-          notifyData_ = null;
-        } else {
-          notifyData_ = null;
+        notifyData_ = null;
+        if (notifyDataBuilder_ != null) {
+          notifyDataBuilder_.dispose();
           notifyDataBuilder_ = null;
         }
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_ECRHubRequest_descriptor;
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_ECRHubRequest_descriptor;
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest getDefaultInstanceForType() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest.getDefaultInstance();
+      @Override
+      public ECRHubRequest getDefaultInstanceForType() {
+        return ECRHubRequest.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest build() {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest result = buildPartial();
+      @Override
+      public ECRHubRequest build() {
+        ECRHubRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest buildPartial() {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest result = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest(this);
-        result.topic_ = topic_;
-        result.msgId_ = msgId_;
-        result.appId_ = appId_;
-        result.timestamp_ = timestamp_;
-        result.version_ = version_;
-        if (bizDataBuilder_ == null) {
-          result.bizData_ = bizData_;
-        } else {
-          result.bizData_ = bizDataBuilder_.build();
-        }
-        if (voiceDataBuilder_ == null) {
-          result.voiceData_ = voiceData_;
-        } else {
-          result.voiceData_ = voiceDataBuilder_.build();
-        }
-        if (printerDataBuilder_ == null) {
-          result.printerData_ = printerData_;
-        } else {
-          result.printerData_ = printerDataBuilder_.build();
-        }
-        if (notifyDataBuilder_ == null) {
-          result.notifyData_ = notifyData_;
-        } else {
-          result.notifyData_ = notifyDataBuilder_.build();
-        }
+      @Override
+      public ECRHubRequest buildPartial() {
+        ECRHubRequest result = new ECRHubRequest(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      @java.lang.Override
+      private void buildPartial0(ECRHubRequest result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.topic_ = topic_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.msgId_ = msgId_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.appId_ = appId_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.timestamp_ = timestamp_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.version_ = version_;
+        }
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.bizData_ = bizDataBuilder_ == null
+              ? bizData_
+              : bizDataBuilder_.build();
+          to_bitField0_ |= 0x00000001;
+        }
+        if (((from_bitField0_ & 0x00000040) != 0)) {
+          result.voiceData_ = voiceDataBuilder_ == null
+              ? voiceData_
+              : voiceDataBuilder_.build();
+          to_bitField0_ |= 0x00000002;
+        }
+        if (((from_bitField0_ & 0x00000080) != 0)) {
+          result.printerData_ = printerDataBuilder_ == null
+              ? printerData_
+              : printerDataBuilder_.build();
+          to_bitField0_ |= 0x00000004;
+        }
+        if (((from_bitField0_ & 0x00000100) != 0)) {
+          result.notifyData_ = notifyDataBuilder_ == null
+              ? notifyData_
+              : notifyDataBuilder_.build();
+          to_bitField0_ |= 0x00000008;
+        }
+        result.bitField0_ |= to_bitField0_;
+      }
+
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest) {
-          return mergeFrom((com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest)other);
+        if (other instanceof ECRHubRequest) {
+          return mergeFrom((ECRHubRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest other) {
-        if (other == com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(ECRHubRequest other) {
+        if (other == ECRHubRequest.getDefaultInstance()) return this;
         if (!other.getTopic().isEmpty()) {
           topic_ = other.topic_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getMsgId().isEmpty()) {
           msgId_ = other.msgId_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (!other.getAppId().isEmpty()) {
           appId_ = other.appId_;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
         if (!other.getTimestamp().isEmpty()) {
           timestamp_ = other.timestamp_;
+          bitField0_ |= 0x00000008;
           onChanged();
         }
         if (!other.getVersion().isEmpty()) {
           version_ = other.version_;
+          bitField0_ |= 0x00000010;
           onChanged();
         }
         if (other.hasBizData()) {
@@ -1279,61 +1183,128 @@ public final class ECRHubRequestProto {
         if (other.hasNotifyData()) {
           mergeNotifyData(other.getNotifyData());
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                topic_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                msgId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                appId_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                timestamp_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                version_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 50: {
+                input.readMessage(
+                    getBizDataFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              case 58: {
+                input.readMessage(
+                    getVoiceDataFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 58
+              case 66: {
+                input.readMessage(
+                    getPrinterDataFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000080;
+                break;
+              } // case 66
+              case 74: {
+                input.readMessage(
+                    getNotifyDataFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000100;
+                break;
+              } // case 74
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
-      private java.lang.Object topic_ = "";
+      private Object topic_ = "";
       /**
        * <pre>
        **
-       *主题类型：ecrhub.init：初始化（握手）；ecrhub.pay.order：支付；ecrhub.pay.query：查询；ecrhub.pay.close：关闭订单；ecrhub.heartbeat：心跳
+       *topic ：ecrhub.init：init（Handshake）；ecrhub.pay.order：payment；ecrhub.pay.query：query；ecrhub.pay.close：close order；ecrhub.heartbeat：heart beat
        * </pre>
        *
        * <code>string topic = 1;</code>
        * @return The topic.
        */
-      public java.lang.String getTopic() {
-        java.lang.Object ref = topic_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTopic() {
+        Object ref = topic_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           topic_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *主题类型：ecrhub.init：初始化（握手）；ecrhub.pay.order：支付；ecrhub.pay.query：查询；ecrhub.pay.close：关闭订单；ecrhub.heartbeat：心跳
+       *topic ：ecrhub.init：init（Handshake）；ecrhub.pay.order：payment；ecrhub.pay.query：query；ecrhub.pay.close：close order；ecrhub.heartbeat：heart beat
        * </pre>
        *
        * <code>string topic = 1;</code>
@@ -1341,11 +1312,11 @@ public final class ECRHubRequestProto {
        */
       public com.google.protobuf.ByteString
           getTopicBytes() {
-        java.lang.Object ref = topic_;
+        Object ref = topic_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           topic_ = b;
           return b;
         } else {
@@ -1355,7 +1326,7 @@ public final class ECRHubRequestProto {
       /**
        * <pre>
        **
-       *主题类型：ecrhub.init：初始化（握手）；ecrhub.pay.order：支付；ecrhub.pay.query：查询；ecrhub.pay.close：关闭订单；ecrhub.heartbeat：心跳
+       *topic ：ecrhub.init：init（Handshake）；ecrhub.pay.order：payment；ecrhub.pay.query：query；ecrhub.pay.close：close order；ecrhub.heartbeat：heart beat
        * </pre>
        *
        * <code>string topic = 1;</code>
@@ -1363,34 +1334,32 @@ public final class ECRHubRequestProto {
        * @return This builder for chaining.
        */
       public Builder setTopic(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         topic_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *主题类型：ecrhub.init：初始化（握手）；ecrhub.pay.order：支付；ecrhub.pay.query：查询；ecrhub.pay.close：关闭订单；ecrhub.heartbeat：心跳
+       *topic ：ecrhub.init：init（Handshake）；ecrhub.pay.order：payment；ecrhub.pay.query：query；ecrhub.pay.close：close order；ecrhub.heartbeat：heart beat
        * </pre>
        *
        * <code>string topic = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearTopic() {
-        
         topic_ = getDefaultInstance().getTopic();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *主题类型：ecrhub.init：初始化（握手）；ecrhub.pay.order：支付；ecrhub.pay.query：查询；ecrhub.pay.close：关闭订单；ecrhub.heartbeat：心跳
+       *topic ：ecrhub.init：init（Handshake）；ecrhub.pay.order：payment；ecrhub.pay.query：query；ecrhub.pay.close：close order；ecrhub.heartbeat：heart beat
        * </pre>
        *
        * <code>string topic = 1;</code>
@@ -1399,42 +1368,40 @@ public final class ECRHubRequestProto {
        */
       public Builder setTopicBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         topic_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
 
-      private java.lang.Object msgId_ = "";
+      private Object msgId_ = "";
       /**
        * <pre>
        **
-       *消息id，用于跟踪交易的上下文
+       *Message ID, used to track the sending and returning of orders
        * </pre>
        *
        * <code>string msg_id = 2;</code>
        * @return The msgId.
        */
-      public java.lang.String getMsgId() {
-        java.lang.Object ref = msgId_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getMsgId() {
+        Object ref = msgId_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           msgId_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *消息id，用于跟踪交易的上下文
+       *Message ID, used to track the sending and returning of orders
        * </pre>
        *
        * <code>string msg_id = 2;</code>
@@ -1442,11 +1409,11 @@ public final class ECRHubRequestProto {
        */
       public com.google.protobuf.ByteString
           getMsgIdBytes() {
-        java.lang.Object ref = msgId_;
+        Object ref = msgId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           msgId_ = b;
           return b;
         } else {
@@ -1456,7 +1423,7 @@ public final class ECRHubRequestProto {
       /**
        * <pre>
        **
-       *消息id，用于跟踪交易的上下文
+       *Message ID, used to track the sending and returning of orders
        * </pre>
        *
        * <code>string msg_id = 2;</code>
@@ -1464,34 +1431,32 @@ public final class ECRHubRequestProto {
        * @return This builder for chaining.
        */
       public Builder setMsgId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         msgId_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *消息id，用于跟踪交易的上下文
+       *Message ID, used to track the sending and returning of orders
        * </pre>
        *
        * <code>string msg_id = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearMsgId() {
-        
         msgId_ = getDefaultInstance().getMsgId();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *消息id，用于跟踪交易的上下文
+       *Message ID, used to track the sending and returning of orders
        * </pre>
        *
        * <code>string msg_id = 2;</code>
@@ -1500,42 +1465,40 @@ public final class ECRHubRequestProto {
        */
       public Builder setMsgIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         msgId_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
 
-      private java.lang.Object appId_ = "";
+      private Object appId_ = "";
       /**
        * <pre>
        **
-       *支付应用的appID
+       *AppID of payment application
        * </pre>
        *
        * <code>string app_id = 3;</code>
        * @return The appId.
        */
-      public java.lang.String getAppId() {
-        java.lang.Object ref = appId_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getAppId() {
+        Object ref = appId_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           appId_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *支付应用的appID
+       *AppID of payment application
        * </pre>
        *
        * <code>string app_id = 3;</code>
@@ -1543,11 +1506,11 @@ public final class ECRHubRequestProto {
        */
       public com.google.protobuf.ByteString
           getAppIdBytes() {
-        java.lang.Object ref = appId_;
+        Object ref = appId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           appId_ = b;
           return b;
         } else {
@@ -1557,7 +1520,7 @@ public final class ECRHubRequestProto {
       /**
        * <pre>
        **
-       *支付应用的appID
+       *AppID of payment application
        * </pre>
        *
        * <code>string app_id = 3;</code>
@@ -1565,34 +1528,32 @@ public final class ECRHubRequestProto {
        * @return This builder for chaining.
        */
       public Builder setAppId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         appId_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *支付应用的appID
+       *AppID of payment application
        * </pre>
        *
        * <code>string app_id = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearAppId() {
-        
         appId_ = getDefaultInstance().getAppId();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *支付应用的appID
+       *AppID of payment application
        * </pre>
        *
        * <code>string app_id = 3;</code>
@@ -1601,42 +1562,40 @@ public final class ECRHubRequestProto {
        */
       public Builder setAppIdBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         appId_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
 
-      private java.lang.Object timestamp_ = "";
+      private Object timestamp_ = "";
       /**
        * <pre>
        **
-       *时间戳
+       *time stamp
        * </pre>
        *
        * <code>string timestamp = 4;</code>
        * @return The timestamp.
        */
-      public java.lang.String getTimestamp() {
-        java.lang.Object ref = timestamp_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTimestamp() {
+        Object ref = timestamp_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           timestamp_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *时间戳
+       *time stamp
        * </pre>
        *
        * <code>string timestamp = 4;</code>
@@ -1644,11 +1603,11 @@ public final class ECRHubRequestProto {
        */
       public com.google.protobuf.ByteString
           getTimestampBytes() {
-        java.lang.Object ref = timestamp_;
+        Object ref = timestamp_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           timestamp_ = b;
           return b;
         } else {
@@ -1658,7 +1617,7 @@ public final class ECRHubRequestProto {
       /**
        * <pre>
        **
-       *时间戳
+       *time stamp
        * </pre>
        *
        * <code>string timestamp = 4;</code>
@@ -1666,34 +1625,32 @@ public final class ECRHubRequestProto {
        * @return This builder for chaining.
        */
       public Builder setTimestamp(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         timestamp_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *时间戳
+       *time stamp
        * </pre>
        *
        * <code>string timestamp = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearTimestamp() {
-        
         timestamp_ = getDefaultInstance().getTimestamp();
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *时间戳
+       *time stamp
        * </pre>
        *
        * <code>string timestamp = 4;</code>
@@ -1702,42 +1659,40 @@ public final class ECRHubRequestProto {
        */
       public Builder setTimestampBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         timestamp_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
 
-      private java.lang.Object version_ = "";
+      private Object version_ = "";
       /**
        * <pre>
        **
-       *SDK版本
+       *SDK version
        * </pre>
        *
        * <code>string version = 5;</code>
        * @return The version.
        */
-      public java.lang.String getVersion() {
-        java.lang.Object ref = version_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getVersion() {
+        Object ref = version_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           version_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *SDK版本
+       *SDK version
        * </pre>
        *
        * <code>string version = 5;</code>
@@ -1745,11 +1700,11 @@ public final class ECRHubRequestProto {
        */
       public com.google.protobuf.ByteString
           getVersionBytes() {
-        java.lang.Object ref = version_;
+        Object ref = version_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           version_ = b;
           return b;
         } else {
@@ -1759,7 +1714,7 @@ public final class ECRHubRequestProto {
       /**
        * <pre>
        **
-       *SDK版本
+       *SDK version
        * </pre>
        *
        * <code>string version = 5;</code>
@@ -1767,34 +1722,32 @@ public final class ECRHubRequestProto {
        * @return This builder for chaining.
        */
       public Builder setVersion(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         version_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *SDK版本
+       *SDK version
        * </pre>
        *
        * <code>string version = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearVersion() {
-        
         version_ = getDefaultInstance().getVersion();
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *SDK版本
+       *SDK version
        * </pre>
        *
        * <code>string version = 5;</code>
@@ -1803,43 +1756,41 @@ public final class ECRHubRequestProto {
        */
       public Builder setVersionBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         version_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
 
-      private com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData bizData_;
+      private RequestBizData bizData_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizDataOrBuilder> bizDataBuilder_;
+          RequestBizData, RequestBizData.Builder, RequestBizDataOrBuilder> bizDataBuilder_;
       /**
        * <pre>
        **
-       *请求的业务数据
+       *Requested Business Data
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
        * @return Whether the bizData field is set.
        */
       public boolean hasBizData() {
-        return bizDataBuilder_ != null || bizData_ != null;
+        return ((bitField0_ & 0x00000020) != 0);
       }
       /**
        * <pre>
        **
-       *请求的业务数据
+       *Requested Business Data
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
        * @return The bizData.
        */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData getBizData() {
+      public RequestBizData getBizData() {
         if (bizDataBuilder_ == null) {
-          return bizData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.getDefaultInstance() : bizData_;
+          return bizData_ == null ? RequestBizData.getDefaultInstance() : bizData_;
         } else {
           return bizDataBuilder_.getMessage();
         }
@@ -1847,128 +1798,130 @@ public final class ECRHubRequestProto {
       /**
        * <pre>
        **
-       *请求的业务数据
+       *Requested Business Data
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
        */
-      public Builder setBizData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData value) {
+      public Builder setBizData(RequestBizData value) {
         if (bizDataBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
           bizData_ = value;
-          onChanged();
         } else {
           bizDataBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000020;
+        onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *请求的业务数据
+       *Requested Business Data
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
        */
       public Builder setBizData(
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.Builder builderForValue) {
+          RequestBizData.Builder builderForValue) {
         if (bizDataBuilder_ == null) {
           bizData_ = builderForValue.build();
-          onChanged();
         } else {
           bizDataBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000020;
+        onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *请求的业务数据
+       *Requested Business Data
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
        */
-      public Builder mergeBizData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData value) {
+      public Builder mergeBizData(RequestBizData value) {
         if (bizDataBuilder_ == null) {
-          if (bizData_ != null) {
-            bizData_ =
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.newBuilder(bizData_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000020) != 0) &&
+            bizData_ != null &&
+            bizData_ != RequestBizData.getDefaultInstance()) {
+            getBizDataBuilder().mergeFrom(value);
           } else {
             bizData_ = value;
           }
-          onChanged();
         } else {
           bizDataBuilder_.mergeFrom(value);
         }
-
+        if (bizData_ != null) {
+          bitField0_ |= 0x00000020;
+          onChanged();
+        }
         return this;
       }
       /**
        * <pre>
        **
-       *请求的业务数据
+       *Requested Business Data
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
        */
       public Builder clearBizData() {
-        if (bizDataBuilder_ == null) {
-          bizData_ = null;
-          onChanged();
-        } else {
-          bizData_ = null;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        bizData_ = null;
+        if (bizDataBuilder_ != null) {
+          bizDataBuilder_.dispose();
           bizDataBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *请求的业务数据
+       *Requested Business Data
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
        */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.Builder getBizDataBuilder() {
-        
+      public RequestBizData.Builder getBizDataBuilder() {
+        bitField0_ |= 0x00000020;
         onChanged();
         return getBizDataFieldBuilder().getBuilder();
       }
       /**
        * <pre>
        **
-       *请求的业务数据
+       *Requested Business Data
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
        */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizDataOrBuilder getBizDataOrBuilder() {
+      public RequestBizDataOrBuilder getBizDataOrBuilder() {
         if (bizDataBuilder_ != null) {
           return bizDataBuilder_.getMessageOrBuilder();
         } else {
           return bizData_ == null ?
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.getDefaultInstance() : bizData_;
+              RequestBizData.getDefaultInstance() : bizData_;
         }
       }
       /**
        * <pre>
        **
-       *请求的业务数据
+       *Requested Business Data
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.RequestBizData biz_data = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizDataOrBuilder> 
+          RequestBizData, RequestBizData.Builder, RequestBizDataOrBuilder>
           getBizDataFieldBuilder() {
         if (bizDataBuilder_ == null) {
           bizDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizDataOrBuilder>(
+              RequestBizData, RequestBizData.Builder, RequestBizDataOrBuilder>(
                   getBizData(),
                   getParentForChildren(),
                   isClean());
@@ -1977,33 +1930,33 @@ public final class ECRHubRequestProto {
         return bizDataBuilder_;
       }
 
-      private com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData voiceData_;
+      private VoiceData voiceData_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceDataOrBuilder> voiceDataBuilder_;
+          VoiceData, VoiceData.Builder, VoiceDataOrBuilder> voiceDataBuilder_;
       /**
        * <pre>
        **
-       *声音
+       *voice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
        * @return Whether the voiceData field is set.
        */
       public boolean hasVoiceData() {
-        return voiceDataBuilder_ != null || voiceData_ != null;
+        return ((bitField0_ & 0x00000040) != 0);
       }
       /**
        * <pre>
        **
-       *声音
+       *voice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
        * @return The voiceData.
        */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData getVoiceData() {
+      public VoiceData getVoiceData() {
         if (voiceDataBuilder_ == null) {
-          return voiceData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.getDefaultInstance() : voiceData_;
+          return voiceData_ == null ? VoiceData.getDefaultInstance() : voiceData_;
         } else {
           return voiceDataBuilder_.getMessage();
         }
@@ -2011,128 +1964,130 @@ public final class ECRHubRequestProto {
       /**
        * <pre>
        **
-       *声音
+       *voice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
        */
-      public Builder setVoiceData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData value) {
+      public Builder setVoiceData(VoiceData value) {
         if (voiceDataBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
           voiceData_ = value;
-          onChanged();
         } else {
           voiceDataBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000040;
+        onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *声音
+       *voice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
        */
       public Builder setVoiceData(
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.Builder builderForValue) {
+          VoiceData.Builder builderForValue) {
         if (voiceDataBuilder_ == null) {
           voiceData_ = builderForValue.build();
-          onChanged();
         } else {
           voiceDataBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000040;
+        onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *声音
+       *voice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
        */
-      public Builder mergeVoiceData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData value) {
+      public Builder mergeVoiceData(VoiceData value) {
         if (voiceDataBuilder_ == null) {
-          if (voiceData_ != null) {
-            voiceData_ =
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.newBuilder(voiceData_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000040) != 0) &&
+            voiceData_ != null &&
+            voiceData_ != VoiceData.getDefaultInstance()) {
+            getVoiceDataBuilder().mergeFrom(value);
           } else {
             voiceData_ = value;
           }
-          onChanged();
         } else {
           voiceDataBuilder_.mergeFrom(value);
         }
-
+        if (voiceData_ != null) {
+          bitField0_ |= 0x00000040;
+          onChanged();
+        }
         return this;
       }
       /**
        * <pre>
        **
-       *声音
+       *voice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
        */
       public Builder clearVoiceData() {
-        if (voiceDataBuilder_ == null) {
-          voiceData_ = null;
-          onChanged();
-        } else {
-          voiceData_ = null;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        voiceData_ = null;
+        if (voiceDataBuilder_ != null) {
+          voiceDataBuilder_.dispose();
           voiceDataBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *声音
+       *voice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
        */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.Builder getVoiceDataBuilder() {
-        
+      public VoiceData.Builder getVoiceDataBuilder() {
+        bitField0_ |= 0x00000040;
         onChanged();
         return getVoiceDataFieldBuilder().getBuilder();
       }
       /**
        * <pre>
        **
-       *声音
+       *voice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
        */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceDataOrBuilder getVoiceDataOrBuilder() {
+      public VoiceDataOrBuilder getVoiceDataOrBuilder() {
         if (voiceDataBuilder_ != null) {
           return voiceDataBuilder_.getMessageOrBuilder();
         } else {
           return voiceData_ == null ?
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.getDefaultInstance() : voiceData_;
+              VoiceData.getDefaultInstance() : voiceData_;
         }
       }
       /**
        * <pre>
        **
-       *声音
+       *voice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.VoiceData voice_data = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceDataOrBuilder> 
+          VoiceData, VoiceData.Builder, VoiceDataOrBuilder>
           getVoiceDataFieldBuilder() {
         if (voiceDataBuilder_ == null) {
           voiceDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceDataOrBuilder>(
+              VoiceData, VoiceData.Builder, VoiceDataOrBuilder>(
                   getVoiceData(),
                   getParentForChildren(),
                   isClean());
@@ -2141,33 +2096,33 @@ public final class ECRHubRequestProto {
         return voiceDataBuilder_;
       }
 
-      private com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData printerData_;
+      private PrinterData printerData_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterDataOrBuilder> printerDataBuilder_;
+          PrinterData, PrinterData.Builder, PrinterDataOrBuilder> printerDataBuilder_;
       /**
        * <pre>
        **
-       *打印
+       *printer
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
        * @return Whether the printerData field is set.
        */
       public boolean hasPrinterData() {
-        return printerDataBuilder_ != null || printerData_ != null;
+        return ((bitField0_ & 0x00000080) != 0);
       }
       /**
        * <pre>
        **
-       *打印
+       *printer
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
        * @return The printerData.
        */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData getPrinterData() {
+      public PrinterData getPrinterData() {
         if (printerDataBuilder_ == null) {
-          return printerData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.getDefaultInstance() : printerData_;
+          return printerData_ == null ? PrinterData.getDefaultInstance() : printerData_;
         } else {
           return printerDataBuilder_.getMessage();
         }
@@ -2175,128 +2130,130 @@ public final class ECRHubRequestProto {
       /**
        * <pre>
        **
-       *打印
+       *printer
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
        */
-      public Builder setPrinterData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData value) {
+      public Builder setPrinterData(PrinterData value) {
         if (printerDataBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
           printerData_ = value;
-          onChanged();
         } else {
           printerDataBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000080;
+        onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *打印
+       *printer
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
        */
       public Builder setPrinterData(
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.Builder builderForValue) {
+          PrinterData.Builder builderForValue) {
         if (printerDataBuilder_ == null) {
           printerData_ = builderForValue.build();
-          onChanged();
         } else {
           printerDataBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000080;
+        onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *打印
+       *printer
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
        */
-      public Builder mergePrinterData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData value) {
+      public Builder mergePrinterData(PrinterData value) {
         if (printerDataBuilder_ == null) {
-          if (printerData_ != null) {
-            printerData_ =
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.newBuilder(printerData_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000080) != 0) &&
+            printerData_ != null &&
+            printerData_ != PrinterData.getDefaultInstance()) {
+            getPrinterDataBuilder().mergeFrom(value);
           } else {
             printerData_ = value;
           }
-          onChanged();
         } else {
           printerDataBuilder_.mergeFrom(value);
         }
-
+        if (printerData_ != null) {
+          bitField0_ |= 0x00000080;
+          onChanged();
+        }
         return this;
       }
       /**
        * <pre>
        **
-       *打印
+       *printer
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
        */
       public Builder clearPrinterData() {
-        if (printerDataBuilder_ == null) {
-          printerData_ = null;
-          onChanged();
-        } else {
-          printerData_ = null;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        printerData_ = null;
+        if (printerDataBuilder_ != null) {
+          printerDataBuilder_.dispose();
           printerDataBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *打印
+       *printer
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
        */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.Builder getPrinterDataBuilder() {
-        
+      public PrinterData.Builder getPrinterDataBuilder() {
+        bitField0_ |= 0x00000080;
         onChanged();
         return getPrinterDataFieldBuilder().getBuilder();
       }
       /**
        * <pre>
        **
-       *打印
+       *printer
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
        */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterDataOrBuilder getPrinterDataOrBuilder() {
+      public PrinterDataOrBuilder getPrinterDataOrBuilder() {
         if (printerDataBuilder_ != null) {
           return printerDataBuilder_.getMessageOrBuilder();
         } else {
           return printerData_ == null ?
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.getDefaultInstance() : printerData_;
+              PrinterData.getDefaultInstance() : printerData_;
         }
       }
       /**
        * <pre>
        **
-       *打印
+       *printer
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.PrinterData printer_data = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterDataOrBuilder> 
+          PrinterData, PrinterData.Builder, PrinterDataOrBuilder>
           getPrinterDataFieldBuilder() {
         if (printerDataBuilder_ == null) {
           printerDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterDataOrBuilder>(
+              PrinterData, PrinterData.Builder, PrinterDataOrBuilder>(
                   getPrinterData(),
                   getParentForChildren(),
                   isClean());
@@ -2305,33 +2262,33 @@ public final class ECRHubRequestProto {
         return printerDataBuilder_;
       }
 
-      private com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData notifyData_;
+      private NotifyData notifyData_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyDataOrBuilder> notifyDataBuilder_;
+          NotifyData, NotifyData.Builder, NotifyDataOrBuilder> notifyDataBuilder_;
       /**
        * <pre>
        **
-       *通知
+       *notice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
        * @return Whether the notifyData field is set.
        */
       public boolean hasNotifyData() {
-        return notifyDataBuilder_ != null || notifyData_ != null;
+        return ((bitField0_ & 0x00000100) != 0);
       }
       /**
        * <pre>
        **
-       *通知
+       *notice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
        * @return The notifyData.
        */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData getNotifyData() {
+      public NotifyData getNotifyData() {
         if (notifyDataBuilder_ == null) {
-          return notifyData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.getDefaultInstance() : notifyData_;
+          return notifyData_ == null ? NotifyData.getDefaultInstance() : notifyData_;
         } else {
           return notifyDataBuilder_.getMessage();
         }
@@ -2339,128 +2296,130 @@ public final class ECRHubRequestProto {
       /**
        * <pre>
        **
-       *通知
+       *notice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
        */
-      public Builder setNotifyData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData value) {
+      public Builder setNotifyData(NotifyData value) {
         if (notifyDataBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
           notifyData_ = value;
-          onChanged();
         } else {
           notifyDataBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000100;
+        onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知
+       *notice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
        */
       public Builder setNotifyData(
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.Builder builderForValue) {
+          NotifyData.Builder builderForValue) {
         if (notifyDataBuilder_ == null) {
           notifyData_ = builderForValue.build();
-          onChanged();
         } else {
           notifyDataBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000100;
+        onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知
+       *notice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
        */
-      public Builder mergeNotifyData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData value) {
+      public Builder mergeNotifyData(NotifyData value) {
         if (notifyDataBuilder_ == null) {
-          if (notifyData_ != null) {
-            notifyData_ =
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.newBuilder(notifyData_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000100) != 0) &&
+            notifyData_ != null &&
+            notifyData_ != NotifyData.getDefaultInstance()) {
+            getNotifyDataBuilder().mergeFrom(value);
           } else {
             notifyData_ = value;
           }
-          onChanged();
         } else {
           notifyDataBuilder_.mergeFrom(value);
         }
-
+        if (notifyData_ != null) {
+          bitField0_ |= 0x00000100;
+          onChanged();
+        }
         return this;
       }
       /**
        * <pre>
        **
-       *通知
+       *notice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
        */
       public Builder clearNotifyData() {
-        if (notifyDataBuilder_ == null) {
-          notifyData_ = null;
-          onChanged();
-        } else {
-          notifyData_ = null;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        notifyData_ = null;
+        if (notifyDataBuilder_ != null) {
+          notifyDataBuilder_.dispose();
           notifyDataBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知
+       *notice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
        */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.Builder getNotifyDataBuilder() {
-        
+      public NotifyData.Builder getNotifyDataBuilder() {
+        bitField0_ |= 0x00000100;
         onChanged();
         return getNotifyDataFieldBuilder().getBuilder();
       }
       /**
        * <pre>
        **
-       *通知
+       *notice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
        */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyDataOrBuilder getNotifyDataOrBuilder() {
+      public NotifyDataOrBuilder getNotifyDataOrBuilder() {
         if (notifyDataBuilder_ != null) {
           return notifyDataBuilder_.getMessageOrBuilder();
         } else {
           return notifyData_ == null ?
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.getDefaultInstance() : notifyData_;
+              NotifyData.getDefaultInstance() : notifyData_;
         }
       }
       /**
        * <pre>
        **
-       *通知
+       *notice
        * </pre>
        *
        * <code>.com.wiseasy.ecr.hub.data.NotifyData notify_data = 9;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyDataOrBuilder> 
+          NotifyData, NotifyData.Builder, NotifyDataOrBuilder>
           getNotifyDataFieldBuilder() {
         if (notifyDataBuilder_ == null) {
           notifyDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyDataOrBuilder>(
+              NotifyData, NotifyData.Builder, NotifyDataOrBuilder>(
                   getNotifyData(),
                   getParentForChildren(),
                   isClean());
@@ -2468,13 +2427,13 @@ public final class ECRHubRequestProto {
         }
         return notifyDataBuilder_;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -2485,23 +2444,34 @@ public final class ECRHubRequestProto {
     }
 
     // @@protoc_insertion_point(class_scope:com.wiseasy.ecr.hub.data.ECRHubRequest)
-    private static final com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest DEFAULT_INSTANCE;
+    private static final ECRHubRequest DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest();
+      DEFAULT_INSTANCE = new ECRHubRequest();
     }
 
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest getDefaultInstance() {
+    public static ECRHubRequest getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<ECRHubRequest>
         PARSER = new com.google.protobuf.AbstractParser<ECRHubRequest>() {
-      @java.lang.Override
+      @Override
       public ECRHubRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ECRHubRequest(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -2509,13 +2479,13 @@ public final class ECRHubRequestProto {
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<ECRHubRequest> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.ECRHubRequest getDefaultInstanceForType() {
+    @Override
+    public ECRHubRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2528,17 +2498,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *商户订单号
+     *Merchant order number
      * </pre>
      *
      * <code>string merchant_order_no = 1;</code>
      * @return The merchantOrderNo.
      */
-    java.lang.String getMerchantOrderNo();
+    String getMerchantOrderNo();
     /**
      * <pre>
      **
-     *商户订单号
+     *Merchant order number
      * </pre>
      *
      * <code>string merchant_order_no = 1;</code>
@@ -2550,17 +2520,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *原商户订单号，退款等后续交易必传
+     *Original merchant order number, refund and other subsequent transactions must be transmitted
      * </pre>
      *
      * <code>string orig_merchant_order_no = 2;</code>
      * @return The origMerchantOrderNo.
      */
-    java.lang.String getOrigMerchantOrderNo();
+    String getOrigMerchantOrderNo();
     /**
      * <pre>
      **
-     *原商户订单号，退款等后续交易必传
+     *Original merchant order number, refund and other subsequent transactions must be transmitted
      * </pre>
      *
      * <code>string orig_merchant_order_no = 2;</code>
@@ -2572,17 +2542,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *标价币种
+     *price currency
      * </pre>
      *
      * <code>string price_currency = 3;</code>
      * @return The priceCurrency.
      */
-    java.lang.String getPriceCurrency();
+    String getPriceCurrency();
     /**
      * <pre>
      **
-     *标价币种
+     *price currency
      * </pre>
      *
      * <code>string price_currency = 3;</code>
@@ -2594,17 +2564,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *订单金额
+     *order amount
      * </pre>
      *
      * <code>string order_amount = 4;</code>
      * @return The orderAmount.
      */
-    java.lang.String getOrderAmount();
+    String getOrderAmount();
     /**
      * <pre>
      **
-     *订单金额
+     *order amount
      * </pre>
      *
      * <code>string order_amount = 4;</code>
@@ -2616,17 +2586,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *消费金额
+     *tip amount
      * </pre>
      *
      * <code>string tip_amount = 5;</code>
      * @return The tipAmount.
      */
-    java.lang.String getTipAmount();
+    String getTipAmount();
     /**
      * <pre>
      **
-     *消费金额
+     *tip amount
      * </pre>
      *
      * <code>string tip_amount = 5;</code>
@@ -2638,17 +2608,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *消费金额
+     *trans type
      * </pre>
      *
      * <code>string trans_type = 6;</code>
      * @return The transType.
      */
-    java.lang.String getTransType();
+    String getTransType();
     /**
      * <pre>
      **
-     *消费金额
+     *trans type
      * </pre>
      *
      * <code>string trans_type = 6;</code>
@@ -2660,17 +2630,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *支付方式类目：QR_C_SCAN_B:主扫；QR_B_SCAN_C：扫码被扫；BANKCARD:银行卡；OTP:OTP一次性密码支付
+     *Payment method category: QR_ C_ SCAN_ B: Main scanning; QR_ B_ SCAN_ C: Scan code is scanned; BANKCARD: Bank card; OTP: OTP one-time password payment
      * </pre>
      *
      * <code>string pay_method_category = 7;</code>
      * @return The payMethodCategory.
      */
-    java.lang.String getPayMethodCategory();
+    String getPayMethodCategory();
     /**
      * <pre>
      **
-     *支付方式类目：QR_C_SCAN_B:主扫；QR_B_SCAN_C：扫码被扫；BANKCARD:银行卡；OTP:OTP一次性密码支付
+     *Payment method category: QR_ C_ SCAN_ B: Main scanning; QR_ B_ SCAN_ C: Scan code is scanned; BANKCARD: Bank card; OTP: OTP one-time password payment
      * </pre>
      *
      * <code>string pay_method_category = 7;</code>
@@ -2682,17 +2652,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *附加信息
+     *Additional information
      * </pre>
      *
      * <code>string attach = 8;</code>
      * @return The attach.
      */
-    java.lang.String getAttach();
+    String getAttach();
     /**
      * <pre>
      **
-     *附加信息
+     *Additional information
      * </pre>
      *
      * <code>string attach = 8;</code>
@@ -2704,17 +2674,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *描述信息
+     *Descriptive information
      * </pre>
      *
      * <code>string description = 9;</code>
      * @return The description.
      */
-    java.lang.String getDescription();
+    String getDescription();
     /**
      * <pre>
      **
-     *描述信息
+     *Descriptive information
      * </pre>
      *
      * <code>string description = 9;</code>
@@ -2726,17 +2696,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *通知回调地址
+     *Notification callback address
      * </pre>
      *
      * <code>string notify_url = 10;</code>
      * @return The notifyUrl.
      */
-    java.lang.String getNotifyUrl();
+    String getNotifyUrl();
     /**
      * <pre>
      **
-     *通知回调地址
+     *Notification callback address
      * </pre>
      *
      * <code>string notify_url = 10;</code>
@@ -2748,17 +2718,17 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *token，确认返回数据的客户端
+     *token，Confirm the client that returned the data
      * </pre>
      *
      * <code>string token = 11;</code>
      * @return The token.
      */
-    java.lang.String getToken();
+    String getToken();
     /**
      * <pre>
      **
-     *token，确认返回数据的客户端
+     *token，Confirm the client that returned the data
      * </pre>
      *
      * <code>string token = 11;</code>
@@ -2770,7 +2740,7 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *扩展参数
+     *Extended parameters
      * </pre>
      *
      * <code>map&lt;string, string&gt; extends_params = 12;</code>
@@ -2779,54 +2749,52 @@ public final class ECRHubRequestProto {
     /**
      * <pre>
      **
-     *扩展参数
+     *Extended parameters
      * </pre>
      *
      * <code>map&lt;string, string&gt; extends_params = 12;</code>
      */
     boolean containsExtendsParams(
-        java.lang.String key);
+        String key);
     /**
      * Use {@link #getExtendsParamsMap()} instead.
      */
-    @java.lang.Deprecated
-    java.util.Map<java.lang.String, java.lang.String>
+    @Deprecated
+    java.util.Map<String, String>
     getExtendsParams();
     /**
      * <pre>
      **
-     *扩展参数
+     *Extended parameters
      * </pre>
      *
      * <code>map&lt;string, string&gt; extends_params = 12;</code>
      */
-    java.util.Map<java.lang.String, java.lang.String>
+    java.util.Map<String, String>
     getExtendsParamsMap();
     /**
      * <pre>
      **
-     *扩展参数
+     *Extended parameters
      * </pre>
      *
      * <code>map&lt;string, string&gt; extends_params = 12;</code>
      */
-
     /* nullable */
-java.lang.String getExtendsParamsOrDefault(
-        java.lang.String key,
+String getExtendsParamsOrDefault(
+        String key,
         /* nullable */
-java.lang.String defaultValue);
+String defaultValue);
     /**
      * <pre>
      **
-     *扩展参数
+     *Extended parameters
      * </pre>
      *
      * <code>map&lt;string, string&gt; extends_params = 12;</code>
      */
-
-    java.lang.String getExtendsParamsOrThrow(
-        java.lang.String key);
+    String getExtendsParamsOrThrow(
+        String key);
   }
   /**
    * Protobuf type {@code com.wiseasy.ecr.hub.data.RequestBizData}
@@ -2854,144 +2822,20 @@ java.lang.String defaultValue);
       token_ = "";
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new RequestBizData();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private RequestBizData(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              merchantOrderNo_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              origMerchantOrderNo_ = s;
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              priceCurrency_ = s;
-              break;
-            }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              orderAmount_ = s;
-              break;
-            }
-            case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              tipAmount_ = s;
-              break;
-            }
-            case 50: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              transType_ = s;
-              break;
-            }
-            case 58: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              payMethodCategory_ = s;
-              break;
-            }
-            case 66: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              attach_ = s;
-              break;
-            }
-            case 74: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              description_ = s;
-              break;
-            }
-            case 82: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              notifyUrl_ = s;
-              break;
-            }
-            case 90: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              token_ = s;
-              break;
-            }
-            case 98: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                extendsParams_ = com.google.protobuf.MapField.newMapField(
-                    ExtendsParamsDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000001;
-              }
-              com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
-              extendsParams__ = input.readMessage(
-                  ExtendsParamsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              extendsParams_.getMutableMap().put(
-                  extendsParams__.getKey(), extendsParams__.getValue());
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_RequestBizData_descriptor;
+      return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_RequestBizData_descriptor;
     }
 
     @SuppressWarnings({"rawtypes"})
-    @java.lang.Override
+    @Override
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
@@ -3002,34 +2846,35 @@ java.lang.String defaultValue);
               "Invalid map field number: " + number);
       }
     }
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_RequestBizData_fieldAccessorTable
+      return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_RequestBizData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.Builder.class);
+              RequestBizData.class, Builder.class);
     }
 
     public static final int MERCHANT_ORDER_NO_FIELD_NUMBER = 1;
-    private volatile java.lang.Object merchantOrderNo_;
+    @SuppressWarnings("serial")
+    private volatile Object merchantOrderNo_ = "";
     /**
      * <pre>
      **
-     *商户订单号
+     *Merchant order number
      * </pre>
      *
      * <code>string merchant_order_no = 1;</code>
      * @return The merchantOrderNo.
      */
-    @java.lang.Override
-    public java.lang.String getMerchantOrderNo() {
-      java.lang.Object ref = merchantOrderNo_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getMerchantOrderNo() {
+      Object ref = merchantOrderNo_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         merchantOrderNo_ = s;
         return s;
       }
@@ -3037,20 +2882,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *商户订单号
+     *Merchant order number
      * </pre>
      *
      * <code>string merchant_order_no = 1;</code>
      * @return The bytes for merchantOrderNo.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getMerchantOrderNoBytes() {
-      java.lang.Object ref = merchantOrderNo_;
-      if (ref instanceof java.lang.String) {
+      Object ref = merchantOrderNo_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         merchantOrderNo_ = b;
         return b;
       } else {
@@ -3059,25 +2904,26 @@ java.lang.String defaultValue);
     }
 
     public static final int ORIG_MERCHANT_ORDER_NO_FIELD_NUMBER = 2;
-    private volatile java.lang.Object origMerchantOrderNo_;
+    @SuppressWarnings("serial")
+    private volatile Object origMerchantOrderNo_ = "";
     /**
      * <pre>
      **
-     *原商户订单号，退款等后续交易必传
+     *Original merchant order number, refund and other subsequent transactions must be transmitted
      * </pre>
      *
      * <code>string orig_merchant_order_no = 2;</code>
      * @return The origMerchantOrderNo.
      */
-    @java.lang.Override
-    public java.lang.String getOrigMerchantOrderNo() {
-      java.lang.Object ref = origMerchantOrderNo_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getOrigMerchantOrderNo() {
+      Object ref = origMerchantOrderNo_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         origMerchantOrderNo_ = s;
         return s;
       }
@@ -3085,20 +2931,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *原商户订单号，退款等后续交易必传
+     *Original merchant order number, refund and other subsequent transactions must be transmitted
      * </pre>
      *
      * <code>string orig_merchant_order_no = 2;</code>
      * @return The bytes for origMerchantOrderNo.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getOrigMerchantOrderNoBytes() {
-      java.lang.Object ref = origMerchantOrderNo_;
-      if (ref instanceof java.lang.String) {
+      Object ref = origMerchantOrderNo_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         origMerchantOrderNo_ = b;
         return b;
       } else {
@@ -3107,25 +2953,26 @@ java.lang.String defaultValue);
     }
 
     public static final int PRICE_CURRENCY_FIELD_NUMBER = 3;
-    private volatile java.lang.Object priceCurrency_;
+    @SuppressWarnings("serial")
+    private volatile Object priceCurrency_ = "";
     /**
      * <pre>
      **
-     *标价币种
+     *price currency
      * </pre>
      *
      * <code>string price_currency = 3;</code>
      * @return The priceCurrency.
      */
-    @java.lang.Override
-    public java.lang.String getPriceCurrency() {
-      java.lang.Object ref = priceCurrency_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getPriceCurrency() {
+      Object ref = priceCurrency_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         priceCurrency_ = s;
         return s;
       }
@@ -3133,20 +2980,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *标价币种
+     *price currency
      * </pre>
      *
      * <code>string price_currency = 3;</code>
      * @return The bytes for priceCurrency.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getPriceCurrencyBytes() {
-      java.lang.Object ref = priceCurrency_;
-      if (ref instanceof java.lang.String) {
+      Object ref = priceCurrency_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         priceCurrency_ = b;
         return b;
       } else {
@@ -3155,25 +3002,26 @@ java.lang.String defaultValue);
     }
 
     public static final int ORDER_AMOUNT_FIELD_NUMBER = 4;
-    private volatile java.lang.Object orderAmount_;
+    @SuppressWarnings("serial")
+    private volatile Object orderAmount_ = "";
     /**
      * <pre>
      **
-     *订单金额
+     *order amount
      * </pre>
      *
      * <code>string order_amount = 4;</code>
      * @return The orderAmount.
      */
-    @java.lang.Override
-    public java.lang.String getOrderAmount() {
-      java.lang.Object ref = orderAmount_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getOrderAmount() {
+      Object ref = orderAmount_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         orderAmount_ = s;
         return s;
       }
@@ -3181,20 +3029,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *订单金额
+     *order amount
      * </pre>
      *
      * <code>string order_amount = 4;</code>
      * @return The bytes for orderAmount.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getOrderAmountBytes() {
-      java.lang.Object ref = orderAmount_;
-      if (ref instanceof java.lang.String) {
+      Object ref = orderAmount_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         orderAmount_ = b;
         return b;
       } else {
@@ -3203,25 +3051,26 @@ java.lang.String defaultValue);
     }
 
     public static final int TIP_AMOUNT_FIELD_NUMBER = 5;
-    private volatile java.lang.Object tipAmount_;
+    @SuppressWarnings("serial")
+    private volatile Object tipAmount_ = "";
     /**
      * <pre>
      **
-     *消费金额
+     *tip amount
      * </pre>
      *
      * <code>string tip_amount = 5;</code>
      * @return The tipAmount.
      */
-    @java.lang.Override
-    public java.lang.String getTipAmount() {
-      java.lang.Object ref = tipAmount_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getTipAmount() {
+      Object ref = tipAmount_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         tipAmount_ = s;
         return s;
       }
@@ -3229,20 +3078,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *消费金额
+     *tip amount
      * </pre>
      *
      * <code>string tip_amount = 5;</code>
      * @return The bytes for tipAmount.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getTipAmountBytes() {
-      java.lang.Object ref = tipAmount_;
-      if (ref instanceof java.lang.String) {
+      Object ref = tipAmount_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         tipAmount_ = b;
         return b;
       } else {
@@ -3251,25 +3100,26 @@ java.lang.String defaultValue);
     }
 
     public static final int TRANS_TYPE_FIELD_NUMBER = 6;
-    private volatile java.lang.Object transType_;
+    @SuppressWarnings("serial")
+    private volatile Object transType_ = "";
     /**
      * <pre>
      **
-     *消费金额
+     *trans type
      * </pre>
      *
      * <code>string trans_type = 6;</code>
      * @return The transType.
      */
-    @java.lang.Override
-    public java.lang.String getTransType() {
-      java.lang.Object ref = transType_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getTransType() {
+      Object ref = transType_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         transType_ = s;
         return s;
       }
@@ -3277,20 +3127,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *消费金额
+     *trans type
      * </pre>
      *
      * <code>string trans_type = 6;</code>
      * @return The bytes for transType.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getTransTypeBytes() {
-      java.lang.Object ref = transType_;
-      if (ref instanceof java.lang.String) {
+      Object ref = transType_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         transType_ = b;
         return b;
       } else {
@@ -3299,25 +3149,26 @@ java.lang.String defaultValue);
     }
 
     public static final int PAY_METHOD_CATEGORY_FIELD_NUMBER = 7;
-    private volatile java.lang.Object payMethodCategory_;
+    @SuppressWarnings("serial")
+    private volatile Object payMethodCategory_ = "";
     /**
      * <pre>
      **
-     *支付方式类目：QR_C_SCAN_B:主扫；QR_B_SCAN_C：扫码被扫；BANKCARD:银行卡；OTP:OTP一次性密码支付
+     *Payment method category: QR_ C_ SCAN_ B: Main scanning; QR_ B_ SCAN_ C: Scan code is scanned; BANKCARD: Bank card; OTP: OTP one-time password payment
      * </pre>
      *
      * <code>string pay_method_category = 7;</code>
      * @return The payMethodCategory.
      */
-    @java.lang.Override
-    public java.lang.String getPayMethodCategory() {
-      java.lang.Object ref = payMethodCategory_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getPayMethodCategory() {
+      Object ref = payMethodCategory_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         payMethodCategory_ = s;
         return s;
       }
@@ -3325,20 +3176,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *支付方式类目：QR_C_SCAN_B:主扫；QR_B_SCAN_C：扫码被扫；BANKCARD:银行卡；OTP:OTP一次性密码支付
+     *Payment method category: QR_ C_ SCAN_ B: Main scanning; QR_ B_ SCAN_ C: Scan code is scanned; BANKCARD: Bank card; OTP: OTP one-time password payment
      * </pre>
      *
      * <code>string pay_method_category = 7;</code>
      * @return The bytes for payMethodCategory.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getPayMethodCategoryBytes() {
-      java.lang.Object ref = payMethodCategory_;
-      if (ref instanceof java.lang.String) {
+      Object ref = payMethodCategory_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         payMethodCategory_ = b;
         return b;
       } else {
@@ -3347,25 +3198,26 @@ java.lang.String defaultValue);
     }
 
     public static final int ATTACH_FIELD_NUMBER = 8;
-    private volatile java.lang.Object attach_;
+    @SuppressWarnings("serial")
+    private volatile Object attach_ = "";
     /**
      * <pre>
      **
-     *附加信息
+     *Additional information
      * </pre>
      *
      * <code>string attach = 8;</code>
      * @return The attach.
      */
-    @java.lang.Override
-    public java.lang.String getAttach() {
-      java.lang.Object ref = attach_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getAttach() {
+      Object ref = attach_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         attach_ = s;
         return s;
       }
@@ -3373,20 +3225,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *附加信息
+     *Additional information
      * </pre>
      *
      * <code>string attach = 8;</code>
      * @return The bytes for attach.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getAttachBytes() {
-      java.lang.Object ref = attach_;
-      if (ref instanceof java.lang.String) {
+      Object ref = attach_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         attach_ = b;
         return b;
       } else {
@@ -3395,25 +3247,26 @@ java.lang.String defaultValue);
     }
 
     public static final int DESCRIPTION_FIELD_NUMBER = 9;
-    private volatile java.lang.Object description_;
+    @SuppressWarnings("serial")
+    private volatile Object description_ = "";
     /**
      * <pre>
      **
-     *描述信息
+     *Descriptive information
      * </pre>
      *
      * <code>string description = 9;</code>
      * @return The description.
      */
-    @java.lang.Override
-    public java.lang.String getDescription() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getDescription() {
+      Object ref = description_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         description_ = s;
         return s;
       }
@@ -3421,20 +3274,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *描述信息
+     *Descriptive information
      * </pre>
      *
      * <code>string description = 9;</code>
      * @return The bytes for description.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getDescriptionBytes() {
-      java.lang.Object ref = description_;
-      if (ref instanceof java.lang.String) {
+      Object ref = description_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         description_ = b;
         return b;
       } else {
@@ -3443,25 +3296,26 @@ java.lang.String defaultValue);
     }
 
     public static final int NOTIFY_URL_FIELD_NUMBER = 10;
-    private volatile java.lang.Object notifyUrl_;
+    @SuppressWarnings("serial")
+    private volatile Object notifyUrl_ = "";
     /**
      * <pre>
      **
-     *通知回调地址
+     *Notification callback address
      * </pre>
      *
      * <code>string notify_url = 10;</code>
      * @return The notifyUrl.
      */
-    @java.lang.Override
-    public java.lang.String getNotifyUrl() {
-      java.lang.Object ref = notifyUrl_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getNotifyUrl() {
+      Object ref = notifyUrl_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         notifyUrl_ = s;
         return s;
       }
@@ -3469,20 +3323,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *通知回调地址
+     *Notification callback address
      * </pre>
      *
      * <code>string notify_url = 10;</code>
      * @return The bytes for notifyUrl.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getNotifyUrlBytes() {
-      java.lang.Object ref = notifyUrl_;
-      if (ref instanceof java.lang.String) {
+      Object ref = notifyUrl_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         notifyUrl_ = b;
         return b;
       } else {
@@ -3491,25 +3345,26 @@ java.lang.String defaultValue);
     }
 
     public static final int TOKEN_FIELD_NUMBER = 11;
-    private volatile java.lang.Object token_;
+    @SuppressWarnings("serial")
+    private volatile Object token_ = "";
     /**
      * <pre>
      **
-     *token，确认返回数据的客户端
+     *token，Confirm the client that returned the data
      * </pre>
      *
      * <code>string token = 11;</code>
      * @return The token.
      */
-    @java.lang.Override
-    public java.lang.String getToken() {
-      java.lang.Object ref = token_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getToken() {
+      Object ref = token_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         token_ = s;
         return s;
       }
@@ -3517,20 +3372,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *token，确认返回数据的客户端
+     *token，Confirm the client that returned the data
      * </pre>
      *
      * <code>string token = 11;</code>
      * @return The bytes for token.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getTokenBytes() {
-      java.lang.Object ref = token_;
-      if (ref instanceof java.lang.String) {
+      Object ref = token_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         token_ = b;
         return b;
       } else {
@@ -3541,18 +3396,19 @@ java.lang.String defaultValue);
     public static final int EXTENDS_PARAMS_FIELD_NUMBER = 12;
     private static final class ExtendsParamsDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
-          java.lang.String, java.lang.String> defaultEntry =
+          String, String> defaultEntry =
               com.google.protobuf.MapEntry
-              .<java.lang.String, java.lang.String>newDefaultInstance(
-                  com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_RequestBizData_ExtendsParamsEntry_descriptor, 
+              .<String, String>newDefaultInstance(
+                  ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_RequestBizData_ExtendsParamsEntry_descriptor,
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "");
     }
+    @SuppressWarnings("serial")
     private com.google.protobuf.MapField<
-        java.lang.String, java.lang.String> extendsParams_;
-    private com.google.protobuf.MapField<java.lang.String, java.lang.String>
+        String, String> extendsParams_;
+    private com.google.protobuf.MapField<String, String>
     internalGetExtendsParams() {
       if (extendsParams_ == null) {
         return com.google.protobuf.MapField.emptyMapField(
@@ -3560,87 +3416,84 @@ java.lang.String defaultValue);
       }
       return extendsParams_;
     }
-
     public int getExtendsParamsCount() {
       return internalGetExtendsParams().getMap().size();
     }
     /**
      * <pre>
      **
-     *扩展参数
+     *Extended parameters
      * </pre>
      *
      * <code>map&lt;string, string&gt; extends_params = 12;</code>
      */
-
-    @java.lang.Override
+    @Override
     public boolean containsExtendsParams(
-        java.lang.String key) {
+        String key) {
       if (key == null) { throw new NullPointerException("map key"); }
       return internalGetExtendsParams().getMap().containsKey(key);
     }
     /**
      * Use {@link #getExtendsParamsMap()} instead.
      */
-    @java.lang.Override
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.String> getExtendsParams() {
+    @Override
+    @Deprecated
+    public java.util.Map<String, String> getExtendsParams() {
       return getExtendsParamsMap();
     }
     /**
      * <pre>
      **
-     *扩展参数
+     *Extended parameters
      * </pre>
      *
      * <code>map&lt;string, string&gt; extends_params = 12;</code>
      */
-    @java.lang.Override
-
-    public java.util.Map<java.lang.String, java.lang.String> getExtendsParamsMap() {
+    @Override
+    public java.util.Map<String, String> getExtendsParamsMap() {
       return internalGetExtendsParams().getMap();
     }
     /**
      * <pre>
      **
-     *扩展参数
+     *Extended parameters
      * </pre>
      *
      * <code>map&lt;string, string&gt; extends_params = 12;</code>
      */
-    @java.lang.Override
-
-    public java.lang.String getExtendsParamsOrDefault(
-        java.lang.String key,
-        java.lang.String defaultValue) {
+    @Override
+    public /* nullable */
+String getExtendsParamsOrDefault(
+        String key,
+        /* nullable */
+String defaultValue) {
       if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
+      java.util.Map<String, String> map =
           internalGetExtendsParams().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
      * <pre>
      **
-     *扩展参数
+     *Extended parameters
      * </pre>
      *
      * <code>map&lt;string, string&gt; extends_params = 12;</code>
      */
-    @java.lang.Override
-
-    public java.lang.String getExtendsParamsOrThrow(
-        java.lang.String key) {
+    @Override
+    public String getExtendsParamsOrThrow(
+        String key) {
       if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, java.lang.String> map =
+      java.util.Map<String, String> map =
           internalGetExtendsParams().getMap();
       if (!map.containsKey(key)) {
-        throw new java.lang.IllegalArgumentException();
+        throw new IllegalArgumentException();
       }
       return map.get(key);
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -3650,7 +3503,7 @@ java.lang.String defaultValue);
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(merchantOrderNo_)) {
@@ -3692,10 +3545,10 @@ java.lang.String defaultValue);
           internalGetExtendsParams(),
           ExtendsParamsDefaultEntryHolder.defaultEntry,
           12);
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -3734,9 +3587,9 @@ java.lang.String defaultValue);
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(token_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, token_);
       }
-      for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
+      for (java.util.Map.Entry<String, String> entry
            : internalGetExtendsParams().getMap().entrySet()) {
-        com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
+        com.google.protobuf.MapEntry<String, String>
         extendsParams__ = ExtendsParamsDefaultEntryHolder.defaultEntry.newBuilderForType()
             .setKey(entry.getKey())
             .setValue(entry.getValue())
@@ -3744,20 +3597,20 @@ java.lang.String defaultValue);
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(12, extendsParams__);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData)) {
+      if (!(obj instanceof RequestBizData)) {
         return super.equals(obj);
       }
-      com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData other = (com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData) obj;
+      RequestBizData other = (RequestBizData) obj;
 
       if (!getMerchantOrderNo()
           .equals(other.getMerchantOrderNo())) return false;
@@ -3783,11 +3636,11 @@ java.lang.String defaultValue);
           .equals(other.getToken())) return false;
       if (!internalGetExtendsParams().equals(
           other.internalGetExtendsParams())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -3820,74 +3673,76 @@ java.lang.String defaultValue);
         hash = (37 * hash) + EXTENDS_PARAMS_FIELD_NUMBER;
         hash = (53 * hash) + internalGetExtendsParams().hashCode();
       }
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parseFrom(
+    public static RequestBizData parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parseFrom(
+    public static RequestBizData parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parseFrom(
+    public static RequestBizData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parseFrom(
+    public static RequestBizData parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parseFrom(byte[] data)
+    public static RequestBizData parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parseFrom(
+    public static RequestBizData parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parseFrom(java.io.InputStream input)
+    public static RequestBizData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parseFrom(
+    public static RequestBizData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parseDelimitedFrom(java.io.InputStream input)
+
+    public static RequestBizData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parseDelimitedFrom(
+
+    public static RequestBizData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parseFrom(
+    public static RequestBizData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parseFrom(
+    public static RequestBizData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3895,23 +3750,23 @@ java.lang.String defaultValue);
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData prototype) {
+    public static Builder newBuilder(RequestBizData prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3921,10 +3776,10 @@ java.lang.String defaultValue);
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.wiseasy.ecr.hub.data.RequestBizData)
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizDataOrBuilder {
+        RequestBizDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_RequestBizData_descriptor;
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_RequestBizData_descriptor;
       }
 
       @SuppressWarnings({"rawtypes"})
@@ -3949,245 +3804,347 @@ java.lang.String defaultValue);
                 "Invalid map field number: " + number);
         }
       }
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_RequestBizData_fieldAccessorTable
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_RequestBizData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.Builder.class);
+                RequestBizData.class, Builder.class);
       }
 
       // Construct using com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
+
       }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         merchantOrderNo_ = "";
-
         origMerchantOrderNo_ = "";
-
         priceCurrency_ = "";
-
         orderAmount_ = "";
-
         tipAmount_ = "";
-
         transType_ = "";
-
         payMethodCategory_ = "";
-
         attach_ = "";
-
         description_ = "";
-
         notifyUrl_ = "";
-
         token_ = "";
-
         internalGetMutableExtendsParams().clear();
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_RequestBizData_descriptor;
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_RequestBizData_descriptor;
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData getDefaultInstanceForType() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.getDefaultInstance();
+      @Override
+      public RequestBizData getDefaultInstanceForType() {
+        return RequestBizData.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData build() {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData result = buildPartial();
+      @Override
+      public RequestBizData build() {
+        RequestBizData result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData buildPartial() {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData result = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData(this);
-        int from_bitField0_ = bitField0_;
-        result.merchantOrderNo_ = merchantOrderNo_;
-        result.origMerchantOrderNo_ = origMerchantOrderNo_;
-        result.priceCurrency_ = priceCurrency_;
-        result.orderAmount_ = orderAmount_;
-        result.tipAmount_ = tipAmount_;
-        result.transType_ = transType_;
-        result.payMethodCategory_ = payMethodCategory_;
-        result.attach_ = attach_;
-        result.description_ = description_;
-        result.notifyUrl_ = notifyUrl_;
-        result.token_ = token_;
-        result.extendsParams_ = internalGetExtendsParams();
-        result.extendsParams_.makeImmutable();
+      @Override
+      public RequestBizData buildPartial() {
+        RequestBizData result = new RequestBizData(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      @java.lang.Override
+      private void buildPartial0(RequestBizData result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.merchantOrderNo_ = merchantOrderNo_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.origMerchantOrderNo_ = origMerchantOrderNo_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.priceCurrency_ = priceCurrency_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.orderAmount_ = orderAmount_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.tipAmount_ = tipAmount_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.transType_ = transType_;
+        }
+        if (((from_bitField0_ & 0x00000040) != 0)) {
+          result.payMethodCategory_ = payMethodCategory_;
+        }
+        if (((from_bitField0_ & 0x00000080) != 0)) {
+          result.attach_ = attach_;
+        }
+        if (((from_bitField0_ & 0x00000100) != 0)) {
+          result.description_ = description_;
+        }
+        if (((from_bitField0_ & 0x00000200) != 0)) {
+          result.notifyUrl_ = notifyUrl_;
+        }
+        if (((from_bitField0_ & 0x00000400) != 0)) {
+          result.token_ = token_;
+        }
+        if (((from_bitField0_ & 0x00000800) != 0)) {
+          result.extendsParams_ = internalGetExtendsParams();
+          result.extendsParams_.makeImmutable();
+        }
+      }
+
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData) {
-          return mergeFrom((com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData)other);
+        if (other instanceof RequestBizData) {
+          return mergeFrom((RequestBizData)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData other) {
-        if (other == com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData.getDefaultInstance()) return this;
+      public Builder mergeFrom(RequestBizData other) {
+        if (other == RequestBizData.getDefaultInstance()) return this;
         if (!other.getMerchantOrderNo().isEmpty()) {
           merchantOrderNo_ = other.merchantOrderNo_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getOrigMerchantOrderNo().isEmpty()) {
           origMerchantOrderNo_ = other.origMerchantOrderNo_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (!other.getPriceCurrency().isEmpty()) {
           priceCurrency_ = other.priceCurrency_;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
         if (!other.getOrderAmount().isEmpty()) {
           orderAmount_ = other.orderAmount_;
+          bitField0_ |= 0x00000008;
           onChanged();
         }
         if (!other.getTipAmount().isEmpty()) {
           tipAmount_ = other.tipAmount_;
+          bitField0_ |= 0x00000010;
           onChanged();
         }
         if (!other.getTransType().isEmpty()) {
           transType_ = other.transType_;
+          bitField0_ |= 0x00000020;
           onChanged();
         }
         if (!other.getPayMethodCategory().isEmpty()) {
           payMethodCategory_ = other.payMethodCategory_;
+          bitField0_ |= 0x00000040;
           onChanged();
         }
         if (!other.getAttach().isEmpty()) {
           attach_ = other.attach_;
+          bitField0_ |= 0x00000080;
           onChanged();
         }
         if (!other.getDescription().isEmpty()) {
           description_ = other.description_;
+          bitField0_ |= 0x00000100;
           onChanged();
         }
         if (!other.getNotifyUrl().isEmpty()) {
           notifyUrl_ = other.notifyUrl_;
+          bitField0_ |= 0x00000200;
           onChanged();
         }
         if (!other.getToken().isEmpty()) {
           token_ = other.token_;
+          bitField0_ |= 0x00000400;
           onChanged();
         }
         internalGetMutableExtendsParams().mergeFrom(
             other.internalGetExtendsParams());
-        this.mergeUnknownFields(other.unknownFields);
+        bitField0_ |= 0x00000800;
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                merchantOrderNo_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                origMerchantOrderNo_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                priceCurrency_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                orderAmount_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              case 42: {
+                tipAmount_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 42
+              case 50: {
+                transType_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 50
+              case 58: {
+                payMethodCategory_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 58
+              case 66: {
+                attach_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000080;
+                break;
+              } // case 66
+              case 74: {
+                description_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000100;
+                break;
+              } // case 74
+              case 82: {
+                notifyUrl_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000200;
+                break;
+              } // case 82
+              case 90: {
+                token_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000400;
+                break;
+              } // case 90
+              case 98: {
+                com.google.protobuf.MapEntry<String, String>
+                extendsParams__ = input.readMessage(
+                    ExtendsParamsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+                internalGetMutableExtendsParams().getMutableMap().put(
+                    extendsParams__.getKey(), extendsParams__.getValue());
+                bitField0_ |= 0x00000800;
+                break;
+              } // case 98
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
       private int bitField0_;
 
-      private java.lang.Object merchantOrderNo_ = "";
+      private Object merchantOrderNo_ = "";
       /**
        * <pre>
        **
-       *商户订单号
+       *Merchant order number
        * </pre>
        *
        * <code>string merchant_order_no = 1;</code>
        * @return The merchantOrderNo.
        */
-      public java.lang.String getMerchantOrderNo() {
-        java.lang.Object ref = merchantOrderNo_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getMerchantOrderNo() {
+        Object ref = merchantOrderNo_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           merchantOrderNo_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *商户订单号
+       *Merchant order number
        * </pre>
        *
        * <code>string merchant_order_no = 1;</code>
@@ -4195,11 +4152,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getMerchantOrderNoBytes() {
-        java.lang.Object ref = merchantOrderNo_;
+        Object ref = merchantOrderNo_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           merchantOrderNo_ = b;
           return b;
         } else {
@@ -4209,7 +4166,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *商户订单号
+       *Merchant order number
        * </pre>
        *
        * <code>string merchant_order_no = 1;</code>
@@ -4217,34 +4174,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setMerchantOrderNo(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         merchantOrderNo_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *商户订单号
+       *Merchant order number
        * </pre>
        *
        * <code>string merchant_order_no = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearMerchantOrderNo() {
-        
         merchantOrderNo_ = getDefaultInstance().getMerchantOrderNo();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *商户订单号
+       *Merchant order number
        * </pre>
        *
        * <code>string merchant_order_no = 1;</code>
@@ -4253,42 +4208,40 @@ java.lang.String defaultValue);
        */
       public Builder setMerchantOrderNoBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         merchantOrderNo_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
 
-      private java.lang.Object origMerchantOrderNo_ = "";
+      private Object origMerchantOrderNo_ = "";
       /**
        * <pre>
        **
-       *原商户订单号，退款等后续交易必传
+       *Original merchant order number, refund and other subsequent transactions must be transmitted
        * </pre>
        *
        * <code>string orig_merchant_order_no = 2;</code>
        * @return The origMerchantOrderNo.
        */
-      public java.lang.String getOrigMerchantOrderNo() {
-        java.lang.Object ref = origMerchantOrderNo_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getOrigMerchantOrderNo() {
+        Object ref = origMerchantOrderNo_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           origMerchantOrderNo_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *原商户订单号，退款等后续交易必传
+       *Original merchant order number, refund and other subsequent transactions must be transmitted
        * </pre>
        *
        * <code>string orig_merchant_order_no = 2;</code>
@@ -4296,11 +4249,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getOrigMerchantOrderNoBytes() {
-        java.lang.Object ref = origMerchantOrderNo_;
+        Object ref = origMerchantOrderNo_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           origMerchantOrderNo_ = b;
           return b;
         } else {
@@ -4310,7 +4263,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *原商户订单号，退款等后续交易必传
+       *Original merchant order number, refund and other subsequent transactions must be transmitted
        * </pre>
        *
        * <code>string orig_merchant_order_no = 2;</code>
@@ -4318,34 +4271,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setOrigMerchantOrderNo(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         origMerchantOrderNo_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *原商户订单号，退款等后续交易必传
+       *Original merchant order number, refund and other subsequent transactions must be transmitted
        * </pre>
        *
        * <code>string orig_merchant_order_no = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearOrigMerchantOrderNo() {
-        
         origMerchantOrderNo_ = getDefaultInstance().getOrigMerchantOrderNo();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *原商户订单号，退款等后续交易必传
+       *Original merchant order number, refund and other subsequent transactions must be transmitted
        * </pre>
        *
        * <code>string orig_merchant_order_no = 2;</code>
@@ -4354,42 +4305,40 @@ java.lang.String defaultValue);
        */
       public Builder setOrigMerchantOrderNoBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         origMerchantOrderNo_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
 
-      private java.lang.Object priceCurrency_ = "";
+      private Object priceCurrency_ = "";
       /**
        * <pre>
        **
-       *标价币种
+       *price currency
        * </pre>
        *
        * <code>string price_currency = 3;</code>
        * @return The priceCurrency.
        */
-      public java.lang.String getPriceCurrency() {
-        java.lang.Object ref = priceCurrency_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getPriceCurrency() {
+        Object ref = priceCurrency_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           priceCurrency_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *标价币种
+       *price currency
        * </pre>
        *
        * <code>string price_currency = 3;</code>
@@ -4397,11 +4346,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getPriceCurrencyBytes() {
-        java.lang.Object ref = priceCurrency_;
+        Object ref = priceCurrency_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           priceCurrency_ = b;
           return b;
         } else {
@@ -4411,7 +4360,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *标价币种
+       *price currency
        * </pre>
        *
        * <code>string price_currency = 3;</code>
@@ -4419,34 +4368,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setPriceCurrency(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         priceCurrency_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *标价币种
+       *price currency
        * </pre>
        *
        * <code>string price_currency = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearPriceCurrency() {
-        
         priceCurrency_ = getDefaultInstance().getPriceCurrency();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *标价币种
+       *price currency
        * </pre>
        *
        * <code>string price_currency = 3;</code>
@@ -4455,42 +4402,40 @@ java.lang.String defaultValue);
        */
       public Builder setPriceCurrencyBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         priceCurrency_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
 
-      private java.lang.Object orderAmount_ = "";
+      private Object orderAmount_ = "";
       /**
        * <pre>
        **
-       *订单金额
+       *order amount
        * </pre>
        *
        * <code>string order_amount = 4;</code>
        * @return The orderAmount.
        */
-      public java.lang.String getOrderAmount() {
-        java.lang.Object ref = orderAmount_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getOrderAmount() {
+        Object ref = orderAmount_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           orderAmount_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *订单金额
+       *order amount
        * </pre>
        *
        * <code>string order_amount = 4;</code>
@@ -4498,11 +4443,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getOrderAmountBytes() {
-        java.lang.Object ref = orderAmount_;
+        Object ref = orderAmount_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           orderAmount_ = b;
           return b;
         } else {
@@ -4512,7 +4457,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *订单金额
+       *order amount
        * </pre>
        *
        * <code>string order_amount = 4;</code>
@@ -4520,34 +4465,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setOrderAmount(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         orderAmount_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *订单金额
+       *order amount
        * </pre>
        *
        * <code>string order_amount = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearOrderAmount() {
-        
         orderAmount_ = getDefaultInstance().getOrderAmount();
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *订单金额
+       *order amount
        * </pre>
        *
        * <code>string order_amount = 4;</code>
@@ -4556,42 +4499,40 @@ java.lang.String defaultValue);
        */
       public Builder setOrderAmountBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         orderAmount_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
 
-      private java.lang.Object tipAmount_ = "";
+      private Object tipAmount_ = "";
       /**
        * <pre>
        **
-       *消费金额
+       *tip amount
        * </pre>
        *
        * <code>string tip_amount = 5;</code>
        * @return The tipAmount.
        */
-      public java.lang.String getTipAmount() {
-        java.lang.Object ref = tipAmount_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTipAmount() {
+        Object ref = tipAmount_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           tipAmount_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *消费金额
+       *tip amount
        * </pre>
        *
        * <code>string tip_amount = 5;</code>
@@ -4599,11 +4540,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getTipAmountBytes() {
-        java.lang.Object ref = tipAmount_;
+        Object ref = tipAmount_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           tipAmount_ = b;
           return b;
         } else {
@@ -4613,7 +4554,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *消费金额
+       *tip amount
        * </pre>
        *
        * <code>string tip_amount = 5;</code>
@@ -4621,34 +4562,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setTipAmount(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         tipAmount_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *消费金额
+       *tip amount
        * </pre>
        *
        * <code>string tip_amount = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearTipAmount() {
-        
         tipAmount_ = getDefaultInstance().getTipAmount();
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *消费金额
+       *tip amount
        * </pre>
        *
        * <code>string tip_amount = 5;</code>
@@ -4657,42 +4596,40 @@ java.lang.String defaultValue);
        */
       public Builder setTipAmountBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         tipAmount_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
 
-      private java.lang.Object transType_ = "";
+      private Object transType_ = "";
       /**
        * <pre>
        **
-       *消费金额
+       *trans type
        * </pre>
        *
        * <code>string trans_type = 6;</code>
        * @return The transType.
        */
-      public java.lang.String getTransType() {
-        java.lang.Object ref = transType_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTransType() {
+        Object ref = transType_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           transType_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *消费金额
+       *trans type
        * </pre>
        *
        * <code>string trans_type = 6;</code>
@@ -4700,11 +4637,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getTransTypeBytes() {
-        java.lang.Object ref = transType_;
+        Object ref = transType_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           transType_ = b;
           return b;
         } else {
@@ -4714,7 +4651,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *消费金额
+       *trans type
        * </pre>
        *
        * <code>string trans_type = 6;</code>
@@ -4722,34 +4659,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setTransType(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         transType_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *消费金额
+       *trans type
        * </pre>
        *
        * <code>string trans_type = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearTransType() {
-        
         transType_ = getDefaultInstance().getTransType();
+        bitField0_ = (bitField0_ & ~0x00000020);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *消费金额
+       *trans type
        * </pre>
        *
        * <code>string trans_type = 6;</code>
@@ -4758,42 +4693,40 @@ java.lang.String defaultValue);
        */
       public Builder setTransTypeBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         transType_ = value;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
 
-      private java.lang.Object payMethodCategory_ = "";
+      private Object payMethodCategory_ = "";
       /**
        * <pre>
        **
-       *支付方式类目：QR_C_SCAN_B:主扫；QR_B_SCAN_C：扫码被扫；BANKCARD:银行卡；OTP:OTP一次性密码支付
+       *Payment method category: QR_ C_ SCAN_ B: Main scanning; QR_ B_ SCAN_ C: Scan code is scanned; BANKCARD: Bank card; OTP: OTP one-time password payment
        * </pre>
        *
        * <code>string pay_method_category = 7;</code>
        * @return The payMethodCategory.
        */
-      public java.lang.String getPayMethodCategory() {
-        java.lang.Object ref = payMethodCategory_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getPayMethodCategory() {
+        Object ref = payMethodCategory_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           payMethodCategory_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *支付方式类目：QR_C_SCAN_B:主扫；QR_B_SCAN_C：扫码被扫；BANKCARD:银行卡；OTP:OTP一次性密码支付
+       *Payment method category: QR_ C_ SCAN_ B: Main scanning; QR_ B_ SCAN_ C: Scan code is scanned; BANKCARD: Bank card; OTP: OTP one-time password payment
        * </pre>
        *
        * <code>string pay_method_category = 7;</code>
@@ -4801,11 +4734,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getPayMethodCategoryBytes() {
-        java.lang.Object ref = payMethodCategory_;
+        Object ref = payMethodCategory_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           payMethodCategory_ = b;
           return b;
         } else {
@@ -4815,7 +4748,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *支付方式类目：QR_C_SCAN_B:主扫；QR_B_SCAN_C：扫码被扫；BANKCARD:银行卡；OTP:OTP一次性密码支付
+       *Payment method category: QR_ C_ SCAN_ B: Main scanning; QR_ B_ SCAN_ C: Scan code is scanned; BANKCARD: Bank card; OTP: OTP one-time password payment
        * </pre>
        *
        * <code>string pay_method_category = 7;</code>
@@ -4823,34 +4756,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setPayMethodCategory(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         payMethodCategory_ = value;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *支付方式类目：QR_C_SCAN_B:主扫；QR_B_SCAN_C：扫码被扫；BANKCARD:银行卡；OTP:OTP一次性密码支付
+       *Payment method category: QR_ C_ SCAN_ B: Main scanning; QR_ B_ SCAN_ C: Scan code is scanned; BANKCARD: Bank card; OTP: OTP one-time password payment
        * </pre>
        *
        * <code>string pay_method_category = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearPayMethodCategory() {
-        
         payMethodCategory_ = getDefaultInstance().getPayMethodCategory();
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *支付方式类目：QR_C_SCAN_B:主扫；QR_B_SCAN_C：扫码被扫；BANKCARD:银行卡；OTP:OTP一次性密码支付
+       *Payment method category: QR_ C_ SCAN_ B: Main scanning; QR_ B_ SCAN_ C: Scan code is scanned; BANKCARD: Bank card; OTP: OTP one-time password payment
        * </pre>
        *
        * <code>string pay_method_category = 7;</code>
@@ -4859,42 +4790,40 @@ java.lang.String defaultValue);
        */
       public Builder setPayMethodCategoryBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         payMethodCategory_ = value;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
 
-      private java.lang.Object attach_ = "";
+      private Object attach_ = "";
       /**
        * <pre>
        **
-       *附加信息
+       *Additional information
        * </pre>
        *
        * <code>string attach = 8;</code>
        * @return The attach.
        */
-      public java.lang.String getAttach() {
-        java.lang.Object ref = attach_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getAttach() {
+        Object ref = attach_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           attach_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *附加信息
+       *Additional information
        * </pre>
        *
        * <code>string attach = 8;</code>
@@ -4902,11 +4831,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getAttachBytes() {
-        java.lang.Object ref = attach_;
+        Object ref = attach_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           attach_ = b;
           return b;
         } else {
@@ -4916,7 +4845,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *附加信息
+       *Additional information
        * </pre>
        *
        * <code>string attach = 8;</code>
@@ -4924,34 +4853,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setAttach(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         attach_ = value;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *附加信息
+       *Additional information
        * </pre>
        *
        * <code>string attach = 8;</code>
        * @return This builder for chaining.
        */
       public Builder clearAttach() {
-        
         attach_ = getDefaultInstance().getAttach();
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *附加信息
+       *Additional information
        * </pre>
        *
        * <code>string attach = 8;</code>
@@ -4960,42 +4887,40 @@ java.lang.String defaultValue);
        */
       public Builder setAttachBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         attach_ = value;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
 
-      private java.lang.Object description_ = "";
+      private Object description_ = "";
       /**
        * <pre>
        **
-       *描述信息
+       *Descriptive information
        * </pre>
        *
        * <code>string description = 9;</code>
        * @return The description.
        */
-      public java.lang.String getDescription() {
-        java.lang.Object ref = description_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getDescription() {
+        Object ref = description_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           description_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *描述信息
+       *Descriptive information
        * </pre>
        *
        * <code>string description = 9;</code>
@@ -5003,11 +4928,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getDescriptionBytes() {
-        java.lang.Object ref = description_;
+        Object ref = description_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           description_ = b;
           return b;
         } else {
@@ -5017,7 +4942,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *描述信息
+       *Descriptive information
        * </pre>
        *
        * <code>string description = 9;</code>
@@ -5025,34 +4950,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setDescription(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         description_ = value;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *描述信息
+       *Descriptive information
        * </pre>
        *
        * <code>string description = 9;</code>
        * @return This builder for chaining.
        */
       public Builder clearDescription() {
-        
         description_ = getDefaultInstance().getDescription();
+        bitField0_ = (bitField0_ & ~0x00000100);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *描述信息
+       *Descriptive information
        * </pre>
        *
        * <code>string description = 9;</code>
@@ -5061,42 +4984,40 @@ java.lang.String defaultValue);
        */
       public Builder setDescriptionBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         description_ = value;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
 
-      private java.lang.Object notifyUrl_ = "";
+      private Object notifyUrl_ = "";
       /**
        * <pre>
        **
-       *通知回调地址
+       *Notification callback address
        * </pre>
        *
        * <code>string notify_url = 10;</code>
        * @return The notifyUrl.
        */
-      public java.lang.String getNotifyUrl() {
-        java.lang.Object ref = notifyUrl_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getNotifyUrl() {
+        Object ref = notifyUrl_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           notifyUrl_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *通知回调地址
+       *Notification callback address
        * </pre>
        *
        * <code>string notify_url = 10;</code>
@@ -5104,11 +5025,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getNotifyUrlBytes() {
-        java.lang.Object ref = notifyUrl_;
+        Object ref = notifyUrl_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           notifyUrl_ = b;
           return b;
         } else {
@@ -5118,7 +5039,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *通知回调地址
+       *Notification callback address
        * </pre>
        *
        * <code>string notify_url = 10;</code>
@@ -5126,34 +5047,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setNotifyUrl(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         notifyUrl_ = value;
+        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知回调地址
+       *Notification callback address
        * </pre>
        *
        * <code>string notify_url = 10;</code>
        * @return This builder for chaining.
        */
       public Builder clearNotifyUrl() {
-        
         notifyUrl_ = getDefaultInstance().getNotifyUrl();
+        bitField0_ = (bitField0_ & ~0x00000200);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知回调地址
+       *Notification callback address
        * </pre>
        *
        * <code>string notify_url = 10;</code>
@@ -5162,42 +5081,40 @@ java.lang.String defaultValue);
        */
       public Builder setNotifyUrlBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         notifyUrl_ = value;
+        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
 
-      private java.lang.Object token_ = "";
+      private Object token_ = "";
       /**
        * <pre>
        **
-       *token，确认返回数据的客户端
+       *token，Confirm the client that returned the data
        * </pre>
        *
        * <code>string token = 11;</code>
        * @return The token.
        */
-      public java.lang.String getToken() {
-        java.lang.Object ref = token_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getToken() {
+        Object ref = token_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           token_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *token，确认返回数据的客户端
+       *token，Confirm the client that returned the data
        * </pre>
        *
        * <code>string token = 11;</code>
@@ -5205,11 +5122,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getTokenBytes() {
-        java.lang.Object ref = token_;
+        Object ref = token_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           token_ = b;
           return b;
         } else {
@@ -5219,7 +5136,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *token，确认返回数据的客户端
+       *token，Confirm the client that returned the data
        * </pre>
        *
        * <code>string token = 11;</code>
@@ -5227,34 +5144,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setToken(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         token_ = value;
+        bitField0_ |= 0x00000400;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *token，确认返回数据的客户端
+       *token，Confirm the client that returned the data
        * </pre>
        *
        * <code>string token = 11;</code>
        * @return This builder for chaining.
        */
       public Builder clearToken() {
-        
         token_ = getDefaultInstance().getToken();
+        bitField0_ = (bitField0_ & ~0x00000400);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *token，确认返回数据的客户端
+       *token，Confirm the client that returned the data
        * </pre>
        *
        * <code>string token = 11;</code>
@@ -5263,29 +5178,26 @@ java.lang.String defaultValue);
        */
       public Builder setTokenBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         token_ = value;
+        bitField0_ |= 0x00000400;
         onChanged();
         return this;
       }
 
       private com.google.protobuf.MapField<
-          java.lang.String, java.lang.String> extendsParams_;
-      private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-      internalGetExtendsParams() {
+          String, String> extendsParams_;
+      private com.google.protobuf.MapField<String, String>
+          internalGetExtendsParams() {
         if (extendsParams_ == null) {
           return com.google.protobuf.MapField.emptyMapField(
               ExtendsParamsDefaultEntryHolder.defaultEntry);
         }
         return extendsParams_;
       }
-      private com.google.protobuf.MapField<java.lang.String, java.lang.String>
-      internalGetMutableExtendsParams() {
-        onChanged();;
+      private com.google.protobuf.MapField<String, String>
+          internalGetMutableExtendsParams() {
         if (extendsParams_ == null) {
           extendsParams_ = com.google.protobuf.MapField.newMapField(
               ExtendsParamsDefaultEntryHolder.defaultEntry);
@@ -5293,88 +5205,87 @@ java.lang.String defaultValue);
         if (!extendsParams_.isMutable()) {
           extendsParams_ = extendsParams_.copy();
         }
+        bitField0_ |= 0x00000800;
+        onChanged();
         return extendsParams_;
       }
-
       public int getExtendsParamsCount() {
         return internalGetExtendsParams().getMap().size();
       }
       /**
        * <pre>
        **
-       *扩展参数
+       *Extended parameters
        * </pre>
        *
        * <code>map&lt;string, string&gt; extends_params = 12;</code>
        */
-
-      @java.lang.Override
+      @Override
       public boolean containsExtendsParams(
-          java.lang.String key) {
+          String key) {
         if (key == null) { throw new NullPointerException("map key"); }
         return internalGetExtendsParams().getMap().containsKey(key);
       }
       /**
        * Use {@link #getExtendsParamsMap()} instead.
        */
-      @java.lang.Override
-      @java.lang.Deprecated
-      public java.util.Map<java.lang.String, java.lang.String> getExtendsParams() {
+      @Override
+      @Deprecated
+      public java.util.Map<String, String> getExtendsParams() {
         return getExtendsParamsMap();
       }
       /**
        * <pre>
        **
-       *扩展参数
+       *Extended parameters
        * </pre>
        *
        * <code>map&lt;string, string&gt; extends_params = 12;</code>
        */
-      @java.lang.Override
-
-      public java.util.Map<java.lang.String, java.lang.String> getExtendsParamsMap() {
+      @Override
+      public java.util.Map<String, String> getExtendsParamsMap() {
         return internalGetExtendsParams().getMap();
       }
       /**
        * <pre>
        **
-       *扩展参数
+       *Extended parameters
        * </pre>
        *
        * <code>map&lt;string, string&gt; extends_params = 12;</code>
        */
-      @java.lang.Override
-
-      public java.lang.String getExtendsParamsOrDefault(
-          java.lang.String key,
-          java.lang.String defaultValue) {
+      @Override
+      public /* nullable */
+String getExtendsParamsOrDefault(
+          String key,
+          /* nullable */
+String defaultValue) {
         if (key == null) { throw new NullPointerException("map key"); }
-        java.util.Map<java.lang.String, java.lang.String> map =
+        java.util.Map<String, String> map =
             internalGetExtendsParams().getMap();
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
        * <pre>
        **
-       *扩展参数
+       *Extended parameters
        * </pre>
        *
        * <code>map&lt;string, string&gt; extends_params = 12;</code>
        */
-      @java.lang.Override
-
-      public java.lang.String getExtendsParamsOrThrow(
-          java.lang.String key) {
+      @Override
+      public String getExtendsParamsOrThrow(
+          String key) {
         if (key == null) { throw new NullPointerException("map key"); }
-        java.util.Map<java.lang.String, java.lang.String> map =
+        java.util.Map<String, String> map =
             internalGetExtendsParams().getMap();
         if (!map.containsKey(key)) {
-          throw new java.lang.IllegalArgumentException();
+          throw new IllegalArgumentException();
         }
         return map.get(key);
       }
-
       public Builder clearExtendsParams() {
+        bitField0_ = (bitField0_ & ~0x00000800);
         internalGetMutableExtendsParams().getMutableMap()
             .clear();
         return this;
@@ -5382,14 +5293,13 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *扩展参数
+       *Extended parameters
        * </pre>
        *
        * <code>map&lt;string, string&gt; extends_params = 12;</code>
        */
-
       public Builder removeExtendsParams(
-          java.lang.String key) {
+          String key) {
         if (key == null) { throw new NullPointerException("map key"); }
         internalGetMutableExtendsParams().getMutableMap()
             .remove(key);
@@ -5398,53 +5308,52 @@ java.lang.String defaultValue);
       /**
        * Use alternate mutation accessors instead.
        */
-      @java.lang.Deprecated
-      public java.util.Map<java.lang.String, java.lang.String>
-      getMutableExtendsParams() {
+      @Deprecated
+      public java.util.Map<String, String>
+          getMutableExtendsParams() {
+        bitField0_ |= 0x00000800;
         return internalGetMutableExtendsParams().getMutableMap();
       }
       /**
        * <pre>
        **
-       *扩展参数
+       *Extended parameters
        * </pre>
        *
        * <code>map&lt;string, string&gt; extends_params = 12;</code>
        */
       public Builder putExtendsParams(
-          java.lang.String key,
-          java.lang.String value) {
+          String key,
+          String value) {
         if (key == null) { throw new NullPointerException("map key"); }
-        if (value == null) {
-  throw new NullPointerException("map value");
-}
-
+        if (value == null) { throw new NullPointerException("map value"); }
         internalGetMutableExtendsParams().getMutableMap()
             .put(key, value);
+        bitField0_ |= 0x00000800;
         return this;
       }
       /**
        * <pre>
        **
-       *扩展参数
+       *Extended parameters
        * </pre>
        *
        * <code>map&lt;string, string&gt; extends_params = 12;</code>
        */
-
       public Builder putAllExtendsParams(
-          java.util.Map<java.lang.String, java.lang.String> values) {
+          java.util.Map<String, String> values) {
         internalGetMutableExtendsParams().getMutableMap()
             .putAll(values);
+        bitField0_ |= 0x00000800;
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -5455,23 +5364,34 @@ java.lang.String defaultValue);
     }
 
     // @@protoc_insertion_point(class_scope:com.wiseasy.ecr.hub.data.RequestBizData)
-    private static final com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData DEFAULT_INSTANCE;
+    private static final RequestBizData DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData();
+      DEFAULT_INSTANCE = new RequestBizData();
     }
 
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData getDefaultInstance() {
+    public static RequestBizData getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<RequestBizData>
         PARSER = new com.google.protobuf.AbstractParser<RequestBizData>() {
-      @java.lang.Override
+      @Override
       public RequestBizData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new RequestBizData(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -5479,13 +5399,13 @@ java.lang.String defaultValue);
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<RequestBizData> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.RequestBizData getDefaultInstanceForType() {
+    @Override
+    public RequestBizData getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -5498,17 +5418,17 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *语音内容
+     *Voice content
      * </pre>
      *
      * <code>string content = 1;</code>
      * @return The content.
      */
-    java.lang.String getContent();
+    String getContent();
     /**
      * <pre>
      **
-     *语音内容
+     *Voice content
      * </pre>
      *
      * <code>string content = 1;</code>
@@ -5520,17 +5440,17 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *语言语种
+     *Languages and languages
      * </pre>
      *
      * <code>string content_locale = 2;</code>
      * @return The contentLocale.
      */
-    java.lang.String getContentLocale();
+    String getContentLocale();
     /**
      * <pre>
      **
-     *语言语种
+     *Languages and languages
      * </pre>
      *
      * <code>string content_locale = 2;</code>
@@ -5542,17 +5462,17 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *语言地址
+     *Language url
      * </pre>
      *
      * <code>string content_url = 3;</code>
      * @return The contentUrl.
      */
-    java.lang.String getContentUrl();
+    String getContentUrl();
     /**
      * <pre>
      **
-     *语言地址
+     *Language url
      * </pre>
      *
      * <code>string content_url = 3;</code>
@@ -5579,108 +5499,47 @@ java.lang.String defaultValue);
       contentUrl_ = "";
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new VoiceData();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private VoiceData(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              content_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              contentLocale_ = s;
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              contentUrl_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_VoiceData_descriptor;
+      return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_VoiceData_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_VoiceData_fieldAccessorTable
+      return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_VoiceData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.Builder.class);
+              VoiceData.class, Builder.class);
     }
 
     public static final int CONTENT_FIELD_NUMBER = 1;
-    private volatile java.lang.Object content_;
+    @SuppressWarnings("serial")
+    private volatile Object content_ = "";
     /**
      * <pre>
      **
-     *语音内容
+     *Voice content
      * </pre>
      *
      * <code>string content = 1;</code>
      * @return The content.
      */
-    @java.lang.Override
-    public java.lang.String getContent() {
-      java.lang.Object ref = content_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getContent() {
+      Object ref = content_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         content_ = s;
         return s;
       }
@@ -5688,20 +5547,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *语音内容
+     *Voice content
      * </pre>
      *
      * <code>string content = 1;</code>
      * @return The bytes for content.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getContentBytes() {
-      java.lang.Object ref = content_;
-      if (ref instanceof java.lang.String) {
+      Object ref = content_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         content_ = b;
         return b;
       } else {
@@ -5710,25 +5569,26 @@ java.lang.String defaultValue);
     }
 
     public static final int CONTENT_LOCALE_FIELD_NUMBER = 2;
-    private volatile java.lang.Object contentLocale_;
+    @SuppressWarnings("serial")
+    private volatile Object contentLocale_ = "";
     /**
      * <pre>
      **
-     *语言语种
+     *Languages and languages
      * </pre>
      *
      * <code>string content_locale = 2;</code>
      * @return The contentLocale.
      */
-    @java.lang.Override
-    public java.lang.String getContentLocale() {
-      java.lang.Object ref = contentLocale_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getContentLocale() {
+      Object ref = contentLocale_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         contentLocale_ = s;
         return s;
       }
@@ -5736,20 +5596,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *语言语种
+     *Languages and languages
      * </pre>
      *
      * <code>string content_locale = 2;</code>
      * @return The bytes for contentLocale.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getContentLocaleBytes() {
-      java.lang.Object ref = contentLocale_;
-      if (ref instanceof java.lang.String) {
+      Object ref = contentLocale_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         contentLocale_ = b;
         return b;
       } else {
@@ -5758,25 +5618,26 @@ java.lang.String defaultValue);
     }
 
     public static final int CONTENT_URL_FIELD_NUMBER = 3;
-    private volatile java.lang.Object contentUrl_;
+    @SuppressWarnings("serial")
+    private volatile Object contentUrl_ = "";
     /**
      * <pre>
      **
-     *语言地址
+     *Language url
      * </pre>
      *
      * <code>string content_url = 3;</code>
      * @return The contentUrl.
      */
-    @java.lang.Override
-    public java.lang.String getContentUrl() {
-      java.lang.Object ref = contentUrl_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getContentUrl() {
+      Object ref = contentUrl_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         contentUrl_ = s;
         return s;
       }
@@ -5784,20 +5645,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *语言地址
+     *Language url
      * </pre>
      *
      * <code>string content_url = 3;</code>
      * @return The bytes for contentUrl.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getContentUrlBytes() {
-      java.lang.Object ref = contentUrl_;
-      if (ref instanceof java.lang.String) {
+      Object ref = contentUrl_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         contentUrl_ = b;
         return b;
       } else {
@@ -5806,7 +5667,7 @@ java.lang.String defaultValue);
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -5816,7 +5677,7 @@ java.lang.String defaultValue);
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(content_)) {
@@ -5828,10 +5689,10 @@ java.lang.String defaultValue);
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(contentUrl_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, contentUrl_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -5846,20 +5707,20 @@ java.lang.String defaultValue);
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(contentUrl_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, contentUrl_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData)) {
+      if (!(obj instanceof VoiceData)) {
         return super.equals(obj);
       }
-      com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData other = (com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData) obj;
+      VoiceData other = (VoiceData) obj;
 
       if (!getContent()
           .equals(other.getContent())) return false;
@@ -5867,11 +5728,11 @@ java.lang.String defaultValue);
           .equals(other.getContentLocale())) return false;
       if (!getContentUrl()
           .equals(other.getContentUrl())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -5884,74 +5745,76 @@ java.lang.String defaultValue);
       hash = (53 * hash) + getContentLocale().hashCode();
       hash = (37 * hash) + CONTENT_URL_FIELD_NUMBER;
       hash = (53 * hash) + getContentUrl().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parseFrom(
+    public static VoiceData parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parseFrom(
+    public static VoiceData parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parseFrom(
+    public static VoiceData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parseFrom(
+    public static VoiceData parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parseFrom(byte[] data)
+    public static VoiceData parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parseFrom(
+    public static VoiceData parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parseFrom(java.io.InputStream input)
+    public static VoiceData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parseFrom(
+    public static VoiceData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parseDelimitedFrom(java.io.InputStream input)
+
+    public static VoiceData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parseDelimitedFrom(
+
+    public static VoiceData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parseFrom(
+    public static VoiceData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parseFrom(
+    public static VoiceData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -5959,23 +5822,23 @@ java.lang.String defaultValue);
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData prototype) {
+    public static Builder newBuilder(VoiceData prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -5985,188 +5848,224 @@ java.lang.String defaultValue);
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.wiseasy.ecr.hub.data.VoiceData)
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceDataOrBuilder {
+        VoiceDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_VoiceData_descriptor;
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_VoiceData_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_VoiceData_fieldAccessorTable
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_VoiceData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.Builder.class);
+                VoiceData.class, Builder.class);
       }
 
       // Construct using com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
+
       }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         content_ = "";
-
         contentLocale_ = "";
-
         contentUrl_ = "";
-
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_VoiceData_descriptor;
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_VoiceData_descriptor;
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData getDefaultInstanceForType() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.getDefaultInstance();
+      @Override
+      public VoiceData getDefaultInstanceForType() {
+        return VoiceData.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData build() {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData result = buildPartial();
+      @Override
+      public VoiceData build() {
+        VoiceData result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData buildPartial() {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData result = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData(this);
-        result.content_ = content_;
-        result.contentLocale_ = contentLocale_;
-        result.contentUrl_ = contentUrl_;
+      @Override
+      public VoiceData buildPartial() {
+        VoiceData result = new VoiceData(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      @java.lang.Override
+      private void buildPartial0(VoiceData result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.content_ = content_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.contentLocale_ = contentLocale_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.contentUrl_ = contentUrl_;
+        }
+      }
+
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData) {
-          return mergeFrom((com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData)other);
+        if (other instanceof VoiceData) {
+          return mergeFrom((VoiceData)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData other) {
-        if (other == com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData.getDefaultInstance()) return this;
+      public Builder mergeFrom(VoiceData other) {
+        if (other == VoiceData.getDefaultInstance()) return this;
         if (!other.getContent().isEmpty()) {
           content_ = other.content_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getContentLocale().isEmpty()) {
           contentLocale_ = other.contentLocale_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (!other.getContentUrl().isEmpty()) {
           contentUrl_ = other.contentUrl_;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                content_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                contentLocale_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                contentUrl_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
-      private java.lang.Object content_ = "";
+      private Object content_ = "";
       /**
        * <pre>
        **
-       *语音内容
+       *Voice content
        * </pre>
        *
        * <code>string content = 1;</code>
        * @return The content.
        */
-      public java.lang.String getContent() {
-        java.lang.Object ref = content_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getContent() {
+        Object ref = content_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           content_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *语音内容
+       *Voice content
        * </pre>
        *
        * <code>string content = 1;</code>
@@ -6174,11 +6073,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getContentBytes() {
-        java.lang.Object ref = content_;
+        Object ref = content_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           content_ = b;
           return b;
         } else {
@@ -6188,7 +6087,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *语音内容
+       *Voice content
        * </pre>
        *
        * <code>string content = 1;</code>
@@ -6196,34 +6095,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setContent(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         content_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *语音内容
+       *Voice content
        * </pre>
        *
        * <code>string content = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearContent() {
-        
         content_ = getDefaultInstance().getContent();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *语音内容
+       *Voice content
        * </pre>
        *
        * <code>string content = 1;</code>
@@ -6232,42 +6129,40 @@ java.lang.String defaultValue);
        */
       public Builder setContentBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         content_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
 
-      private java.lang.Object contentLocale_ = "";
+      private Object contentLocale_ = "";
       /**
        * <pre>
        **
-       *语言语种
+       *Languages and languages
        * </pre>
        *
        * <code>string content_locale = 2;</code>
        * @return The contentLocale.
        */
-      public java.lang.String getContentLocale() {
-        java.lang.Object ref = contentLocale_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getContentLocale() {
+        Object ref = contentLocale_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           contentLocale_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *语言语种
+       *Languages and languages
        * </pre>
        *
        * <code>string content_locale = 2;</code>
@@ -6275,11 +6170,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getContentLocaleBytes() {
-        java.lang.Object ref = contentLocale_;
+        Object ref = contentLocale_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           contentLocale_ = b;
           return b;
         } else {
@@ -6289,7 +6184,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *语言语种
+       *Languages and languages
        * </pre>
        *
        * <code>string content_locale = 2;</code>
@@ -6297,34 +6192,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setContentLocale(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         contentLocale_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *语言语种
+       *Languages and languages
        * </pre>
        *
        * <code>string content_locale = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearContentLocale() {
-        
         contentLocale_ = getDefaultInstance().getContentLocale();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *语言语种
+       *Languages and languages
        * </pre>
        *
        * <code>string content_locale = 2;</code>
@@ -6333,42 +6226,40 @@ java.lang.String defaultValue);
        */
       public Builder setContentLocaleBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         contentLocale_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
 
-      private java.lang.Object contentUrl_ = "";
+      private Object contentUrl_ = "";
       /**
        * <pre>
        **
-       *语言地址
+       *Language url
        * </pre>
        *
        * <code>string content_url = 3;</code>
        * @return The contentUrl.
        */
-      public java.lang.String getContentUrl() {
-        java.lang.Object ref = contentUrl_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getContentUrl() {
+        Object ref = contentUrl_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           contentUrl_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *语言地址
+       *Language url
        * </pre>
        *
        * <code>string content_url = 3;</code>
@@ -6376,11 +6267,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getContentUrlBytes() {
-        java.lang.Object ref = contentUrl_;
+        Object ref = contentUrl_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           contentUrl_ = b;
           return b;
         } else {
@@ -6390,7 +6281,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *语言地址
+       *Language url
        * </pre>
        *
        * <code>string content_url = 3;</code>
@@ -6398,34 +6289,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setContentUrl(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         contentUrl_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *语言地址
+       *Language url
        * </pre>
        *
        * <code>string content_url = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearContentUrl() {
-        
         contentUrl_ = getDefaultInstance().getContentUrl();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *语言地址
+       *Language url
        * </pre>
        *
        * <code>string content_url = 3;</code>
@@ -6434,22 +6323,20 @@ java.lang.String defaultValue);
        */
       public Builder setContentUrlBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         contentUrl_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -6460,23 +6347,34 @@ java.lang.String defaultValue);
     }
 
     // @@protoc_insertion_point(class_scope:com.wiseasy.ecr.hub.data.VoiceData)
-    private static final com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData DEFAULT_INSTANCE;
+    private static final VoiceData DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData();
+      DEFAULT_INSTANCE = new VoiceData();
     }
 
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData getDefaultInstance() {
+    public static VoiceData getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<VoiceData>
         PARSER = new com.google.protobuf.AbstractParser<VoiceData>() {
-      @java.lang.Override
+      @Override
       public VoiceData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new VoiceData(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -6484,13 +6382,13 @@ java.lang.String defaultValue);
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<VoiceData> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.VoiceData getDefaultInstanceForType() {
+    @Override
+    public VoiceData getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6503,17 +6401,17 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *打印文本内容
+     *Print Text Content
      * </pre>
      *
      * <code>string content = 1;</code>
      * @return The content.
      */
-    java.lang.String getContent();
+    String getContent();
     /**
      * <pre>
      **
-     *打印文本内容
+     *Print Text Content
      * </pre>
      *
      * <code>string content = 1;</code>
@@ -6525,17 +6423,17 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *打印文本地址
+     *Print Text Address
      * </pre>
      *
      * <code>string content_url = 2;</code>
      * @return The contentUrl.
      */
-    java.lang.String getContentUrl();
+    String getContentUrl();
     /**
      * <pre>
      **
-     *打印文本地址
+     *Print Text Address
      * </pre>
      *
      * <code>string content_url = 2;</code>
@@ -6561,102 +6459,47 @@ java.lang.String defaultValue);
       contentUrl_ = "";
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new PrinterData();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private PrinterData(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              content_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              contentUrl_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_PrinterData_descriptor;
+      return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_PrinterData_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_PrinterData_fieldAccessorTable
+      return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_PrinterData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.Builder.class);
+              PrinterData.class, Builder.class);
     }
 
     public static final int CONTENT_FIELD_NUMBER = 1;
-    private volatile java.lang.Object content_;
+    @SuppressWarnings("serial")
+    private volatile Object content_ = "";
     /**
      * <pre>
      **
-     *打印文本内容
+     *Print Text Content
      * </pre>
      *
      * <code>string content = 1;</code>
      * @return The content.
      */
-    @java.lang.Override
-    public java.lang.String getContent() {
-      java.lang.Object ref = content_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getContent() {
+      Object ref = content_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         content_ = s;
         return s;
       }
@@ -6664,20 +6507,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *打印文本内容
+     *Print Text Content
      * </pre>
      *
      * <code>string content = 1;</code>
      * @return The bytes for content.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getContentBytes() {
-      java.lang.Object ref = content_;
-      if (ref instanceof java.lang.String) {
+      Object ref = content_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         content_ = b;
         return b;
       } else {
@@ -6686,25 +6529,26 @@ java.lang.String defaultValue);
     }
 
     public static final int CONTENT_URL_FIELD_NUMBER = 2;
-    private volatile java.lang.Object contentUrl_;
+    @SuppressWarnings("serial")
+    private volatile Object contentUrl_ = "";
     /**
      * <pre>
      **
-     *打印文本地址
+     *Print Text Address
      * </pre>
      *
      * <code>string content_url = 2;</code>
      * @return The contentUrl.
      */
-    @java.lang.Override
-    public java.lang.String getContentUrl() {
-      java.lang.Object ref = contentUrl_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getContentUrl() {
+      Object ref = contentUrl_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         contentUrl_ = s;
         return s;
       }
@@ -6712,20 +6556,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *打印文本地址
+     *Print Text Address
      * </pre>
      *
      * <code>string content_url = 2;</code>
      * @return The bytes for contentUrl.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getContentUrlBytes() {
-      java.lang.Object ref = contentUrl_;
-      if (ref instanceof java.lang.String) {
+      Object ref = contentUrl_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         contentUrl_ = b;
         return b;
       } else {
@@ -6734,7 +6578,7 @@ java.lang.String defaultValue);
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -6744,7 +6588,7 @@ java.lang.String defaultValue);
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(content_)) {
@@ -6753,10 +6597,10 @@ java.lang.String defaultValue);
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(contentUrl_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, contentUrl_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -6768,30 +6612,30 @@ java.lang.String defaultValue);
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(contentUrl_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, contentUrl_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData)) {
+      if (!(obj instanceof PrinterData)) {
         return super.equals(obj);
       }
-      com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData other = (com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData) obj;
+      PrinterData other = (PrinterData) obj;
 
       if (!getContent()
           .equals(other.getContent())) return false;
       if (!getContentUrl()
           .equals(other.getContentUrl())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -6802,74 +6646,76 @@ java.lang.String defaultValue);
       hash = (53 * hash) + getContent().hashCode();
       hash = (37 * hash) + CONTENT_URL_FIELD_NUMBER;
       hash = (53 * hash) + getContentUrl().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parseFrom(
+    public static PrinterData parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parseFrom(
+    public static PrinterData parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parseFrom(
+    public static PrinterData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parseFrom(
+    public static PrinterData parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parseFrom(byte[] data)
+    public static PrinterData parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parseFrom(
+    public static PrinterData parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parseFrom(java.io.InputStream input)
+    public static PrinterData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parseFrom(
+    public static PrinterData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parseDelimitedFrom(java.io.InputStream input)
+
+    public static PrinterData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parseDelimitedFrom(
+
+    public static PrinterData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parseFrom(
+    public static PrinterData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parseFrom(
+    public static PrinterData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6877,23 +6723,23 @@ java.lang.String defaultValue);
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData prototype) {
+    public static Builder newBuilder(PrinterData prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -6903,181 +6749,210 @@ java.lang.String defaultValue);
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.wiseasy.ecr.hub.data.PrinterData)
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterDataOrBuilder {
+        PrinterDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_PrinterData_descriptor;
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_PrinterData_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_PrinterData_fieldAccessorTable
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_PrinterData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.Builder.class);
+                PrinterData.class, Builder.class);
       }
 
       // Construct using com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
+
       }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         content_ = "";
-
         contentUrl_ = "";
-
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_PrinterData_descriptor;
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_PrinterData_descriptor;
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData getDefaultInstanceForType() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.getDefaultInstance();
+      @Override
+      public PrinterData getDefaultInstanceForType() {
+        return PrinterData.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData build() {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData result = buildPartial();
+      @Override
+      public PrinterData build() {
+        PrinterData result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData buildPartial() {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData result = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData(this);
-        result.content_ = content_;
-        result.contentUrl_ = contentUrl_;
+      @Override
+      public PrinterData buildPartial() {
+        PrinterData result = new PrinterData(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      @java.lang.Override
+      private void buildPartial0(PrinterData result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.content_ = content_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.contentUrl_ = contentUrl_;
+        }
+      }
+
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData) {
-          return mergeFrom((com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData)other);
+        if (other instanceof PrinterData) {
+          return mergeFrom((PrinterData)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData other) {
-        if (other == com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData.getDefaultInstance()) return this;
+      public Builder mergeFrom(PrinterData other) {
+        if (other == PrinterData.getDefaultInstance()) return this;
         if (!other.getContent().isEmpty()) {
           content_ = other.content_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getContentUrl().isEmpty()) {
           contentUrl_ = other.contentUrl_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                content_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                contentUrl_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
-      private java.lang.Object content_ = "";
+      private Object content_ = "";
       /**
        * <pre>
        **
-       *打印文本内容
+       *Print Text Content
        * </pre>
        *
        * <code>string content = 1;</code>
        * @return The content.
        */
-      public java.lang.String getContent() {
-        java.lang.Object ref = content_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getContent() {
+        Object ref = content_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           content_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *打印文本内容
+       *Print Text Content
        * </pre>
        *
        * <code>string content = 1;</code>
@@ -7085,11 +6960,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getContentBytes() {
-        java.lang.Object ref = content_;
+        Object ref = content_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           content_ = b;
           return b;
         } else {
@@ -7099,7 +6974,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *打印文本内容
+       *Print Text Content
        * </pre>
        *
        * <code>string content = 1;</code>
@@ -7107,34 +6982,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setContent(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         content_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *打印文本内容
+       *Print Text Content
        * </pre>
        *
        * <code>string content = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearContent() {
-        
         content_ = getDefaultInstance().getContent();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *打印文本内容
+       *Print Text Content
        * </pre>
        *
        * <code>string content = 1;</code>
@@ -7143,42 +7016,40 @@ java.lang.String defaultValue);
        */
       public Builder setContentBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         content_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
 
-      private java.lang.Object contentUrl_ = "";
+      private Object contentUrl_ = "";
       /**
        * <pre>
        **
-       *打印文本地址
+       *Print Text Address
        * </pre>
        *
        * <code>string content_url = 2;</code>
        * @return The contentUrl.
        */
-      public java.lang.String getContentUrl() {
-        java.lang.Object ref = contentUrl_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getContentUrl() {
+        Object ref = contentUrl_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           contentUrl_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *打印文本地址
+       *Print Text Address
        * </pre>
        *
        * <code>string content_url = 2;</code>
@@ -7186,11 +7057,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getContentUrlBytes() {
-        java.lang.Object ref = contentUrl_;
+        Object ref = contentUrl_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           contentUrl_ = b;
           return b;
         } else {
@@ -7200,7 +7071,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *打印文本地址
+       *Print Text Address
        * </pre>
        *
        * <code>string content_url = 2;</code>
@@ -7208,34 +7079,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setContentUrl(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         contentUrl_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *打印文本地址
+       *Print Text Address
        * </pre>
        *
        * <code>string content_url = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearContentUrl() {
-        
         contentUrl_ = getDefaultInstance().getContentUrl();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *打印文本地址
+       *Print Text Address
        * </pre>
        *
        * <code>string content_url = 2;</code>
@@ -7244,22 +7113,20 @@ java.lang.String defaultValue);
        */
       public Builder setContentUrlBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         contentUrl_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -7270,23 +7137,34 @@ java.lang.String defaultValue);
     }
 
     // @@protoc_insertion_point(class_scope:com.wiseasy.ecr.hub.data.PrinterData)
-    private static final com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData DEFAULT_INSTANCE;
+    private static final PrinterData DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData();
+      DEFAULT_INSTANCE = new PrinterData();
     }
 
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData getDefaultInstance() {
+    public static PrinterData getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<PrinterData>
         PARSER = new com.google.protobuf.AbstractParser<PrinterData>() {
-      @java.lang.Override
+      @Override
       public PrinterData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PrinterData(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -7294,13 +7172,13 @@ java.lang.String defaultValue);
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<PrinterData> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.PrinterData getDefaultInstanceForType() {
+    @Override
+    public PrinterData getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -7313,17 +7191,17 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *通知的title
+     *Title of notification
      * </pre>
      *
      * <code>string title = 1;</code>
      * @return The title.
      */
-    java.lang.String getTitle();
+    String getTitle();
     /**
      * <pre>
      **
-     *通知的title
+     *Title of notification
      * </pre>
      *
      * <code>string title = 1;</code>
@@ -7335,17 +7213,17 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *通知的body
+     *Notified body
      * </pre>
      *
      * <code>string body = 2;</code>
      * @return The body.
      */
-    java.lang.String getBody();
+    String getBody();
     /**
      * <pre>
      **
-     *通知的body
+     *Notified body
      * </pre>
      *
      * <code>string body = 2;</code>
@@ -7357,17 +7235,17 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *通知显示图片地址
+     *Notification display image address
      * </pre>
      *
      * <code>string image_url = 3;</code>
      * @return The imageUrl.
      */
-    java.lang.String getImageUrl();
+    String getImageUrl();
     /**
      * <pre>
      **
-     *通知显示图片地址
+     *Notification display image address
      * </pre>
      *
      * <code>string image_url = 3;</code>
@@ -7379,17 +7257,17 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *通知声音
+     *Notification sound
      * </pre>
      *
      * <code>string sound = 4;</code>
      * @return The sound.
      */
-    java.lang.String getSound();
+    String getSound();
     /**
      * <pre>
      **
-     *通知声音
+     *Notification sound
      * </pre>
      *
      * <code>string sound = 4;</code>
@@ -7417,114 +7295,47 @@ java.lang.String defaultValue);
       sound_ = "";
     }
 
-    @java.lang.Override
+    @Override
     @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
+    protected Object newInstance(
         UnusedPrivateParameter unused) {
       return new NotifyData();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private NotifyData(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              title_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              body_ = s;
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              imageUrl_ = s;
-              break;
-            }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              sound_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_NotifyData_descriptor;
+      return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_NotifyData_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_NotifyData_fieldAccessorTable
+      return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_NotifyData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.Builder.class);
+              NotifyData.class, Builder.class);
     }
 
     public static final int TITLE_FIELD_NUMBER = 1;
-    private volatile java.lang.Object title_;
+    @SuppressWarnings("serial")
+    private volatile Object title_ = "";
     /**
      * <pre>
      **
-     *通知的title
+     *Title of notification
      * </pre>
      *
      * <code>string title = 1;</code>
      * @return The title.
      */
-    @java.lang.Override
-    public java.lang.String getTitle() {
-      java.lang.Object ref = title_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getTitle() {
+      Object ref = title_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         title_ = s;
         return s;
       }
@@ -7532,20 +7343,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *通知的title
+     *Title of notification
      * </pre>
      *
      * <code>string title = 1;</code>
      * @return The bytes for title.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getTitleBytes() {
-      java.lang.Object ref = title_;
-      if (ref instanceof java.lang.String) {
+      Object ref = title_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         title_ = b;
         return b;
       } else {
@@ -7554,25 +7365,26 @@ java.lang.String defaultValue);
     }
 
     public static final int BODY_FIELD_NUMBER = 2;
-    private volatile java.lang.Object body_;
+    @SuppressWarnings("serial")
+    private volatile Object body_ = "";
     /**
      * <pre>
      **
-     *通知的body
+     *Notified body
      * </pre>
      *
      * <code>string body = 2;</code>
      * @return The body.
      */
-    @java.lang.Override
-    public java.lang.String getBody() {
-      java.lang.Object ref = body_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getBody() {
+      Object ref = body_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         body_ = s;
         return s;
       }
@@ -7580,20 +7392,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *通知的body
+     *Notified body
      * </pre>
      *
      * <code>string body = 2;</code>
      * @return The bytes for body.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getBodyBytes() {
-      java.lang.Object ref = body_;
-      if (ref instanceof java.lang.String) {
+      Object ref = body_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         body_ = b;
         return b;
       } else {
@@ -7602,25 +7414,26 @@ java.lang.String defaultValue);
     }
 
     public static final int IMAGE_URL_FIELD_NUMBER = 3;
-    private volatile java.lang.Object imageUrl_;
+    @SuppressWarnings("serial")
+    private volatile Object imageUrl_ = "";
     /**
      * <pre>
      **
-     *通知显示图片地址
+     *Notification display image address
      * </pre>
      *
      * <code>string image_url = 3;</code>
      * @return The imageUrl.
      */
-    @java.lang.Override
-    public java.lang.String getImageUrl() {
-      java.lang.Object ref = imageUrl_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getImageUrl() {
+      Object ref = imageUrl_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         imageUrl_ = s;
         return s;
       }
@@ -7628,20 +7441,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *通知显示图片地址
+     *Notification display image address
      * </pre>
      *
      * <code>string image_url = 3;</code>
      * @return The bytes for imageUrl.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getImageUrlBytes() {
-      java.lang.Object ref = imageUrl_;
-      if (ref instanceof java.lang.String) {
+      Object ref = imageUrl_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         imageUrl_ = b;
         return b;
       } else {
@@ -7650,25 +7463,26 @@ java.lang.String defaultValue);
     }
 
     public static final int SOUND_FIELD_NUMBER = 4;
-    private volatile java.lang.Object sound_;
+    @SuppressWarnings("serial")
+    private volatile Object sound_ = "";
     /**
      * <pre>
      **
-     *通知声音
+     *Notification sound
      * </pre>
      *
      * <code>string sound = 4;</code>
      * @return The sound.
      */
-    @java.lang.Override
-    public java.lang.String getSound() {
-      java.lang.Object ref = sound_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    @Override
+    public String getSound() {
+      Object ref = sound_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         sound_ = s;
         return s;
       }
@@ -7676,20 +7490,20 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *通知声音
+     *Notification sound
      * </pre>
      *
      * <code>string sound = 4;</code>
      * @return The bytes for sound.
      */
-    @java.lang.Override
+    @Override
     public com.google.protobuf.ByteString
         getSoundBytes() {
-      java.lang.Object ref = sound_;
-      if (ref instanceof java.lang.String) {
+      Object ref = sound_;
+      if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         sound_ = b;
         return b;
       } else {
@@ -7698,7 +7512,7 @@ java.lang.String defaultValue);
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -7708,7 +7522,7 @@ java.lang.String defaultValue);
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(title_)) {
@@ -7723,10 +7537,10 @@ java.lang.String defaultValue);
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(sound_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, sound_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
-    @java.lang.Override
+    @Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -7744,20 +7558,20 @@ java.lang.String defaultValue);
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(sound_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, sound_);
       }
-      size += unknownFields.getSerializedSize();
+      size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
+    @Override
+    public boolean equals(final Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData)) {
+      if (!(obj instanceof NotifyData)) {
         return super.equals(obj);
       }
-      com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData other = (com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData) obj;
+      NotifyData other = (NotifyData) obj;
 
       if (!getTitle()
           .equals(other.getTitle())) return false;
@@ -7767,11 +7581,11 @@ java.lang.String defaultValue);
           .equals(other.getImageUrl())) return false;
       if (!getSound()
           .equals(other.getSound())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -7786,74 +7600,76 @@ java.lang.String defaultValue);
       hash = (53 * hash) + getImageUrl().hashCode();
       hash = (37 * hash) + SOUND_FIELD_NUMBER;
       hash = (53 * hash) + getSound().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parseFrom(
+    public static NotifyData parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parseFrom(
+    public static NotifyData parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parseFrom(
+    public static NotifyData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parseFrom(
+    public static NotifyData parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parseFrom(byte[] data)
+    public static NotifyData parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parseFrom(
+    public static NotifyData parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parseFrom(java.io.InputStream input)
+    public static NotifyData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parseFrom(
+    public static NotifyData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parseDelimitedFrom(java.io.InputStream input)
+
+    public static NotifyData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parseDelimitedFrom(
+
+    public static NotifyData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parseFrom(
+    public static NotifyData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parseFrom(
+    public static NotifyData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -7861,23 +7677,23 @@ java.lang.String defaultValue);
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
+    @Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData prototype) {
+    public static Builder newBuilder(NotifyData prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
+    @Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -7887,195 +7703,238 @@ java.lang.String defaultValue);
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.wiseasy.ecr.hub.data.NotifyData)
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyDataOrBuilder {
+        NotifyDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_NotifyData_descriptor;
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_NotifyData_descriptor;
       }
 
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      @Override
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_NotifyData_fieldAccessorTable
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_NotifyData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.Builder.class);
+                NotifyData.class, Builder.class);
       }
 
       // Construct using com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
-        maybeForceBuilderInitialization();
+
       }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
+      @Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         title_ = "";
-
         body_ = "";
-
         imageUrl_ = "";
-
         sound_ = "";
-
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_NotifyData_descriptor;
+        return ECRHubRequestProto.internal_static_com_wiseasy_ecr_hub_data_NotifyData_descriptor;
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData getDefaultInstanceForType() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.getDefaultInstance();
+      @Override
+      public NotifyData getDefaultInstanceForType() {
+        return NotifyData.getDefaultInstance();
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData build() {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData result = buildPartial();
+      @Override
+      public NotifyData build() {
+        NotifyData result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData buildPartial() {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData result = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData(this);
-        result.title_ = title_;
-        result.body_ = body_;
-        result.imageUrl_ = imageUrl_;
-        result.sound_ = sound_;
+      @Override
+      public NotifyData buildPartial() {
+        NotifyData result = new NotifyData(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      @java.lang.Override
+      private void buildPartial0(NotifyData result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.title_ = title_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.body_ = body_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.imageUrl_ = imageUrl_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.sound_ = sound_;
+        }
+      }
+
+      @Override
       public Builder clone() {
         return super.clone();
       }
-      @java.lang.Override
+      @Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.setField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @java.lang.Override
+      @Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @java.lang.Override
+      @Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
+      @Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return super.addRepeatedField(field, value);
       }
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData) {
-          return mergeFrom((com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData)other);
+        if (other instanceof NotifyData) {
+          return mergeFrom((NotifyData)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData other) {
-        if (other == com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData.getDefaultInstance()) return this;
+      public Builder mergeFrom(NotifyData other) {
+        if (other == NotifyData.getDefaultInstance()) return this;
         if (!other.getTitle().isEmpty()) {
           title_ = other.title_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getBody().isEmpty()) {
           body_ = other.body_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (!other.getImageUrl().isEmpty()) {
           imageUrl_ = other.imageUrl_;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
         if (!other.getSound().isEmpty()) {
           sound_ = other.sound_;
+          bitField0_ |= 0x00000008;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
+        this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
       }
 
-      @java.lang.Override
+      @Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
+      @Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData parsedMessage = null;
+        if (extensionRegistry == null) {
+          throw new NullPointerException();
+        }
         try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                title_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                body_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                imageUrl_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 34: {
+                sound_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
+          onChanged();
+        } // finally
         return this;
       }
+      private int bitField0_;
 
-      private java.lang.Object title_ = "";
+      private Object title_ = "";
       /**
        * <pre>
        **
-       *通知的title
+       *Title of notification
        * </pre>
        *
        * <code>string title = 1;</code>
        * @return The title.
        */
-      public java.lang.String getTitle() {
-        java.lang.Object ref = title_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTitle() {
+        Object ref = title_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           title_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *通知的title
+       *Title of notification
        * </pre>
        *
        * <code>string title = 1;</code>
@@ -8083,11 +7942,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getTitleBytes() {
-        java.lang.Object ref = title_;
+        Object ref = title_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           title_ = b;
           return b;
         } else {
@@ -8097,7 +7956,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *通知的title
+       *Title of notification
        * </pre>
        *
        * <code>string title = 1;</code>
@@ -8105,34 +7964,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setTitle(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         title_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知的title
+       *Title of notification
        * </pre>
        *
        * <code>string title = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearTitle() {
-        
         title_ = getDefaultInstance().getTitle();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知的title
+       *Title of notification
        * </pre>
        *
        * <code>string title = 1;</code>
@@ -8141,42 +7998,40 @@ java.lang.String defaultValue);
        */
       public Builder setTitleBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         title_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
 
-      private java.lang.Object body_ = "";
+      private Object body_ = "";
       /**
        * <pre>
        **
-       *通知的body
+       *Notified body
        * </pre>
        *
        * <code>string body = 2;</code>
        * @return The body.
        */
-      public java.lang.String getBody() {
-        java.lang.Object ref = body_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getBody() {
+        Object ref = body_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           body_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *通知的body
+       *Notified body
        * </pre>
        *
        * <code>string body = 2;</code>
@@ -8184,11 +8039,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getBodyBytes() {
-        java.lang.Object ref = body_;
+        Object ref = body_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           body_ = b;
           return b;
         } else {
@@ -8198,7 +8053,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *通知的body
+       *Notified body
        * </pre>
        *
        * <code>string body = 2;</code>
@@ -8206,34 +8061,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setBody(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         body_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知的body
+       *Notified body
        * </pre>
        *
        * <code>string body = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearBody() {
-        
         body_ = getDefaultInstance().getBody();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知的body
+       *Notified body
        * </pre>
        *
        * <code>string body = 2;</code>
@@ -8242,42 +8095,40 @@ java.lang.String defaultValue);
        */
       public Builder setBodyBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         body_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
 
-      private java.lang.Object imageUrl_ = "";
+      private Object imageUrl_ = "";
       /**
        * <pre>
        **
-       *通知显示图片地址
+       *Notification display image address
        * </pre>
        *
        * <code>string image_url = 3;</code>
        * @return The imageUrl.
        */
-      public java.lang.String getImageUrl() {
-        java.lang.Object ref = imageUrl_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getImageUrl() {
+        Object ref = imageUrl_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           imageUrl_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *通知显示图片地址
+       *Notification display image address
        * </pre>
        *
        * <code>string image_url = 3;</code>
@@ -8285,11 +8136,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getImageUrlBytes() {
-        java.lang.Object ref = imageUrl_;
+        Object ref = imageUrl_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           imageUrl_ = b;
           return b;
         } else {
@@ -8299,7 +8150,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *通知显示图片地址
+       *Notification display image address
        * </pre>
        *
        * <code>string image_url = 3;</code>
@@ -8307,34 +8158,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setImageUrl(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         imageUrl_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知显示图片地址
+       *Notification display image address
        * </pre>
        *
        * <code>string image_url = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearImageUrl() {
-        
         imageUrl_ = getDefaultInstance().getImageUrl();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知显示图片地址
+       *Notification display image address
        * </pre>
        *
        * <code>string image_url = 3;</code>
@@ -8343,42 +8192,40 @@ java.lang.String defaultValue);
        */
       public Builder setImageUrlBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         imageUrl_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
 
-      private java.lang.Object sound_ = "";
+      private Object sound_ = "";
       /**
        * <pre>
        **
-       *通知声音
+       *Notification sound
        * </pre>
        *
        * <code>string sound = 4;</code>
        * @return The sound.
        */
-      public java.lang.String getSound() {
-        java.lang.Object ref = sound_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getSound() {
+        Object ref = sound_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           sound_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
        * <pre>
        **
-       *通知声音
+       *Notification sound
        * </pre>
        *
        * <code>string sound = 4;</code>
@@ -8386,11 +8233,11 @@ java.lang.String defaultValue);
        */
       public com.google.protobuf.ByteString
           getSoundBytes() {
-        java.lang.Object ref = sound_;
+        Object ref = sound_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           sound_ = b;
           return b;
         } else {
@@ -8400,7 +8247,7 @@ java.lang.String defaultValue);
       /**
        * <pre>
        **
-       *通知声音
+       *Notification sound
        * </pre>
        *
        * <code>string sound = 4;</code>
@@ -8408,34 +8255,32 @@ java.lang.String defaultValue);
        * @return This builder for chaining.
        */
       public Builder setSound(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
         sound_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知声音
+       *Notification sound
        * </pre>
        *
        * <code>string sound = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearSound() {
-        
         sound_ = getDefaultInstance().getSound();
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
       /**
        * <pre>
        **
-       *通知声音
+       *Notification sound
        * </pre>
        *
        * <code>string sound = 4;</code>
@@ -8444,22 +8289,20 @@ java.lang.String defaultValue);
        */
       public Builder setSoundBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         sound_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
-      @java.lang.Override
+      @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
+      @Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -8470,23 +8313,34 @@ java.lang.String defaultValue);
     }
 
     // @@protoc_insertion_point(class_scope:com.wiseasy.ecr.hub.data.NotifyData)
-    private static final com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData DEFAULT_INSTANCE;
+    private static final NotifyData DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData();
+      DEFAULT_INSTANCE = new NotifyData();
     }
 
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData getDefaultInstance() {
+    public static NotifyData getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<NotifyData>
         PARSER = new com.google.protobuf.AbstractParser<NotifyData>() {
-      @java.lang.Override
+      @Override
       public NotifyData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new NotifyData(input, extensionRegistry);
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
       }
     };
 
@@ -8494,13 +8348,13 @@ java.lang.String defaultValue);
       return PARSER;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<NotifyData> getParserForType() {
       return PARSER;
     }
 
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto.NotifyData getDefaultInstanceForType() {
+    @Override
+    public NotifyData getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -8544,7 +8398,7 @@ java.lang.String defaultValue);
   private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    java.lang.String[] descriptorData = {
+    String[] descriptorData = {
       "\n\027ECRHubRequestData.proto\022\030com.wiseasy.e" +
       "cr.hub.data\"\317\002\n\rECRHubRequest\022\r\n\005topic\030\001" +
       " \001(\t\022\016\n\006msg_id\030\002 \001(\t\022\016\n\006app_id\030\003 \001(\t\022\021\n\t" +
@@ -8582,37 +8436,37 @@ java.lang.String defaultValue);
     internal_static_com_wiseasy_ecr_hub_data_ECRHubRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_data_ECRHubRequest_descriptor,
-        new java.lang.String[] { "Topic", "MsgId", "AppId", "Timestamp", "Version", "BizData", "VoiceData", "PrinterData", "NotifyData", });
+        new String[] { "Topic", "MsgId", "AppId", "Timestamp", "Version", "BizData", "VoiceData", "PrinterData", "NotifyData", });
     internal_static_com_wiseasy_ecr_hub_data_RequestBizData_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_wiseasy_ecr_hub_data_RequestBizData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_data_RequestBizData_descriptor,
-        new java.lang.String[] { "MerchantOrderNo", "OrigMerchantOrderNo", "PriceCurrency", "OrderAmount", "TipAmount", "TransType", "PayMethodCategory", "Attach", "Description", "NotifyUrl", "Token", "ExtendsParams", });
+        new String[] { "MerchantOrderNo", "OrigMerchantOrderNo", "PriceCurrency", "OrderAmount", "TipAmount", "TransType", "PayMethodCategory", "Attach", "Description", "NotifyUrl", "Token", "ExtendsParams", });
     internal_static_com_wiseasy_ecr_hub_data_RequestBizData_ExtendsParamsEntry_descriptor =
       internal_static_com_wiseasy_ecr_hub_data_RequestBizData_descriptor.getNestedTypes().get(0);
     internal_static_com_wiseasy_ecr_hub_data_RequestBizData_ExtendsParamsEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_data_RequestBizData_ExtendsParamsEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
+        new String[] { "Key", "Value", });
     internal_static_com_wiseasy_ecr_hub_data_VoiceData_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_wiseasy_ecr_hub_data_VoiceData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_data_VoiceData_descriptor,
-        new java.lang.String[] { "Content", "ContentLocale", "ContentUrl", });
+        new String[] { "Content", "ContentLocale", "ContentUrl", });
     internal_static_com_wiseasy_ecr_hub_data_PrinterData_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_wiseasy_ecr_hub_data_PrinterData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_data_PrinterData_descriptor,
-        new java.lang.String[] { "Content", "ContentUrl", });
+        new String[] { "Content", "ContentUrl", });
     internal_static_com_wiseasy_ecr_hub_data_NotifyData_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_wiseasy_ecr_hub_data_NotifyData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_data_NotifyData_descriptor,
-        new java.lang.String[] { "Title", "Body", "ImageUrl", "Sound", });
+        new String[] { "Title", "Body", "ImageUrl", "Sound", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

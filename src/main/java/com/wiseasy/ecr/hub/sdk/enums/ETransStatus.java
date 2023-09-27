@@ -31,4 +31,15 @@ public enum ETransStatus {
     public String getCode() {
         return code;
     }
+
+    public static ETransStatus codeOf(String code) {
+        if (code != null) {
+            for (ETransStatus item : values()) {
+                if (item.getCode().equals(code)) {
+                    return item;
+                }
+            }
+        }
+        return null;
+    }
 }

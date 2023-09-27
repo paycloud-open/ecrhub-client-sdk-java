@@ -11,7 +11,7 @@ import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
 public abstract class ECRHubRequest<T extends ECRHubResponse> {
 
     /**
-     * Message unique ID, return as is
+     * Message ID, used to receive the corresponding response. The caller needs to remain unique.
      */
     @JSONField(name = "msgId")
     private String msg_id;

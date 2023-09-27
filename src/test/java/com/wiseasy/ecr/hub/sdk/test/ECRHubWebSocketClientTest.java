@@ -5,7 +5,6 @@ import com.wiseasy.ecr.hub.sdk.ECRHubClient;
 import com.wiseasy.ecr.hub.sdk.ECRHubClientFactory;
 import com.wiseasy.ecr.hub.sdk.ECRHubConfig;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
-import com.wiseasy.ecr.hub.sdk.model.request.InitRequest;
 import com.wiseasy.ecr.hub.sdk.model.request.PurchaseRequest;
 import com.wiseasy.ecr.hub.sdk.model.request.QueryRequest;
 import com.wiseasy.ecr.hub.sdk.model.response.QueryResponse;
@@ -22,9 +21,6 @@ public class ECRHubWebSocketClientTest {
         ECRHubConfig config = new ECRHubConfig(APP_ID);
         ECRHubClient client = ECRHubClientFactory.create("ws://192.168.100.30:35779", config);
         client.connect(); // Must
-
-        InitRequest initRequest = new InitRequest();
-        client.execute(initRequest);
 
         PurchaseRequest request = new PurchaseRequest();
         request.setMerchant_order_no(RandomUtil.randomNumbers(20));

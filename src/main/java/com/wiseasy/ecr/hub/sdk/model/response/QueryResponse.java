@@ -4,72 +4,111 @@ import com.alibaba.fastjson2.annotation.JSONField;
 
 public class QueryResponse extends ECRHubResponse {
     /**
-     * Merchant Order No.
+     * Merchant order No.
+     * The order number for the refund request when refunded, different from the order number of the original consumer transaction. No more than 32 alphanumeric characters.
+     *
+     * For example: 1217752501201407033233368018
      */
     @JSONField(name = "merchantOrderNo")
     private String merchant_order_no;
     /**
-     * Price Currency
+     * Price Currency, ISO-4217 compliant, described in a three-character code
+     *
+     * For example: USD
      */
     @JSONField(name = "priceCurrency")
     private String price_currency;
     /**
      * Order Amount
+     * Expressed in the quoted currency, for example, One USD stands for one dollar, not one cent
+     *
+     * For example: 34.50
      */
     @JSONField(name = "orderAmount")
     private String order_amount;
     /**
      * Tip Amount
+     * The amount of the tip is expressed in the currency in which it is denominated, for example, 1 USD stands for one dollar, not one cent.
+     *
+     * For example: 1.50
      */
     @JSONField(name = "tipAmount")
     private String tip_amount;
     /**
      * Transaction type
+     *
+     * @see com.wiseasy.ecr.hub.sdk.enums.ETransType
+     *
+     * For example: 1
      */
     @JSONField(name = "transType")
     private String trans_type;
     /**
      * Payment scenario
+     *
+     * @see com.wiseasy.ecr.hub.sdk.enums.EPayScenario
      */
     @JSONField(name = "payScenario")
     private String pay_scenario;
     /**
-     * attach
+     * Attach
+     * Allows merchants to submit an additional data to the gateway, which will be returned as-is for payment notifications and inquiries
+     *
+     * For example: abc
      */
     @JSONField(name = "attach")
     private String attach;
     /**
      * Transaction status
+     *
+     * @see com.wiseasy.ecr.hub.sdk.enums.ETransStatus
+     *
+     * For example: 2
      */
     @JSONField(name = "transStatus")
     private String trans_status;
     /**
      * PayCloud transaction No.
+     *
+     * For example: 51230016492309010000001
      */
     @JSONField(name = "transNo")
     private String trans_no;
     /**
      * Amount paid by customer
+     * The actual amount paid by the customer
+     *
+     * For example: 36.00
      */
     @JSONField(name = "paidAmount")
     private String paid_amount;
     /**
-     * Payment Channel Transaction No.
+     * Payment Channel Transaction No. such as WeChat, Alipay, Visa, Mastercard and other payment platforms
+     *
+     * For example: 4210001022202106045676702818
      */
     @JSONField(name = "payChannelTransNo")
     private String pay_channel_trans_no;
     /**
      * Payment User Account
+     *
+     * For example: 6227***6666
      */
     @JSONField(name = "payUserAccountId")
     private String pay_user_account_id;
     /**
      * Payment method id
+     *
+     * @see com.wiseasy.ecr.hub.sdk.enums.EPayMethod
+     *
+     * For example: Visa
      */
     @JSONField(name = "payMethodId")
     private String pay_method_id;
     /**
-     * Transaction completion time
+     * Time of successful trade, time zone: UTC/GMT+0, format: YYYY-MM-DD HH:mm:ss
+     *
+     * For Example: 2021-06-03 12:48:51
      */
     @JSONField(name = "transEndTime")
     private String trans_end_time;

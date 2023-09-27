@@ -6,7 +6,7 @@ public enum ETransType {
      */
     PURCHASE("1"),
     /**
-     * Cancel/Void
+     * Purchase Cancel/Void
      */
     CANCEL("2"),
     /**
@@ -50,5 +50,16 @@ public enum ETransType {
 
     public String getCode() {
         return code;
+    }
+
+    public static ETransType codeOf(String code) {
+        if (code != null) {
+            for (ETransType item : values()) {
+                if (item.getCode().equals(code)) {
+                    return item;
+                }
+            }
+        }
+        return null;
     }
 }

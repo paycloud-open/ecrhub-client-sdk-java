@@ -5,17 +5,17 @@ import com.alibaba.fastjson2.annotation.JSONField;
 
 public abstract class ECRHubResponse {
     /**
-     * Message unique ID, return as is
+     * Message ID, used to receive the corresponding response. The caller needs to remain unique.
      */
     @JSONField(name = "msgId")
     private String msg_id;
     /**
-     * Execution status, true-success, false-failure
+     * Execution status, true:success, false:failure
      */
     @JSONField(name = "success")
     private boolean success;
     /**
-     * Error message, returned when success is false
+     * Error message, this msg contains an error message when an error occurs
      */
     @JSONField(name = "errorMsg")
     private String error_msg;

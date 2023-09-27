@@ -12,51 +12,75 @@ public class PurchaseRequest extends ECRHubRequest<PurchaseResponse> {
     }
 
     /**
-     * Merchant Order No.
+     * Merchant order No.
+     * The order number for the refund request when refunded, different from the order number of the original consumer transaction. No more than 32 alphanumeric characters.
+     *
+     * For example: 1217752501201407033233368018
      */
     @JSONField(name = "merchantOrderNo")
     private String merchant_order_no;
     /**
-     * Price Currency
+     * Price Currency, ISO-4217 compliant, described in a three-character code
+     *
+     * For example: USD
      */
     @JSONField(name = "priceCurrency")
     private String price_currency;
     /**
      * Order Amount
+     * Expressed in the quoted currency, for example, One USD stands for one dollar, not one cent
+     *
+     * For example: 34.50
      */
     @JSONField(name = "orderAmount")
     private String order_amount;
     /**
      * Tip Amount
+     * The amount of the tip is expressed in the currency in which it is denominated, for example, 1 USD stands for one dollar, not one cent.
+     *
+     * For example: 1.50
      */
     @JSONField(name = "tipAmount")
     private String tip_amount;
     /**
      * Transaction type
+     *
+     * @see com.wiseasy.ecr.hub.sdk.enums.ETransType
+     *
+     * For example: 1
      */
     @JSONField(name = "transType")
     private String trans_type = ETransType.PURCHASE.getCode();
     /**
      * Payment Methods Category
      *
-     * QR_C_SCAN_B: Customer Scan merchant payment code
-     * QR_B_SCAN_C: Merchant Scan customer payment code
-     * BANKCARD: Bank card payment
+     * @see com.wiseasy.ecr.hub.sdk.enums.EPayMethodCategory
+     *
+     * For example: BANKCARD
      */
     @JSONField(name = "payMethodCategory")
     private String pay_method_category;
     /**
-     * attach
+     * Attach
+     * Allows merchants to submit an additional data to the gateway, which will be returned as-is for payment notifications and inquiries
+     *
+     * For example: abc
      */
     @JSONField(name = "attach")
     private String attach;
     /**
      * Order description
+     * A brief description of the goods or services purchased by the customer
+     *
+     * For example: IPhone White X2
      */
     @JSONField(name = "description")
     private String description;
     /**
      * PayCloud backend server callback address after successful payment
+     * Receive payment notifications from the gateway to call back the server address, and only when the transaction goes through the payment gateway will there be a callback.
+     *
+     * For example: http://www.xxx.com/notify
      */
     @JSONField(name = "notifyUrl")
     private String notify_url;

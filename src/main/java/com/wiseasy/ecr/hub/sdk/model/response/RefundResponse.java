@@ -4,37 +4,56 @@ import com.alibaba.fastjson2.annotation.JSONField;
 
 public class RefundResponse extends ECRHubResponse {
     /**
-     * Merchant Order No.
+     * Merchant order No.
+     * The order number for the refund request when refunded, different from the order number of the original consumer transaction. No more than 32 alphanumeric characters.
+     *
+     * For example: 1217752501201407033233368018
      */
     @JSONField(name = "merchantOrderNo")
     private String merchant_order_no;
     /**
      * Order Amount
+     * Expressed in the quoted currency, for example, One USD stands for one dollar, not one cent
+     *
+     * For example: 34.50
      */
     @JSONField(name = "orderAmount")
     private String order_amount;
     /**
-     * attach
+     * Attach
+     * Allows merchants to submit an additional data to the gateway, which will be returned as-is for payment notifications and inquiries
+     *
+     * For example: abc
      */
     @JSONField(name = "attach")
     private String attach;
     /**
      * Transaction status
+     *
+     * @see com.wiseasy.ecr.hub.sdk.enums.ETransStatus
+     *
+     * For example: 2
      */
     @JSONField(name = "transStatus")
     private String trans_status;
     /**
      * PayCloud transaction No.
+     *
+     * For example: 51230016492309010000001
      */
     @JSONField(name = "transNo")
     private String trans_no;
     /**
-     * Payment Channel Transaction No.
+     * Payment Channel Transaction No. such as WeChat, Alipay, Visa, Mastercard and other payment platforms
+     *
+     * For example: 4210001022202106045676702818
      */
     @JSONField(name = "payChannelTransNo")
     private String pay_channel_trans_no;
     /**
-     * Transaction completion time
+     * Time of successful trade, time zone: UTC/GMT+0, format: YYYY-MM-DD HH:mm:ss
+     *
+     * For Example: 2021-06-03 12:48:51
      */
     @JSONField(name = "transEndTime")
     private String trans_end_time;
