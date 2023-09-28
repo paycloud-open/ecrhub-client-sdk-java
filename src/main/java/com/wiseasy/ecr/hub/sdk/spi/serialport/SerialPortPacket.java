@@ -74,7 +74,7 @@ public class SerialPortPacket {
     /**
      * messageId in 1..127
      */
-    private synchronized static byte getMsgId() {
+    private static synchronized byte getMsgId() {
         if (++msgId > 127) {
             msgId = 1;
         }
