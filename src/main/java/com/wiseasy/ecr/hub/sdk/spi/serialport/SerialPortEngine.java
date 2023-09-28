@@ -143,6 +143,7 @@ public class SerialPortEngine {
         byte[] msg = new SerialPortPacket.HandshakePacket().encode();
         int numWritten = serialPort.writeBytes(msg, msg.length);
         if (numWritten <= 0) {
+            log.error("Send handshake packet fail");
             return false;
         }
 
@@ -216,7 +217,7 @@ public class SerialPortEngine {
                 MSG_CACHE.remove(msgId);
                 return HexUtil.hex2byte(msg);
             } else {
-                ThreadUtil.safeSleep(100);
+                ThreadUtil.safeSleep(200);
                 if (System.currentTimeMillis() - before > timeout) {
                     throw new ECRHubTimeoutException();
                 }
