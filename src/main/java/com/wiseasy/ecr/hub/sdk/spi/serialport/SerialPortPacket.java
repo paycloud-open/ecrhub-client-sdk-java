@@ -33,7 +33,7 @@ public class SerialPortPacket {
     private int checkCodeLength = 1;//check code length
     private int endCodeLength = 2;//end symbol
 
-    private static volatile int msgId; //messageId in 1..255
+    private static volatile int msgId; //messageId in 1..127
 
     protected byte[] head = HexUtil.hex2byte(PACK_HEAD);
     private byte packType;
@@ -72,13 +72,13 @@ public class SerialPortPacket {
     }
 
     /**
-     * messageId in 1..255
+     * messageId in 1..127
      */
-    private static byte getMsgId() {
-        if (++msgId > 255) {
+    private synchronized static byte getMsgId() {
+        if (++msgId > 127) {
             msgId = 1;
         }
-        return (byte)msgId;
+        return (byte) msgId;
     }
 
     /**
