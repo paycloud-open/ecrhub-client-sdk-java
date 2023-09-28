@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @program: ECR-Hub
@@ -23,6 +24,8 @@ public class SerialPortPacket {
     public static final String PACK_HEAD = "55AA";
     public static final String PACK_TAIL = "CC33";
 
+    private static final AtomicInteger counter = new AtomicInteger(0);
+
     private int maxLength = 1024;//Defines the maximum length of a packet, the maximum length expressed in 2 bytes
     private int starCodeLength = 2;//start symbol
     private int packetTypeLength = 1;//Package type
@@ -33,10 +36,8 @@ public class SerialPortPacket {
     private int checkCodeLength = 1;//check code length
     private int endCodeLength = 2;//end symbol
 
-    private static volatile int msgId; //messageId in 1..127
-
     protected byte[] head = HexUtil.hex2byte(PACK_HEAD);
-    private byte packType;
+    protected byte packType;
     protected byte ack;
     protected byte id;
     protected byte[] dataLen;
@@ -75,10 +76,12 @@ public class SerialPortPacket {
      * messageId in 1..127
      */
     private static synchronized byte getMsgId() {
-        if (++msgId > 127) {
-            msgId = 1;
+        int id = counter.incrementAndGet();
+        if (id > 127) {
+            counter.set(0);
+            id = counter.incrementAndGet();
         }
-        return (byte) msgId;
+        return (byte) id;
     }
 
     /**
