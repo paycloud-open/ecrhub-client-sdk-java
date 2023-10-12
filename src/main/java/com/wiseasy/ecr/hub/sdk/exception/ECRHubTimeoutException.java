@@ -6,4 +6,7 @@ public class ECRHubTimeoutException extends ECRHubException {
         super();
     }
 
+    public ECRHubTimeoutException(String message) {
+        super(message);
+    }
 }

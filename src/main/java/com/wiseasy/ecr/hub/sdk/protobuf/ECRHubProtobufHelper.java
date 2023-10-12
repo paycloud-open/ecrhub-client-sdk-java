@@ -21,6 +21,7 @@ public class ECRHubProtobufHelper {
                 .setVersion(request.getVersion())
                 .setAppId(config.getAppId())
                 .setTopic(request.getTopic())
+                .setPairData(buildPairData(request))
                 .setBizData(buildBizData(request))
                 .setVoiceData(buildVoiceData(request))
                 .setPrinterData(buildPrintData(request))
@@ -44,6 +45,17 @@ public class ECRHubProtobufHelper {
         } catch (Exception e) {
             log.error("Invalid ProtocolBuffer Message:", e);
             throw new ECRHubException("Invalid ProtocolBuffer Message:", e);
+        }
+    }
+
+    public static ECRHubRequestProto.RequestPairData buildPairData(ECRHubRequest request) throws ECRHubException {
+        try {
+            ECRHubRequestProto.RequestPairData.Builder builder = ECRHubRequestProto.RequestPairData.newBuilder();
+            JsonFormat.parser().ignoringUnknownFields().merge(JSON.toJSONString(request), builder);
+            return builder.build();
+        } catch (Exception e) {
+            log.error("Build PairData Error:", e);
+            throw new ECRHubException("Build PairData Error:", e);
         }
     }
 

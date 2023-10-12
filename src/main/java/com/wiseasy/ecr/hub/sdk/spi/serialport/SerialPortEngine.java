@@ -6,7 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
-import com.wiseasy.ecr.hub.sdk.ECRHubConfig;
+import com.wiseasy.ecr.hub.sdk.ECRHubConfig.SerialPortConfig;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
@@ -18,8 +18,6 @@ import org.slf4j.LoggerFactory;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @program: ECR-Hub
@@ -31,10 +29,8 @@ public class SerialPortEngine {
 
     private static final Logger log = LoggerFactory.getLogger(SerialPortEngine.class);
 
-    private volatile boolean isConnected = false;
-    private final Lock lock = new ReentrantLock();
-    private final String PORT_NAME_TAG = "GPS";
-    private final ECRHubConfig config;
+    private static final String PORT_NAME_TAG = "GPS";
+    private final SerialPortConfig config;
     private final SerialPort serialPort;
     private final SerialPortPacketDecoder packDecoder;
 
@@ -43,7 +39,7 @@ public class SerialPortEngine {
 
     private final FIFOCache<String, String> MSG_CACHE = new FIFOCache<>(30, 15 * 60 * 1000);
 
-    public SerialPortEngine(String portName, ECRHubConfig config) throws ECRHubException {
+    public SerialPortEngine(String portName, SerialPortConfig config) throws ECRHubException {
         this.config = config;
         this.serialPort = getCommPort(portName);
         this.packDecoder = new SerialPortPacketDecoder();
@@ -55,18 +51,18 @@ public class SerialPortEngine {
         if (StrUtil.isBlank(portName)) {
             serialPort = findSerialPort(PORT_NAME_TAG);
             if (serialPort == null) {
-                throw new ECRHubException("The serial port name cannot be empty.");
+                throw new ECRHubException("The serial port cannot be empty.");
             }
         } else {
             try {
                 serialPort = SerialPort.getCommPort(portName);
             } catch (Exception e) {
-                log.error("Invalid serial port name:{}", portName);
+                log.error("The serial port[{}] is invalid.", portName);
                 throw new ECRHubException(e);
             }
         }
         if (serialPort.isOpen()) {
-            throw new ECRHubException("This serial port is already occupied.");
+            throw new ECRHubException("The serial port[" + portName + "] is already used.");
         }
         return serialPort;
     }
@@ -81,58 +77,43 @@ public class SerialPortEngine {
         return null;
     }
 
-    public boolean connect() throws ECRHubException {
-        if (isConnected) {
-            return true;
-        }
-        lock.lock();
-        try {
-            // Open serial port
-            if (!serialPort.isOpen()) {
-                open();
-            }
+    public void connect(long startTime, int timeout) throws ECRHubException {
+        // Open serial port
+        doOpen();
 
-            // Handshake
-            handshake();
+        // Handshake
+        doHandshake(startTime, timeout);
 
-            // Add data listener
-            serialPort.addDataListener(new ReadListener());
+        // Add data listener
+        serialPort.addDataListener(new ReadListener());
 
-            // Start Write Thread
-            writeThread = new Thread(new WriteThread());
-            writeThread.start();
-
-            isConnected = true;
-
-            return true;
-        } finally {
-            lock.unlock();
-        }
+        // Start Write Thread
+        writeThread = new Thread(new WriteThread());
+        writeThread.start();
     }
 
-    private void open() throws ECRHubException {
-        ECRHubConfig.SerialPortConfig cfg = config.getSerialPortConfig();
-        serialPort.setComPortParameters(cfg.getBaudRate(), cfg.getDataBits(), cfg.getStopBits(), cfg.getParity());
-        serialPort.setComPortTimeouts(cfg.getTimeoutMode(), cfg.getReadTimeout(), cfg.getWriteTimeout());
-        if (serialPort.openPort(100)) {
-            log.info("Successfully open the serial port:{}", serialPort.getSystemPortName());
-        } else {
-            throw new ECRHubException("Failed to open the serial port:" + serialPort.getSystemPortName());
-        }
-    }
-
-    private void handshake() throws ECRHubException {
-        int timeout = config.getSerialPortConfig().getConnTimeout();
-        long before = System.currentTimeMillis();
-        while (true) {
-            log.info("connecting...");
-            if (doHandshake()) {
-                log.info("Connection successful");
-                return;
+    private void doOpen() throws ECRHubException {
+        if (!serialPort.isOpen()) {
+            serialPort.setComPortParameters(config.getBaudRate(), config.getDataBits(), config.getStopBits(), config.getParity());
+            serialPort.setComPortTimeouts(config.getTimeoutMode(), config.getReadTimeout(), config.getWriteTimeout());
+            if (serialPort.openPort(100)) {
+                log.info("Successful open the serial port:{}", serialPort.getSystemPortName());
             } else {
-                ThreadUtil.safeSleep(10);
-                if (System.currentTimeMillis() - before > timeout) {
-                    throw new ECRHubException("Connection timeout");
+                throw new ECRHubException("Failed to open the serial port:" + serialPort.getSystemPortName());
+            }
+        }
+    }
+
+    private void doHandshake(long startTime, int timeout) throws ECRHubException {
+        while (true) {
+            if (doHandshake()) {
+                log.info("Handshake successful");
+                break;
+            } else {
+                log.info("Handshake failed");
+                ThreadUtil.safeSleep(100);
+                if (System.currentTimeMillis() - startTime > timeout) {
+                    throw new ECRHubTimeoutException("Connection timeout");
                 }
             }
         }
@@ -143,7 +124,7 @@ public class SerialPortEngine {
         byte[] msg = new SerialPortPacket.HandshakePacket().encode();
         int numWritten = serialPort.writeBytes(msg, msg.length);
         if (numWritten <= 0) {
-            log.error("Send handshake packet fail");
+            log.error("Send handshake packet failed");
             return false;
         }
 
@@ -170,47 +151,38 @@ public class SerialPortEngine {
     }
 
     public boolean close() {
-        if (!isConnected) {
-            return true;
+        // Stop Write Thread
+        if (writeThread != null) {
+            writeThread.interrupt();
+            writeThread = null;
         }
-        lock.lock();
-        try {
-            // Stop Write Thread
-            if (writeThread != null) {
-                writeThread.interrupt();
-                writeThread = null;
-            }
-            // Close Port
-            boolean isClosed = serialPort.closePort();
-            if (isClosed) {
-                isConnected = false;
-            }
-            return isClosed;
-        } finally {
-            lock.unlock();
+        // Close Port
+        if (serialPort.isOpen()) {
+            return serialPort.closePort();
+        } else {
+            return true;
         }
     }
 
-    public boolean isConnected() {
-        return serialPort.isOpen() && isConnected;
+    public boolean isOpen() {
+        return serialPort.isOpen();
     }
 
     public void safeWrite(byte[] bytes) {
-        if (isConnected()) {
+        if (isOpen()) {
             outQueue.add(bytes);
         }
     }
 
     public void write(byte[] bytes) throws ECRHubException {
-        if (isConnected()) {
+        if (isOpen()) {
             outQueue.add(bytes);
         } else {
-            throw new ECRHubException("The serial port is not connected.");
+            throw new ECRHubException("The serial port is not opened.");
         }
     }
 
-    public byte[] read(String msgId, long timeout) throws ECRHubTimeoutException {
-        long before = System.currentTimeMillis();
+    public byte[] read(String msgId, long startTime, long timeout) throws ECRHubTimeoutException {
         while (true) {
             String msg = MSG_CACHE.get(msgId);
             if (StrUtil.isNotBlank(msg)) {
@@ -218,7 +190,7 @@ public class SerialPortEngine {
                 return HexUtil.hex2byte(msg);
             } else {
                 ThreadUtil.safeSleep(200);
-                if (System.currentTimeMillis() - before > timeout) {
+                if (System.currentTimeMillis() - startTime > timeout) {
                     throw new ECRHubTimeoutException();
                 }
             }
@@ -259,14 +231,14 @@ public class SerialPortEngine {
             Set<String> packList = packDecoder.decode(bytes);
             packList.forEach(pack -> {
                 try {
-                    handlePack(pack);
+                    decodePack(pack);
                 } catch (Exception e) {
-                    log.warn("Handle packet[{}] error:", pack, e);
+                    log.warn("Decode packet[{}] error:", pack, e);
                 }
             });
         }
 
-        private void handlePack(String hexPack) {
+        private void decodePack(String hexPack) {
             SerialPortPacket pack = new SerialPortPacket().decode(hexPack);
             if (pack == null || pack.getPackType() != SerialPortPacket.PACK_TYPE_COMMON) {
                 return;
@@ -296,18 +268,18 @@ public class SerialPortEngine {
             safeWrite(pack);
         }
 
-        private void putcache(byte[] byteData) {
-            if (byteData.length == 0) {
+        private void putcache(byte[] bytes) {
+            if (bytes.length == 0) {
                 return;
             }
             ECRHubResponseProto.ECRHubResponse respProto = null;
             try {
-                respProto = ECRHubProtobufHelper.unpack(byteData);
+                respProto = ECRHubProtobufHelper.unpack(bytes);
             } catch (Exception e) {
                 log.warn(e.getMessage(), e);
             }
             if (respProto != null) {
-                MSG_CACHE.put(respProto.getMsgId(), HexUtil.byte2hex(byteData));
+                MSG_CACHE.put(respProto.getMsgId(), HexUtil.byte2hex(bytes));
             }
         }
     }

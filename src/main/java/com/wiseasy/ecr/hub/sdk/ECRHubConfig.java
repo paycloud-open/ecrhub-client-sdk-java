@@ -3,7 +3,14 @@ package com.wiseasy.ecr.hub.sdk;
 import com.fazecast.jSerialComm.SerialPort;
 
 public class ECRHubConfig {
-
+    /**
+     * Device name
+     */
+    private String deviceName;
+    /**
+     * Device alias name
+     */
+    private String aliasName;
     /**
      * Payment Application Id
      */
@@ -22,6 +29,28 @@ public class ECRHubConfig {
 
     public ECRHubConfig(String appId) {
         this.appId = appId;
+    }
+
+    public ECRHubConfig(String appId, String deviceName, String aliasName) {
+        this.appId = appId;
+        this.deviceName = deviceName;
+        this.aliasName = aliasName;
+    }
+
+    public String getDeviceName() {
+        return deviceName;
+    }
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
+
+    public String getAliasName() {
+        return aliasName;
+    }
+
+    public void setAliasName(String aliasName) {
+        this.aliasName = aliasName;
     }
 
     public String getAppId() {
@@ -88,7 +117,7 @@ public class ECRHubConfig {
         /**
          * Connection timeout (milliseconds)
          */
-        private int connTimeout = 30 * 1000;
+        private int connTimeout = 180 * 1000;
 
         public int getBaudRate() {
             return baudRate;
