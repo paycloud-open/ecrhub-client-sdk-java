@@ -37,7 +37,7 @@ public class SerialPortEngine {
     private final BlockingQueue<byte[]> outQueue;
     private Thread writeThread;
 
-    private final FIFOCache<String, String> MSG_CACHE = new FIFOCache<>(30, 15 * 60 * 1000);
+    private final FIFOCache<String, String> MSG_CACHE = new FIFOCache<>(20, 10 * 60 * 1000);
 
     public SerialPortEngine(String portName, SerialPortConfig config) throws ECRHubException {
         this.config = config;
@@ -111,7 +111,7 @@ public class SerialPortEngine {
                 break;
             } else {
                 log.info("Handshake failed");
-                ThreadUtil.safeSleep(100);
+                ThreadUtil.safeSleep(10);
                 if (System.currentTimeMillis() - startTime > timeout) {
                     throw new ECRHubTimeoutException("Handshake connection timeout");
                 }
@@ -130,10 +130,10 @@ public class SerialPortEngine {
 
         // read handshake confirm packet
         byte[] buffer = new byte[0];
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             int bytesAvailable = serialPort.bytesAvailable();
             if (bytesAvailable <= 0) {
-                ThreadUtil.safeSleep(100);
+                ThreadUtil.safeSleep(20);
             } else {
                 buffer = new byte[bytesAvailable];
                 serialPort.readBytes(buffer, buffer.length);
@@ -193,7 +193,7 @@ public class SerialPortEngine {
                 MSG_CACHE.remove(msgId);
                 return HexUtil.hex2byte(msg);
             } else {
-                ThreadUtil.safeSleep(100);
+                ThreadUtil.safeSleep(20);
                 if (System.currentTimeMillis() - startTime > timeout) {
                     throw new ECRHubTimeoutException();
                 }
