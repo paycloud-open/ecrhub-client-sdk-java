@@ -1,5 +1,6 @@
 package com.wiseasy.ecr.hub.sdk.utils;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.net.NetUtil;
 
 import java.net.Inet4Address;
@@ -17,6 +18,28 @@ public class NetHelper {
             // ignore
         }
         return hostName;
+    }
+
+    public static InetAddress getSiteLocalAddress() {
+        LinkedHashSet<InetAddress> inetAddresses = NetUtil.localAddressList(null, inetAddress -> inetAddress instanceof Inet4Address && inetAddress.isSiteLocalAddress());
+        if (CollUtil.isEmpty(inetAddresses)) {
+            return NetUtil.getLocalhost();
+        }
+        for (InetAddress inetAddress : inetAddresses) {
+            return inetAddress;
+        }
+
+        return NetUtil.getLocalhost();
+    }
+
+    public static int getUsableLocalPort(int port) {
+        while (!NetUtil.isUsableLocalPort(port)) {
+            if (port >= NetUtil.PORT_RANGE_MAX) {
+                throw new IllegalArgumentException("The maximum port of 65535 cannot be exceeded");
+            }
+            port = port + 1;
+        }
+        return port;
     }
 
     public static String getLocalMacAddress() {

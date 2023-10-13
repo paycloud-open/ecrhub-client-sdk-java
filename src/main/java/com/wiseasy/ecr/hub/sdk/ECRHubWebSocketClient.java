@@ -26,6 +26,7 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
         } catch (URISyntaxException e) {
             throw new ECRHubException("ecrWebSocketClient error", e);
         }
+
     }
 
     @Override
