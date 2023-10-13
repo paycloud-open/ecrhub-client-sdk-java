@@ -39,9 +39,9 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     @Override
     public ECRHubResponse connect2() throws ECRHubException {
-        log.info("Connecting...");
         lock.lock();
         try {
+            log.info("Connecting...");
             long startTime = System.currentTimeMillis();
             int timeout = getConfig().getSerialPortConfig().getConnTimeout();
             if (!isConnected) {
@@ -49,7 +49,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
                 isConnected = true;
             }
             ECRHubResponse response = doPair(startTime, timeout);
-            isPaired = true;
+            isPaired = response.isSuccess();
             log.info("Connection successful");
             return response;
         } finally {
@@ -66,10 +66,12 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     public boolean disconnect() throws ECRHubException {
         lock.lock();
         try {
+            log.info("Disconnecting...");
             boolean isClosed = engine.close();
             if (isClosed) {
                 isConnected = false;
                 isPaired = false;
+                log.info("Disconnect successful");
             }
             return isClosed;
         } finally {
