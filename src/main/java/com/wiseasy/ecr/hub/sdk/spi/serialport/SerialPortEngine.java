@@ -130,10 +130,10 @@ public class SerialPortEngine {
 
         // read handshake confirm packet
         byte[] buffer = new byte[0];
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 100; i++) {
             int bytesAvailable = serialPort.bytesAvailable();
             if (bytesAvailable <= 0) {
-                ThreadUtil.safeSleep(20);
+                ThreadUtil.safeSleep(10);
             } else {
                 buffer = new byte[bytesAvailable];
                 serialPort.readBytes(buffer, buffer.length);
@@ -193,7 +193,7 @@ public class SerialPortEngine {
                 MSG_CACHE.remove(msgId);
                 return HexUtil.hex2byte(msg);
             } else {
-                ThreadUtil.safeSleep(20);
+                ThreadUtil.safeSleep(10);
                 if (System.currentTimeMillis() - startTime > timeout) {
                     throw new ECRHubTimeoutException();
                 }
