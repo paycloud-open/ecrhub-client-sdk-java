@@ -1,13 +1,14 @@
 package com.wiseasy.ecr.hub.sdk.model.request;
 
 import com.alibaba.fastjson2.annotation.JSONField;
+import com.wiseasy.ecr.hub.sdk.enums.ETopic;
 import com.wiseasy.ecr.hub.sdk.model.response.CloseResponse;
 
 public class CloseRequest extends ECRHubRequest<CloseResponse> {
 
     @Override
     public String getTopic() {
-        return "ecrhub.pay.close";
+        return ETopic.CLOSE_ORDER.getValue();
     }
 
     /**

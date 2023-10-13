@@ -1,11 +1,12 @@
 package com.wiseasy.ecr.hub.sdk;
 
+import cn.hutool.core.util.IdUtil;
+import com.wiseasy.ecr.hub.sdk.enums.ETopic;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
-import com.wiseasy.ecr.hub.sdk.model.request.PairRequest;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
-import com.wiseasy.ecr.hub.sdk.model.response.PairResponse;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
+import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
 import com.wiseasy.ecr.hub.sdk.spi.serialport.SerialPortEngine;
 import com.wiseasy.ecr.hub.sdk.spi.serialport.SerialPortPacket;
 import com.wiseasy.ecr.hub.sdk.utils.HexUtil;
@@ -33,6 +34,12 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     @Override
     public boolean connect() throws ECRHubException {
+        connect2();
+        return isConnected();
+    }
+
+    @Override
+    public ECRHubResponse connect2() throws ECRHubException {
         log.info("Connecting...");
         lock.lock();
         try {
@@ -42,14 +49,10 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
                 engine.connect(startTime, timeout);
                 isConnected = true;
             }
-            if (!isPaired) {
-                doPair(startTime, timeout);
-                isPaired = true;
-            }
-            if (isConnected && isPaired) {
-                log.info("Connection successful");
-            }
-            return true;
+            ECRHubResponse response = pair(startTime, timeout);
+            isPaired = true;
+            log.info("Connection successful");
+            return response;
         } finally {
             lock.unlock();
         }
@@ -75,34 +78,42 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         }
     }
 
-    protected void doPair(long startTime, int timeout) throws ECRHubException {
+    protected ECRHubResponse pair(long startTime, int timeout) throws ECRHubException {
         log.info("Start pairing");
-        PairRequest request = buildPairRequest();
-        byte[] msg = ECRHubProtobufHelper.pack(getConfig(), request);
-        byte[] pack = new SerialPortPacket.MsgPacket(msg).encode();
+        ECRHubRequestProto.ECRHubRequest request = buildPairRequest();
+        byte[] pack = new SerialPortPacket.MsgPacket(request.toByteArray()).encode();
         log.debug("Send pairing packet:{}", HexUtil.byte2hex(pack));
         engine.write(pack);
 
-        byte[] respPack = engine.read(request.getMsg_id(), startTime, timeout);
-        PairResponse response = decodeRespPack(respPack, request.getResponseClass());
+        byte[] respPack = engine.read(request.getMsgId(), startTime, timeout);
+        ECRHubResponse response = decodeRespPack(respPack, ECRHubResponse.class);
         if (response.isSuccess()) {
             log.info("Successful pairing");
+            return response;
         } else {
             log.error("Failed pairing: {}", response.getError_msg());
             throw new ECRHubException(response.getError_msg());
         }
     }
 
-    private PairRequest buildPairRequest() {
-        ECRHubConfig config = getConfig();
-        String deviceName = Optional.ofNullable(config.getDeviceName()).orElse(NetHelper.getLocalHostName());
-        String aliasName = Optional.ofNullable(config.getAliasName()).orElse(deviceName);
+    private ECRHubRequestProto.ECRHubRequest buildPairRequest() {
+        String deviceName = Optional.ofNullable(getConfig().getDeviceName()).orElse(NetHelper.getLocalHostName());
+        String aliasName = Optional.ofNullable(getConfig().getAliasName()).orElse(deviceName);
+        String macAddress = NetHelper.getLocalMacAddress();
 
-        PairRequest request = new PairRequest();
-        request.setDevice_name(deviceName);
-        request.setAlias_name(aliasName);
-        request.setMac_address(NetHelper.getLocalMacAddress());
-        return request;
+        ECRHubRequestProto.RequestPairData pairData = ECRHubRequestProto.RequestPairData.newBuilder()
+                .setDeviceName(deviceName)
+                .setAliasName(aliasName)
+                .setMacAddress(macAddress)
+                .build();
+
+        return ECRHubRequestProto.ECRHubRequest.newBuilder()
+                .setTimestamp(String.valueOf(System.currentTimeMillis()))
+                .setMsgId(IdUtil.fastSimpleUUID())
+                .setAppId(getConfig().getAppId())
+                .setTopic(ETopic.PAIR.getValue())
+                .setPairData(pairData)
+                .build();
     }
 
     @Override

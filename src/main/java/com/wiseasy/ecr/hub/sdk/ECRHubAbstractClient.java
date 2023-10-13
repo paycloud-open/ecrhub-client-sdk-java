@@ -31,6 +31,11 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
     }
 
     @Override
+    public ECRHubResponse connect2() throws ECRHubException {
+        return null;
+    }
+
+    @Override
     public <T extends ECRHubResponse> T execute(ECRHubRequest<T> request) throws ECRHubException {
         sendReq(request);
 
@@ -80,10 +85,17 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
             return null;
         }
 
+        ECRHubResponseProto.ResponseDeviceData deviceInfo = respProto.getDeviceData();
+        ECRHubResponse.DeviceData deviceData = new ECRHubResponse.DeviceData();
+        deviceData.setDevice_sn(deviceInfo.getDeviceSn());
+        deviceData.setApp_name(deviceInfo.getAppName());
+        deviceData.setApp_version(deviceInfo.getAppVersion());
+
         T resp = bizDataJson.toJavaObject(respClass);
         resp.setMsg_id(respProto.getMsgId());
         resp.setSuccess(respProto.getSuccess());
         resp.setError_msg(respProto.getErrorMsg());
+        resp.setDevice_data(deviceData);
         return resp;
     }
 }

@@ -1,13 +1,14 @@
 package com.wiseasy.ecr.hub.sdk.model.request;
 
 import com.alibaba.fastjson2.annotation.JSONField;
+import com.wiseasy.ecr.hub.sdk.enums.ETopic;
 import com.wiseasy.ecr.hub.sdk.model.response.QueryResponse;
 
 public class QueryRequest extends ECRHubRequest<QueryResponse> {
 
     @Override
     public String getTopic() {
-        return "ecrhub.pay.query";
+        return ETopic.QUERY_ORDER.getValue();
     }
 
     /**

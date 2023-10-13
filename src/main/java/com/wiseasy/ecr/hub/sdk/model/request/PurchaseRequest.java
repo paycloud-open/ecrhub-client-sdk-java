@@ -1,6 +1,7 @@
 package com.wiseasy.ecr.hub.sdk.model.request;
 
 import com.alibaba.fastjson2.annotation.JSONField;
+import com.wiseasy.ecr.hub.sdk.enums.ETopic;
 import com.wiseasy.ecr.hub.sdk.enums.ETransType;
 import com.wiseasy.ecr.hub.sdk.model.response.PurchaseResponse;
 
@@ -8,7 +9,7 @@ public class PurchaseRequest extends ECRHubRequest<PurchaseResponse> {
 
     @Override
     public String getTopic() {
-        return "ecrhub.pay.order";
+        return ETopic.PAY_ORDER.getValue();
     }
 
     /**

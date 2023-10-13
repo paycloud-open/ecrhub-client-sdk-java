@@ -19,6 +19,11 @@ public abstract class ECRHubResponse {
      */
     @JSONField(name = "errorMsg")
     private String error_msg;
+    /**
+     * Device data object
+     */
+    @JSONField(name = "deviceData")
+    private DeviceData device_data;
 
     public String getMsg_id() {
         return msg_id;
@@ -42,6 +47,59 @@ public abstract class ECRHubResponse {
 
     public void setError_msg(String error_msg) {
         this.error_msg = error_msg;
+    }
+
+    public DeviceData getDevice_data() {
+        return device_data;
+    }
+
+    public void setDevice_data(DeviceData device_data) {
+        this.device_data = device_data;
+    }
+
+    /**
+     * Device data object
+     */
+    public static class DeviceData {
+        /**
+         * Device SN
+         */
+        @JSONField(name = "deviceSn")
+        private String device_sn;
+        /**
+         * App name
+         */
+        @JSONField(name = "appName")
+        private String app_name;
+        /**
+         * App version
+         */
+        @JSONField(name = "appVersion")
+        private String app_version;
+
+        public String getDevice_sn() {
+            return device_sn;
+        }
+
+        public void setDevice_sn(String device_sn) {
+            this.device_sn = device_sn;
+        }
+
+        public String getApp_name() {
+            return app_name;
+        }
+
+        public void setApp_name(String app_name) {
+            this.app_name = app_name;
+        }
+
+        public String getApp_version() {
+            return app_version;
+        }
+
+        public void setApp_version(String app_version) {
+            this.app_version = app_version;
+        }
     }
 
     @Override
