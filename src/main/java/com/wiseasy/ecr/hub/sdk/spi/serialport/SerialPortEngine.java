@@ -113,7 +113,7 @@ public class SerialPortEngine {
                 log.info("Handshake failed");
                 ThreadUtil.safeSleep(100);
                 if (System.currentTimeMillis() - startTime > timeout) {
-                    throw new ECRHubTimeoutException("Connection timeout");
+                    throw new ECRHubTimeoutException("Handshake connection timeout");
                 }
             }
         }

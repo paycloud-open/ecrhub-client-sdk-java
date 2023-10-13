@@ -6,19 +6,18 @@ import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
 import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
+import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse.DeviceData;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData;
+import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData;
 
 public abstract class ECRHubAbstractClient implements ECRHubClient {
-
-    private static final Logger log = LoggerFactory.getLogger(ECRHubAbstractClient.class);
 
     /**
      * Default synchronous read data timeout (milliseconds)
      */
-    public static final long DEF_READ_TIMEOUT = 5 * 60 * 1000;
+    protected static final long DEF_READ_TIMEOUT = 5 * 60 * 1000;
 
     private final ECRHubConfig config;
 
@@ -63,39 +62,25 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
 
     protected abstract <T extends ECRHubResponse> T getResp(ECRHubRequest<T> request) throws ECRHubException;
 
-    protected <T extends ECRHubResponse> T decodeRespPack(byte[] respPack, Class<T> respClass) {
+    protected <T extends ECRHubResponse> T decodeRespPack(byte[] respPack, Class<T> respClass) throws ECRHubException {
         if (respPack == null || respPack.length == 0) {
             return null;
+        } else {
+            ECRHubResponseProto.ECRHubResponse respProto = ECRHubProtobufHelper.unpack(respPack);
+
+            ResponseDeviceData deviceData = respProto.getDeviceData();
+            JSONObject deviceDataJson = ECRHubProtobufHelper.proto2Json(deviceData);
+            DeviceData device = deviceDataJson.toJavaObject(DeviceData.class);
+
+            ResponseBizData bizData = respProto.getBizData();
+            JSONObject bizDataJson = ECRHubProtobufHelper.proto2Json(bizData);
+
+            T resp = bizDataJson.toJavaObject(respClass);
+            resp.setMsg_id(respProto.getMsgId());
+            resp.setSuccess(respProto.getSuccess());
+            resp.setError_msg(respProto.getErrorMsg());
+            resp.setDevice_data(device);
+            return resp;
         }
-
-        ECRHubResponseProto.ECRHubResponse respProto = null;
-        try {
-            respProto = ECRHubProtobufHelper.unpack(respPack);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return null;
-        }
-
-        ECRHubResponseProto.ResponseBizData bizData = respProto.getBizData();
-        JSONObject bizDataJson = null;
-        try {
-            bizDataJson = ECRHubProtobufHelper.proto2Json(bizData);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return null;
-        }
-
-        ECRHubResponseProto.ResponseDeviceData deviceInfo = respProto.getDeviceData();
-        ECRHubResponse.DeviceData deviceData = new ECRHubResponse.DeviceData();
-        deviceData.setDevice_sn(deviceInfo.getDeviceSn());
-        deviceData.setApp_name(deviceInfo.getAppName());
-        deviceData.setApp_version(deviceInfo.getAppVersion());
-
-        T resp = bizDataJson.toJavaObject(respClass);
-        resp.setMsg_id(respProto.getMsgId());
-        resp.setSuccess(respProto.getSuccess());
-        resp.setError_msg(respProto.getErrorMsg());
-        resp.setDevice_data(deviceData);
-        return resp;
     }
 }

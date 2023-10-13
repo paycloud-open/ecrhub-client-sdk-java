@@ -120,18 +120,15 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         String aliasName = Optional.ofNullable(getConfig().getAliasName()).orElse(deviceName);
         String macAddress = NetHelper.getLocalMacAddress();
 
-        ECRHubRequestProto.RequestPairData pairData = ECRHubRequestProto.RequestPairData.newBuilder()
-                .setDeviceName(deviceName)
-                .setAliasName(aliasName)
-                .setMacAddress(macAddress)
-                .build();
-
         return ECRHubRequestProto.ECRHubRequest.newBuilder()
                 .setTimestamp(String.valueOf(System.currentTimeMillis()))
                 .setMsgId(IdUtil.fastSimpleUUID())
-                .setAppId(getConfig().getAppId())
                 .setTopic(ETopic.PAIR.getValue())
-                .setPairData(pairData)
+                .setPairData(ECRHubRequestProto.RequestPairData.newBuilder()
+                            .setDeviceName(deviceName)
+                            .setAliasName(aliasName)
+                            .setMacAddress(macAddress)
+                            .build())
                 .build();
     }
 }
