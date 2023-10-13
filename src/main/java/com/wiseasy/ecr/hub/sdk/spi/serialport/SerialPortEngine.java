@@ -96,7 +96,7 @@ public class SerialPortEngine {
         if (!serialPort.isOpen()) {
             serialPort.setComPortParameters(config.getBaudRate(), config.getDataBits(), config.getStopBits(), config.getParity());
             serialPort.setComPortTimeouts(config.getTimeoutMode(), config.getReadTimeout(), config.getWriteTimeout());
-            if (serialPort.openPort(100)) {
+            if (serialPort.openPort()) {
                 log.info("Successful open the serial port:{}", serialPort.getSystemPortName());
             } else {
                 throw new ECRHubException("Failed to open the serial port:" + serialPort.getSystemPortName());
@@ -129,12 +129,16 @@ public class SerialPortEngine {
         }
 
         // read handshake confirm packet
-        ThreadUtil.safeSleep(1000);
         byte[] buffer = new byte[0];
-        int bytesAvailable = serialPort.bytesAvailable();
-        if (bytesAvailable > 0) {
-            buffer = new byte[bytesAvailable];
-            serialPort.readBytes(buffer, buffer.length);
+        for (int i = 0; i < 10; i++) {
+            int bytesAvailable = serialPort.bytesAvailable();
+            if (bytesAvailable <= 0) {
+                ThreadUtil.safeSleep(100);
+            } else {
+                buffer = new byte[bytesAvailable];
+                serialPort.readBytes(buffer, buffer.length);
+                break;
+            }
         }
 
         // decode handshake confirm packet
@@ -189,7 +193,7 @@ public class SerialPortEngine {
                 MSG_CACHE.remove(msgId);
                 return HexUtil.hex2byte(msg);
             } else {
-                ThreadUtil.safeSleep(200);
+                ThreadUtil.safeSleep(100);
                 if (System.currentTimeMillis() - startTime > timeout) {
                     throw new ECRHubTimeoutException();
                 }

@@ -64,7 +64,7 @@ public class WebSocketClientEngine extends WebSocketClient {
                 MSG_CACHE.remove(msgId);
                 return msg;
             } else {
-                ThreadUtil.safeSleep(200);
+                ThreadUtil.safeSleep(100);
                 if (System.currentTimeMillis() - before > timeout) {
                     throw new ECRHubTimeoutException();
                 }
