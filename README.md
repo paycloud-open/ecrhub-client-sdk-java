@@ -105,4 +105,6 @@ request.setPay_method_category("BANKCARD");
 PurchaseResponse response = client.execute(request);
 System.out.println("Purchase Response:" + response);
 
+// Close connect
+client.disconnect();
 ```
