@@ -34,8 +34,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     @Override
     public boolean connect() throws ECRHubException {
-        connect2();
-        return isConnected();
+        return connect2().isSuccess();
     }
 
     @Override
@@ -49,7 +48,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
                 engine.connect(startTime, timeout);
                 isConnected = true;
             }
-            ECRHubResponse response = pair(startTime, timeout);
+            ECRHubResponse response = doPair(startTime, timeout);
             isPaired = true;
             log.info("Connection successful");
             return response;
@@ -78,7 +77,27 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         }
     }
 
-    protected ECRHubResponse pair(long startTime, int timeout) throws ECRHubException {
+    @Override
+    protected void sendReq(ECRHubRequest request) throws ECRHubException {
+        if (!isConnected()) {
+            throw new ECRHubException("The serial port is not connected.");
+        }
+        byte[] msg = ECRHubProtobufHelper.pack(getConfig(), request);
+        byte[] pack = new SerialPortPacket.MsgPacket(msg).encode();
+        log.debug("Send data packet:{}", HexUtil.byte2hex(pack));
+        engine.write(pack);
+    }
+
+    @Override
+    protected <T extends ECRHubResponse> T getResp(ECRHubRequest<T> request) throws ECRHubException {
+        ECRHubConfig config = request.getConfig();
+        long timeout = config != null ? config.getSerialPortConfig().getReadTimeout() : DEF_READ_TIMEOUT;
+        long startTime = System.currentTimeMillis();
+        byte[] respPack = engine.read(request.getMsg_id(), startTime, timeout);
+        return decodeRespPack(respPack, request.getResponseClass());
+    }
+
+    private ECRHubResponse doPair(long startTime, int timeout) throws ECRHubException {
         log.info("Start pairing");
         ECRHubRequestProto.ECRHubRequest request = buildPairRequest();
         byte[] pack = new SerialPortPacket.MsgPacket(request.toByteArray()).encode();
@@ -114,25 +133,5 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
                 .setTopic(ETopic.PAIR.getValue())
                 .setPairData(pairData)
                 .build();
-    }
-
-    @Override
-    protected void sendReq(ECRHubRequest request) throws ECRHubException {
-        if (!isConnected()) {
-            throw new ECRHubException("The serial port is not connected.");
-        }
-        byte[] msg = ECRHubProtobufHelper.pack(getConfig(), request);
-        byte[] pack = new SerialPortPacket.MsgPacket(msg).encode();
-        log.debug("Send data packet:{}", HexUtil.byte2hex(pack));
-        engine.write(pack);
-    }
-
-    @Override
-    protected <T extends ECRHubResponse> T getResp(ECRHubRequest<T> request) throws ECRHubException {
-        ECRHubConfig config = request.getConfig();
-        long timeout = config != null ? config.getSerialPortConfig().getReadTimeout() : DEF_READ_TIMEOUT;
-        long startTime = System.currentTimeMillis();
-        byte[] respPack = engine.read(request.getMsg_id(), startTime, timeout);
-        return decodeRespPack(respPack, request.getResponseClass());
     }
 }
