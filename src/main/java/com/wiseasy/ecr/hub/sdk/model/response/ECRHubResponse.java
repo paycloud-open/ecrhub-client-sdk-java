@@ -3,7 +3,7 @@ package com.wiseasy.ecr.hub.sdk.model.response;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.annotation.JSONField;
 
-public abstract class ECRHubResponse {
+public class ECRHubResponse {
     /**
      * Message ID, used to receive the corresponding response. The caller needs to remain unique.
      */
