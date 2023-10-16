@@ -97,7 +97,7 @@ public class SerialPortEngine {
         if (!serialPort.isOpen()) {
             serialPort.setComPortParameters(config.getBaudRate(), config.getDataBits(), config.getStopBits(), config.getParity());
             serialPort.setComPortTimeouts(config.getTimeoutMode(), config.getReadTimeout(), config.getWriteTimeout());
-            if (serialPort.openPort()) {
+            if (serialPort.openPort(5)) {
                 log.info("Successful open the serial port name:{}", serialPort.getSystemPortName());
             } else {
                 log.error("Failed to open the serial port name:{}", serialPort.getSystemPortName());
@@ -112,9 +112,9 @@ public class SerialPortEngine {
                 log.info("Handshake successful");
                 break;
             } else {
-                log.info("Handshake failed");
                 ThreadUtil.safeSleep(10);
                 if (System.currentTimeMillis() - startTime > timeout) {
+                    log.error("Handshake failed");
                     throw new ECRHubTimeoutException("Handshake connection timeout");
                 }
             }
@@ -126,7 +126,6 @@ public class SerialPortEngine {
         byte[] msg = new SerialPortPacket.HandshakePacket().encode();
         int numWritten = serialPort.writeBytes(msg, msg.length);
         if (numWritten <= 0) {
-            log.error("Send handshake packet failed");
             return false;
         }
 
