@@ -8,8 +8,14 @@ import org.java_websocket.WebSocket;
  */
 public interface WebSocketClientListener {
 
-    void onOpen(WebSocket socket);
+    default void onOpen(WebSocket socket) {
 
-    void onClose(WebSocket socket, int code, String reason, boolean remote);
+    }
+
+    default void onClose(WebSocket socket, int code, String reason, boolean remote) {
+
+    }
+
+    void onMessage(WebSocket conn, String message);
 
 }

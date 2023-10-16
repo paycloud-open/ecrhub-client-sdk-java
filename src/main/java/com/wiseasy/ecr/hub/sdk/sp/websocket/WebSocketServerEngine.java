@@ -1,14 +1,10 @@
 package com.wiseasy.ecr.hub.sdk.sp.websocket;
 
 import cn.hutool.cache.impl.FIFOCache;
-import cn.hutool.core.codec.Base64;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.StrUtil;
-import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
-import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
-import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto;
 import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
@@ -18,14 +14,10 @@ import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
 
 public class WebSocketServerEngine extends WebSocketServer {
 
     private boolean running = false;
-
-    private final FIFOCache<String, String> MSG_CACHE = new FIFOCache<>(20, 10 * 60 * 1000);
-
     private static final Logger log = LoggerFactory.getLogger(WebSocketServerEngine.class);
 
     private WebSocketClientListener clientListener;
@@ -52,7 +44,7 @@ public class WebSocketServerEngine extends WebSocketServer {
 
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        log.info("socket open success: {}", conn.getRemoteSocketAddress());
+        log.debug("socket open success: {}", conn.getRemoteSocketAddress());
         if (null != clientListener) {
             clientListener.onOpen(conn);
         }
@@ -60,7 +52,7 @@ public class WebSocketServerEngine extends WebSocketServer {
 
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-        log.info("socket onClose. code: {},reason:{},remote:{}", code, reason, remote);
+        log.debug("socket onClose. code: {},reason:{},remote:{}", code, reason, remote);
         if (null != clientListener) {
             clientListener.onClose(conn, code, reason, remote);
         }
@@ -68,15 +60,10 @@ public class WebSocketServerEngine extends WebSocketServer {
 
     @Override
     public void onMessage(WebSocket conn, String message) {
-        byte[] bytes = message.getBytes(StandardCharsets.UTF_8);
-        log.info("onMessage:{}", Base64.encode(bytes));
-        ECRHubResponseProto.ECRHubResponse respProto;
-        try {
-            respProto = ECRHubProtobufHelper.unpack(bytes);
-        } catch (ECRHubException e) {
-            throw new RuntimeException(e);
+        log.debug("socket onMessage. {}", message);
+        if (null != clientListener) {
+            clientListener.onMessage(conn, message);
         }
-        MSG_CACHE.put(respProto.getMsgId(), message);
     }
 
     @Override
@@ -96,19 +83,4 @@ public class WebSocketServerEngine extends WebSocketServer {
         running = false;
     }
 
-    public String receive(String msgId, long timeout) throws ECRHubTimeoutException {
-        long before = System.currentTimeMillis();
-        while (true) {
-            String msg = MSG_CACHE.get(msgId);
-            if (StrUtil.isNotBlank(msg)) {
-                MSG_CACHE.remove(msgId);
-                return msg;
-            } else {
-                ThreadUtil.safeSleep(200);
-                if (System.currentTimeMillis() - before > timeout) {
-                    throw new ECRHubTimeoutException();
-                }
-            }
-        }
-    }
 }
