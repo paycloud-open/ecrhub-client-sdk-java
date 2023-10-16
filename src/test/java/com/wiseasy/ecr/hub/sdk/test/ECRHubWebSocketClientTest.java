@@ -14,7 +14,6 @@ import com.wiseasy.ecr.hub.sdk.model.response.CloseResponse;
 import com.wiseasy.ecr.hub.sdk.model.response.PurchaseResponse;
 import com.wiseasy.ecr.hub.sdk.model.response.QueryResponse;
 import com.wiseasy.ecr.hub.sdk.model.response.RefundResponse;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,11 +32,6 @@ public class ECRHubWebSocketClientTest {
     public static void before() throws ECRHubException {
         client = ECRHubClientFactory.create("ws://192.168.100.30:35779");
         client.connect(); // Must
-    }
-
-    @AfterAll
-    public static void after() throws ECRHubException {
-        client.disconnect(); // Must
     }
 
     @Test

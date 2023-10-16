@@ -14,7 +14,6 @@ import com.wiseasy.ecr.hub.sdk.model.response.CloseResponse;
 import com.wiseasy.ecr.hub.sdk.model.response.PurchaseResponse;
 import com.wiseasy.ecr.hub.sdk.model.response.QueryResponse;
 import com.wiseasy.ecr.hub.sdk.model.response.RefundResponse;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,11 +30,6 @@ public class ECRHubSerialPortClientTest {
     public static void before() throws ECRHubException {
         client = ECRHubClientFactory.create("sp://" + SERIAL_PORT_NAME);
         client.connect(); // Must
-    }
-
-    @AfterAll
-    public static void after() throws ECRHubException {
-        client.disconnect(); // Must
     }
 
     @Test
