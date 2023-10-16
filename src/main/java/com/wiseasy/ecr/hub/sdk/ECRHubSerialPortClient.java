@@ -7,8 +7,8 @@ import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
-import com.wiseasy.ecr.hub.sdk.spi.serialport.SerialPortEngine;
-import com.wiseasy.ecr.hub.sdk.spi.serialport.SerialPortPacket;
+import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortEngine;
+import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortPacket;
 import com.wiseasy.ecr.hub.sdk.utils.HexUtil;
 import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
 import org.slf4j.Logger;
@@ -22,10 +22,9 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     private static final Logger log = LoggerFactory.getLogger(ECRHubSerialPortClient.class);
 
+    private volatile boolean isConnected = false;
     private final Lock lock = new ReentrantLock();
     private final SerialPortEngine engine;
-    private volatile boolean isConnected = false;
-    private volatile boolean isPaired = false;
 
     public ECRHubSerialPortClient(String port, ECRHubConfig config) throws ECRHubException {
         super(config);
@@ -42,14 +41,14 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         lock.lock();
         try {
             log.info("Connecting...");
+
             long startTime = System.currentTimeMillis();
             int timeout = getConfig().getSerialPortConfig().getConnTimeout();
-            if (!isConnected) {
-                engine.connect(startTime, timeout);
-                isConnected = true;
-            }
-            ECRHubResponse response = doPair(startTime, timeout);
-            isPaired = response.isSuccess();
+            engine.connect(startTime, timeout);
+
+            ECRHubResponse response = pair(startTime, timeout);
+            isConnected = response.isSuccess();
+
             log.info("Connection successful");
             return response;
         } finally {
@@ -59,7 +58,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     @Override
     public boolean isConnected() throws ECRHubException {
-        return isConnected && isPaired;
+        return engine.isOpen() && isConnected;
     }
 
     @Override
@@ -70,7 +69,6 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
             boolean isClosed = engine.close();
             if (isClosed) {
                 isConnected = false;
-                isPaired = false;
                 log.info("Disconnect successful");
             }
             return isClosed;
@@ -99,7 +97,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         return decodeRespPack(respPack, request.getResponseClass());
     }
 
-    private ECRHubResponse doPair(long startTime, int timeout) throws ECRHubException {
+    private ECRHubResponse pair(long startTime, int timeout) throws ECRHubException {
         log.info("Start pairing");
         ECRHubRequestProto.ECRHubRequest request = buildPairRequest();
         byte[] pack = new SerialPortPacket.MsgPacket(request.toByteArray()).encode();

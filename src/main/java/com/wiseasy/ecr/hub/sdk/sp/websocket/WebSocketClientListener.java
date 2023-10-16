@@ -1,4 +1,4 @@
-package com.wiseasy.ecr.hub.sdk.spi.websocket;
+package com.wiseasy.ecr.hub.sdk.sp.websocket;
 
 import org.java_websocket.WebSocket;
 

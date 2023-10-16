@@ -1,4 +1,4 @@
-package com.wiseasy.ecr.hub.sdk.spi.websocket;
+package com.wiseasy.ecr.hub.sdk.sp.websocket;
 
 import cn.hutool.cache.impl.FIFOCache;
 import cn.hutool.core.codec.Base64;

@@ -95,6 +95,10 @@ public class ECRHubConfig {
      */
     public static class SerialPortConfig {
         /**
+         * SerialPort name tag
+         */
+        private String portNameTag = "GPS";
+        /**
          * Baud rate
          */
         private int baudRate = 115200;
@@ -131,6 +135,14 @@ public class ECRHubConfig {
          * Connection timeout (milliseconds)
          */
         private int connTimeout = 180 * 1000;
+
+        public String getPortNameTag() {
+            return portNameTag;
+        }
+
+        public void setPortNameTag(String portNameTag) {
+            this.portNameTag = portNameTag;
+        }
 
         public int getBaudRate() {
             return baudRate;

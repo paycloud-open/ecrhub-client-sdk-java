@@ -5,7 +5,7 @@ import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
-import com.wiseasy.ecr.hub.sdk.spi.websocket.WebSocketClientEngine;
+import com.wiseasy.ecr.hub.sdk.sp.websocket.WebSocketClientEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

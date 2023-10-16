@@ -1,4 +1,4 @@
-package com.wiseasy.ecr.hub.sdk.spi.serialport;
+package com.wiseasy.ecr.hub.sdk.sp.serialport;
 
 import com.wiseasy.ecr.hub.sdk.utils.HexUtil;
 import org.slf4j.Logger;

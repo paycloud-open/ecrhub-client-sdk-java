@@ -1,4 +1,4 @@
-package com.wiseasy.ecr.hub.sdk.spi.serialport;
+package com.wiseasy.ecr.hub.sdk.sp.serialport;
 
 import cn.hutool.cache.impl.FIFOCache;
 import cn.hutool.core.thread.ThreadUtil;
@@ -29,42 +29,40 @@ public class SerialPortEngine {
 
     private static final Logger log = LoggerFactory.getLogger(SerialPortEngine.class);
 
-    private static final String PORT_NAME_TAG = "GPS";
     private final SerialPortConfig config;
     private final SerialPort serialPort;
     private final SerialPortPacketDecoder packDecoder;
 
-    private final BlockingQueue<byte[]> outQueue;
+    private final BlockingQueue<byte[]> writeQueue;
     private Thread writeThread;
 
     private final FIFOCache<String, String> MSG_CACHE = new FIFOCache<>(20, 10 * 60 * 1000);
 
     public SerialPortEngine(String portName, SerialPortConfig config) throws ECRHubException {
         this.config = config;
-        this.serialPort = getCommPort(portName);
+        this.serialPort = getSerialPort(portName);
         this.packDecoder = new SerialPortPacketDecoder();
-        this.outQueue = new LinkedBlockingQueue<>();
+        this.writeQueue = new LinkedBlockingQueue<>();
     }
 
-    public SerialPort getCommPort(String portName) throws ECRHubException {
-        SerialPort serialPort = null;
-        if (StrUtil.isBlank(portName)) {
-            serialPort = findSerialPort(PORT_NAME_TAG);
-            if (serialPort == null) {
-                throw new ECRHubException("The serial port cannot be empty.");
-            }
-        } else {
+    private SerialPort getSerialPort(String portName) throws ECRHubException {
+        if (StrUtil.isNotBlank(portName)) {
+            // Specify the serial port name
             try {
-                serialPort = SerialPort.getCommPort(portName);
+                return SerialPort.getCommPort(portName);
             } catch (Exception e) {
-                log.error("The serial port[{}] is invalid.", portName);
+                log.error("The serial port name[{}] is invalid.", portName);
                 throw new ECRHubException(e);
             }
+        } else {
+            // No serial port name specified, automatic search for serial port
+            SerialPort port = findSerialPort(config.getPortNameTag());
+            if (port != null) {
+                return port;
+            } else {
+                throw new ECRHubException("The serial port name cannot be empty.");
+            }
         }
-        if (serialPort.isOpen()) {
-            throw new ECRHubException("The serial port[" + portName + "] is already used.");
-        }
-        return serialPort;
     }
 
     private SerialPort findSerialPort(String portNameTag) {
@@ -79,32 +77,36 @@ public class SerialPortEngine {
 
     public void connect(long startTime, int timeout) throws ECRHubException {
         // Open serial port
-        doOpen();
+        open();
 
         // Handshake
-        doHandshake(startTime, timeout);
+        handshake(startTime, timeout);
 
         // Add data listener
+        serialPort.removeDataListener();
         serialPort.addDataListener(new ReadListener());
 
         // Start Write Thread
-        writeThread = new Thread(new WriteThread());
-        writeThread.start();
+        if (writeThread == null) {
+            writeThread = new Thread(new WriteThread());
+            writeThread.start();
+        }
     }
 
-    private void doOpen() throws ECRHubException {
+    private void open() throws ECRHubException {
         if (!serialPort.isOpen()) {
             serialPort.setComPortParameters(config.getBaudRate(), config.getDataBits(), config.getStopBits(), config.getParity());
             serialPort.setComPortTimeouts(config.getTimeoutMode(), config.getReadTimeout(), config.getWriteTimeout());
             if (serialPort.openPort()) {
-                log.info("Successful open the serial port:{}", serialPort.getSystemPortName());
+                log.info("Successful open the serial port name:{}", serialPort.getSystemPortName());
             } else {
-                throw new ECRHubException("Failed to open the serial port:" + serialPort.getSystemPortName());
+                log.error("Failed to open the serial port name:{}", serialPort.getSystemPortName());
+                throw new ECRHubException("Failed to open the serial port name:" + serialPort.getSystemPortName());
             }
         }
     }
 
-    private void doHandshake(long startTime, int timeout) throws ECRHubException {
+    private void handshake(long startTime, int timeout) throws ECRHubException {
         while (true) {
             if (doHandshake()) {
                 log.info("Handshake successful");
@@ -174,13 +176,13 @@ public class SerialPortEngine {
 
     public void safeWrite(byte[] bytes) {
         if (isOpen()) {
-            outQueue.add(bytes);
+            writeQueue.add(bytes);
         }
     }
 
     public void write(byte[] bytes) throws ECRHubException {
         if (isOpen()) {
-            outQueue.add(bytes);
+            writeQueue.add(bytes);
         } else {
             throw new ECRHubException("The serial port is not opened.");
         }
@@ -207,11 +209,11 @@ public class SerialPortEngine {
             Thread.currentThread().setName("SerialPortWriteThread-" + Thread.currentThread().getId());
             try {
                 while (!Thread.interrupted()) {
-                    byte[] bytes = outQueue.take();
+                    byte[] bytes = writeQueue.take();
                     serialPort.writeBytes(bytes, bytes.length);
                 }
             } catch (InterruptedException e) {
-                for (byte[] bytes : outQueue) {
+                for (byte[] bytes : writeQueue) {
                     serialPort.writeBytes(bytes, bytes.length);
                 }
                 Thread.currentThread().interrupt();
