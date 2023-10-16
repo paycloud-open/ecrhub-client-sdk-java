@@ -43,7 +43,7 @@ public class WebSocketServerEngine extends WebSocketServer {
     }
 
     public WebSocketServerEngine(int port) {
-        this(NetHelper.getSiteLocalAddress(), NetHelper.getUsableLocalPort(port));
+        this(NetHelper.getLocalhost(), NetHelper.getUsableLocalPort(port));
     }
 
     public WebSocketServerEngine(InetAddress siteLocalAddress, int port) {

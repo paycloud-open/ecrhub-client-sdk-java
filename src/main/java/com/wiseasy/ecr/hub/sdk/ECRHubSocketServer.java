@@ -101,7 +101,7 @@ public class ECRHubSocketServer extends ECRHubAbstractServer implements WebSocke
         boolean registerMDNS = socketServerConfig.isRegisterMDNS();
         if (registerMDNS) {
             try {
-                InetAddress siteLocalAddress = NetHelper.getSiteLocalAddress();
+                InetAddress siteLocalAddress = NetHelper.getLocalhost();
                 jmDNS = JmDNS.create(siteLocalAddress);
                 JSONObject info = new JSONObject();
                 info.put("mac_address", NetUtil.getMacAddress(siteLocalAddress));

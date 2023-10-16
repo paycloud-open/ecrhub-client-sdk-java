@@ -1,6 +1,5 @@
 package com.wiseasy.ecr.hub.sdk.utils;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.net.NetUtil;
 
 import java.net.Inet4Address;
@@ -10,28 +9,6 @@ import java.util.LinkedHashSet;
 
 public class NetHelper {
 
-    public static String getLocalHostName() {
-        String hostName = null;
-        try {
-            hostName = InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e) {
-            // ignore
-        }
-        return hostName;
-    }
-
-    public static InetAddress getSiteLocalAddress() {
-        LinkedHashSet<InetAddress> inetAddresses = NetUtil.localAddressList(null, inetAddress -> inetAddress instanceof Inet4Address && inetAddress.isSiteLocalAddress());
-        if (CollUtil.isEmpty(inetAddresses)) {
-            return NetUtil.getLocalhost();
-        }
-        for (InetAddress inetAddress : inetAddresses) {
-            return inetAddress;
-        }
-
-        return NetUtil.getLocalhost();
-    }
-
     public static int getUsableLocalPort(int port) {
         while (!NetUtil.isUsableLocalPort(port)) {
             if (port >= NetUtil.PORT_RANGE_MAX) {
@@ -40,6 +17,16 @@ public class NetHelper {
             port = port + 1;
         }
         return port;
+    }
+
+    public static String getLocalHostName() {
+        String hostName = null;
+        try {
+            hostName = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            // ignore
+        }
+        return hostName;
     }
 
     public static String getLocalMacAddress() {
@@ -64,6 +51,6 @@ public class NetHelper {
                 return address;
             }
         }
-        return null;
+        return NetUtil.getLocalhost();
     }
 }
