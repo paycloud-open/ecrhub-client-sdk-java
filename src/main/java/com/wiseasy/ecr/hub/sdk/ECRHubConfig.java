@@ -20,11 +20,6 @@ public class ECRHubConfig {
      */
     private SocketConfig socketConfig = new SocketConfig();
 
-    /**
-     * Socket Server Configuration
-     */
-    private SocketServerConfig socketServerConfig = new SocketServerConfig();
-
     public ECRHubConfig() {
     }
 
@@ -65,13 +60,6 @@ public class ECRHubConfig {
         this.socketConfig = socketConfig;
     }
 
-    public SocketServerConfig getSocketServerConfig() {
-        return socketServerConfig;
-    }
-
-    public void setSocketServerConfig(SocketServerConfig socketServerConfig) {
-        this.socketServerConfig = socketServerConfig;
-    }
 
     /**
      * Serial Port Configuration
@@ -222,49 +210,5 @@ public class ECRHubConfig {
         }
     }
 
-    public static class SocketServerConfig {
-
-        public static final int DEFAULT_PORT = 35000;
-
-
-        /**
-         * Receive timeout (milliseconds)
-         */
-        private int receiveTimeOut = 5 * 60 * 1000;
-
-        /**
-         * port
-         */
-        private int port = DEFAULT_PORT;
-
-        /**
-         * Whether you need to register the service to MDNS
-         */
-        private boolean registerMDNS = true;
-
-        public int getPort() {
-            return port;
-        }
-
-        public void setPort(int port) {
-            this.port = port;
-        }
-
-        public boolean isRegisterMDNS() {
-            return registerMDNS;
-        }
-
-        public void setRegisterMDNS(boolean registerMDNS) {
-            this.registerMDNS = registerMDNS;
-        }
-
-        public int getReceiveTimeOut() {
-            return receiveTimeOut;
-        }
-
-        public void setReceiveTimeOut(int receiveTimeOut) {
-            this.receiveTimeOut = receiveTimeOut;
-        }
-    }
 
 }

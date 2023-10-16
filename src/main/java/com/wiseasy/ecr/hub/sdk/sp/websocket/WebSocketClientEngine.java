@@ -56,8 +56,7 @@ public class WebSocketClientEngine extends WebSocketClient {
         MSG_CACHE.put(respProto.getMsgId(), message);
     }
 
-    public String receive(String msgId, long timeout) throws ECRHubTimeoutException {
-        long before = System.currentTimeMillis();
+    public String receive(String msgId,long startTime, long timeout) throws ECRHubTimeoutException {
         while (true) {
             String msg = MSG_CACHE.get(msgId);
             if (StrUtil.isNotBlank(msg)) {
@@ -65,7 +64,7 @@ public class WebSocketClientEngine extends WebSocketClient {
                 return msg;
             } else {
                 ThreadUtil.safeSleep(10);
-                if (System.currentTimeMillis() - before > timeout) {
+                if (System.currentTimeMillis() - startTime > timeout) {
                     throw new ECRHubTimeoutException();
                 }
             }
