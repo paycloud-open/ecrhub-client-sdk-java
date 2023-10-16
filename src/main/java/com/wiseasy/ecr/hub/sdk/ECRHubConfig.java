@@ -4,17 +4,13 @@ import com.fazecast.jSerialComm.SerialPort;
 
 public class ECRHubConfig {
     /**
-     * Device name
+     * Host name
      */
-    private String deviceName;
+    private String hostName;
     /**
-     * Device alias name
+     * Host alias name
      */
     private String aliasName;
-    /**
-     * Payment Application Id
-     */
-    private String appId;
     /**
      * Serial Port Configuration
      */
@@ -32,22 +28,17 @@ public class ECRHubConfig {
     public ECRHubConfig() {
     }
 
-    public ECRHubConfig(String appId) {
-        this.appId = appId;
-    }
-
-    public ECRHubConfig(String appId, String deviceName, String aliasName) {
-        this.appId = appId;
-        this.deviceName = deviceName;
+    public ECRHubConfig(String hostName, String aliasName) {
+        this.hostName = hostName;
         this.aliasName = aliasName;
     }
 
-    public String getDeviceName() {
-        return deviceName;
+    public String getHostName() {
+        return hostName;
     }
 
-    public void setDeviceName(String deviceName) {
-        this.deviceName = deviceName;
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
     }
 
     public String getAliasName() {
@@ -56,14 +47,6 @@ public class ECRHubConfig {
 
     public void setAliasName(String aliasName) {
         this.aliasName = aliasName;
-    }
-
-    public String getAppId() {
-        return appId;
-    }
-
-    public void setAppId(String appId) {
-        this.appId = appId;
     }
 
     public SerialPortConfig getSerialPortConfig() {

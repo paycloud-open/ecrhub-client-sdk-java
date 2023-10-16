@@ -26,7 +26,6 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
         } catch (URISyntaxException e) {
             throw new ECRHubException("ecrWebSocketClient error", e);
         }
-
     }
 
     @Override
@@ -66,7 +65,7 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
 
     @Override
     protected void sendReq(ECRHubRequest request) throws ECRHubException {
-        byte[] msg = ECRHubProtobufHelper.pack(getConfig(), request);
+        byte[] msg = ECRHubProtobufHelper.pack(request);
         engine.send(new String(msg));
     }
 

@@ -28,7 +28,7 @@ public class ECRHubSocketServerTest {
 
     @BeforeAll
     public static void before() throws ECRHubException {
-        ECRHubConfig config = new ECRHubConfig(APP_ID);
+        ECRHubConfig config = new ECRHubConfig();
         config.getSocketServerConfig().setRegisterMDNS(true);
         client = ECRHubServerFactory.createSocketServer(config);
 
@@ -57,9 +57,11 @@ public class ECRHubSocketServerTest {
     public void purchase() throws ECRHubException {
         // Setting read timeout,the timeout set here is valid for this request
         ECRHubConfig requestConfig = new ECRHubConfig();
+        requestConfig.getSocketConfig().setSocketTimeout(5 * 60 * 1000);
 
         // Purchase
         PurchaseRequest request = new PurchaseRequest();
+        request.setApp_id(APP_ID);
         request.setMerchant_order_no("O" + System.currentTimeMillis());
         request.setOrder_amount("10");
         request.setPay_method_category("BANKCARD");

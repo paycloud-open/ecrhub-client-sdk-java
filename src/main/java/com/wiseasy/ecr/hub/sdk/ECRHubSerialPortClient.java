@@ -82,7 +82,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         if (!isConnected()) {
             throw new ECRHubException("The serial port is not connected.");
         }
-        byte[] msg = ECRHubProtobufHelper.pack(getConfig(), request);
+        byte[] msg = ECRHubProtobufHelper.pack(request);
         byte[] pack = new SerialPortPacket.MsgPacket(msg).encode();
         log.debug("Send data packet:{}", HexUtil.byte2hex(pack));
         engine.write(pack);
@@ -116,8 +116,8 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     }
 
     private ECRHubRequestProto.ECRHubRequest buildPairRequest() {
-        String deviceName = Optional.ofNullable(getConfig().getDeviceName()).orElse(NetHelper.getLocalHostName());
-        String aliasName = Optional.ofNullable(getConfig().getAliasName()).orElse(deviceName);
+        String hostName = Optional.ofNullable(getConfig().getHostName()).orElse(NetHelper.getLocalHostName());
+        String aliasName = Optional.ofNullable(getConfig().getAliasName()).orElse(hostName);
         String macAddress = NetHelper.getLocalMacAddress();
 
         return ECRHubRequestProto.ECRHubRequest.newBuilder()
@@ -125,7 +125,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
                 .setMsgId(IdUtil.fastSimpleUUID())
                 .setTopic(ETopic.PAIR.getValue())
                 .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
-                            .setDeviceName(deviceName)
+                            .setDeviceName(hostName)
                             .setAliasName(aliasName)
                             .setMacAddress(macAddress)
                             .build())

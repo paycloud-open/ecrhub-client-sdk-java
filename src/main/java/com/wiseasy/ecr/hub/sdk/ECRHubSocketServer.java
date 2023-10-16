@@ -167,7 +167,7 @@ public class ECRHubSocketServer extends ECRHubAbstractServer implements WebSocke
             throw new ECRHubException("The terminal is closed and the device needs to be reconnected");
         }
         WebSocket socket = terminal.getSocket();
-        byte[] msg = ECRHubProtobufHelper.pack(getConfig(), request);
+        byte[] msg = ECRHubProtobufHelper.pack(request);
         socket.send(new String(msg));
     }
 

@@ -14,6 +14,7 @@ import com.wiseasy.ecr.hub.sdk.model.response.CloseResponse;
 import com.wiseasy.ecr.hub.sdk.model.response.PurchaseResponse;
 import com.wiseasy.ecr.hub.sdk.model.response.QueryResponse;
 import com.wiseasy.ecr.hub.sdk.model.response.RefundResponse;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,9 +29,13 @@ public class ECRHubSerialPortClientTest {
 
     @BeforeAll
     public static void before() throws ECRHubException {
-        ECRHubConfig config = new ECRHubConfig(APP_ID);
-        client = ECRHubClientFactory.create("sp://" + SERIAL_PORT_NAME, config);
+        client = ECRHubClientFactory.create("sp://" + SERIAL_PORT_NAME);
         client.connect(); // Must
+    }
+
+    @AfterAll
+    public static void after() throws ECRHubException {
+        client.disconnect(); // Must
     }
 
     @Test
@@ -42,6 +47,7 @@ public class ECRHubSerialPortClientTest {
 
         // Purchase
         PurchaseRequest request = new PurchaseRequest();
+        request.setApp_id(APP_ID);
         request.setMerchant_order_no("O" + System.currentTimeMillis());
         request.setOrder_amount("10");
         request.setPay_method_category("BANKCARD");
@@ -57,6 +63,7 @@ public class ECRHubSerialPortClientTest {
     public void purchase_async() throws ECRHubException {
         // Purchase
         PurchaseRequest request = new PurchaseRequest();
+        request.setApp_id(APP_ID);
         request.setMerchant_order_no("O" + System.currentTimeMillis());
         request.setOrder_amount("10");
         request.setTip_amount("2");
@@ -86,6 +93,7 @@ public class ECRHubSerialPortClientTest {
     @DisplayName("refund")
     public void refund() throws ECRHubException {
         RefundRequest request = new RefundRequest();
+        request.setApp_id(APP_ID);
         request.setOrig_merchant_order_no("O1695032342508");
         request.setMerchant_order_no("O" + System.currentTimeMillis());
         request.setOrder_amount("1");
@@ -99,6 +107,7 @@ public class ECRHubSerialPortClientTest {
     @DisplayName("closeOrder")
     public void closeOrder() throws ECRHubException {
         CloseRequest request = new CloseRequest();
+        request.setApp_id(APP_ID);
         request.setMerchant_order_no("O1695032342508");
 
         CloseResponse response = client.execute(request);
@@ -109,6 +118,7 @@ public class ECRHubSerialPortClientTest {
     @DisplayName("queryOrder")
     public void queryOrder() throws ECRHubException {
         QueryRequest request = new QueryRequest();
+        request.setApp_id(APP_ID);
         request.setMerchant_order_no("O1695032342508");
 
         QueryResponse response = client.execute(request);

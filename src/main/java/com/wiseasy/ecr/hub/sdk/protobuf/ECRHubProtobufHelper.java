@@ -4,7 +4,6 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.google.protobuf.MessageOrBuilder;
 import com.google.protobuf.util.JsonFormat;
-import com.wiseasy.ecr.hub.sdk.ECRHubConfig;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
 import org.slf4j.Logger;
@@ -14,15 +13,14 @@ public class ECRHubProtobufHelper {
 
     private static final Logger log = LoggerFactory.getLogger(ECRHubProtobufHelper.class);
 
-    public static byte[] pack(ECRHubConfig config, ECRHubRequest request) throws ECRHubException {
+    public static byte[] pack(ECRHubRequest request) throws ECRHubException {
         return ECRHubRequestProto.ECRHubRequest.newBuilder()
                 .setTimestamp(String.valueOf(System.currentTimeMillis()))
                 .setMsgId(request.getMsg_id())
                 .setVersion(request.getVersion())
-                .setAppId(config.getAppId())
+                .setAppId(request.getApp_id())
                 .setTopic(request.getTopic())
                 .setBizData(buildBizData(request))
-                .setDeviceData(buildDeviceData(request))
                 .setVoiceData(buildVoiceData(request))
                 .setPrinterData(buildPrintData(request))
                 .setNotifyData(buildNotifyData(request))
@@ -56,17 +54,6 @@ public class ECRHubProtobufHelper {
         } catch (Exception e) {
             log.error("Build BizData Error:", e);
             throw new ECRHubException("Build BizData Error:", e);
-        }
-    }
-
-    public static ECRHubRequestProto.RequestDeviceData buildDeviceData(ECRHubRequest request) throws ECRHubException {
-        try {
-            ECRHubRequestProto.RequestDeviceData.Builder builder = ECRHubRequestProto.RequestDeviceData.newBuilder();
-            JsonFormat.parser().ignoringUnknownFields().merge(JSON.toJSONString(request.getDevice_data()), builder);
-            return builder.build();
-        } catch (Exception e) {
-            log.error("Build DeviceData Error:", e);
-            throw new ECRHubException("Build DeviceData Error:", e);
         }
     }
 

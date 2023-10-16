@@ -21,10 +21,9 @@ public abstract class ECRHubRequest<T extends ECRHubResponse> {
     @JSONField(name = "version")
     private String version = "1.0";
     /**
-     * Device data object
+     * Payment Application Id
      */
-    @JSONField(name = "deviceData")
-    private DeviceData device_data = new DeviceData();
+    private String app_id;
     /**
      * Voice data object
      */
@@ -78,12 +77,12 @@ public abstract class ECRHubRequest<T extends ECRHubResponse> {
         this.version = version;
     }
 
-    public DeviceData getDevice_data() {
-        return device_data;
+    public String getApp_id() {
+        return app_id;
     }
 
-    public void setDevice_data(DeviceData device_data) {
-        this.device_data = device_data;
+    public void setApp_id(String app_id) {
+        this.app_id = app_id;
     }
 
     public VoiceData getVoice_data() {
@@ -108,72 +107,6 @@ public abstract class ECRHubRequest<T extends ECRHubResponse> {
 
     public void setNotify_data(NotifyData notify_data) {
         this.notify_data = notify_data;
-    }
-
-    /**
-     * Device data object
-     */
-    public static class DeviceData {
-        /**
-         * Device name
-         */
-        private String device_name;
-        /**
-         * Device alias name
-         */
-        private String alias_name;
-        /**
-         * Device mac address
-         */
-        private String mac_address;
-        /**
-         * Device ip address
-         */
-        private String ip_address;
-        /**
-         * Device port number
-         */
-        private String port;
-
-        public String getDevice_name() {
-            return device_name;
-        }
-
-        public void setDevice_name(String device_name) {
-            this.device_name = device_name;
-        }
-
-        public String getAlias_name() {
-            return alias_name;
-        }
-
-        public void setAlias_name(String alias_name) {
-            this.alias_name = alias_name;
-        }
-
-        public String getMac_address() {
-            return mac_address;
-        }
-
-        public void setMac_address(String mac_address) {
-            this.mac_address = mac_address;
-        }
-
-        public String getIp_address() {
-            return ip_address;
-        }
-
-        public void setIp_address(String ip_address) {
-            this.ip_address = ip_address;
-        }
-
-        public String getPort() {
-            return port;
-        }
-
-        public void setPort(String port) {
-            this.port = port;
-        }
     }
 
     /**
