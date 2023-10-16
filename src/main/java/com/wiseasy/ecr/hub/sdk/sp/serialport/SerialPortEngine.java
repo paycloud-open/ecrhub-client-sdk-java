@@ -162,6 +162,8 @@ public class SerialPortEngine {
             writeThread.interrupt();
             writeThread = null;
         }
+        // Remove Data Listener
+        serialPort.removeDataListener();
         // Close Port
         if (serialPort.isOpen()) {
             return serialPort.closePort();
