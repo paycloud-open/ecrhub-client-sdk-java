@@ -56,7 +56,7 @@ public class SerialPortEngine {
             }
         } else {
             // No serial port name specified, automatic search for serial port
-            SerialPort port = findSerialPort(config.getPortNameTag());
+            SerialPort port = findSerialPort(config.getPortNameKeyword());
             if (port != null) {
                 return port;
             } else {
@@ -65,10 +65,10 @@ public class SerialPortEngine {
         }
     }
 
-    private SerialPort findSerialPort(String portNameTag) {
+    private SerialPort findSerialPort(String portNameKeyword) {
         for (SerialPort port : SerialPort.getCommPorts()) {
             String portName = port.getDescriptivePortName();
-            if (StrUtil.contains(portName, portNameTag)) {
+            if (StrUtil.contains(portName, portNameKeyword)) {
                 return port;
             }
         }

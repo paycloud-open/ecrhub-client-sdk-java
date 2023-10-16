@@ -97,7 +97,7 @@ public class ECRHubConfig {
         /**
          * SerialPort name tag
          */
-        private String portNameTag = "GPS";
+        private String portNameKeyword = "GPS";
         /**
          * Baud rate
          */
@@ -136,12 +136,12 @@ public class ECRHubConfig {
          */
         private int connTimeout = 180 * 1000;
 
-        public String getPortNameTag() {
-            return portNameTag;
+        public String getPortNameKeyword() {
+            return portNameKeyword;
         }
 
-        public void setPortNameTag(String portNameTag) {
-            this.portNameTag = portNameTag;
+        public void setPortNameKeyword(String portNameKeyword) {
+            this.portNameKeyword = portNameKeyword;
         }
 
         public int getBaudRate() {
