@@ -124,7 +124,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
                 .setTimestamp(String.valueOf(System.currentTimeMillis()))
                 .setMsgId(IdUtil.fastSimpleUUID())
                 .setTopic(ETopic.PAIR.getValue())
-                .setPairData(ECRHubRequestProto.RequestPairData.newBuilder()
+                .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
                             .setDeviceName(deviceName)
                             .setAliasName(aliasName)
                             .setMacAddress(macAddress)

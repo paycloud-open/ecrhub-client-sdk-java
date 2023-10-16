@@ -21,6 +21,11 @@ public abstract class ECRHubRequest<T extends ECRHubResponse> {
     @JSONField(name = "version")
     private String version = "1.0";
     /**
+     * Device data object
+     */
+    @JSONField(name = "deviceData")
+    private DeviceData device_data = new DeviceData();
+    /**
      * Voice data object
      */
     @JSONField(name = "voiceData")
@@ -35,7 +40,9 @@ public abstract class ECRHubRequest<T extends ECRHubResponse> {
      */
     @JSONField(name = "notifyData")
     private NotifyData notify_data = new NotifyData();
-
+    /**
+     * Request config object
+     */
     private ECRHubConfig config;
 
     public Class<T> getResponseClass() {
@@ -71,6 +78,14 @@ public abstract class ECRHubRequest<T extends ECRHubResponse> {
         this.version = version;
     }
 
+    public DeviceData getDevice_data() {
+        return device_data;
+    }
+
+    public void setDevice_data(DeviceData device_data) {
+        this.device_data = device_data;
+    }
+
     public VoiceData getVoice_data() {
         return voice_data;
     }
@@ -93,6 +108,72 @@ public abstract class ECRHubRequest<T extends ECRHubResponse> {
 
     public void setNotify_data(NotifyData notify_data) {
         this.notify_data = notify_data;
+    }
+
+    /**
+     * Device data object
+     */
+    public static class DeviceData {
+        /**
+         * Device name
+         */
+        private String device_name;
+        /**
+         * Device alias name
+         */
+        private String alias_name;
+        /**
+         * Device mac address
+         */
+        private String mac_address;
+        /**
+         * Device ip address
+         */
+        private String ip_address;
+        /**
+         * Device port number
+         */
+        private String port;
+
+        public String getDevice_name() {
+            return device_name;
+        }
+
+        public void setDevice_name(String device_name) {
+            this.device_name = device_name;
+        }
+
+        public String getAlias_name() {
+            return alias_name;
+        }
+
+        public void setAlias_name(String alias_name) {
+            this.alias_name = alias_name;
+        }
+
+        public String getMac_address() {
+            return mac_address;
+        }
+
+        public void setMac_address(String mac_address) {
+            this.mac_address = mac_address;
+        }
+
+        public String getIp_address() {
+            return ip_address;
+        }
+
+        public void setIp_address(String ip_address) {
+            this.ip_address = ip_address;
+        }
+
+        public String getPort() {
+            return port;
+        }
+
+        public void setPort(String port) {
+            this.port = port;
+        }
     }
 
     /**
@@ -228,7 +309,6 @@ public abstract class ECRHubRequest<T extends ECRHubResponse> {
         public void setSound(String sound) {
             this.sound = sound;
         }
-
     }
 
     @Override

@@ -22,6 +22,7 @@ public class ECRHubProtobufHelper {
                 .setAppId(config.getAppId())
                 .setTopic(request.getTopic())
                 .setBizData(buildBizData(request))
+                .setDeviceData(buildDeviceData(request))
                 .setVoiceData(buildVoiceData(request))
                 .setPrinterData(buildPrintData(request))
                 .setNotifyData(buildNotifyData(request))
@@ -55,6 +56,17 @@ public class ECRHubProtobufHelper {
         } catch (Exception e) {
             log.error("Build BizData Error:", e);
             throw new ECRHubException("Build BizData Error:", e);
+        }
+    }
+
+    public static ECRHubRequestProto.RequestDeviceData buildDeviceData(ECRHubRequest request) throws ECRHubException {
+        try {
+            ECRHubRequestProto.RequestDeviceData.Builder builder = ECRHubRequestProto.RequestDeviceData.newBuilder();
+            JsonFormat.parser().ignoringUnknownFields().merge(JSON.toJSONString(request.getDevice_data()), builder);
+            return builder.build();
+        } catch (Exception e) {
+            log.error("Build DeviceData Error:", e);
+            throw new ECRHubException("Build DeviceData Error:", e);
         }
     }
 
