@@ -1,17 +1,23 @@
 package com.wiseasy.ecr.hub.sdk;
 
 import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSONObject;
+import com.wiseasy.ecr.hub.sdk.enums.ETopic;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
 import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse.DeviceData;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
+import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData;
+import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
+
+import java.util.Optional;
 
 public abstract class ECRHubAbstractClient implements ECRHubClient {
 
@@ -63,9 +69,38 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
         });
     }
 
-    protected abstract void sendReq(ECRHubRequest request) throws ECRHubException;
+    protected abstract byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime, int timeout) throws ECRHubException;
+
+    protected abstract <T extends ECRHubResponse> void sendReq(ECRHubRequest<T> request) throws ECRHubException;
 
     protected abstract <T extends ECRHubResponse> T getResp(ECRHubRequest<T> request) throws ECRHubException;
+
+    protected ECRHubResponse pair(long startTime, int timeout) throws ECRHubException {
+        byte[] pack = sendPairReq(buildPairRequest(), startTime, timeout);
+        ECRHubResponse response = decodeRespPack(pack, ECRHubResponse.class);
+        if (response.isSuccess()) {
+            return response;
+        } else {
+            throw new ECRHubException(response.getError_msg());
+        }
+    }
+
+    protected ECRHubRequestProto.ECRHubRequest buildPairRequest() {
+        String hostName = Optional.ofNullable(getConfig().getHostName()).orElse(NetHelper.getLocalHostName());
+        String aliasName = Optional.ofNullable(getConfig().getAliasName()).orElse(hostName);
+        String macAddress = NetHelper.getLocalMacAddress();
+
+        return ECRHubRequestProto.ECRHubRequest.newBuilder()
+                .setTimestamp(String.valueOf(System.currentTimeMillis()))
+                .setMsgId(IdUtil.fastSimpleUUID())
+                .setTopic(ETopic.PAIR.getValue())
+                .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
+                            .setDeviceName(hostName)
+                            .setAliasName(aliasName)
+                            .setMacAddress(macAddress)
+                            .build())
+                .build();
+    }
 
     protected <T extends ECRHubResponse> T decodeRespPack(byte[] respPack, Class<T> respClass) throws ECRHubException {
         if (respPack == null || respPack.length == 0) {

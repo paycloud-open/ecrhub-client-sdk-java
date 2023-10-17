@@ -1,7 +1,5 @@
 package com.wiseasy.ecr.hub.sdk;
 
-import cn.hutool.core.util.IdUtil;
-import com.wiseasy.ecr.hub.sdk.enums.ETopic;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
@@ -9,11 +7,9 @@ import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
 import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortEngine;
 import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortPacket;
-import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -77,6 +73,13 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     }
 
     @Override
+    protected byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime, int timeout) throws ECRHubException {
+        SerialPortPacket pack = new SerialPortPacket.MsgPacket(request.toByteArray());
+        engine.addQueue(pack);
+        return engine.read(request.getMsgId(), startTime, timeout);
+    }
+
+    @Override
     protected void sendReq(ECRHubRequest request) throws ECRHubException {
         if (!isConnected()) {
             throw new ECRHubException("The serial port is not connected.");
@@ -91,43 +94,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     protected <T extends ECRHubResponse> T getResp(ECRHubRequest<T> request) throws ECRHubException {
         ECRHubConfig config = request.getConfig();
         long timeout = config != null ? config.getSerialPortConfig().getReadTimeout() : DEF_READ_TIMEOUT;
-        long startTime = System.currentTimeMillis();
-        byte[] respPack = engine.read(request.getMsg_id(), startTime, timeout);
+        byte[] respPack = engine.read(request.getMsg_id(), System.currentTimeMillis(), timeout);
         return decodeRespPack(respPack, request.getResponseClass());
-    }
-
-    private ECRHubResponse pair(long startTime, int timeout) throws ECRHubException {
-        log.info("Start pairing");
-        ECRHubRequestProto.ECRHubRequest request = buildPairRequest();
-        SerialPortPacket pack = new SerialPortPacket.MsgPacket(request.toByteArray());
-        log.debug("Send data packet:\n{}", pack);
-        engine.addQueue(pack);
-
-        byte[] respPack = engine.read(request.getMsgId(), startTime, timeout);
-        ECRHubResponse response = decodeRespPack(respPack, ECRHubResponse.class);
-        if (response.isSuccess()) {
-            log.info("Successful pairing");
-            return response;
-        } else {
-            log.error("Failed pairing: {}", response.getError_msg());
-            throw new ECRHubException(response.getError_msg());
-        }
-    }
-
-    private ECRHubRequestProto.ECRHubRequest buildPairRequest() {
-        String hostName = Optional.ofNullable(getConfig().getHostName()).orElse(NetHelper.getLocalHostName());
-        String aliasName = Optional.ofNullable(getConfig().getAliasName()).orElse(hostName);
-        String macAddress = NetHelper.getLocalMacAddress();
-
-        return ECRHubRequestProto.ECRHubRequest.newBuilder()
-                .setTimestamp(String.valueOf(System.currentTimeMillis()))
-                .setMsgId(IdUtil.fastSimpleUUID())
-                .setTopic(ETopic.PAIR.getValue())
-                .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
-                            .setDeviceName(hostName)
-                            .setAliasName(aliasName)
-                            .setMacAddress(macAddress)
-                            .build())
-                .build();
     }
 }

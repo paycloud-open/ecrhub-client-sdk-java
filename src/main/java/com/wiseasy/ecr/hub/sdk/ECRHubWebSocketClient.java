@@ -1,8 +1,5 @@
 package com.wiseasy.ecr.hub.sdk;
 
-import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.IdUtil;
-import com.wiseasy.ecr.hub.sdk.enums.ETopic;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
 import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
@@ -10,14 +7,11 @@ import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
 import com.wiseasy.ecr.hub.sdk.sp.websocket.WebSocketClientEngine;
-import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class ECRHubWebSocketClient extends ECRHubAbstractClient {
@@ -32,64 +26,36 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
         super(config);
         try {
             this.engine = new WebSocketClientEngine(new URI(url));
-        } catch (URISyntaxException e) {
+        } catch (Exception e) {
             throw new ECRHubException("ecrWebSocketClient error", e);
         }
     }
 
     @Override
     public boolean connect() throws ECRHubException {
-        connect2();
-        return connected;
+        return connect2().isSuccess();
     }
 
     @Override
     public ECRHubResponse connect2() throws ECRHubException {
         int connTimeout = getConfig().getSocketConfig().getConnTimeout();
+        log.info("Connecting...");
+
+        boolean success;
         try {
-            boolean b = engine.connectBlocking(connTimeout, TimeUnit.MILLISECONDS);
-            if (!b) {
-                throw new ECRHubException("connect failed");
-            }
+            success = engine.connectBlocking(connTimeout, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             throw new ECRHubTimeoutException();
         }
-        ECRHubResponse pair = pair(System.currentTimeMillis(), connTimeout);
-        connected = pair.isSuccess();
-        log.info("Connection successful");
-        return pair;
-    }
-
-    private ECRHubRequestProto.ECRHubRequest buildPairRequest() {
-        String hostName = Optional.ofNullable(getConfig().getHostName()).orElse(NetHelper.getLocalHostName());
-        String aliasName = Optional.ofNullable(getConfig().getAliasName()).orElse(hostName);
-        String macAddress = NetHelper.getLocalMacAddress();
-
-        return ECRHubRequestProto.ECRHubRequest.newBuilder()
-                .setTimestamp(String.valueOf(System.currentTimeMillis()))
-                .setMsgId(IdUtil.fastSimpleUUID())
-                .setTopic(ETopic.PAIR.getValue())
-                .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
-                        .setDeviceName(hostName)
-                        .setAliasName(aliasName)
-                        .setMacAddress(macAddress)
-                        .build())
-                .build();
-    }
-
-    private ECRHubResponse pair(long startTime, int timeout) throws ECRHubException {
-        log.info("Start pairing");
-        ECRHubRequestProto.ECRHubRequest request = buildPairRequest();
-        engine.send(new String(request.toByteArray()));
-        String receive = engine.receive(request.getMsgId(), startTime, timeout);
-        ECRHubResponse response = decodeRespPack(receive.getBytes(StandardCharsets.UTF_8), ECRHubResponse.class);
-        if (response.isSuccess()) {
-            log.info("Successful pairing");
-            return response;
-        } else {
-            log.error("Failed pairing: {}", response.getError_msg());
-            throw new ECRHubException(response.getError_msg());
+        if (!success) {
+            throw new ECRHubException("Connection failed");
         }
+
+        ECRHubResponse response = pair(System.currentTimeMillis(), connTimeout);
+        connected = response.isSuccess();
+        log.info("Connection successful");
+
+        return response;
     }
 
     @Override
@@ -106,6 +72,13 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
         } catch (InterruptedException e) {
             throw new ECRHubException("disconnect error", e);
         }
+    }
+
+    @Override
+    protected byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime, int timeout) throws ECRHubException {
+        engine.send(new String(request.toByteArray()));
+        String receive = engine.receive(request.getMsgId(), startTime, timeout);
+        return receive.getBytes(StandardCharsets.UTF_8);
     }
 
     @Override
