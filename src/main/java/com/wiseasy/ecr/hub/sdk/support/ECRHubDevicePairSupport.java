@@ -80,6 +80,7 @@ public class ECRHubDevicePairSupport implements WebSocketClientListener {
 
     private ECRHubDevicePairSupport() {
         this.engine = new WebSocketServerEngine();
+        this.engine.setClientListener(this);
     }
 
     public void setPairListener(PairListener listener) {
@@ -89,7 +90,6 @@ public class ECRHubDevicePairSupport implements WebSocketClientListener {
 
     @Override
     public void onMessage(WebSocket conn, String message) {
-
         ECRHubRequestProto.RequestDeviceData deviceData;
         ECRHubRequestProto.ECRHubRequest ecrHubRequest;
         try {
