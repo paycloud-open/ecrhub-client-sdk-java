@@ -80,7 +80,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     }
 
     @Override
-    protected void sendReq(ECRHubRequest request) throws ECRHubException {
+    protected <T extends ECRHubResponse> void sendReq(ECRHubRequest<T> request) throws ECRHubException {
         if (!isConnected()) {
             throw new ECRHubException("The serial port is not connected.");
         }
