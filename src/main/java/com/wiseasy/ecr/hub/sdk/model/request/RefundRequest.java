@@ -93,6 +93,22 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
      */
     @JSONField(name = "notifyUrl")
     private String notify_url;
+    /**
+     * Order need terminal confirmation. Default: true
+     * - true: Terminal confirmation is required;
+     * - false: No terminal confirmation is required.
+     *
+     * For example: true
+     */
+    @JSONField(name = "confirmOnTerminal")
+    private boolean confirm_on_terminal = true;
+    /**
+     * Order expires time, in seconds. Default to 300 seconds.
+     *
+     * For example: 300
+     */
+    @JSONField(name = "expires")
+    private String expires;
 
     public String getMerchant_order_no() {
         return merchant_order_no;
@@ -168,5 +184,21 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
 
     public void setNotify_url(String notify_url) {
         this.notify_url = notify_url;
+    }
+
+    public boolean isConfirm_on_terminal() {
+        return confirm_on_terminal;
+    }
+
+    public void setConfirm_on_terminal(boolean confirm_on_terminal) {
+        this.confirm_on_terminal = confirm_on_terminal;
+    }
+
+    public String getExpires() {
+        return expires;
+    }
+
+    public void setExpires(String expires) {
+        this.expires = expires;
     }
 }
