@@ -9,7 +9,6 @@ import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
 import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortEngine;
 import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortPacket;
-import com.wiseasy.ecr.hub.sdk.utils.HexUtil;
 import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,9 +82,8 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
             throw new ECRHubException("The serial port is not connected.");
         }
         byte[] msg = ECRHubProtobufHelper.pack(request);
-        byte[] pack = new SerialPortPacket.MsgPacket(msg).encode();
-        log.debug("Send data packet:{}", HexUtil.byte2hex(pack));
-        engine.write(pack);
+        SerialPortPacket pack = new SerialPortPacket.MsgPacket(msg);
+        engine.addQueue(pack);
     }
 
     @Override
@@ -100,9 +98,8 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     private ECRHubResponse pair(long startTime, int timeout) throws ECRHubException {
         log.info("Start pairing");
         ECRHubRequestProto.ECRHubRequest request = buildPairRequest();
-        byte[] pack = new SerialPortPacket.MsgPacket(request.toByteArray()).encode();
-        log.debug("Send pairing packet:{}", HexUtil.byte2hex(pack));
-        engine.write(pack);
+        SerialPortPacket pack = new SerialPortPacket.MsgPacket(request.toByteArray());
+        engine.addQueue(pack);
 
         byte[] respPack = engine.read(request.getMsgId(), startTime, timeout);
         ECRHubResponse response = decodeRespPack(respPack, ECRHubResponse.class);

@@ -161,6 +161,7 @@ public class SerialPortPacket {
         this.checkCode = pack[pack.length - 1 - endCodeLength];
         if (getCheckCode(checkDataBuffer) != checkCode) {
             // Faulty calibration packets are not handled
+            return null;
         } else {
             this.packType = pack[starCodeLength];
             this.ack = pack[starCodeLength + packetTypeLength];
@@ -171,9 +172,8 @@ public class SerialPortPacket {
             if (dataLen2 > 0) {
                 System.arraycopy(pack, headerLength, data, 0, dataLen2);
             }
+            return this;
         }
-
-        return this;
     }
 
     public SerialPortPacket decode(String hexPack) {
@@ -184,6 +184,39 @@ public class SerialPortPacket {
             log.warn("Decode Hex packet[{}] error:{}", hexPack, e);
         }
         return pack;
+    }
+
+    @Override
+    public String toString() {
+        int dataLength = data != null ? data.length : 0;
+        StringBuilder sb = new StringBuilder();
+        sb.append("PacketHead:");
+        sb.append(HexUtil.byte2hex(head));
+        sb.append("\n");
+        sb.append("PacketType:");
+        sb.append(HexUtil.byte2hex(packType));
+        sb.append("\n");
+        sb.append("       ACK:");
+        sb.append(HexUtil.byte2hex(ack));
+        sb.append("\n");
+        sb.append("    DataId:");
+        sb.append(HexUtil.byte2hex(id));
+        sb.append("\n");
+        sb.append("DataLength:");
+        sb.append(dataLength);
+        sb.append("\n");
+        if (dataLength > 0) {
+            sb.append("      Data:");
+            sb.append(HexUtil.byte2hex(data));
+            sb.append("\n");
+        }
+        sb.append(" CheckCode:");
+        sb.append(HexUtil.byte2hex(checkCode));
+        sb.append("\n");
+        sb.append("PacketTail:");
+        sb.append(HexUtil.byte2hex(end));
+        sb.append("\n");
+        return sb.toString();
     }
 
     /**

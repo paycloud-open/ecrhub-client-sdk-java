@@ -4439,6 +4439,39 @@ String defaultValue);
      */
     String getExtendsParamsOrThrow(
         String key);
+
+    /**
+     * <pre>
+     **
+     *confirm on terminal
+     * </pre>
+     *
+     * <code>bool confirm_on_terminal = 13;</code>
+     * @return The confirmOnTerminal.
+     */
+    boolean getConfirmOnTerminal();
+
+    /**
+     * <pre>
+     **
+     *order expire
+     * </pre>
+     *
+     * <code>string expires = 14;</code>
+     * @return The expires.
+     */
+    String getExpires();
+    /**
+     * <pre>
+     **
+     *order expire
+     * </pre>
+     *
+     * <code>string expires = 14;</code>
+     * @return The bytes for expires.
+     */
+    com.google.protobuf.ByteString
+        getExpiresBytes();
   }
   /**
    * Protobuf type {@code com.wiseasy.ecr.hub.sdk.protobuf.RequestBizData}
@@ -4464,6 +4497,7 @@ String defaultValue);
       description_ = "";
       notifyUrl_ = "";
       token_ = "";
+      expires_ = "";
     }
 
     @Override
@@ -5136,6 +5170,71 @@ String defaultValue) {
       return map.get(key);
     }
 
+    public static final int CONFIRM_ON_TERMINAL_FIELD_NUMBER = 13;
+    private boolean confirmOnTerminal_ = false;
+    /**
+     * <pre>
+     **
+     *confirm on terminal
+     * </pre>
+     *
+     * <code>bool confirm_on_terminal = 13;</code>
+     * @return The confirmOnTerminal.
+     */
+    @Override
+    public boolean getConfirmOnTerminal() {
+      return confirmOnTerminal_;
+    }
+
+    public static final int EXPIRES_FIELD_NUMBER = 14;
+    @SuppressWarnings("serial")
+    private volatile Object expires_ = "";
+    /**
+     * <pre>
+     **
+     *order expire
+     * </pre>
+     *
+     * <code>string expires = 14;</code>
+     * @return The expires.
+     */
+    @Override
+    public String getExpires() {
+      Object ref = expires_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        expires_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     **
+     *order expire
+     * </pre>
+     *
+     * <code>string expires = 14;</code>
+     * @return The bytes for expires.
+     */
+    @Override
+    public com.google.protobuf.ByteString
+        getExpiresBytes() {
+      Object ref = expires_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        expires_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @Override
     public final boolean isInitialized() {
@@ -5189,6 +5288,12 @@ String defaultValue) {
           internalGetExtendsParams(),
           ExtendsParamsDefaultEntryHolder.defaultEntry,
           12);
+      if (confirmOnTerminal_ != false) {
+        output.writeBool(13, confirmOnTerminal_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(expires_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, expires_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -5241,6 +5346,13 @@ String defaultValue) {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(12, extendsParams__);
       }
+      if (confirmOnTerminal_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(13, confirmOnTerminal_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(expires_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, expires_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
@@ -5280,6 +5392,10 @@ String defaultValue) {
           .equals(other.getToken())) return false;
       if (!internalGetExtendsParams().equals(
           other.internalGetExtendsParams())) return false;
+      if (getConfirmOnTerminal()
+          != other.getConfirmOnTerminal()) return false;
+      if (!getExpires()
+          .equals(other.getExpires())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -5317,6 +5433,11 @@ String defaultValue) {
         hash = (37 * hash) + EXTENDS_PARAMS_FIELD_NUMBER;
         hash = (53 * hash) + internalGetExtendsParams().hashCode();
       }
+      hash = (37 * hash) + CONFIRM_ON_TERMINAL_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getConfirmOnTerminal());
+      hash = (37 * hash) + EXPIRES_FIELD_NUMBER;
+      hash = (53 * hash) + getExpires().hashCode();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -5482,6 +5603,8 @@ String defaultValue) {
         notifyUrl_ = "";
         token_ = "";
         internalGetMutableExtendsParams().clear();
+        confirmOnTerminal_ = false;
+        expires_ = "";
         return this;
       }
 
@@ -5551,6 +5674,12 @@ String defaultValue) {
         if (((from_bitField0_ & 0x00000800) != 0)) {
           result.extendsParams_ = internalGetExtendsParams();
           result.extendsParams_.makeImmutable();
+        }
+        if (((from_bitField0_ & 0x00001000) != 0)) {
+          result.confirmOnTerminal_ = confirmOnTerminal_;
+        }
+        if (((from_bitField0_ & 0x00002000) != 0)) {
+          result.expires_ = expires_;
         }
       }
 
@@ -5656,6 +5785,14 @@ String defaultValue) {
         internalGetMutableExtendsParams().mergeFrom(
             other.internalGetExtendsParams());
         bitField0_ |= 0x00000800;
+        if (other.getConfirmOnTerminal() != false) {
+          setConfirmOnTerminal(other.getConfirmOnTerminal());
+        }
+        if (!other.getExpires().isEmpty()) {
+          expires_ = other.expires_;
+          bitField0_ |= 0x00002000;
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -5746,6 +5883,16 @@ String defaultValue) {
                 bitField0_ |= 0x00000800;
                 break;
               } // case 98
+              case 104: {
+                confirmOnTerminal_ = input.readBool();
+                bitField0_ |= 0x00001000;
+                break;
+              } // case 104
+              case 114: {
+                expires_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00002000;
+                break;
+              } // case 114
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -6989,6 +7136,150 @@ String defaultValue) {
         internalGetMutableExtendsParams().getMutableMap()
             .putAll(values);
         bitField0_ |= 0x00000800;
+        return this;
+      }
+
+      private boolean confirmOnTerminal_ ;
+      /**
+       * <pre>
+       **
+       *confirm on terminal
+       * </pre>
+       *
+       * <code>bool confirm_on_terminal = 13;</code>
+       * @return The confirmOnTerminal.
+       */
+      @Override
+      public boolean getConfirmOnTerminal() {
+        return confirmOnTerminal_;
+      }
+      /**
+       * <pre>
+       **
+       *confirm on terminal
+       * </pre>
+       *
+       * <code>bool confirm_on_terminal = 13;</code>
+       * @param value The confirmOnTerminal to set.
+       * @return This builder for chaining.
+       */
+      public Builder setConfirmOnTerminal(boolean value) {
+
+        confirmOnTerminal_ = value;
+        bitField0_ |= 0x00001000;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *confirm on terminal
+       * </pre>
+       *
+       * <code>bool confirm_on_terminal = 13;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearConfirmOnTerminal() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        confirmOnTerminal_ = false;
+        onChanged();
+        return this;
+      }
+
+      private Object expires_ = "";
+      /**
+       * <pre>
+       **
+       *order expire
+       * </pre>
+       *
+       * <code>string expires = 14;</code>
+       * @return The expires.
+       */
+      public String getExpires() {
+        Object ref = expires_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          expires_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *order expire
+       * </pre>
+       *
+       * <code>string expires = 14;</code>
+       * @return The bytes for expires.
+       */
+      public com.google.protobuf.ByteString
+          getExpiresBytes() {
+        Object ref = expires_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          expires_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *order expire
+       * </pre>
+       *
+       * <code>string expires = 14;</code>
+       * @param value The expires to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExpires(
+          String value) {
+        if (value == null) { throw new NullPointerException(); }
+        expires_ = value;
+        bitField0_ |= 0x00002000;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *order expire
+       * </pre>
+       *
+       * <code>string expires = 14;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearExpires() {
+        expires_ = getDefaultInstance().getExpires();
+        bitField0_ = (bitField0_ & ~0x00002000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *order expire
+       * </pre>
+       *
+       * <code>string expires = 14;</code>
+       * @param value The bytes for expires to set.
+       * @return This builder for chaining.
+       */
+      public Builder setExpiresBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        expires_ = value;
+        bitField0_ |= 0x00002000;
+        onChanged();
         return this;
       }
       @Override
@@ -10063,7 +10354,7 @@ String defaultValue) {
       "tobuf.RequestDeviceData\"s\n\021RequestDevice" +
       "Data\022\023\n\013mac_address\030\001 \001(\t\022\023\n\013device_name" +
       "\030\002 \001(\t\022\022\n\nalias_name\030\003 \001(\t\022\022\n\nip_address" +
-      "\030\004 \001(\t\022\014\n\004port\030\005 \001(\t\"\231\003\n\016RequestBizData\022" +
+      "\030\004 \001(\t\022\014\n\004port\030\005 \001(\t\"\307\003\n\016RequestBizData\022" +
       "\031\n\021merchant_order_no\030\001 \001(\t\022\036\n\026orig_merch" +
       "ant_order_no\030\002 \001(\t\022\026\n\016price_currency\030\003 \001" +
       "(\t\022\024\n\014order_amount\030\004 \001(\t\022\022\n\ntip_amount\030\005" +
@@ -10072,15 +10363,16 @@ String defaultValue) {
       "tion\030\t \001(\t\022\022\n\nnotify_url\030\n \001(\t\022\r\n\005token\030" +
       "\013 \001(\t\022[\n\016extends_params\030\014 \003(\0132C.com.wise" +
       "asy.ecr.hub.sdk.protobuf.RequestBizData." +
-      "ExtendsParamsEntry\0324\n\022ExtendsParamsEntry" +
-      "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"I\n\tVoic" +
-      "eData\022\017\n\007content\030\001 \001(\t\022\026\n\016content_locale" +
-      "\030\002 \001(\t\022\023\n\013content_url\030\003 \001(\t\"3\n\013PrinterDa" +
-      "ta\022\017\n\007content\030\001 \001(\t\022\023\n\013content_url\030\002 \001(\t" +
-      "\"K\n\nNotifyData\022\r\n\005title\030\001 \001(\t\022\014\n\004body\030\002 " +
-      "\001(\t\022\021\n\timage_url\030\003 \001(\t\022\r\n\005sound\030\004 \001(\tB6\n" +
-      " com.wiseasy.ecr.hub.sdk.protobufB\022ECRHu" +
-      "bRequestProtob\006proto3"
+      "ExtendsParamsEntry\022\033\n\023confirm_on_termina" +
+      "l\030\r \001(\010\022\017\n\007expires\030\016 \001(\t\0324\n\022ExtendsParam" +
+      "sEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"I" +
+      "\n\tVoiceData\022\017\n\007content\030\001 \001(\t\022\026\n\016content_" +
+      "locale\030\002 \001(\t\022\023\n\013content_url\030\003 \001(\t\"3\n\013Pri" +
+      "nterData\022\017\n\007content\030\001 \001(\t\022\023\n\013content_url" +
+      "\030\002 \001(\t\"K\n\nNotifyData\022\r\n\005title\030\001 \001(\t\022\014\n\004b" +
+      "ody\030\002 \001(\t\022\021\n\timage_url\030\003 \001(\t\022\r\n\005sound\030\004 " +
+      "\001(\tB6\n com.wiseasy.ecr.hub.sdk.protobufB" +
+      "\022ECRHubRequestProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -10103,7 +10395,7 @@ String defaultValue) {
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_RequestBizData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_RequestBizData_descriptor,
-        new String[] { "MerchantOrderNo", "OrigMerchantOrderNo", "PriceCurrency", "OrderAmount", "TipAmount", "TransType", "PayMethodCategory", "Attach", "Description", "NotifyUrl", "Token", "ExtendsParams", });
+        new String[] { "MerchantOrderNo", "OrigMerchantOrderNo", "PriceCurrency", "OrderAmount", "TipAmount", "TransType", "PayMethodCategory", "Attach", "Description", "NotifyUrl", "Token", "ExtendsParams", "ConfirmOnTerminal", "Expires", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_RequestBizData_ExtendsParamsEntry_descriptor =
       internal_static_com_wiseasy_ecr_hub_sdk_protobuf_RequestBizData_descriptor.getNestedTypes().get(0);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_RequestBizData_ExtendsParamsEntry_fieldAccessorTable = new
