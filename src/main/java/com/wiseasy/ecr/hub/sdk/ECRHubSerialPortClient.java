@@ -100,6 +100,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         log.info("Start pairing");
         ECRHubRequestProto.ECRHubRequest request = buildPairRequest();
         SerialPortPacket pack = new SerialPortPacket.MsgPacket(request.toByteArray());
+        log.debug("Send data packet:\n{}", pack);
         engine.addQueue(pack);
 
         byte[] respPack = engine.read(request.getMsgId(), startTime, timeout);
