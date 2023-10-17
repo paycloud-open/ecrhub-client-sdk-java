@@ -37,11 +37,6 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
     }
 
     @Override
-    public ECRHubResponse connect2() throws ECRHubException {
-        return null;
-    }
-
-    @Override
     public <T extends ECRHubResponse> T execute(ECRHubRequest<T> request) throws ECRHubException {
         if (StrUtil.isBlank(request.getApp_id())) {
             throw new ECRHubException("AppId cannot be empty.");
