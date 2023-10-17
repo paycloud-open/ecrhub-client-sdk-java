@@ -86,8 +86,8 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
     }
 
     protected ECRHubRequestProto.ECRHubRequest buildPairRequest() {
-        String hostName = Optional.ofNullable(getConfig().getHostName()).orElse(NetHelper.getLocalHostName());
-        String aliasName = Optional.ofNullable(getConfig().getAliasName()).orElse(hostName);
+        String hostName = Optional.ofNullable(config.getHostName()).orElse(NetHelper.getLocalHostName());
+        String aliasName = Optional.ofNullable(config.getAliasName()).orElse(hostName);
         String macAddress = NetHelper.getLocalMacAddress();
 
         return ECRHubRequestProto.ECRHubRequest.newBuilder()
@@ -95,10 +95,10 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
                 .setMsgId(IdUtil.fastSimpleUUID())
                 .setTopic(ETopic.PAIR.getValue())
                 .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
-                            .setDeviceName(hostName)
-                            .setAliasName(aliasName)
-                            .setMacAddress(macAddress)
-                            .build())
+                              .setDeviceName(hostName)
+                              .setAliasName(aliasName)
+                              .setMacAddress(macAddress)
+                              .build())
                 .build();
     }
 
