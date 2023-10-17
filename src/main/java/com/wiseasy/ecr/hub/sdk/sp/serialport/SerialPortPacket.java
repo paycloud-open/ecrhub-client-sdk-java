@@ -190,30 +190,30 @@ public class SerialPortPacket {
     public String toString() {
         int dataLength = data != null ? data.length : 0;
         StringBuilder sb = new StringBuilder();
-        sb.append("PacketHead:");
+        sb.append("PacketHead: ");
         sb.append(HexUtil.byte2hex(head));
         sb.append("\n");
-        sb.append("PacketType:");
+        sb.append("PacketType: ");
         sb.append(HexUtil.byte2hex(packType));
         sb.append("\n");
-        sb.append("       ACK:");
+        sb.append("       ACK: ");
         sb.append(HexUtil.byte2hex(ack));
         sb.append("\n");
-        sb.append("    DataId:");
+        sb.append("    DataId: ");
         sb.append(HexUtil.byte2hex(id));
         sb.append("\n");
-        sb.append("DataLength:");
+        sb.append("DataLength: ");
         sb.append(dataLength);
         sb.append("\n");
         if (dataLength > 0) {
-            sb.append("      Data:");
+            sb.append("      Data: ");
             sb.append(HexUtil.byte2hex(data));
             sb.append("\n");
         }
-        sb.append(" CheckCode:");
+        sb.append(" CheckCode: ");
         sb.append(HexUtil.byte2hex(checkCode));
         sb.append("\n");
-        sb.append("PacketTail:");
+        sb.append("PacketTail: ");
         sb.append(HexUtil.byte2hex(end));
         sb.append("\n");
         return sb.toString();

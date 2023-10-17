@@ -101,6 +101,7 @@ public class SerialPortEngine {
         if (!serialPort.isOpen()) {
             serialPort.setComPortParameters(config.getBaudRate(), config.getDataBits(), config.getStopBits(), config.getParity());
             serialPort.setComPortTimeouts(config.getTimeoutMode(), config.getReadTimeout(), config.getWriteTimeout());
+            log.info("Start opening the serial port name:{}", serialPort.getSystemPortName());
             if (serialPort.openPort(5)) {
                 log.info("Successful open the serial port name:{}", serialPort.getSystemPortName());
             } else {
@@ -111,14 +112,15 @@ public class SerialPortEngine {
     }
 
     private void handshake(long startTime, int timeout) throws ECRHubException {
+        log.info("Start handshake connection...");
         while (true) {
             if (doHandshake()) {
-                log.info("Handshake successful");
+                log.info("Handshake connection successful");
                 break;
             } else {
                 ThreadUtil.safeSleep(10);
                 if (System.currentTimeMillis() - startTime > timeout) {
-                    log.error("Handshake failed");
+                    log.error("Handshake connection failed");
                     throw new ECRHubTimeoutException("Handshake connection timeout");
                 }
             }
@@ -148,7 +150,6 @@ public class SerialPortEngine {
             for (String hexPack : packDecoder.decode(buffer)) {
                 SerialPortPacket pack = new SerialPortPacket().decode(hexPack);
                 if (pack != null && pack.getPackType() == SerialPortPacket.PACK_TYPE_HANDSHAKE_CONFIRM) {
-                    log.debug("Received packet:\n{}", pack);
                     return true;
                 }
             }
@@ -185,15 +186,13 @@ public class SerialPortEngine {
     }
 
     public boolean write(SerialPortPacket pack) {
-        if (isOpen()) {
+        if (!isOpen()) {
+            return false;
+        } else {
             byte[] msg = pack.encode();
             int numWritten = serialPort.writeBytes(msg, msg.length);
-            if (numWritten > 0) {
-                log.debug("Send packet:\n{}", pack);
-                return true;
-            }
+            return (numWritten > 0);
         }
-        return false;
     }
 
     public byte[] read(String msgId, long startTime, long timeout) throws ECRHubTimeoutException {
@@ -218,7 +217,7 @@ public class SerialPortEngine {
         @Override
         public void run() {
             while (isOpen()) {
-                ThreadUtil.safeSleep(100);
+                ThreadUtil.safeSleep(50);
                 SerialPortPacket pack = writeQueue.peek();
                 if (pack == null || pack.id == 0x00) {
                     continue;
@@ -234,7 +233,7 @@ public class SerialPortEngine {
         private boolean checkRetryTimes(byte id) {
             Integer times = writeMap.get(id);
             int retryTimes = times == null ? 1 : times + 1;
-            if (retryTimes <= 50) {
+            if (retryTimes <= 100) {
                 writeMap.put(id, retryTimes);
                 return true;
             } else {
@@ -274,18 +273,17 @@ public class SerialPortEngine {
             if (pack == null || pack.getPackType() != SerialPortPacket.PACK_TYPE_COMMON) {
                 return;
             }
-            if (log.isDebugEnabled()) {
-                log.debug("Received packet:\n{}", pack);
-            }
             // ACK packet
             byte ack = pack.getAck();
             if (ack != 0x00) {
+                log.debug("Received ack packet:\n{}", pack);
                 // Remove this message from the message queue
                 poll(ack);
             }
             // Common packet
             byte id = pack.getId();
             if (id != 0x00) {
+                log.debug("Received data packet:\n{}", pack);
                 // Send data ACK packet
                 ack(id);
                 // Check if the message Id is duplicated
@@ -309,6 +307,7 @@ public class SerialPortEngine {
 
         private void ack(byte id) {
             SerialPortPacket pack = new SerialPortPacket.AckPacket(id);
+            log.debug("Send ack packet:\n{}", pack);
             write(pack);
         }
 

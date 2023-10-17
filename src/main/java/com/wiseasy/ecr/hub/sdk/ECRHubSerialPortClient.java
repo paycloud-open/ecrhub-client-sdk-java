@@ -83,6 +83,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         }
         byte[] msg = ECRHubProtobufHelper.pack(request);
         SerialPortPacket pack = new SerialPortPacket.MsgPacket(msg);
+        log.debug("Send data packet:\n{}", pack);
         engine.addQueue(pack);
     }
 
