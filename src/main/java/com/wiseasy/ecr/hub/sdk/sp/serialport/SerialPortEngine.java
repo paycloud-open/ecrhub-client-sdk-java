@@ -148,7 +148,7 @@ public class SerialPortEngine {
             for (String hexPack : packDecoder.decode(buffer)) {
                 SerialPortPacket pack = new SerialPortPacket().decode(hexPack);
                 if (pack != null && pack.getPackType() == SerialPortPacket.PACK_TYPE_HANDSHAKE_CONFIRM) {
-                    log.debug("Send packet:\n{}", pack);
+                    log.debug("Received packet:\n{}", pack);
                     return true;
                 }
             }
