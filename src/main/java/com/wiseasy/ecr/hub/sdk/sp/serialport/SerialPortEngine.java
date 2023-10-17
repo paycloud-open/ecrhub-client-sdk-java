@@ -148,6 +148,7 @@ public class SerialPortEngine {
             for (String hexPack : packDecoder.decode(buffer)) {
                 SerialPortPacket pack = new SerialPortPacket().decode(hexPack);
                 if (pack != null && pack.getPackType() == SerialPortPacket.PACK_TYPE_HANDSHAKE_CONFIRM) {
+                    log.debug("Send packet:\n{}", pack);
                     return true;
                 }
             }
@@ -188,9 +189,7 @@ public class SerialPortEngine {
             byte[] msg = pack.encode();
             int numWritten = serialPort.writeBytes(msg, msg.length);
             if (numWritten > 0) {
-                if (log.isDebugEnabled()) {
-                    log.debug("Send packet:\n{}", pack);
-                }
+                log.debug("Send packet:\n{}", pack);
                 return true;
             }
         }
@@ -219,7 +218,7 @@ public class SerialPortEngine {
         @Override
         public void run() {
             while (isOpen()) {
-                ThreadUtil.safeSleep(50);
+                ThreadUtil.safeSleep(100);
                 SerialPortPacket pack = writeQueue.peek();
                 if (pack == null || pack.id == 0x00) {
                     continue;
@@ -235,7 +234,7 @@ public class SerialPortEngine {
         private boolean checkRetryTimes(byte id) {
             Integer times = writeMap.get(id);
             int retryTimes = times == null ? 1 : times + 1;
-            if (retryTimes <= 100) {
+            if (retryTimes <= 50) {
                 writeMap.put(id, retryTimes);
                 return true;
             } else {
