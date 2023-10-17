@@ -1,10 +1,7 @@
 package com.wiseasy.ecr.hub.sdk.sp.websocket;
 
-import cn.hutool.cache.impl.FIFOCache;
 import cn.hutool.core.net.NetUtil;
-import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.StrUtil;
-import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
 import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
@@ -17,7 +14,7 @@ import java.net.InetSocketAddress;
 
 public class WebSocketServerEngine extends WebSocketServer {
 
-    private boolean running = false;
+    private volatile boolean running = false;
     private static final Logger log = LoggerFactory.getLogger(WebSocketServerEngine.class);
 
     private WebSocketClientListener clientListener;

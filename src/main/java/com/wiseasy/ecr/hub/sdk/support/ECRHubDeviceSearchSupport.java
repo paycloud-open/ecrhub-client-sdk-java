@@ -32,11 +32,11 @@ public class ECRHubDeviceSearchSupport {
 
         void added(ECRHubDevice device);
 
-        void remove(ECRHubDevice device);
+        void removed(ECRHubDevice device);
 
     }
 
-    private volatile boolean status;
+    private volatile boolean running;
 
     private final DeviceServiceListener deviceServiceListener;
 
@@ -62,7 +62,7 @@ public class ECRHubDeviceSearchSupport {
         @Override
         public void serviceRemoved(ServiceEvent event) {
             if (null != deviceListener) {
-                deviceListener.remove(new ECRHubDevice());
+                deviceListener.removed(new ECRHubDevice());
             }
         }
 
@@ -77,21 +77,21 @@ public class ECRHubDeviceSearchSupport {
     }
 
     public void start() {
-        if (status) {
+        if (running) {
             return;
         }
         jmDNS.addServiceListener(ECR_HUB_MDNS_TYPE, deviceServiceListener);
-        status = true;
+        running = true;
     }
 
     public void stop() {
-        if (!status) {
+        if (!running) {
             return;
         }
         jmDNS.removeServiceListener(ECR_HUB_MDNS_TYPE, deviceServiceListener);
         try {
             jmDNS.close();
-            status = true;
+            running = true;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

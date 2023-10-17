@@ -73,7 +73,7 @@ public class ECRHubDevicePairSupport implements WebSocketClientListener {
 
     private PairListener pairListener;
 
-    private volatile boolean status;
+    private volatile boolean running;
 
     private final WebSocketServerEngine engine;
 
@@ -127,7 +127,7 @@ public class ECRHubDevicePairSupport implements WebSocketClientListener {
 
     public void start() throws ECRHubException {
         try {
-            if (status) {
+            if (running) {
                 return;
             }
             engine.start();
@@ -142,7 +142,7 @@ public class ECRHubDevicePairSupport implements WebSocketClientListener {
             ServiceInfo serviceInfo = ServiceInfo.create(ECR_CLIENT_MDNS_SERVICE_TYPE, localHostName, engine.getPort(), info.toJSONString());
             jmDNS.registerService(serviceInfo);
             log.info("mdns register success, service name: {}", serviceInfo.getName());
-            status = true;
+            running = true;
 
         } catch (IOException e) {
             throw new ECRHubException(e);
@@ -151,7 +151,7 @@ public class ECRHubDevicePairSupport implements WebSocketClientListener {
 
 
     public void stop() throws ECRHubException {
-        if (!status) {
+        if (!running) {
             return;
         }
         try {
@@ -163,7 +163,7 @@ public class ECRHubDevicePairSupport implements WebSocketClientListener {
 
                 }
             }
-            status = false;
+            running = false;
         } catch (InterruptedException e) {
             throw new ECRHubException(e);
         }

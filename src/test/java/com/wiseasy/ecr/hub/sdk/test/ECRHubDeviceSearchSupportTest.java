@@ -20,10 +20,11 @@ public class ECRHubDeviceSearchSupportTest {
             }
 
             @Override
-            public void remove(ECRHubDevice device) {
+            public void removed(ECRHubDevice device) {
                 System.out.println("remove: " + device);
             }
         });
+
         support.stop();
     }
 }
