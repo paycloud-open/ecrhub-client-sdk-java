@@ -101,7 +101,7 @@ public class ECRHubConfig {
         /**
          * Read timeout (milliseconds)
          */
-        private int readTimeout = 300 * 1000;
+        private int readTimeout = 301 * 1000;
         /**
          * Connection timeout (milliseconds)
          */
@@ -195,7 +195,7 @@ public class ECRHubConfig {
         /**
          * Read timeout (milliseconds)
          */
-        private int readTimeout = 300 * 1000;
+        private int readTimeout = 301 * 1000;
 
         public int getConnTimeout() {
             return connTimeout;
