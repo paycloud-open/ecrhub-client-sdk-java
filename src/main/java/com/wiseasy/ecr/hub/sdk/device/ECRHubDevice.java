@@ -1,4 +1,4 @@
-package com.wiseasy.ecr.hub.sdk.model;
+package com.wiseasy.ecr.hub.sdk.device;
 
 import com.alibaba.fastjson2.JSONObject;
 
@@ -56,4 +56,21 @@ public class ECRHubDevice {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ECRHubDevice)) return false;
+
+        ECRHubDevice that = (ECRHubDevice) o;
+
+        if (!terminal_sn.equals(that.terminal_sn)) return false;
+        return ws_address.equals(that.ws_address);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = terminal_sn.hashCode();
+        result = 31 * result + ws_address.hashCode();
+        return result;
+    }
 }
