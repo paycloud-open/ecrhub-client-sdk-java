@@ -278,7 +278,9 @@ public class SerialPortEngine {
             }
             // Common packet
             byte id = pack.getId();
-            if (id != 0x00) {
+            if (id == 0x00) {
+                // Heartbeat packet, do nothing
+            } else {
                 log.debug("Received data packet:\n{}", pack);
                 // Send data ACK packet
                 ack(id);
