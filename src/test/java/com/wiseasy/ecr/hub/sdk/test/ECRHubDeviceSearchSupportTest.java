@@ -4,7 +4,7 @@ import com.wiseasy.ecr.hub.sdk.model.ECRHubDevice;
 import com.wiseasy.ecr.hub.sdk.support.ECRHubDeviceSearchSupport;
 
 /**
- * @author wangyuxiang@wiseasy.com
+ * @author wangyuxiang
  * @since 2023-10-17 13:09
  */
 public class ECRHubDeviceSearchSupportTest {

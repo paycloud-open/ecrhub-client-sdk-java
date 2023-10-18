@@ -3,7 +3,7 @@ package com.wiseasy.ecr.hub.sdk.model;
 import com.alibaba.fastjson2.JSONObject;
 
 /**
- * @author wangyuxiang@wiseasy.com
+ * @author wangyuxiang
  * @since 2023-10-13 09:30
  */
 public class ECRHubDevice {

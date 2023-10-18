@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 /**
- * @author wangyuxiang@wiseasy.com
+ * @author wangyuxiang
  * @since 2023-10-17 12:53
  */
 public class ECRHubDeviceSearchSupport {

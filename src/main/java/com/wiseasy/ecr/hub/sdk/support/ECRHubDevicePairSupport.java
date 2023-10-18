@@ -45,7 +45,7 @@ import java.nio.charset.StandardCharsets;
  *  }
  * </pre>
  *
- * @author wangyuxiang@wiseasy.com
+ * @author wangyuxiang
  * @since 2023-10-16 11:07
  */
 public class ECRHubDevicePairSupport implements WebSocketClientListener {

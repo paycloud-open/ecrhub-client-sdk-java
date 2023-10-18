@@ -19,7 +19,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author wangyuxiang@wiseasy.com
+ * @author wangyuxiang
  * @since 2023-09-14 14:59
  */
 public class ECRHubWebSocketClientTest {

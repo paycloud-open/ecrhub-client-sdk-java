@@ -3,7 +3,7 @@ package com.wiseasy.ecr.hub.sdk.sp.websocket;
 import org.java_websocket.WebSocket;
 
 /**
- * @author wangyuxiang@wiseasy.com
+ * @author wangyuxiang
  * @since 2023-10-13 10:45
  */
 public interface WebSocketClientListener {

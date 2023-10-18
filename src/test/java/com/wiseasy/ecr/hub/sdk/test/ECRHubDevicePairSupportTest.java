@@ -4,7 +4,7 @@ import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.support.ECRHubDevicePairSupport;
 
 /**
- * @author wangyuxiang@wiseasy.com
+ * @author wangyuxiang
  * @since 2023-10-17 12:46
  */
 public class ECRHubDevicePairSupportTest {
@@ -18,7 +18,7 @@ public class ECRHubDevicePairSupportTest {
             System.out.println("Pair device info:" + device);
             return true;
         });
-        support.stop();
+        // support.stop();
 
     }
 }
