@@ -75,12 +75,11 @@ public class ECRHubDevicePairSupport implements WebSocketClientListener {
 
     private volatile boolean running;
 
-    private final WebSocketServerEngine engine;
+    private WebSocketServerEngine engine;
 
 
     private ECRHubDevicePairSupport() {
-        this.engine = new WebSocketServerEngine();
-        this.engine.setClientListener(this);
+
     }
 
     public void setPairListener(PairListener listener) {
@@ -130,6 +129,8 @@ public class ECRHubDevicePairSupport implements WebSocketClientListener {
             if (running) {
                 return;
             }
+            this.engine = new WebSocketServerEngine();
+            this.engine.setClientListener(this);
             engine.start();
             InetAddress siteLocalAddress = NetHelper.getLocalhost();
             jmDNS = JmDNS.create(siteLocalAddress);
