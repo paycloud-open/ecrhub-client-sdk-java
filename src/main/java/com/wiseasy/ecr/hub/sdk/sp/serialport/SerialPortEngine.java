@@ -29,12 +29,12 @@ public class SerialPortEngine {
 
     private static final Logger log = LoggerFactory.getLogger(SerialPortEngine.class);
 
+    private final FIFOCache<String, String> MSG_CACHE = new FIFOCache<>(20, 10 * 60 * 1000);
     private final SerialPortConfig config;
     private final SerialPort serialPort;
     private final SerialPortPacketDecoder packDecoder;
     private final Map<Byte, Integer> writeMap;
-
-    private final FIFOCache<String, String> MSG_CACHE = new FIFOCache<>(20, 10 * 60 * 1000);
+    private Thread heartBeatThread;
 
     public SerialPortEngine(String portName, SerialPortConfig config) throws ECRHubException {
         this.config = config;
@@ -80,12 +80,15 @@ public class SerialPortEngine {
         // Handshake
         handshake(startTime);
 
-        // Start HeartBeat
-        startHeartBeat();
-
         // Add data listener
         serialPort.removeDataListener();
         serialPort.addDataListener(new ReadListener());
+
+        // Start HeartBeat
+        if (heartBeatThread == null) {
+            heartBeatThread = new Thread(new HeartBeatThread());
+            heartBeatThread.start();
+        }
     }
 
     private void open() throws ECRHubException {
@@ -149,22 +152,18 @@ public class SerialPortEngine {
         return false;
     }
 
-    private void startHeartBeat() {
-        byte[] buffer = new SerialPortPacket.HeartBeatPacket().encode();
-        ThreadUtil.execute(() -> {
-            while (isOpen()) {
-                write(buffer);
-                ThreadUtil.safeSleep(1000);
-            }
-        });
-    }
-
     public boolean close() {
-        if (serialPort.isOpen()) {
-            writeMap.clear();
-            return serialPort.closePort();
-        } else {
+        if (!serialPort.isOpen()) {
             return true;
+        } else {
+            if (heartBeatThread != null) {
+                heartBeatThread.interrupt();
+                heartBeatThread = null;
+            }
+            if (writeMap != null) {
+                writeMap.clear();
+            }
+            return serialPort.closePort();
         }
     }
 
@@ -227,6 +226,17 @@ public class SerialPortEngine {
             }
         }
         return buffer;
+    }
+
+    private class HeartBeatThread implements Runnable {
+        @Override
+        public void run() {
+            byte[] buffer = new SerialPortPacket.HeartBeatPacket().encode();
+            while (isOpen()) {
+                write(buffer);
+                ThreadUtil.safeSleep(1000);
+            }
+        }
     }
 
     private class ReadListener implements SerialPortDataListener {
