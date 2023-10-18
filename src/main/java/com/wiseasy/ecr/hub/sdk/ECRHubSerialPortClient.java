@@ -6,7 +6,6 @@ import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
 import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortEngine;
-import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortPacket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,10 +73,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     @Override
     protected byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
         long timeout = getConfig().getSerialPortConfig().getConnTimeout();
-
-        SerialPortPacket pack = new SerialPortPacket.MsgPacket(request.toByteArray());
-        engine.write(pack, startTime, timeout);
-
+        engine.write(request.toByteArray(), startTime, timeout);
         return engine.read(request.getMsgId(), startTime, timeout);
     }
 
@@ -89,10 +85,8 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
             ECRHubConfig config = Optional.ofNullable(request.getConfig()).orElse(super.getConfig());
             long timeout = config.getSerialPortConfig().getWriteTimeout();
 
-            byte[] msg = ECRHubProtobufHelper.pack(request);
-            SerialPortPacket pack = new SerialPortPacket.MsgPacket(msg);
-            log.debug("Send data packet:\n{}", pack);
-            engine.write(pack, System.currentTimeMillis(), timeout);
+            byte[] buffer = ECRHubProtobufHelper.pack(request);
+            engine.write(buffer, System.currentTimeMillis(), timeout);
         }
     }
 
@@ -101,7 +95,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         ECRHubConfig config = Optional.ofNullable(request.getConfig()).orElse(super.getConfig());
         long timeout = config.getSerialPortConfig().getReadTimeout();
 
-        byte[] respPack = engine.read(request.getMsg_id(), System.currentTimeMillis(), timeout);
-        return decodeRespPack(respPack, request.getResponseClass());
+        byte[] buffer = engine.read(request.getMsg_id(), System.currentTimeMillis(), timeout);
+        return decodeRespPack(buffer, request.getResponseClass());
     }
 }

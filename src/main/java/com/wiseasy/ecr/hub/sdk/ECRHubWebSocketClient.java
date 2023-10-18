@@ -82,8 +82,8 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
 
         engine.send(new String(request.toByteArray()));
 
-        String receive = engine.receive(request.getMsgId(), startTime, timeout);
-        return receive.getBytes(StandardCharsets.UTF_8);
+        String msg = engine.receive(request.getMsgId(), startTime, timeout);
+        return msg.getBytes(StandardCharsets.UTF_8);
     }
 
     @Override

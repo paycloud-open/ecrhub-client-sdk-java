@@ -93,7 +93,7 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
     }
 
     protected <T extends ECRHubResponse> T decodeRespPack(byte[] respPack, Class<T> respClass) throws ECRHubException {
-        if (respPack == null || respPack.length == 0) {
+        if (respPack == null) {
             return null;
         } else {
             ECRHubResponseProto.ECRHubResponse respProto = ECRHubProtobufHelper.unpack(respPack);

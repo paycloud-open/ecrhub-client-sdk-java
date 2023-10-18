@@ -2,7 +2,6 @@ package com.wiseasy.ecr.hub.sdk.sp.serialport;
 
 import cn.hutool.cache.impl.FIFOCache;
 import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
@@ -34,7 +33,6 @@ public class SerialPortEngine {
     private final SerialPort serialPort;
     private final SerialPortPacketDecoder packDecoder;
     private final Map<Byte, Integer> writeMap;
-    private Thread heartBeatThread;
 
     private final FIFOCache<String, String> MSG_CACHE = new FIFOCache<>(20, 10 * 60 * 1000);
 
@@ -82,19 +80,16 @@ public class SerialPortEngine {
         // Handshake
         handshake(startTime);
 
+        // Start HeartBeat
+        startHeartBeat();
+
         // Add data listener
         serialPort.removeDataListener();
         serialPort.addDataListener(new ReadListener());
-
-        // Start HeartBeat
-        if (heartBeatThread == null) {
-            heartBeatThread = new Thread(new HeartBeatThread());
-            heartBeatThread.start();
-        }
     }
 
     private void open() throws ECRHubException {
-        if (!isOpen()) {
+        if (!serialPort.isOpen()) {
             String portName = serialPort.getSystemPortName();
             log.info("Start opening the serial port name:{}", portName);
 
@@ -112,12 +107,13 @@ public class SerialPortEngine {
 
     private void handshake(long startTime) throws ECRHubException {
         log.info("Start handshake connection...");
+        byte[] buffer = new SerialPortPacket.HandshakePacket().encode();
         while (true) {
-            if (doHandshake()) {
+            if (doHandshake(buffer)) {
                 log.info("Handshake connection successful");
                 break;
             } else {
-                ThreadUtil.safeSleep(10);
+                ThreadUtil.safeSleep(50);
                 if (System.currentTimeMillis() - startTime > config.getConnTimeout()) {
                     log.error("Handshake connection failed");
                     throw new ECRHubTimeoutException("Handshake connection timeout");
@@ -126,25 +122,24 @@ public class SerialPortEngine {
         }
     }
 
-    private boolean doHandshake() {
+    private boolean doHandshake(byte[] buffer) {
         // send handshake packet
-        SerialPortPacket handshakePack = new SerialPortPacket.HandshakePacket();
-        if (!write(handshakePack)) {
+        if (!write(buffer)) {
             return false;
         }
         // read handshake confirm packet
-        byte[] bytes = null;
+        byte[] readBuffer = new byte[0];
         for (int i = 0; i < 100; i++) {
-            bytes = read();
-            if (ArrayUtil.isNotEmpty(bytes)) {
+            readBuffer = read();
+            if (readBuffer.length > 0) {
                 break;
             } else {
                 ThreadUtil.safeSleep(10);
             }
         }
         // decode handshake confirm packet
-        if (ArrayUtil.isNotEmpty(bytes)) {
-            for (String hexPack : packDecoder.decode(bytes)) {
+        if (readBuffer.length > 0) {
+            for (String hexPack : packDecoder.decode(readBuffer)) {
                 SerialPortPacket pack = new SerialPortPacket().decode(hexPack);
                 if (pack != null && pack.getPackType() == SerialPortPacket.PACK_TYPE_HANDSHAKE_CONFIRM) {
                     return true;
@@ -154,18 +149,22 @@ public class SerialPortEngine {
         return false;
     }
 
+    private void startHeartBeat() {
+        byte[] buffer = new SerialPortPacket.HeartBeatPacket().encode();
+        ThreadUtil.execute(() -> {
+            while (isOpen()) {
+                write(buffer);
+                ThreadUtil.safeSleep(1000);
+            }
+        });
+    }
+
     public boolean close() {
-        if (!isOpen()) {
-            return true;
-        } else {
-            if (heartBeatThread != null) {
-                heartBeatThread.interrupt();
-                heartBeatThread = null;
-            }
-            if (writeMap != null) {
-                writeMap.clear();
-            }
+        if (serialPort.isOpen()) {
+            writeMap.clear();
             return serialPort.closePort();
+        } else {
+            return true;
         }
     }
 
@@ -173,23 +172,25 @@ public class SerialPortEngine {
         return serialPort.isOpen();
     }
 
-    public boolean write(SerialPortPacket pack) {
+    public boolean write(byte[] buffer) {
         if (isOpen()) {
-            byte[] bytes = pack.encode();
-            int numWritten = serialPort.writeBytes(bytes, bytes.length);
+            int numWritten = serialPort.writeBytes(buffer, buffer.length);
             return numWritten > 0;
         } else {
             return false;
         }
     }
 
-    public void write(SerialPortPacket pack, long startTime, long timeout) throws ECRHubException {
+    public void write(byte[] buffer, long startTime, long timeout) throws ECRHubException {
+        SerialPortPacket pack = new SerialPortPacket.MsgPacket(buffer);
+        byte[] bytes = pack.encode();
+        log.debug("Send data packet:\n{}", pack);
         writeMap.put(pack.id, 1);
         while (isOpen()) {
             if (!writeMap.containsKey(pack.id)) {
                 break;
             }
-            write(pack);
+            write(bytes);
             ThreadUtil.safeSleep(100);
             if (System.currentTimeMillis() - startTime > timeout) {
                 writeMap.remove(pack.id);
@@ -199,23 +200,25 @@ public class SerialPortEngine {
     }
 
     public byte[] read() {
-        byte[] bytes = null;
+        byte[] buffer = new byte[0];
         if (isOpen()) {
             int bytesAvailable = serialPort.bytesAvailable();
             if (bytesAvailable > 0) {
-                bytes = new byte[bytesAvailable];
-                serialPort.readBytes(bytes, bytes.length);
+                buffer = new byte[bytesAvailable];
+                serialPort.readBytes(buffer, buffer.length);
             }
         }
-        return bytes;
+        return buffer;
     }
 
     public byte[] read(String msgId, long startTime, long timeout) throws ECRHubTimeoutException {
-        while (true) {
+        byte[] buffer = new byte[0];
+        while (isOpen()) {
             String msg = MSG_CACHE.get(msgId);
             if (StrUtil.isNotBlank(msg)) {
                 MSG_CACHE.remove(msgId);
-                return HexUtil.hex2byte(msg);
+                buffer = HexUtil.hex2byte(msg);
+                break;
             } else {
                 ThreadUtil.safeSleep(20);
                 if (System.currentTimeMillis() - startTime > timeout) {
@@ -223,17 +226,7 @@ public class SerialPortEngine {
                 }
             }
         }
-    }
-
-    private class HeartBeatThread implements Runnable {
-        @Override
-        public void run() {
-            SerialPortPacket pack = new SerialPortPacket.HeartBeatPacket();
-            while (isOpen()) {
-                write(pack);
-                ThreadUtil.safeSleep(1000);
-            }
-        }
+        return buffer;
     }
 
     private class ReadListener implements SerialPortDataListener {
@@ -292,7 +285,7 @@ public class SerialPortEngine {
         private void ack(byte id) {
             SerialPortPacket pack = new SerialPortPacket.AckPacket(id);
             log.debug("Send ack packet:\n{}", pack);
-            write(pack);
+            write(pack.encode());
         }
 
         private void putcache(byte[] bytes) {
