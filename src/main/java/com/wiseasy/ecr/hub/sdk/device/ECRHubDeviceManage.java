@@ -30,10 +30,20 @@ import java.nio.charset.StandardCharsets;
  */
 public class ECRHubDeviceManage implements WebSocketClientListener {
 
+    private static final Logger log = LoggerFactory.getLogger(ECRHubDeviceManage.class);
+
     private static final String ECR_HUB_CLIENT_MDNS_SERVICE_TYPE = "_ecr-hub-client._tcp.local.";
     private static final String ECR_HUB_SERVER_MDNS_SERVICE_TYPE = "_ecr-hub-server._tcp.local.";
 
-    private static final Logger log = LoggerFactory.getLogger(ECRHubDeviceManage.class);
+    private volatile boolean running;
+    private WebSocketServerEngine engine;
+    private JmDNS jmDNS;
+    private DeviceServiceListener deviceServiceListener;
+    private DeviceEventListener deviceEventListener;
+
+
+    private ECRHubDeviceManage() {
+    }
 
     private static class ECRHubDeviceManageHolder {
         private static final ECRHubDeviceManage INSTANCE = new ECRHubDeviceManage();
@@ -43,34 +53,16 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
         return ECRHubDeviceManageHolder.INSTANCE;
     }
 
-
-    private WebSocketServerEngine engine;
-
-    private volatile boolean running;
-
-    private JmDNS jmDNS;
-
-    private DeviceServiceListener deviceServiceListener;
-    private DeviceEventListener deviceEventListener;
-
     public void setDeviceEventListener(DeviceEventListener deviceEventListener) {
         this.deviceEventListener = deviceEventListener;
-        deviceServiceListener.setDeviceListener(deviceEventListener);
+        this.deviceServiceListener.setDeviceListener(deviceEventListener);
     }
-
-    private ECRHubDeviceManage() {
-
-    }
-
 
     public void start() throws ECRHubException {
-
         if (running) {
             return;
         }
-
         try {
-
             InetAddress siteLocalAddress = NetHelper.getLocalhost();
             jmDNS = JmDNS.create(siteLocalAddress);
             deviceServiceListener = new DeviceServiceListener();
@@ -123,7 +115,7 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
         return ecrHubResponse.isSuccess();
     }
 
-    private void handlePair(WebSocket conn, String message) {
+    private void onPaired(WebSocket conn, String message) {
         ECRHubRequestProto.RequestDeviceData deviceData;
         ECRHubRequestProto.ECRHubRequest ecrHubRequest;
         try {
@@ -139,31 +131,22 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
             device.setIp_address(deviceData.getIpAddress());
             device.setTerminal_sn(deviceData.getDeviceName());
             device.setWs_address(StrUtil.format("ws://{}:{}", deviceData.getIpAddress(), deviceData.getPort()));
-            if (deviceEventListener.onPaired((device))) {
-                conn.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
-                        .setTopic(ecrHubRequest.getTopic())
-                        .setMsgId(RandomUtil.randomNumbers(20))
-                        .setAppId(ecrHubRequest.getAppId())
-                        .setTimestamp(String.valueOf(System.currentTimeMillis()))
-                        .setSuccess(true)
-                        .build().toByteArray()));
-            } else {
-                conn.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
-                        .setTopic(ecrHubRequest.getTopic())
-                        .setMsgId(RandomUtil.randomNumbers(20))
-                        .setAppId(ecrHubRequest.getAppId())
-                        .setTimestamp(String.valueOf(System.currentTimeMillis()))
-                        .setSuccess(false)
-                        .build().toByteArray()));
-            }
+
+            boolean success = deviceEventListener.onPaired((device));
+
+            conn.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
+                    .setTopic(ecrHubRequest.getTopic())
+                    .setMsgId(RandomUtil.randomNumbers(20))
+                    .setAppId(ecrHubRequest.getAppId())
+                    .setTimestamp(String.valueOf(System.currentTimeMillis()))
+                    .setSuccess(success)
+                    .build().toByteArray()));
         }
-
     }
-
 
     @Override
     public void onMessage(WebSocket conn, String message) {
-        handlePair(conn, message);
+        onPaired(conn, message);
     }
 
     public interface DeviceEventListener {
@@ -182,21 +165,18 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
          * ECR Hub devices is removed
          */
         void onRemoved(ECRHubDevice device);
-
     }
 
     private static class DeviceServiceListener implements ServiceListener {
+
+        private DeviceEventListener deviceEventListener;
 
         public void setDeviceListener(DeviceEventListener deviceEventListener) {
             this.deviceEventListener = deviceEventListener;
         }
 
-        private DeviceEventListener deviceEventListener;
-
-
         @Override
         public void serviceAdded(ServiceEvent event) {
-
         }
 
         @Override
@@ -220,7 +200,5 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
                 deviceEventListener.onAdded(device);
             }
         }
-
     }
-
 }
