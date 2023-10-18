@@ -123,8 +123,7 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
         return ecrHubResponse.isSuccess();
     }
 
-    @Override
-    public void onMessage(WebSocket conn, String message) {
+    private void handlePair(WebSocket conn, String message) {
         ECRHubRequestProto.RequestDeviceData deviceData;
         ECRHubRequestProto.ECRHubRequest ecrHubRequest;
         try {
@@ -159,6 +158,12 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
             }
         }
 
+    }
+
+
+    @Override
+    public void onMessage(WebSocket conn, String message) {
+        handlePair(conn, message);
     }
 
     public interface DeviceEventListener {
