@@ -10,6 +10,7 @@ import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortPacket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -36,12 +37,10 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         lock.lock();
         try {
             log.info("Connecting...");
-
             long startTime = System.currentTimeMillis();
-            int timeout = getConfig().getSerialPortConfig().getConnTimeout();
-            engine.connect(startTime, timeout);
+            engine.connect(startTime);
 
-            ECRHubResponse response = pair(startTime, timeout);
+            ECRHubResponse response = pair(startTime);
             isConnected = response.isSuccess();
 
             log.info("Connection successful");
@@ -73,9 +72,12 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     }
 
     @Override
-    protected byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime, int timeout) throws ECRHubException {
+    protected byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
+        long timeout = getConfig().getSerialPortConfig().getConnTimeout();
+
         SerialPortPacket pack = new SerialPortPacket.MsgPacket(request.toByteArray());
-        engine.addQueue(pack);
+        engine.write(pack, startTime, timeout);
+
         return engine.read(request.getMsgId(), startTime, timeout);
     }
 
@@ -83,17 +85,22 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     protected <T extends ECRHubResponse> void sendReq(ECRHubRequest<T> request) throws ECRHubException {
         if (!isConnected()) {
             throw new ECRHubException("The serial port is not connected.");
+        } else {
+            ECRHubConfig config = Optional.ofNullable(request.getConfig()).orElse(super.getConfig());
+            long timeout = config.getSerialPortConfig().getWriteTimeout();
+
+            byte[] msg = ECRHubProtobufHelper.pack(request);
+            SerialPortPacket pack = new SerialPortPacket.MsgPacket(msg);
+            log.debug("Send data packet:\n{}", pack);
+            engine.write(pack, System.currentTimeMillis(), timeout);
         }
-        byte[] msg = ECRHubProtobufHelper.pack(request);
-        SerialPortPacket pack = new SerialPortPacket.MsgPacket(msg);
-        log.debug("Send data packet:\n{}", pack);
-        engine.addQueue(pack);
     }
 
     @Override
     protected <T extends ECRHubResponse> T getResp(ECRHubRequest<T> request) throws ECRHubException {
-        ECRHubConfig config = request.getConfig();
-        long timeout = config != null ? config.getSerialPortConfig().getReadTimeout() : DEF_READ_TIMEOUT;
+        ECRHubConfig config = Optional.ofNullable(request.getConfig()).orElse(super.getConfig());
+        long timeout = config.getSerialPortConfig().getReadTimeout();
+
         byte[] respPack = engine.read(request.getMsg_id(), System.currentTimeMillis(), timeout);
         return decodeRespPack(respPack, request.getResponseClass());
     }

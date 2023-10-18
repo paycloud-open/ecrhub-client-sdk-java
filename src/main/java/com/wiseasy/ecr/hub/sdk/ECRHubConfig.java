@@ -101,11 +101,11 @@ public class ECRHubConfig {
         /**
          * Read timeout (milliseconds)
          */
-        private int readTimeout = 10 * 1000;
+        private int readTimeout = 300 * 1000;
         /**
          * Connection timeout (milliseconds)
          */
-        private int connTimeout = 180 * 1000;
+        private int connTimeout = 30 * 1000;
 
         public String getPortNameKeyword() {
             return portNameKeyword;
@@ -189,9 +189,13 @@ public class ECRHubConfig {
          */
         private int connTimeout = 30 * 1000;
         /**
-         * Read/write timeout (milliseconds)
+         * Write timeout (milliseconds)
          */
-        private int socketTimeout = 10 * 1000;
+        private int writeTimeout = 10 * 1000;
+        /**
+         * Read timeout (milliseconds)
+         */
+        private int readTimeout = 300 * 1000;
 
         public int getConnTimeout() {
             return connTimeout;
@@ -201,14 +205,20 @@ public class ECRHubConfig {
             this.connTimeout = connTimeout;
         }
 
-        public int getSocketTimeout() {
-            return socketTimeout;
+        public int getWriteTimeout() {
+            return writeTimeout;
         }
 
-        public void setSocketTimeout(int socketTimeout) {
-            this.socketTimeout = socketTimeout;
+        public void setWriteTimeout(int writeTimeout) {
+            this.writeTimeout = writeTimeout;
+        }
+
+        public int getReadTimeout() {
+            return readTimeout;
+        }
+
+        public void setReadTimeout(int readTimeout) {
+            this.readTimeout = readTimeout;
         }
     }
-
-
 }

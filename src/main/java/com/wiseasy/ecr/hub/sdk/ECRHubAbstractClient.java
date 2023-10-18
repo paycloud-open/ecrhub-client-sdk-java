@@ -21,11 +21,6 @@ import java.util.Optional;
 
 public abstract class ECRHubAbstractClient implements ECRHubClient {
 
-    /**
-     * Default synchronous read data timeout (milliseconds)
-     */
-    protected static final long DEF_READ_TIMEOUT = 5 * 60 * 1000;
-
     private final ECRHubConfig config;
 
     public ECRHubAbstractClient(ECRHubConfig config) {
@@ -64,14 +59,14 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
         });
     }
 
-    protected abstract byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime, int timeout) throws ECRHubException;
+    protected abstract byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException;
 
     protected abstract <T extends ECRHubResponse> void sendReq(ECRHubRequest<T> request) throws ECRHubException;
 
     protected abstract <T extends ECRHubResponse> T getResp(ECRHubRequest<T> request) throws ECRHubException;
 
-    protected ECRHubResponse pair(long startTime, int timeout) throws ECRHubException {
-        byte[] pack = sendPairReq(buildPairRequest(), startTime, timeout);
+    protected ECRHubResponse pair(long startTime) throws ECRHubException {
+        byte[] pack = sendPairReq(buildPairRequest(), startTime);
         ECRHubResponse response = decodeRespPack(pack, ECRHubResponse.class);
         if (response.isSuccess()) {
             return response;

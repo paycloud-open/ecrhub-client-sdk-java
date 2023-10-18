@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class ECRHubWebSocketClient extends ECRHubAbstractClient {
@@ -38,12 +39,13 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
 
     @Override
     public ECRHubResponse connect2() throws ECRHubException {
-        int connTimeout = getConfig().getSocketConfig().getConnTimeout();
+        long startTime = System.currentTimeMillis();
+        int timeout = getConfig().getSocketConfig().getConnTimeout();
         log.info("Connecting...");
 
         boolean success;
         try {
-            success = engine.connectBlocking(connTimeout, TimeUnit.MILLISECONDS);
+            success = engine.connectBlocking(timeout, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             throw new ECRHubTimeoutException();
         }
@@ -51,7 +53,7 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
             throw new ECRHubException("Connection failed");
         }
 
-        ECRHubResponse response = pair(System.currentTimeMillis(), connTimeout);
+        ECRHubResponse response = pair(startTime);
         connected = response.isSuccess();
         log.info("Connection successful");
 
@@ -75,8 +77,11 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
     }
 
     @Override
-    protected byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime, int timeout) throws ECRHubException {
+    protected byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
+        long timeout = getConfig().getSocketConfig().getConnTimeout();
+
         engine.send(new String(request.toByteArray()));
+
         String receive = engine.receive(request.getMsgId(), startTime, timeout);
         return receive.getBytes(StandardCharsets.UTF_8);
     }
@@ -89,8 +94,9 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
 
     @Override
     protected <T extends ECRHubResponse> T getResp(ECRHubRequest<T> request) throws ECRHubException {
-        ECRHubConfig config = request.getConfig();
-        long timeout = config != null ? config.getSocketConfig().getSocketTimeout() : DEF_READ_TIMEOUT;
+        ECRHubConfig config = Optional.ofNullable(request.getConfig()).orElse(super.getConfig());
+        long timeout = config.getSocketConfig().getReadTimeout();
+
         String msg = engine.receive(request.getMsg_id(), System.currentTimeMillis(), timeout);
         return decodeRespPack(msg.getBytes(StandardCharsets.UTF_8), request.getResponseClass());
     }
