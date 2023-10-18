@@ -162,6 +162,9 @@ public class SerialPortEngine {
                 heartBeatThread.interrupt();
                 heartBeatThread = null;
             }
+            if (writeMap != null) {
+                writeMap.clear();
+            }
             return serialPort.closePort();
         }
     }
@@ -189,6 +192,7 @@ public class SerialPortEngine {
             write(pack);
             ThreadUtil.safeSleep(100);
             if (System.currentTimeMillis() - startTime > timeout) {
+                writeMap.remove(pack.id);
                 throw new ECRHubTimeoutException("Write timeout");
             }
         }
