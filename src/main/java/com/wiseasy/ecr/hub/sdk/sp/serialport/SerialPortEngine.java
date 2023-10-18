@@ -227,7 +227,7 @@ public class SerialPortEngine {
             SerialPortPacket pack = new SerialPortPacket.HeartBeatPacket();
             while (isOpen()) {
                 write(pack);
-                ThreadUtil.safeSleep(100);
+                ThreadUtil.safeSleep(1000);
             }
         }
     }
