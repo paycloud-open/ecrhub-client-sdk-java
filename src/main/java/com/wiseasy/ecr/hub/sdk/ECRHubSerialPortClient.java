@@ -33,16 +33,16 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     @Override
     public ECRHubResponse connect2() throws ECRHubException {
+        long startTime = System.currentTimeMillis();
         lock.lock();
         try {
             log.info("Connecting...");
-            long startTime = System.currentTimeMillis();
             engine.connect(startTime);
 
             ECRHubResponse response = pair(startTime);
             isConnected = response.isSuccess();
-
             log.info("Connection successful");
+
             return response;
         } finally {
             lock.unlock();
