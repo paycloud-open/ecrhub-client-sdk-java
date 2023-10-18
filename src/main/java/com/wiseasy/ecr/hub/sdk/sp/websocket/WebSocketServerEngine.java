@@ -77,6 +77,7 @@ public class WebSocketServerEngine extends WebSocketServer {
     @Override
     public void stop() throws InterruptedException {
         super.stop();
+        log.info("service stopped : {}", StrUtil.format("ws//{}:{}", this.getAddress().getAddress().getHostAddress(), this.getPort()));
         running = false;
     }
 

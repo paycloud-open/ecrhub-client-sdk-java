@@ -15,7 +15,7 @@ import java.net.InetAddress;
  */
 public class ECRHubDeviceSearchSupport {
 
-    private static final String ECR_HUB_MDNS_TYPE = "_ecr-client._tcp.local.";
+    private static final String ECR_HUB_SERVER_MDNS_TYPE = "_ecr-hub-server._tcp.local.";
 
     private static class ECRHubDeviceSearchSupportHolder {
         private static final ECRHubDeviceSearchSupport INSTANCE = new ECRHubDeviceSearchSupport();
@@ -80,7 +80,7 @@ public class ECRHubDeviceSearchSupport {
         if (running) {
             return;
         }
-        jmDNS.addServiceListener(ECR_HUB_MDNS_TYPE, deviceServiceListener);
+        jmDNS.addServiceListener(ECR_HUB_SERVER_MDNS_TYPE, deviceServiceListener);
         running = true;
     }
 
@@ -88,7 +88,7 @@ public class ECRHubDeviceSearchSupport {
         if (!running) {
             return;
         }
-        jmDNS.removeServiceListener(ECR_HUB_MDNS_TYPE, deviceServiceListener);
+        jmDNS.removeServiceListener(ECR_HUB_SERVER_MDNS_TYPE, deviceServiceListener);
         try {
             jmDNS.close();
             running = true;
