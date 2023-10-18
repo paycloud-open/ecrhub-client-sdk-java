@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 public class ECRHubSerialPortClientTest {
 
     public static final String APP_ID = "wz6012822ca2f1as78";
-    public static final String SERIAL_PORT_NAME = "COM6";
+    public static final String SERIAL_PORT_NAME = "";
 
     private static ECRHubClient client;
 
