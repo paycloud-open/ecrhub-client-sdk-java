@@ -56,10 +56,6 @@ public class SerialPortPacket {
         this.data = data;
     }
 
-    public byte getPackType() {
-        return packType;
-    }
-
     public byte getAck() {
         return ack;
     }
@@ -68,16 +64,12 @@ public class SerialPortPacket {
         return id;
     }
 
-    public byte[] getData() {
-        return data;
-    }
-
     /**
      * messageId in 1..127
      */
-    private static synchronized byte getMsgId() {
+    private static synchronized byte getDataId() {
         int id = counter.incrementAndGet();
-        if (id > 127) {
+        if (id > 255) {
             counter.set(0);
             id = counter.incrementAndGet();
         }
@@ -87,31 +79,20 @@ public class SerialPortPacket {
     /**
      * Int type to 2-byte length
      */
-    private static byte[] getLen(int length) {
-         byte[] len = new byte[2];
-         len[0] = (byte) ((length >> 8) & 0xFF);
-         len[1] = (byte) ((length >> 0) & 0xFF);
-         return len;
-     }
-
-    /**
-     * Get check code
-     */
-     private byte getCheckCode(byte[] datas) {
-         byte temp = datas[0];
-         for (int i = 1; i < datas.length; i++) {
-            temp = (byte) (temp ^ datas[i]);
-         }
-         return temp;
-     }
+    private static byte[] getDataLen(int length) {
+        byte[] len = new byte[2];
+        len[0] = (byte) ((length >> 8) & 0xFF);
+        len[1] = (byte) ((length >> 0) & 0xFF);
+        return len;
+    }
 
     /**
      * Get data length
      */
     private byte[] getDataLen(byte[] pack) {
-        byte[] data = new byte[dataLength];
-        System.arraycopy(pack, starCodeLength + packetTypeLength + ackLength + packetIdLength, data, 0, dataLength);
-        return data;
+        byte[] dataLen = new byte[dataLength];
+        System.arraycopy(pack, starCodeLength + packetTypeLength + ackLength + packetIdLength, dataLen, 0, dataLength);
+        return dataLen;
     }
 
     /**
@@ -121,6 +102,17 @@ public class SerialPortPacket {
         int rlt = (a & 0xFF) << 8;
         rlt += (b & 0xFF) << 0;
         return rlt;
+    }
+
+    /**
+     * Get check code
+     */
+    private byte getCheckCode(byte[] datas) {
+        byte temp = datas[0];
+        for (int i = 1; i < datas.length; i++) {
+            temp = (byte) (temp ^ datas[i]);
+        }
+        return temp;
     }
 
     /**
@@ -224,7 +216,7 @@ public class SerialPortPacket {
      */
     public static class HandshakePacket extends SerialPortPacket {
         public HandshakePacket() {
-            super(PACK_TYPE_HANDSHAKE, (byte)0x00, (byte)0x00, getLen(0), null);
+            super(PACK_TYPE_HANDSHAKE, (byte)0x00, (byte)0x00, getDataLen(0), null);
         }
     }
 
@@ -233,7 +225,7 @@ public class SerialPortPacket {
      */
     public static class HandshakeConfirmPacket extends SerialPortPacket {
         public HandshakeConfirmPacket() {
-            super(PACK_TYPE_HANDSHAKE_CONFIRM, (byte)0x00, (byte)0x00, getLen(0), null);
+            super(PACK_TYPE_HANDSHAKE_CONFIRM, (byte)0x00, (byte)0x00, getDataLen(0), null);
         }
     }
 
@@ -242,7 +234,7 @@ public class SerialPortPacket {
      */
     public static class HeartBeatPacket extends SerialPortPacket {
         public HeartBeatPacket() {
-            super(PACK_TYPE_COMMON, (byte)0x00, (byte)0x00, getLen(0), null);
+            super(PACK_TYPE_COMMON, (byte)0x00, (byte)0x00, getDataLen(0), null);
         }
     }
 
@@ -251,7 +243,7 @@ public class SerialPortPacket {
      */
     public static class MsgPacket extends SerialPortPacket {
         public MsgPacket(byte[] data) {
-            super(PACK_TYPE_COMMON, (byte)0x00, getMsgId(), getLen((data != null) ? data.length : 0), data);
+            super(PACK_TYPE_COMMON, (byte)0x00, getDataId(), getDataLen((data != null) ? data.length : 0), data);
         }
     }
 
@@ -260,7 +252,7 @@ public class SerialPortPacket {
      */
     public static class AckPacket extends SerialPortPacket {
         public AckPacket(byte ack) {
-            super(PACK_TYPE_COMMON, ack, (byte)0x00, getLen(0), null);
+            super(PACK_TYPE_COMMON, ack, (byte)0x00, getDataLen(0), null);
         }
     }
 }
