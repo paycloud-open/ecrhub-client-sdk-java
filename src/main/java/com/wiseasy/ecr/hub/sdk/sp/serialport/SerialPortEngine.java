@@ -135,7 +135,7 @@ public class SerialPortEngine {
             if (handshakeConfirm) {
                 return true;
             } else {
-                ThreadUtil.safeSleep(10);
+                ThreadUtil.safeSleep(5);
                 if (System.currentTimeMillis() - startTime > 1000) {
                     return false;
                 }
@@ -252,7 +252,7 @@ public class SerialPortEngine {
                     handleCommonPack(pack);
                     break;
                 default:
-                    // Other packet, do nothing
+                    // Other packet, ignore
                     break;
             }
         }
@@ -267,7 +267,10 @@ public class SerialPortEngine {
             }
             // Common packet
             byte id = pack.getId();
-            if (0x00 != id) {
+            if (0x00 == id) {
+                // Heartbeat packet, do nothing
+            } else {
+                // Data packet
                 log.debug("Received data packet:\n{}", pack);
                 // Send data ACK packet
                 sendAck(id);
