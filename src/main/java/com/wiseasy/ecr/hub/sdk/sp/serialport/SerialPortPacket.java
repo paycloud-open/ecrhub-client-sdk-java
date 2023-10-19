@@ -56,6 +56,10 @@ public class SerialPortPacket {
         this.data = data;
     }
 
+    public byte getPackType() {
+        return packType;
+    }
+
     public byte getAck() {
         return ack;
     }
@@ -64,16 +68,22 @@ public class SerialPortPacket {
         return id;
     }
 
+    public byte[] getData() {
+        return data;
+    }
+
     /**
-     * messageId in 1..127
+     * messageId in 1..255
      */
-    private static synchronized byte getDataId() {
-        int id = counter.incrementAndGet();
-        if (id > 255) {
-            counter.set(0);
-            id = counter.incrementAndGet();
+    private static byte getDataId() {
+        synchronized(SerialPortPacket.class) {
+            int id = counter.incrementAndGet();
+            if (id > 255) {
+                counter.set(0);
+                id = counter.incrementAndGet();
+            }
+            return (byte) id;
         }
-        return (byte) id;
     }
 
     /**
@@ -107,10 +117,10 @@ public class SerialPortPacket {
     /**
      * Get check code
      */
-    private byte getCheckCode(byte[] datas) {
-        byte temp = datas[0];
-        for (int i = 1; i < datas.length; i++) {
-            temp = (byte) (temp ^ datas[i]);
+    private byte getCheckCode(byte[] bytes) {
+        byte temp = bytes[0];
+        for (int i = 1; i < bytes.length; i++) {
+            temp = (byte) (temp ^ bytes[i]);
         }
         return temp;
     }
@@ -123,18 +133,18 @@ public class SerialPortPacket {
     public byte[] encode() {
         int dataRealLength = data != null ? data.length : 0;
         int checkLength = headerLength - starCodeLength + dataRealLength;
-        ByteBuffer bufferCheck = ByteBuffer.allocate(checkLength);
-        bufferCheck.put(packType);
-        bufferCheck.put(ack);
-        bufferCheck.put(id);
-        bufferCheck.put(dataLen);
+        ByteBuffer checkBuffer = ByteBuffer.allocate(checkLength);
+        checkBuffer.put(packType);
+        checkBuffer.put(ack);
+        checkBuffer.put(id);
+        checkBuffer.put(dataLen);
         if (dataRealLength > 0) {
-            bufferCheck.put(data);
+            checkBuffer.put(data);
         }
-        this.checkCode = getCheckCode(bufferCheck.array());
+        this.checkCode = getCheckCode(checkBuffer.array());
         ByteBuffer buffer = ByteBuffer.allocate(starCodeLength + checkLength + checkCodeLength + endCodeLength);
         buffer.put(head);
-        buffer.put(bufferCheck.array());
+        buffer.put(checkBuffer.array());
         buffer.put(checkCode);
         buffer.put(end);
         return buffer.array();
@@ -159,10 +169,10 @@ public class SerialPortPacket {
             this.ack = pack[starCodeLength + packetTypeLength];
             this.id = pack[starCodeLength + packetTypeLength + ackLength];
             this.dataLen = getDataLen(pack);
-            int dataLen2 = parseLen(dataLen[0], dataLen[1]);
-            this.data = new byte[dataLen2];
-            if (dataLen2 > 0) {
-                System.arraycopy(pack, headerLength, data, 0, dataLen2);
+            int dataLenInt = parseLen(dataLen[0], dataLen[1]);
+            this.data = new byte[dataLenInt];
+            if (dataLenInt > 0) {
+                System.arraycopy(pack, headerLength, data, 0, dataLenInt);
             }
             return this;
         }
@@ -180,7 +190,7 @@ public class SerialPortPacket {
 
     @Override
     public String toString() {
-        int dataLength = data != null ? data.length : 0;
+        int dataRealLength = data != null ? data.length : 0;
         StringBuilder sb = new StringBuilder();
         sb.append("PacketHead: ");
         sb.append(HexUtil.byte2hex(head));
@@ -195,9 +205,9 @@ public class SerialPortPacket {
         sb.append(HexUtil.byte2hex(id));
         sb.append("\n");
         sb.append("DataLength: ");
-        sb.append(dataLength);
+        sb.append(dataRealLength);
         sb.append("\n");
-        if (dataLength > 0) {
+        if (dataRealLength > 0) {
             sb.append("      Data: ");
             sb.append(HexUtil.byte2hex(data));
             sb.append("\n");
@@ -243,7 +253,7 @@ public class SerialPortPacket {
      */
     public static class MsgPacket extends SerialPortPacket {
         public MsgPacket(byte[] data) {
-            super(PACK_TYPE_COMMON, (byte)0x00, getDataId(), getDataLen((data != null) ? data.length : 0), data);
+            super(PACK_TYPE_COMMON, (byte)0x00, getDataId(), getDataLen(data != null ? data.length : 0), data);
         }
     }
 
