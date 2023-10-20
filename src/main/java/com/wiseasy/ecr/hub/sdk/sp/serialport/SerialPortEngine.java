@@ -209,8 +209,10 @@ public class SerialPortEngine {
     private class HeartBeatThread implements Runnable {
         @Override
         public void run() {
-            byte[] buffer = new SerialPortPacket.HeartBeatPacket().encode();
+            SerialPortPacket pack = new SerialPortPacket.HeartBeatPacket();
+            byte[] buffer = pack.encode();
             while (isOpen()) {
+                log.debug("Send heartbeat packet:\n{}", pack);
                 write(buffer);
                 ThreadUtil.safeSleep(1000);
             }
