@@ -2,6 +2,8 @@ package com.wiseasy.ecr.hub.sdk.device;
 
 import com.alibaba.fastjson2.JSONObject;
 
+import java.util.Objects;
+
 /**
  * @author wangyuxiang
  * @since 2023-10-13 09:30
@@ -15,7 +17,6 @@ public class ECRHubDevice {
     private String mac_address;
 
     private String ws_address;
-
 
     public String getTerminal_sn() {
         return terminal_sn;
@@ -63,14 +64,11 @@ public class ECRHubDevice {
 
         ECRHubDevice that = (ECRHubDevice) o;
 
-        if (!terminal_sn.equals(that.terminal_sn)) return false;
-        return ws_address.equals(that.ws_address);
+        return Objects.equals(terminal_sn, that.terminal_sn);
     }
 
     @Override
     public int hashCode() {
-        int result = terminal_sn.hashCode();
-        result = 31 * result + ws_address.hashCode();
-        return result;
+        return terminal_sn != null ? terminal_sn.hashCode() : 0;
     }
 }
