@@ -269,6 +269,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
         @Override
         public void serviceRemoved(ServiceEvent event) {
             ECRHubDevice device = buildFromServiceInfo(event.getInfo());
+            log.info("removed device:{}", device);
             deviceMap.remove(device.getTerminal_sn());
             if (null != ecrHubDeviceEventListener) {
                 ecrHubDeviceEventListener.onRemoved(device);
@@ -278,6 +279,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
         @Override
         public void serviceResolved(ServiceEvent event) {
             ECRHubDevice device = buildFromServiceInfo(event.getInfo());
+            log.info("find device:{}", device);
             deviceMap.put(device.getTerminal_sn(), device);
             if (null != ecrHubDeviceEventListener) {
                 ecrHubDeviceEventListener.onAdded(device);
