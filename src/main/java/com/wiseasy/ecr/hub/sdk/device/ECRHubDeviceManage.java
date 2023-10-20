@@ -1,6 +1,6 @@
 package com.wiseasy.ecr.hub.sdk.device;
 
-import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.wiseasy.ecr.hub.sdk.ECRHubClient;
@@ -41,7 +41,6 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
     private DeviceServiceListener deviceServiceListener;
     private DeviceEventListener deviceEventListener;
 
-
     private ECRHubDeviceManage() {
     }
 
@@ -51,11 +50,6 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
 
     public static ECRHubDeviceManage getInstance() {
         return ECRHubDeviceManageHolder.INSTANCE;
-    }
-
-    public void setDeviceEventListener(DeviceEventListener deviceEventListener) {
-        this.deviceEventListener = deviceEventListener;
-        this.deviceServiceListener.setDeviceListener(deviceEventListener);
     }
 
     public void start() throws ECRHubException {
@@ -103,6 +97,11 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
         }
     }
 
+    public void setDeviceEventListener(DeviceEventListener deviceEventListener) {
+        this.deviceEventListener = deviceEventListener;
+        this.deviceServiceListener.setDeviceListener(deviceEventListener);
+    }
+
     public boolean doPair(ECRHubDevice device) throws ECRHubException {
         if (null == device) {
             throw new ECRHubException("device must not null");
@@ -115,38 +114,40 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
         return ecrHubResponse.isSuccess();
     }
 
-    private void onPaired(WebSocket conn, String message) {
-        ECRHubRequestProto.RequestDeviceData deviceData;
+    @Override
+    public void onMessage(WebSocket conn, String message) {
+        onPair(conn, message);
+    }
+
+    private void onPair(WebSocket conn, String message) {
         ECRHubRequestProto.ECRHubRequest ecrHubRequest;
         try {
             ecrHubRequest = ECRHubRequestProto.ECRHubRequest.parseFrom(message.getBytes(StandardCharsets.UTF_8));
-            deviceData = ecrHubRequest.getDeviceData();
         } catch (InvalidProtocolBufferException e) {
             throw new RuntimeException(e);
         }
 
         if (null != deviceEventListener) {
+            ECRHubRequestProto.RequestDeviceData deviceData = ecrHubRequest.getDeviceData();
             ECRHubDevice device = new ECRHubDevice();
             device.setMac_address(deviceData.getMacAddress());
             device.setIp_address(deviceData.getIpAddress());
             device.setTerminal_sn(deviceData.getDeviceName());
-            device.setWs_address(StrUtil.format("ws://{}:{}", deviceData.getIpAddress(), deviceData.getPort()));
+            device.setWs_address(buildWSAddress(deviceData.getIpAddress(), Integer.parseInt(deviceData.getPort())));
 
             boolean success = deviceEventListener.onPaired((device));
 
             conn.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
-                    .setTopic(ecrHubRequest.getTopic())
-                    .setMsgId(RandomUtil.randomNumbers(20))
-                    .setAppId(ecrHubRequest.getAppId())
                     .setTimestamp(String.valueOf(System.currentTimeMillis()))
+                    .setMsgId(IdUtil.fastSimpleUUID())
+                    .setTopic(ecrHubRequest.getTopic())
                     .setSuccess(success)
                     .build().toByteArray()));
         }
     }
 
-    @Override
-    public void onMessage(WebSocket conn, String message) {
-        onPaired(conn, message);
+    private String buildWSAddress(String host, int port) {
+        return StrUtil.format("ws://{}:{}", host, port);
     }
 
     public interface DeviceEventListener {
@@ -167,7 +168,7 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
         void onRemoved(ECRHubDevice device);
     }
 
-    private static class DeviceServiceListener implements ServiceListener {
+    private class DeviceServiceListener implements ServiceListener {
 
         private DeviceEventListener deviceEventListener;
 
@@ -182,10 +183,10 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
         @Override
         public void serviceRemoved(ServiceEvent event) {
             if (null != deviceEventListener) {
-                ECRHubDevice ecrHubDevice = new ECRHubDevice();
                 ServiceInfo info = event.getInfo();
+                ECRHubDevice ecrHubDevice = new ECRHubDevice();
                 ecrHubDevice.setTerminal_sn(info.getName());
-                ecrHubDevice.setWs_address(StrUtil.format("ws://{}:{}", info.getHostAddresses()[0], info.getPort()));
+                ecrHubDevice.setWs_address(buildWSAddress(info.getHostAddresses()[0], info.getPort()));
                 deviceEventListener.onRemoved(ecrHubDevice);
             }
         }
@@ -193,10 +194,10 @@ public class ECRHubDeviceManage implements WebSocketClientListener {
         @Override
         public void serviceResolved(ServiceEvent event) {
             if (null != deviceEventListener) {
-                ECRHubDevice device = new ECRHubDevice();
                 ServiceInfo info = event.getInfo();
+                ECRHubDevice device = new ECRHubDevice();
                 device.setTerminal_sn(info.getName());
-                device.setWs_address(StrUtil.format("ws://{}:{}", info.getHostAddresses()[0], info.getPort()));
+                device.setWs_address(buildWSAddress(info.getHostAddresses()[0], info.getPort()));
                 deviceEventListener.onAdded(device);
             }
         }
