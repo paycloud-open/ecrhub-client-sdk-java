@@ -1,7 +1,10 @@
 package com.wiseasy.ecr.hub.sdk.device;
 
+import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.system.SystemUtil;
+import com.alibaba.fastjson2.JSONObject;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.wiseasy.ecr.hub.sdk.ECRHubClient;
 import com.wiseasy.ecr.hub.sdk.ECRHubClientFactory;
@@ -40,17 +43,20 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
     private static final String ECR_HUB_CLIENT_MDNS_SERVICE_TYPE = "_ecr-hub-client._tcp.local.";
     private static final String ECR_HUB_SERVER_MDNS_SERVICE_TYPE = "_ecr-hub-server._tcp.local.";
 
+    private final ECRHubDeviceStorage storage;
+    private final Map<String, ECRHubDevice> deviceMap;
+
     private volatile boolean running;
+    private ECRHubDeviceEventListener ecrHubDeviceEventListener;
     private WebSocketServerEngine engine;
     private JmDNS jmDNS;
     private DeviceServiceListener deviceServiceListener;
 
-    private final ECRHubDeviceStorage storage;
 
-    private ECRHubDeviceEventListener ecrHubDeviceEventListener;
-
-    private final Map<String, ECRHubDevice> deviceMap = new ConcurrentHashMap<>(1);
-
+    private ECRHubClientWebSocketService() {
+        storage = ECRHubDeviceStorage.getInstance();
+        deviceMap = new ConcurrentHashMap<>(1);
+    }
 
     @Override
     public boolean isRunning() {
@@ -62,9 +68,6 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
         this.ecrHubDeviceEventListener = listener;
     }
 
-    private ECRHubClientWebSocketService() {
-        storage = ECRHubDeviceStorage.getInstance();
-    }
 
     private static class ECRHubDeviceManageHolder {
         private static final ECRHubClientWebSocketService INSTANCE = new ECRHubClientWebSocketService();
@@ -88,12 +91,12 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             engine.start();
             String localHostName = NetHelper.getLocalHostName();
 
-            // JSONObject info = new JSONObject();
-            // info.put("mac_address", NetUtil.getMacAddress(siteLocalAddress));
-            // info.put("os_name", SystemUtil.getOsInfo().getName());
-            // info.put("os_version", SystemUtil.getOsInfo().getVersion());
-            // info.put("host_name", localHostName);
-            ServiceInfo serviceInfo = ServiceInfo.create(ECR_HUB_CLIENT_MDNS_SERVICE_TYPE, localHostName, engine.getPort(), "");
+            JSONObject info = new JSONObject();
+            info.put("mac_address", NetUtil.getMacAddress(siteLocalAddress));
+            info.put("os_name", SystemUtil.getOsInfo().getName());
+            info.put("os_version", SystemUtil.getOsInfo().getVersion());
+            info.put("host_name", localHostName);
+            ServiceInfo serviceInfo = ServiceInfo.create(ECR_HUB_CLIENT_MDNS_SERVICE_TYPE, localHostName, engine.getPort(), info.toJSONString());
             jmDNS.registerService(serviceInfo);
             log.info("mdns register success, service name: {}", serviceInfo.getName());
         } catch (IOException e) {
@@ -260,30 +263,34 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
 
         @Override
         public void serviceAdded(ServiceEvent event) {
+
         }
 
         @Override
         public void serviceRemoved(ServiceEvent event) {
-            ServiceInfo info = event.getInfo();
-            ECRHubDevice ecrHubDevice = new ECRHubDevice();
-            ecrHubDevice.setTerminal_sn(info.getName());
-            ecrHubDevice.setWs_address(buildWSAddress(info.getHostAddresses()[0], info.getPort()));
-            deviceMap.remove(ecrHubDevice.getTerminal_sn());
+            ECRHubDevice device = buildFromServiceInfo(event.getInfo());
+            deviceMap.remove(device.getTerminal_sn());
             if (null != ecrHubDeviceEventListener) {
-                ecrHubDeviceEventListener.onRemoved(ecrHubDevice);
+                ecrHubDeviceEventListener.onRemoved(device);
             }
         }
 
         @Override
         public void serviceResolved(ServiceEvent event) {
-            ServiceInfo info = event.getInfo();
-            ECRHubDevice device = new ECRHubDevice();
-            device.setTerminal_sn(info.getName());
-            device.setWs_address(buildWSAddress(info.getHostAddresses()[0], info.getPort()));
+            ECRHubDevice device = buildFromServiceInfo(event.getInfo());
             deviceMap.put(device.getTerminal_sn(), device);
             if (null != ecrHubDeviceEventListener) {
                 ecrHubDeviceEventListener.onAdded(device);
             }
         }
+    }
+
+    private ECRHubDevice buildFromServiceInfo(ServiceInfo info) {
+        ECRHubDevice device = new ECRHubDevice();
+        device.setTerminal_sn(info.getName());
+        device.setApp_version(info.getPropertyString("app_version"));
+        device.setApp_name(info.getPropertyString("app_name"));
+        device.setWs_address(buildWSAddress(info.getHostAddresses()[0], info.getPort()));
+        return device;
     }
 }
