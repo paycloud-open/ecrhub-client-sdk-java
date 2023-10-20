@@ -162,8 +162,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
         List<String> strings = storage.queryPairedDevice();
         List<ECRHubDevice> ecrHubDevices = new ArrayList<>();
         for (String device_sn : strings) {
-            ECRHubDevice ecrHubDevice = deviceMap.get(device_sn);
-            ecrHubDevices.add(ecrHubDevice);
+            ecrHubDevices.add(deviceMap.get(device_sn));
         }
         return ecrHubDevices;
     }
@@ -279,6 +278,16 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
         @Override
         public void serviceResolved(ServiceEvent event) {
             ECRHubDevice device = buildFromServiceInfo(event.getInfo());
+
+            ECRHubDevice ecrHubDevice = deviceMap.get(device.getTerminal_sn());
+            if (null != ecrHubDevice) {
+                String wsAddress = ecrHubDevice.getWs_address();
+                if (StrUtil.equalsAnyIgnoreCase(wsAddress, device.getWs_address())) {
+                    log.warn("Discover the same service, ignore:{}", device);
+                    return;
+                }
+            }
+
             log.info("find device:{}", device);
             deviceMap.put(device.getTerminal_sn(), device);
             if (null != ecrHubDeviceEventListener) {
