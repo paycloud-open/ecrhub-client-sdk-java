@@ -20,6 +20,19 @@ public class RefundResponse extends ECRHubResponse {
     @JSONField(name = "orderAmount")
     private String order_amount;
     /**
+     * Tip Amount
+     * The amount of the tip is expressed in the currency in which it is denominated, for example, 1 USD stands for one dollar, not one cent.
+     *
+     * For example: 1.50
+     */
+    @JSONField(name = "tipAmount")
+    private String tip_amount;
+    /**
+     * Store no
+     */
+    @JSONField(name = "storeNo")
+    private String store_no;
+    /**
      * Attach
      * Allows merchants to submit an additional data to the gateway, which will be returned as-is for payment notifications and inquiries
      *
@@ -51,6 +64,20 @@ public class RefundResponse extends ECRHubResponse {
     @JSONField(name = "payChannelTransNo")
     private String pay_channel_trans_no;
     /**
+     * Merchant discount amount
+     *
+     * For example: 10.00
+     */
+    @JSONField(name = "discountBmopc")
+    private String discount_bmopc;
+    /**
+     * Payment Channel discount amount
+     *
+     * For example: 6.00
+     */
+    @JSONField(name = "discountBpc")
+    private String discount_bpc;
+    /**
      * Time of successful trade, time zone: UTC/GMT+0, format: YYYY-MM-DD HH:mm:ss
      *
      * For Example: 2021-06-03 12:48:51
@@ -58,12 +85,12 @@ public class RefundResponse extends ECRHubResponse {
     @JSONField(name = "transEndTime")
     private String trans_end_time;
 
-    public String getMerchantOrderNo() {
+    public String getMerchant_order_no() {
         return merchant_order_no;
     }
 
-    public void setMerchantOrderNo(String merchantOrderNo) {
-        this.merchant_order_no = merchantOrderNo;
+    public void setMerchant_order_no(String merchant_order_no) {
+        this.merchant_order_no = merchant_order_no;
     }
 
     public String getOrder_amount() {
@@ -72,6 +99,22 @@ public class RefundResponse extends ECRHubResponse {
 
     public void setOrder_amount(String order_amount) {
         this.order_amount = order_amount;
+    }
+
+    public String getTip_amount() {
+        return tip_amount;
+    }
+
+    public void setTip_amount(String tip_amount) {
+        this.tip_amount = tip_amount;
+    }
+
+    public String getStore_no() {
+        return store_no;
+    }
+
+    public void setStore_no(String store_no) {
+        this.store_no = store_no;
     }
 
     public String getAttach() {
@@ -104,6 +147,22 @@ public class RefundResponse extends ECRHubResponse {
 
     public void setPay_channel_trans_no(String pay_channel_trans_no) {
         this.pay_channel_trans_no = pay_channel_trans_no;
+    }
+
+    public String getDiscount_bmopc() {
+        return discount_bmopc;
+    }
+
+    public void setDiscount_bmopc(String discount_bmopc) {
+        this.discount_bmopc = discount_bmopc;
+    }
+
+    public String getDiscount_bpc() {
+        return discount_bpc;
+    }
+
+    public void setDiscount_bpc(String discount_bpc) {
+        this.discount_bpc = discount_bpc;
     }
 
     public String getTrans_end_time() {

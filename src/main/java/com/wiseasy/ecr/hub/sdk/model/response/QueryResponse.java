@@ -44,6 +44,11 @@ public class QueryResponse extends ECRHubResponse {
     @JSONField(name = "transType")
     private String trans_type;
     /**
+     * Store no
+     */
+    @JSONField(name = "storeNo")
+    private String store_no;
+    /**
      * Payment scenario
      *
      * @see com.wiseasy.ecr.hub.sdk.enums.EPayScenario
@@ -75,6 +80,13 @@ public class QueryResponse extends ECRHubResponse {
     @JSONField(name = "transNo")
     private String trans_no;
     /**
+     * Payment Channel Transaction No. such as WeChat, Alipay, Visa, Mastercard and other payment platforms
+     *
+     * For example: 4210001022202106045676702818
+     */
+    @JSONField(name = "payChannelTransNo")
+    private String pay_channel_trans_no;
+    /**
      * Amount paid by customer
      * The actual amount paid by the customer
      *
@@ -83,12 +95,19 @@ public class QueryResponse extends ECRHubResponse {
     @JSONField(name = "paidAmount")
     private String paid_amount;
     /**
-     * Payment Channel Transaction No. such as WeChat, Alipay, Visa, Mastercard and other payment platforms
+     * Merchant discount amount
      *
-     * For example: 4210001022202106045676702818
+     * For example: 10.00
      */
-    @JSONField(name = "payChannelTransNo")
-    private String pay_channel_trans_no;
+    @JSONField(name = "discountBmopc")
+    private String discount_bmopc;
+    /**
+     * Payment Channel discount amount
+     *
+     * For example: 6.00
+     */
+    @JSONField(name = "discountBpc")
+    private String discount_bpc;
     /**
      * Payment User Account
      *
@@ -153,6 +172,14 @@ public class QueryResponse extends ECRHubResponse {
         this.trans_type = trans_type;
     }
 
+    public String getStore_no() {
+        return store_no;
+    }
+
+    public void setStore_no(String store_no) {
+        this.store_no = store_no;
+    }
+
     public String getPay_scenario() {
         return pay_scenario;
     }
@@ -185,6 +212,14 @@ public class QueryResponse extends ECRHubResponse {
         this.trans_no = trans_no;
     }
 
+    public String getPay_channel_trans_no() {
+        return pay_channel_trans_no;
+    }
+
+    public void setPay_channel_trans_no(String pay_channel_trans_no) {
+        this.pay_channel_trans_no = pay_channel_trans_no;
+    }
+
     public String getPaid_amount() {
         return paid_amount;
     }
@@ -193,12 +228,20 @@ public class QueryResponse extends ECRHubResponse {
         this.paid_amount = paid_amount;
     }
 
-    public String getPay_channel_trans_no() {
-        return pay_channel_trans_no;
+    public String getDiscount_bmopc() {
+        return discount_bmopc;
     }
 
-    public void setPay_channel_trans_no(String pay_channel_trans_no) {
-        this.pay_channel_trans_no = pay_channel_trans_no;
+    public void setDiscount_bmopc(String discount_bmopc) {
+        this.discount_bmopc = discount_bmopc;
+    }
+
+    public String getDiscount_bpc() {
+        return discount_bpc;
+    }
+
+    public void setDiscount_bpc(String discount_bpc) {
+        this.discount_bpc = discount_bpc;
     }
 
     public String getPay_user_account_id() {

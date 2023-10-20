@@ -8,6 +8,8 @@ import com.alibaba.fastjson2.annotation.JSONField;
 import com.wiseasy.ecr.hub.sdk.ECRHubConfig;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
 
+import java.util.Map;
+
 public abstract class ECRHubRequest<T extends ECRHubResponse> {
 
     /**
@@ -24,6 +26,11 @@ public abstract class ECRHubRequest<T extends ECRHubResponse> {
      * Payment Application Id
      */
     private String app_id;
+    /**
+     * Extended parameters
+     */
+    @JSONField(name = "extendsParams")
+    private Map<String, String> extends_params;
     /**
      * Voice data object
      */
@@ -83,6 +90,14 @@ public abstract class ECRHubRequest<T extends ECRHubResponse> {
 
     public void setApp_id(String app_id) {
         this.app_id = app_id;
+    }
+
+    public Map<String, String> getExtends_params() {
+        return extends_params;
+    }
+
+    public void setExtends_params(Map<String, String> extends_params) {
+        this.extends_params = extends_params;
     }
 
     public VoiceData getVoice_data() {

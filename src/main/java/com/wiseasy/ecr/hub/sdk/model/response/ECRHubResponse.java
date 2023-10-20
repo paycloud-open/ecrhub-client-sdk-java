@@ -3,6 +3,8 @@ package com.wiseasy.ecr.hub.sdk.model.response;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.annotation.JSONField;
 
+import java.util.Map;
+
 public class ECRHubResponse {
     /**
      * Message ID, used to receive the corresponding response. The caller needs to remain unique.
@@ -19,6 +21,11 @@ public class ECRHubResponse {
      */
     @JSONField(name = "errorMsg")
     private String error_msg;
+    /**
+     * Extended parameters
+     */
+    @JSONField(name = "extendsParams")
+    private Map<String, String> extends_params;
     /**
      * Device data object
      */
@@ -55,6 +62,14 @@ public class ECRHubResponse {
 
     public void setDevice_data(DeviceData device_data) {
         this.device_data = device_data;
+    }
+
+    public Map<String, String> getExtends_params() {
+        return extends_params;
+    }
+
+    public void setExtends_params(Map<String, String> extends_params) {
+        this.extends_params = extends_params;
     }
 
     /**

@@ -1,0 +1,170 @@
+syntax = "proto3";
+package com.wiseasy.ecr.hub.sdk.protobuf;
+option java_package = "com.wiseasy.ecr.hub.sdk.protobuf";
+option java_outer_classname = "ECRHubRequestProto";
+message ECRHubRequest {
+  /**
+  topic ：ecrhub.init：init（Handshake）；ecrhub.pay.order：payment；ecrhub.pay.query：query；ecrhub.pay.close：close order；ecrhub.heartbeat：heart beat
+   */
+  string topic = 1;
+  /**
+  Message ID, used to track the sending and returning of orders
+   */
+  string msg_id = 2;
+  /**
+  AppID of payment application
+  */
+  string app_id = 3;
+  /**
+  time stamp
+  */
+  string timestamp = 4;
+  /**
+  SDK version
+  */
+  string version = 5;
+  /**
+  Requested Business Data
+  */
+  RequestBizData biz_data = 6;
+  /**
+  voice
+  */
+  VoiceData voice_data = 7;
+  /**
+  printer
+  */
+  PrinterData printer_data = 8;
+  /**
+  notice
+  */
+  NotifyData notify_data = 9;
+  /**
+  request pair data
+   */
+  RequestDeviceData device_data = 10;
+}
+
+message RequestDeviceData {
+  /**
+  device mac address
+   */
+  string mac_address = 1;
+  /**
+  device name
+   */
+  string device_name = 2;
+  /**
+  device alias name
+   */
+  string alias_name = 3;
+  /**
+  server ip address
+   */
+  string ip_address = 4;
+  /**
+  server port number
+   */
+  string port = 5;
+}
+
+message RequestBizData {
+  /**
+  Merchant order number
+  */
+  string merchant_order_no = 1;
+  /**
+ Original merchant order number, refund and other subsequent transactions must be transmitted
+ */
+  string orig_merchant_order_no = 2;
+  /**
+  price currency
+  */
+  string price_currency = 3;
+  /**
+  order amount
+  */
+  string order_amount = 4;
+  /**
+  tip amount
+  */
+  string tip_amount = 5;
+  /**
+  trans type
+  */
+  string trans_type = 6;
+  /**
+  Payment method category: QR_ C_ SCAN_ B: Main scanning; QR_ B_ SCAN_ C: Scan code is scanned; BANKCARD: Bank card; OTP: OTP one-time password payment
+  */
+  string pay_method_category = 7;
+  /**
+  Additional information
+   */
+  string attach = 8;
+  /**
+  Descriptive information
+   */
+  string description = 9;
+  /**
+  Notification callback address
+  */
+  string notify_url = 10;
+  /**
+ Extended parameters
+ */
+  map<string, string> extends_params = 11;
+  /**
+  confirm on terminal
+   */
+  bool confirm_on_terminal = 12;
+  /**
+   order expire
+   */
+  string expires = 13;
+}
+
+message VoiceData {
+  /**
+  Voice content
+  */
+  string content = 1;
+  /**
+  Languages and languages
+  */
+  string content_locale = 2;
+  /**
+  Language url
+  */
+  string content_url = 3;
+}
+
+message PrinterData {
+  /**
+  Print Text Content
+  */
+  string content = 1;
+  /**
+  Print Text Address
+  */
+  string content_url = 2;
+}
+
+message NotifyData {
+  /**
+  Title of notification
+  */
+  string title = 1;
+  /**
+  Notified body
+  */
+  string body = 2;
+  /**
+  Notification display image address
+  */
+  string image_url = 3;
+  /**
+  Notification sound
+  */
+  string sound = 4;
+}
+
