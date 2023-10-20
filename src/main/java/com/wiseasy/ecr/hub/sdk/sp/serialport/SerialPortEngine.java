@@ -247,7 +247,7 @@ public class SerialPortEngine {
             switch (pack.packType) {
                 case SerialPortPacket.PACK_TYPE_HANDSHAKE_CONFIRM:
                     // Handshake confirm packet
-                    handshakeConfirm = true;
+                    handleHandshakeConfirmPack(pack);
                     break;
                 case SerialPortPacket.PACK_TYPE_COMMON:
                     // Common packet
@@ -257,6 +257,10 @@ public class SerialPortEngine {
                     // Other packet, ignore
                     break;
             }
+        }
+
+        private void handleHandshakeConfirmPack(SerialPortPacket pack) {
+            handshakeConfirm = true;
         }
 
         private void handleCommonPack(SerialPortPacket pack) {
