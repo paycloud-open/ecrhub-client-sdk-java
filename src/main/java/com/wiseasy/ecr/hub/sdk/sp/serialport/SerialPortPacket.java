@@ -217,7 +217,6 @@ public class SerialPortPacket {
         sb.append("\n");
         sb.append("PacketTail: ");
         sb.append(HexUtil.byte2hex(end));
-        sb.append("\n");
         return sb.toString();
     }
 
