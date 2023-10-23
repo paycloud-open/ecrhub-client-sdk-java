@@ -159,10 +159,16 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
 
     @Override
     public List<ECRHubDevice> getPairedDeviceList() {
-        List<String> strings = storage.queryPairedDevice();
+        List<String> devices = storage.queryPairedDevice();
         List<ECRHubDevice> ecrHubDevices = new ArrayList<>();
-        for (String device_sn : strings) {
-            ecrHubDevices.add(deviceMap.get(device_sn));
+        for (String device_sn : devices) {
+            ECRHubDevice e = deviceMap.get(device_sn);
+            // The device is not online
+            if (null == e) {
+                e = new ECRHubDevice();
+                e.setTerminal_sn(device_sn);
+            }
+            ecrHubDevices.add(e);
         }
         return ecrHubDevices;
     }
