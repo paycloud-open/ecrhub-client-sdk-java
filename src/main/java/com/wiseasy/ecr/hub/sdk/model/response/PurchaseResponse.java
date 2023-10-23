@@ -44,18 +44,6 @@ public class PurchaseResponse extends ECRHubResponse {
     @JSONField(name = "transType")
     private String trans_type;
     /**
-     * Store no
-     */
-    @JSONField(name = "storeNo")
-    private String store_no;
-    /**
-     * Payment scenario
-     *
-     * @see com.wiseasy.ecr.hub.sdk.enums.EPayScenario
-     */
-    @JSONField(name = "payScenario")
-    private String pay_scenario;
-    /**
      * Attach
      * Allows merchants to submit an additional data to the gateway, which will be returned as-is for payment notifications and inquiries
      *
@@ -125,6 +113,18 @@ public class PurchaseResponse extends ECRHubResponse {
     @JSONField(name = "payMethodId")
     private String pay_method_id;
     /**
+     * Payment scenario
+     *
+     * @see com.wiseasy.ecr.hub.sdk.enums.EPayScenario
+     */
+    @JSONField(name = "payScenario")
+    private String pay_scenario;
+    /**
+     * Store no
+     */
+    @JSONField(name = "storeNo")
+    private String store_no;
+    /**
      * Time of successful trade, time zone: UTC/GMT+0, format: YYYY-MM-DD HH:mm:ss
      *
      * For Example: 2021-06-03 12:48:51
@@ -170,22 +170,6 @@ public class PurchaseResponse extends ECRHubResponse {
 
     public void setTrans_type(String trans_type) {
         this.trans_type = trans_type;
-    }
-
-    public String getStore_no() {
-        return store_no;
-    }
-
-    public void setStore_no(String store_no) {
-        this.store_no = store_no;
-    }
-
-    public String getPay_scenario() {
-        return pay_scenario;
-    }
-
-    public void setPay_scenario(String pay_scenario) {
-        this.pay_scenario = pay_scenario;
     }
 
     public String getAttach() {
@@ -258,6 +242,22 @@ public class PurchaseResponse extends ECRHubResponse {
 
     public void setPay_method_id(String pay_method_id) {
         this.pay_method_id = pay_method_id;
+    }
+
+    public String getPay_scenario() {
+        return pay_scenario;
+    }
+
+    public void setPay_scenario(String pay_scenario) {
+        this.pay_scenario = pay_scenario;
+    }
+
+    public String getStore_no() {
+        return store_no;
+    }
+
+    public void setStore_no(String store_no) {
+        this.store_no = store_no;
     }
 
     public String getTrans_end_time() {

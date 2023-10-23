@@ -56,7 +56,7 @@ public class SerialPortEngine {
             if (port != null) {
                 return port;
             } else {
-                throw new ECRHubException("Not found available serial port.");
+                throw new ECRHubException("No available serial port found, please confirm if the USB cable is connected.");
             }
         }
     }

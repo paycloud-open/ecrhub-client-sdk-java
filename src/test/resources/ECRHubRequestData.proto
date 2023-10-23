@@ -121,6 +121,10 @@ message RequestBizData {
    order expire
    */
   string expires = 13;
+  /**
+ pay channel trans_no
+ */
+  string orig_pay_channel_trans_no = 14;
 }
 
 message VoiceData {

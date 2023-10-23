@@ -93,7 +93,7 @@ public class PurchaseRequest extends ECRHubRequest<PurchaseResponse> {
      * For example: true
      */
     @JSONField(name = "confirmOnTerminal")
-    private boolean confirm_on_terminal = true;
+    private Boolean confirm_on_terminal;
     /**
      * Order expires time, in seconds. Default to 300 seconds.
      *
@@ -170,11 +170,11 @@ public class PurchaseRequest extends ECRHubRequest<PurchaseResponse> {
         this.notify_url = notify_url;
     }
 
-    public boolean isConfirm_on_terminal() {
+    public Boolean getConfirm_on_terminal() {
         return confirm_on_terminal;
     }
 
-    public void setConfirm_on_terminal(boolean confirm_on_terminal) {
+    public void setConfirm_on_terminal(Boolean confirm_on_terminal) {
         this.confirm_on_terminal = confirm_on_terminal;
     }
 

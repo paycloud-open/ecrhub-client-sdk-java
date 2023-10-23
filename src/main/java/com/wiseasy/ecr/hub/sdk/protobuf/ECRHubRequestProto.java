@@ -4450,6 +4450,28 @@ java.lang.String defaultValue);
      */
     com.google.protobuf.ByteString
         getExpiresBytes();
+
+    /**
+     * <pre>
+     **
+     *pay channel trans_no
+     * </pre>
+     *
+     * <code>string orig_pay_channel_trans_no = 14;</code>
+     * @return The origPayChannelTransNo.
+     */
+    java.lang.String getOrigPayChannelTransNo();
+    /**
+     * <pre>
+     **
+     *pay channel trans_no
+     * </pre>
+     *
+     * <code>string orig_pay_channel_trans_no = 14;</code>
+     * @return The bytes for origPayChannelTransNo.
+     */
+    com.google.protobuf.ByteString
+        getOrigPayChannelTransNoBytes();
   }
   /**
    * Protobuf type {@code com.wiseasy.ecr.hub.sdk.protobuf.RequestBizData}
@@ -4475,6 +4497,7 @@ java.lang.String defaultValue);
       description_ = "";
       notifyUrl_ = "";
       expires_ = "";
+      origPayChannelTransNo_ = "";
     }
 
     @java.lang.Override
@@ -5163,6 +5186,55 @@ java.lang.String defaultValue) {
       }
     }
 
+    public static final int ORIG_PAY_CHANNEL_TRANS_NO_FIELD_NUMBER = 14;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object origPayChannelTransNo_ = "";
+    /**
+     * <pre>
+     **
+     *pay channel trans_no
+     * </pre>
+     *
+     * <code>string orig_pay_channel_trans_no = 14;</code>
+     * @return The origPayChannelTransNo.
+     */
+    @java.lang.Override
+    public java.lang.String getOrigPayChannelTransNo() {
+      java.lang.Object ref = origPayChannelTransNo_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        origPayChannelTransNo_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     **
+     *pay channel trans_no
+     * </pre>
+     *
+     * <code>string orig_pay_channel_trans_no = 14;</code>
+     * @return The bytes for origPayChannelTransNo.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getOrigPayChannelTransNoBytes() {
+      java.lang.Object ref = origPayChannelTransNo_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        origPayChannelTransNo_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -5218,6 +5290,9 @@ java.lang.String defaultValue) {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(expires_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 13, expires_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(origPayChannelTransNo_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, origPayChannelTransNo_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5275,6 +5350,9 @@ java.lang.String defaultValue) {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(expires_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(13, expires_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(origPayChannelTransNo_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, origPayChannelTransNo_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
@@ -5316,6 +5394,8 @@ java.lang.String defaultValue) {
           != other.getConfirmOnTerminal()) return false;
       if (!getExpires()
           .equals(other.getExpires())) return false;
+      if (!getOrigPayChannelTransNo()
+          .equals(other.getOrigPayChannelTransNo())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -5356,6 +5436,8 @@ java.lang.String defaultValue) {
           getConfirmOnTerminal());
       hash = (37 * hash) + EXPIRES_FIELD_NUMBER;
       hash = (53 * hash) + getExpires().hashCode();
+      hash = (37 * hash) + ORIG_PAY_CHANNEL_TRANS_NO_FIELD_NUMBER;
+      hash = (53 * hash) + getOrigPayChannelTransNo().hashCode();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -5522,6 +5604,7 @@ java.lang.String defaultValue) {
         internalGetMutableExtendsParams().clear();
         confirmOnTerminal_ = false;
         expires_ = "";
+        origPayChannelTransNo_ = "";
         return this;
       }
 
@@ -5594,6 +5677,9 @@ java.lang.String defaultValue) {
         }
         if (((from_bitField0_ & 0x00001000) != 0)) {
           result.expires_ = expires_;
+        }
+        if (((from_bitField0_ & 0x00002000) != 0)) {
+          result.origPayChannelTransNo_ = origPayChannelTransNo_;
         }
       }
 
@@ -5702,6 +5788,11 @@ java.lang.String defaultValue) {
           bitField0_ |= 0x00001000;
           onChanged();
         }
+        if (!other.getOrigPayChannelTransNo().isEmpty()) {
+          origPayChannelTransNo_ = other.origPayChannelTransNo_;
+          bitField0_ |= 0x00002000;
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -5797,6 +5888,11 @@ java.lang.String defaultValue) {
                 bitField0_ |= 0x00001000;
                 break;
               } // case 106
+              case 114: {
+                origPayChannelTransNo_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00002000;
+                break;
+              } // case 114
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -7086,6 +7182,103 @@ java.lang.String defaultValue) {
         checkByteStringIsUtf8(value);
         expires_ = value;
         bitField0_ |= 0x00001000;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object origPayChannelTransNo_ = "";
+      /**
+       * <pre>
+       **
+       *pay channel trans_no
+       * </pre>
+       *
+       * <code>string orig_pay_channel_trans_no = 14;</code>
+       * @return The origPayChannelTransNo.
+       */
+      public java.lang.String getOrigPayChannelTransNo() {
+        java.lang.Object ref = origPayChannelTransNo_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          origPayChannelTransNo_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *pay channel trans_no
+       * </pre>
+       *
+       * <code>string orig_pay_channel_trans_no = 14;</code>
+       * @return The bytes for origPayChannelTransNo.
+       */
+      public com.google.protobuf.ByteString
+          getOrigPayChannelTransNoBytes() {
+        java.lang.Object ref = origPayChannelTransNo_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          origPayChannelTransNo_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *pay channel trans_no
+       * </pre>
+       *
+       * <code>string orig_pay_channel_trans_no = 14;</code>
+       * @param value The origPayChannelTransNo to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrigPayChannelTransNo(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        origPayChannelTransNo_ = value;
+        bitField0_ |= 0x00002000;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *pay channel trans_no
+       * </pre>
+       *
+       * <code>string orig_pay_channel_trans_no = 14;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOrigPayChannelTransNo() {
+        origPayChannelTransNo_ = getDefaultInstance().getOrigPayChannelTransNo();
+        bitField0_ = (bitField0_ & ~0x00002000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *pay channel trans_no
+       * </pre>
+       *
+       * <code>string orig_pay_channel_trans_no = 14;</code>
+       * @param value The bytes for origPayChannelTransNo to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOrigPayChannelTransNoBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        origPayChannelTransNo_ = value;
+        bitField0_ |= 0x00002000;
         onChanged();
         return this;
       }
@@ -10161,7 +10354,7 @@ java.lang.String defaultValue) {
       "tobuf.RequestDeviceData\"s\n\021RequestDevice" +
       "Data\022\023\n\013mac_address\030\001 \001(\t\022\023\n\013device_name" +
       "\030\002 \001(\t\022\022\n\nalias_name\030\003 \001(\t\022\022\n\nip_address" +
-      "\030\004 \001(\t\022\014\n\004port\030\005 \001(\t\"\270\003\n\016RequestBizData\022" +
+      "\030\004 \001(\t\022\014\n\004port\030\005 \001(\t\"\333\003\n\016RequestBizData\022" +
       "\031\n\021merchant_order_no\030\001 \001(\t\022\036\n\026orig_merch" +
       "ant_order_no\030\002 \001(\t\022\026\n\016price_currency\030\003 \001" +
       "(\t\022\024\n\014order_amount\030\004 \001(\t\022\022\n\ntip_amount\030\005" +
@@ -10171,15 +10364,16 @@ java.lang.String defaultValue) {
       "s_params\030\013 \003(\0132C.com.wiseasy.ecr.hub.sdk" +
       ".protobuf.RequestBizData.ExtendsParamsEn" +
       "try\022\033\n\023confirm_on_terminal\030\014 \001(\010\022\017\n\007expi" +
-      "res\030\r \001(\t\0324\n\022ExtendsParamsEntry\022\013\n\003key\030\001" +
-      " \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"I\n\tVoiceData\022\017\n\007" +
-      "content\030\001 \001(\t\022\026\n\016content_locale\030\002 \001(\t\022\023\n" +
-      "\013content_url\030\003 \001(\t\"3\n\013PrinterData\022\017\n\007con" +
-      "tent\030\001 \001(\t\022\023\n\013content_url\030\002 \001(\t\"K\n\nNotif" +
-      "yData\022\r\n\005title\030\001 \001(\t\022\014\n\004body\030\002 \001(\t\022\021\n\tim" +
-      "age_url\030\003 \001(\t\022\r\n\005sound\030\004 \001(\tB6\n com.wise" +
-      "asy.ecr.hub.sdk.protobufB\022ECRHubRequestP" +
-      "rotob\006proto3"
+      "res\030\r \001(\t\022!\n\031orig_pay_channel_trans_no\030\016" +
+      " \001(\t\0324\n\022ExtendsParamsEntry\022\013\n\003key\030\001 \001(\t\022" +
+      "\r\n\005value\030\002 \001(\t:\0028\001\"I\n\tVoiceData\022\017\n\007conte" +
+      "nt\030\001 \001(\t\022\026\n\016content_locale\030\002 \001(\t\022\023\n\013cont" +
+      "ent_url\030\003 \001(\t\"3\n\013PrinterData\022\017\n\007content\030" +
+      "\001 \001(\t\022\023\n\013content_url\030\002 \001(\t\"K\n\nNotifyData" +
+      "\022\r\n\005title\030\001 \001(\t\022\014\n\004body\030\002 \001(\t\022\021\n\timage_u" +
+      "rl\030\003 \001(\t\022\r\n\005sound\030\004 \001(\tB6\n com.wiseasy.e" +
+      "cr.hub.sdk.protobufB\022ECRHubRequestProtob" +
+      "\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -10202,7 +10396,7 @@ java.lang.String defaultValue) {
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_RequestBizData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_RequestBizData_descriptor,
-        new java.lang.String[] { "MerchantOrderNo", "OrigMerchantOrderNo", "PriceCurrency", "OrderAmount", "TipAmount", "TransType", "PayMethodCategory", "Attach", "Description", "NotifyUrl", "ExtendsParams", "ConfirmOnTerminal", "Expires", });
+        new java.lang.String[] { "MerchantOrderNo", "OrigMerchantOrderNo", "PriceCurrency", "OrderAmount", "TipAmount", "TransType", "PayMethodCategory", "Attach", "Description", "NotifyUrl", "ExtendsParams", "ConfirmOnTerminal", "Expires", "OrigPayChannelTransNo", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_RequestBizData_ExtendsParamsEntry_descriptor =
       internal_static_com_wiseasy_ecr_hub_sdk_protobuf_RequestBizData_descriptor.getNestedTypes().get(0);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_RequestBizData_ExtendsParamsEntry_fieldAccessorTable = new

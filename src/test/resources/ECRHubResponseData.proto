@@ -121,5 +121,9 @@ message ResponseBizData {
  extends params
  */
   map<string, string> extends_params = 16;
+  /**
+  Additional information
+   */
+  string attach = 17;
 }
 

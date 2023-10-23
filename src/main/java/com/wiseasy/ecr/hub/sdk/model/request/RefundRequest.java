@@ -29,6 +29,13 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
     @JSONField(name = "origMerchantOrderNo")
     private String orig_merchant_order_no;
     /**
+     * Payment Channel Transaction No. such as WeChat, Alipay, Visa, Mastercard and other payment platforms
+     *
+     * For example: 4210001022202106045676702818
+     */
+    @JSONField(name = "origPayChannelTransNo")
+    private String orig_pay_channel_trans_no;
+    /**
      * Price Currency, ISO-4217 compliant, described in a three-character code
      *
      * For example: USD
@@ -70,6 +77,15 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
     @JSONField(name = "payMethodCategory")
     private String pay_method_category;
     /**
+     * Payment method id
+     *
+     * @see com.wiseasy.ecr.hub.sdk.enums.EPayMethod
+     *
+     * For example: Visa
+     */
+    @JSONField(name = "payMethodId")
+    private String pay_method_id;
+    /**
      * Attach
      * Allows merchants to submit an additional data to the gateway, which will be returned as-is for payment notifications and inquiries
      *
@@ -101,7 +117,7 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
      * For example: true
      */
     @JSONField(name = "confirmOnTerminal")
-    private boolean confirm_on_terminal = true;
+    private Boolean confirm_on_terminal;
     /**
      * Order expires time, in seconds. Default to 300 seconds.
      *
@@ -124,6 +140,14 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
 
     public void setOrig_merchant_order_no(String orig_merchant_order_no) {
         this.orig_merchant_order_no = orig_merchant_order_no;
+    }
+
+    public String getOrig_pay_channel_trans_no() {
+        return orig_pay_channel_trans_no;
+    }
+
+    public void setOrig_pay_channel_trans_no(String orig_pay_channel_trans_no) {
+        this.orig_pay_channel_trans_no = orig_pay_channel_trans_no;
     }
 
     public String getPrice_currency() {
@@ -162,6 +186,14 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
         this.pay_method_category = pay_method_category;
     }
 
+    public String getPay_method_id() {
+        return pay_method_id;
+    }
+
+    public void setPay_method_id(String pay_method_id) {
+        this.pay_method_id = pay_method_id;
+    }
+
     public String getAttach() {
         return attach;
     }
@@ -186,11 +218,11 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
         this.notify_url = notify_url;
     }
 
-    public boolean isConfirm_on_terminal() {
+    public Boolean getConfirm_on_terminal() {
         return confirm_on_terminal;
     }
 
-    public void setConfirm_on_terminal(boolean confirm_on_terminal) {
+    public void setConfirm_on_terminal(Boolean confirm_on_terminal) {
         this.confirm_on_terminal = confirm_on_terminal;
     }
 

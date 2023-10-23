@@ -28,11 +28,6 @@ public class RefundResponse extends ECRHubResponse {
     @JSONField(name = "tipAmount")
     private String tip_amount;
     /**
-     * Store no
-     */
-    @JSONField(name = "storeNo")
-    private String store_no;
-    /**
      * Attach
      * Allows merchants to submit an additional data to the gateway, which will be returned as-is for payment notifications and inquiries
      *
@@ -78,6 +73,11 @@ public class RefundResponse extends ECRHubResponse {
     @JSONField(name = "discountBpc")
     private String discount_bpc;
     /**
+     * Store no
+     */
+    @JSONField(name = "storeNo")
+    private String store_no;
+    /**
      * Time of successful trade, time zone: UTC/GMT+0, format: YYYY-MM-DD HH:mm:ss
      *
      * For Example: 2021-06-03 12:48:51
@@ -107,14 +107,6 @@ public class RefundResponse extends ECRHubResponse {
 
     public void setTip_amount(String tip_amount) {
         this.tip_amount = tip_amount;
-    }
-
-    public String getStore_no() {
-        return store_no;
-    }
-
-    public void setStore_no(String store_no) {
-        this.store_no = store_no;
     }
 
     public String getAttach() {
@@ -163,6 +155,14 @@ public class RefundResponse extends ECRHubResponse {
 
     public void setDiscount_bpc(String discount_bpc) {
         this.discount_bpc = discount_bpc;
+    }
+
+    public String getStore_no() {
+        return store_no;
+    }
+
+    public void setStore_no(String store_no) {
+        this.store_no = store_no;
     }
 
     public String getTrans_end_time() {

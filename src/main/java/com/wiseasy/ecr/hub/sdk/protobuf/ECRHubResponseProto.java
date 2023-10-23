@@ -3607,6 +3607,28 @@ java.lang.String defaultValue);
      */
     java.lang.String getExtendsParamsOrThrow(
         java.lang.String key);
+
+    /**
+     * <pre>
+     **
+     *Additional information
+     * </pre>
+     *
+     * <code>string attach = 17;</code>
+     * @return The attach.
+     */
+    java.lang.String getAttach();
+    /**
+     * <pre>
+     **
+     *Additional information
+     * </pre>
+     *
+     * <code>string attach = 17;</code>
+     * @return The bytes for attach.
+     */
+    com.google.protobuf.ByteString
+        getAttachBytes();
   }
   /**
    * Protobuf type {@code com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData}
@@ -3636,6 +3658,7 @@ java.lang.String defaultValue);
       payMethodId_ = "";
       discountBmopc_ = "";
       discountBpc_ = "";
+      attach_ = "";
     }
 
     @java.lang.Override
@@ -4504,6 +4527,55 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
 
+    public static final int ATTACH_FIELD_NUMBER = 17;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object attach_ = "";
+    /**
+     * <pre>
+     **
+     *Additional information
+     * </pre>
+     *
+     * <code>string attach = 17;</code>
+     * @return The attach.
+     */
+    @java.lang.Override
+    public java.lang.String getAttach() {
+      java.lang.Object ref = attach_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        attach_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     **
+     *Additional information
+     * </pre>
+     *
+     * <code>string attach = 17;</code>
+     * @return The bytes for attach.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getAttachBytes() {
+      java.lang.Object ref = attach_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        attach_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4569,6 +4641,9 @@ java.lang.String defaultValue) {
           internalGetExtendsParams(),
           ExtendsParamsDefaultEntryHolder.defaultEntry,
           16);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(attach_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 17, attach_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -4633,6 +4708,9 @@ java.lang.String defaultValue) {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(16, extendsParams__);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(attach_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(17, attach_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
@@ -4680,6 +4758,8 @@ java.lang.String defaultValue) {
           .equals(other.getDiscountBpc())) return false;
       if (!internalGetExtendsParams().equals(
           other.internalGetExtendsParams())) return false;
+      if (!getAttach()
+          .equals(other.getAttach())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -4725,6 +4805,8 @@ java.lang.String defaultValue) {
         hash = (37 * hash) + EXTENDS_PARAMS_FIELD_NUMBER;
         hash = (53 * hash) + internalGetExtendsParams().hashCode();
       }
+      hash = (37 * hash) + ATTACH_FIELD_NUMBER;
+      hash = (53 * hash) + getAttach().hashCode();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4894,6 +4976,7 @@ java.lang.String defaultValue) {
         discountBmopc_ = "";
         discountBpc_ = "";
         internalGetMutableExtendsParams().clear();
+        attach_ = "";
         return this;
       }
 
@@ -4975,6 +5058,9 @@ java.lang.String defaultValue) {
         if (((from_bitField0_ & 0x00008000) != 0)) {
           result.extendsParams_ = internalGetExtendsParams();
           result.extendsParams_.makeImmutable();
+        }
+        if (((from_bitField0_ & 0x00010000) != 0)) {
+          result.attach_ = attach_;
         }
       }
 
@@ -5100,6 +5186,11 @@ java.lang.String defaultValue) {
         internalGetMutableExtendsParams().mergeFrom(
             other.internalGetExtendsParams());
         bitField0_ |= 0x00008000;
+        if (!other.getAttach().isEmpty()) {
+          attach_ = other.attach_;
+          bitField0_ |= 0x00010000;
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -5210,6 +5301,11 @@ java.lang.String defaultValue) {
                 bitField0_ |= 0x00008000;
                 break;
               } // case 130
+              case 138: {
+                attach_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00010000;
+                break;
+              } // case 138
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -6843,6 +6939,103 @@ java.lang.String defaultValue) {
         bitField0_ |= 0x00008000;
         return this;
       }
+
+      private java.lang.Object attach_ = "";
+      /**
+       * <pre>
+       **
+       *Additional information
+       * </pre>
+       *
+       * <code>string attach = 17;</code>
+       * @return The attach.
+       */
+      public java.lang.String getAttach() {
+        java.lang.Object ref = attach_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          attach_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *Additional information
+       * </pre>
+       *
+       * <code>string attach = 17;</code>
+       * @return The bytes for attach.
+       */
+      public com.google.protobuf.ByteString
+          getAttachBytes() {
+        java.lang.Object ref = attach_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          attach_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *Additional information
+       * </pre>
+       *
+       * <code>string attach = 17;</code>
+       * @param value The attach to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAttach(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        attach_ = value;
+        bitField0_ |= 0x00010000;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *Additional information
+       * </pre>
+       *
+       * <code>string attach = 17;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAttach() {
+        attach_ = getDefaultInstance().getAttach();
+        bitField0_ = (bitField0_ & ~0x00010000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *Additional information
+       * </pre>
+       *
+       * <code>string attach = 17;</code>
+       * @param value The bytes for attach to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAttachBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        attach_ = value;
+        bitField0_ |= 0x00010000;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -6946,7 +7139,7 @@ java.lang.String defaultValue) {
       "ta\030\t \001(\01324.com.wiseasy.ecr.hub.sdk.proto" +
       "buf.ResponseDeviceData\"N\n\022ResponseDevice" +
       "Data\022\020\n\010app_name\030\001 \001(\t\022\021\n\tdevice_sn\030\002 \001(" +
-      "\t\022\023\n\013app_version\030\003 \001(\t\"\377\003\n\017ResponseBizDa" +
+      "\t\022\023\n\013app_version\030\003 \001(\t\"\217\004\n\017ResponseBizDa" +
       "ta\022\031\n\021merchant_order_no\030\001 \001(\t\022\024\n\014order_a" +
       "mount\030\002 \001(\t\022\020\n\010trans_no\030\003 \001(\t\022\026\n\016price_c" +
       "urrency\030\004 \001(\t\022\022\n\ntrans_type\030\005 \001(\t\022\020\n\010sto" +
@@ -6958,10 +7151,10 @@ java.lang.String defaultValue) {
       "\030\016 \001(\t\022\024\n\014discount_bpc\030\017 \001(\t\022\\\n\016extends_" +
       "params\030\020 \003(\0132D.com.wiseasy.ecr.hub.sdk.p" +
       "rotobuf.ResponseBizData.ExtendsParamsEnt" +
-      "ry\0324\n\022ExtendsParamsEntry\022\013\n\003key\030\001 \001(\t\022\r\n" +
-      "\005value\030\002 \001(\t:\0028\001B7\n com.wiseasy.ecr.hub." +
-      "sdk.protobufB\023ECRHubResponseProtob\006proto" +
-      "3"
+      "ry\022\016\n\006attach\030\021 \001(\t\0324\n\022ExtendsParamsEntry" +
+      "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B7\n com." +
+      "wiseasy.ecr.hub.sdk.protobufB\023ECRHubResp" +
+      "onseProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -6984,7 +7177,7 @@ java.lang.String defaultValue) {
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_descriptor,
-        new java.lang.String[] { "MerchantOrderNo", "OrderAmount", "TransNo", "PriceCurrency", "TransType", "StoreNo", "PayScenario", "TransStatus", "PayChannelTransNo", "PayUserAccountId", "PaidAmount", "TransEndTime", "PayMethodId", "DiscountBmopc", "DiscountBpc", "ExtendsParams", });
+        new java.lang.String[] { "MerchantOrderNo", "OrderAmount", "TransNo", "PriceCurrency", "TransType", "StoreNo", "PayScenario", "TransStatus", "PayChannelTransNo", "PayUserAccountId", "PaidAmount", "TransEndTime", "PayMethodId", "DiscountBmopc", "DiscountBpc", "ExtendsParams", "Attach", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_ExtendsParamsEntry_descriptor =
       internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_descriptor.getNestedTypes().get(0);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_ExtendsParamsEntry_fieldAccessorTable = new
