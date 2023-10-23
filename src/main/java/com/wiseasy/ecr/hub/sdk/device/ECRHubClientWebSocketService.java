@@ -178,7 +178,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
         List<String> strings = storage.queryPairedDevice();
 
         List<ECRHubDevice> ecrHubDevices = new ArrayList<>();
-        Set<String> all_devices = deviceMap.keySet();
+        List<String> all_devices = new ArrayList<>(deviceMap.keySet());
         strings.forEach(all_devices::remove);
         for (String terminal_sn : all_devices) {
             ecrHubDevices.add(deviceMap.get(terminal_sn));
