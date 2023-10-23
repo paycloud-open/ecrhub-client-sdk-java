@@ -84,7 +84,7 @@ public class ECRHubClientServiceTest {
              * The device is unpaired
              */
             @Override
-            public void unPaired(ECRHubDevice device) {
+            public void onUnpaired(ECRHubDevice device) {
                 System.out.println("unPaired :" + device);
             }
 

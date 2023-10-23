@@ -153,7 +153,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
 
         storage.removePairedDevice(device.getTerminal_sn());
         if (null != ecrHubDeviceEventListener) {
-            ecrHubDeviceEventListener.unPaired(device);
+            ecrHubDeviceEventListener.onUnpaired(device);
         }
     }
 
@@ -243,7 +243,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
 
         storage.removePairedDevice(device.getTerminal_sn());
         if (null != ecrHubDeviceEventListener) {
-            ecrHubDeviceEventListener.unPaired(device);
+            ecrHubDeviceEventListener.onUnpaired(device);
 
         }
         socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()

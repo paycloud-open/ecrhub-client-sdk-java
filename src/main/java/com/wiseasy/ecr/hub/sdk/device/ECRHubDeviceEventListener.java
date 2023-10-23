@@ -13,6 +13,6 @@ public interface ECRHubDeviceEventListener {
 
     boolean onPaired(ECRHubDevice device);
 
-    void unPaired(ECRHubDevice device);
+    void onUnpaired(ECRHubDevice device);
 
 }
