@@ -89,10 +89,10 @@ import com.wiseasy.ecr.hub.sdk.model.response.PurchaseResponse;
 // 1、Create a client instance By Serial port
 ECRHubConfig config = new ECRHubConfig();
 
-// Method 1: Specify the serial port name, Please replace "xxxxxx" with the real serial port name
+// Method 1: Specify the serial port name. Please replace "xxxxxx" with the real serial port name. For example: COM6
 // ECRHubClient client = ECRHubClientFactory.create("sp://xxxxxx", config);
 
-// Method 2: Do not specify the serial port name, the SDK will automatically finds available serial ports
+// Method 2: Do not specify the serial port name. The SDK will automatically find available serial port
 ECRHubClient client = ECRHubClientFactory.create("sp://", config);
 
 // 2、Connecting to the server
