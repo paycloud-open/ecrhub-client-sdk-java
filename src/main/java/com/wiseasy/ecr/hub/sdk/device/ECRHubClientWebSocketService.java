@@ -8,10 +8,12 @@ import com.alibaba.fastjson2.JSONObject;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.wiseasy.ecr.hub.sdk.ECRHubClient;
 import com.wiseasy.ecr.hub.sdk.ECRHubClientFactory;
+import com.wiseasy.ecr.hub.sdk.enums.ETopic;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto;
+import com.wiseasy.ecr.hub.sdk.sp.websocket.WebSocketClientEngine;
 import com.wiseasy.ecr.hub.sdk.sp.websocket.WebSocketClientListener;
 import com.wiseasy.ecr.hub.sdk.sp.websocket.WebSocketServerEngine;
 import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
@@ -25,12 +27,14 @@ import javax.jmdns.ServiceInfo;
 import javax.jmdns.ServiceListener;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author wangyuxiang
@@ -131,15 +135,19 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             throw new ECRHubException("ws_address must not blank");
         }
         ECRHubClient ecrHubClient = ECRHubClientFactory.create(device.getWs_address());
-        ECRHubResponse ecrHubResponse = ecrHubClient.connect2();
-        boolean success = ecrHubResponse.isSuccess();
-        if (success) {
-            storage.addPairedDevice(device.getTerminal_sn());
-            if (null != ecrHubDeviceEventListener) {
-                ecrHubDeviceEventListener.onPaired(device);
+        try {
+            ECRHubResponse ecrHubResponse = ecrHubClient.connect2();
+            boolean success = ecrHubResponse.isSuccess();
+            if (success) {
+                storage.addPairedDevice(device.getTerminal_sn());
+                if (null != ecrHubDeviceEventListener) {
+                    ecrHubDeviceEventListener.onPaired(device);
+                }
             }
+            return success;
+        } finally {
+            ecrHubClient.disconnect();
         }
-        return success;
     }
 
     @Override
@@ -151,6 +159,40 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             throw new ECRHubException("ws_address must not blank");
         }
 
+        // The device is not online
+        if (StrUtil.isBlank(device.getWs_address())) {
+            doUnpaired(device);
+            return;
+        }
+
+        String wsAddress = device.getWs_address();
+        try {
+            WebSocketClientEngine engine = new WebSocketClientEngine(new URI(wsAddress));
+            engine.connectBlocking(30, TimeUnit.SECONDS);
+            String msgId = IdUtil.fastSimpleUUID();
+            engine.send(new String(ECRHubRequestProto.ECRHubRequest.newBuilder()
+                    .setTopic(ETopic.UN_PAIR.getValue())
+                    .setMsgId(msgId)
+                    .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
+                            .setMacAddress(NetHelper.getLocalMacAddress())
+                            .build())
+                    .build()
+                    .toByteArray()
+            ));
+
+            // The default wait is 60s
+            String receive = engine.receive(msgId, System.currentTimeMillis(), 60 * 1000);
+            ECRHubResponseProto.ECRHubResponse ecrHubResponse = ECRHubResponseProto.ECRHubResponse.parseFrom(receive.getBytes(StandardCharsets.UTF_8));
+            if (ecrHubResponse.getSuccess()) {
+                // unpaired succeeded
+                doUnpaired(device);
+            }
+        } catch (ECRHubException | InvalidProtocolBufferException | URISyntaxException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void doUnpaired(ECRHubDevice device) {
         storage.removePairedDevice(device.getTerminal_sn());
         if (null != ecrHubDeviceEventListener) {
             ecrHubDeviceEventListener.onUnpaired(device);
@@ -188,11 +230,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
 
     @Override
     public void onMessage(WebSocket conn, String message) {
-        doPair(conn, message);
-        // cancelPair()
-    }
 
-    private void doPair(WebSocket socket, String message) {
         ECRHubRequestProto.ECRHubRequest ecrHubRequest;
         try {
             ecrHubRequest = ECRHubRequestProto.ECRHubRequest.parseFrom(message.getBytes(StandardCharsets.UTF_8));
@@ -207,8 +245,17 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
         device.setTerminal_sn(deviceData.getDeviceName());
         device.setWs_address(buildWSAddress(deviceData.getIpAddress(), Integer.parseInt(deviceData.getPort())));
 
-        if (null != ecrHubDeviceEventListener) {
+        String topic = ecrHubRequest.getTopic();
+        if (ETopic.PAIR.getValue().equals(topic)) {
+            doPair(conn, device);
+        } else if (ETopic.UN_PAIR.getValue().equals(topic)) {
+            cancelPair(conn, device);
+        }
+    }
 
+    private void doPair(WebSocket socket, ECRHubDevice device) {
+
+        if (null != ecrHubDeviceEventListener) {
             boolean success = ecrHubDeviceEventListener.onPaired((device));
             if (success) {
                 storage.addPairedDevice(device.getTerminal_sn());
@@ -217,47 +264,33 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
                     .setTimestamp(String.valueOf(System.currentTimeMillis()))
                     .setMsgId(IdUtil.fastSimpleUUID())
-                    .setTopic(ecrHubRequest.getTopic())
+                    .setTopic(ETopic.PAIR.getValue())
                     .setSuccess(success)
                     .build().toByteArray()));
         } else {
-            // 没设置默认配对成功
+            // The default pairing is not set successfully
             storage.addPairedDevice(device.getTerminal_sn());
             socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
                     .setTimestamp(String.valueOf(System.currentTimeMillis()))
                     .setMsgId(IdUtil.fastSimpleUUID())
-                    .setTopic(ecrHubRequest.getTopic())
+                    .setTopic(ETopic.PAIR.getValue())
                     .setSuccess(true)
                     .build().toByteArray()));
         }
     }
 
-    private void cancelPair(WebSocket socket, String message) {
-        ECRHubRequestProto.ECRHubRequest ecrHubRequest;
-        try {
-            ecrHubRequest = ECRHubRequestProto.ECRHubRequest.parseFrom(message.getBytes(StandardCharsets.UTF_8));
-        } catch (InvalidProtocolBufferException e) {
-            throw new RuntimeException(e);
-        }
-
-        ECRHubRequestProto.RequestDeviceData deviceData = ecrHubRequest.getDeviceData();
-        ECRHubDevice device = new ECRHubDevice();
-        device.setMac_address(deviceData.getMacAddress());
-        device.setIp_address(deviceData.getIpAddress());
-        device.setTerminal_sn(deviceData.getDeviceName());
-        device.setWs_address(buildWSAddress(deviceData.getIpAddress(), Integer.parseInt(deviceData.getPort())));
+    private void cancelPair(WebSocket socket, ECRHubDevice device) {
+        socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
+                .setTimestamp(String.valueOf(System.currentTimeMillis()))
+                .setMsgId(IdUtil.fastSimpleUUID())
+                .setTopic(ETopic.UN_PAIR.getValue())
+                .setSuccess(true)
+                .build().toByteArray()));
 
         storage.removePairedDevice(device.getTerminal_sn());
         if (null != ecrHubDeviceEventListener) {
             ecrHubDeviceEventListener.onUnpaired(device);
-
         }
-        socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
-                .setTimestamp(String.valueOf(System.currentTimeMillis()))
-                .setMsgId(IdUtil.fastSimpleUUID())
-                .setTopic(ecrHubRequest.getTopic())
-                .setSuccess(true)
-                .build().toByteArray()));
     }
 
     private String buildWSAddress(String host, int port) {

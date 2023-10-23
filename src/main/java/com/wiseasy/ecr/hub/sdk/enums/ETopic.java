@@ -6,6 +6,10 @@ public enum ETopic {
      */
     PAIR("ecrhub.pair"),
     /**
+     * Unpair
+     */
+    UN_PAIR("ecrhub.unpair"),
+    /**
      * init
      */
     INIT("ecrhub.init"),
