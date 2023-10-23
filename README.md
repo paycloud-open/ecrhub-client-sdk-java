@@ -17,7 +17,7 @@ Help Java developers quickly use ECRHubClient SDK to achieve LAN cross-device se
 - This JAR depends on some open source third party JARs. If these JARs are not integrated in your project, you will need to manually add dependencies to your project.
 
 ```XML
-<!-- mandatory -->
+<!-- Mandatory -->
 <!-- jSerialComm -->
 <dependency>
     <groupId>com.fazecast</groupId>
@@ -59,8 +59,14 @@ Help Java developers quickly use ECRHubClient SDK to achieve LAN cross-device se
     <artifactId>slf4j-api</artifactId>
     <version>2.0.9</version>
 </dependency>
+<!-- jmdns -->
+<dependency>
+    <groupId>org.jmdns</groupId>
+    <artifactId>jmdns</artifactId>
+    <version>3.5.8</version>
+</dependency>
 
-<!-- non-mandatory -->
+<!-- Non-mandatory -->
 <!-- logback -->
 <dependency>
     <groupId>ch.qos.logback</groupId>
