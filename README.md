@@ -4,8 +4,13 @@
 Help Java developers quickly use ECRHubClient SDK to achieve LAN cross-device service calls. Developers do not need to care about the complexity of the internal logic , just call a method to complete a functional operation .
 
 ## Features
-- **Multiple connection mode:** This SDK provides multiple ways to connect to Cashier, including serial port and websocket. You can choose the applicable connection method according to your ECR system environment.
-- **Payments type supported:** This SDK provides a variety of payment methods, including bank card code scanning, and also provides a lot of intermediary payment capabilities, such as consumption, revocation, refund, pre-authorization, pre-authorization completion and so on.
+- **Multiple connection mode:** This SDK provides multiple ways to connect to WiseCashier, including serial port and websocket. You can choose the applicable connection method according to your ECR system environment.
+- **Payments type supported:** This SDK provides a variety of payment methods, including bank card code scanning, and also provides a lot of intermediary payment capabilities, such as purchase, refund, query, close, pre-authorization, pre-authorization completion and so on.
+- **Automatic pair:** This SDK automatically pairs by default, ECR developers do not need to develop additional pairing functions and pairing management interface.
+- **USB serial port：**
+    - Automatic port discovery: This SDK supports automatic serial port discovery capability. When creating ECRHubClient, if the serial port name is: "sp://", the SDK will automatically find the available serial ports and then connect them.
+    - Automatic reconnection: This SDK supports heartbeat connection detection, detecting heartbeat once every 30 seconds, if the heartbeat request is not received from ECRHub, it will disconnect and wait for the next transaction request to automatically establish a connection and initiate the transaction.
+
 
 ## Getting Started
 
