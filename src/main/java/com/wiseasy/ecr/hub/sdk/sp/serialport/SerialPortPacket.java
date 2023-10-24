@@ -178,7 +178,11 @@ public class SerialPortPacket {
         }
     }
 
-    public SerialPortPacket decode(String hexPack) {
+    public String encodeHex() {
+        return HexUtil.byte2hex(encode());
+    }
+
+    public SerialPortPacket decodeHex(String hexPack) {
         SerialPortPacket pack = null;
         try {
             pack = decode(HexUtil.hex2byte(hexPack));

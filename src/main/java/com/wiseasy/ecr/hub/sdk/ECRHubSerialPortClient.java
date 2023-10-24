@@ -17,7 +17,6 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     private static final Logger log = LoggerFactory.getLogger(ECRHubSerialPortClient.class);
 
-    private volatile boolean isConnected = false;
     private final Lock lock = new ReentrantLock();
     private final SerialPortEngine engine;
 
@@ -37,10 +36,10 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         lock.lock();
         try {
             log.info("Connecting...");
-            engine.connect(startTime);
 
+            engine.connect(startTime);
             ECRHubResponse response = pair(startTime);
-            isConnected = response.isSuccess();
+
             log.info("Connection successful");
 
             return response;
@@ -51,7 +50,12 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     @Override
     public boolean isConnected() throws ECRHubException {
-        return engine.isOpen() && isConnected;
+        lock.lock();
+        try {
+            return engine.isOpen();
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
@@ -59,14 +63,24 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         lock.lock();
         try {
             log.info("Disconnecting...");
+
             boolean isClosed = engine.close();
             if (isClosed) {
-                isConnected = false;
                 log.info("Disconnect successful");
             }
+
             return isClosed;
         } finally {
             lock.unlock();
+        }
+    }
+
+    private void autoConnect() throws ECRHubException {
+        if (!isConnected()) {
+            boolean success = connect();
+            if (!success) {
+                throw new ECRHubException("The serial port is not connected.");
+            }
         }
     }
 
@@ -79,15 +93,13 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     @Override
     protected <T extends ECRHubResponse> void sendReq(ECRHubRequest<T> request) throws ECRHubException {
-        if (!isConnected()) {
-            throw new ECRHubException("The serial port is not connected.");
-        } else {
-            ECRHubConfig config = Optional.ofNullable(request.getConfig()).orElse(super.getConfig());
-            long timeout = config.getSerialPortConfig().getWriteTimeout();
+        autoConnect();
 
-            byte[] buffer = ECRHubProtobufHelper.pack(request);
-            engine.write(buffer, System.currentTimeMillis(), timeout);
-        }
+        ECRHubConfig config = Optional.ofNullable(request.getConfig()).orElse(super.getConfig());
+        long timeout = config.getSerialPortConfig().getWriteTimeout();
+
+        byte[] buffer = ECRHubProtobufHelper.pack(request);
+        engine.write(buffer, System.currentTimeMillis(), timeout);
     }
 
     @Override
