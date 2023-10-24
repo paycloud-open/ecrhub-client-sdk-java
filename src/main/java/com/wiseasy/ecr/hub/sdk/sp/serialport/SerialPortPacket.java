@@ -44,9 +44,9 @@ public class SerialPortPacket {
     protected byte[] data;
     protected byte checkCode;
     protected byte[] end = HexUtil.hex2byte(PACK_TAIL);
+    protected String hexPack;
 
-    public SerialPortPacket() {
-    }
+    public SerialPortPacket() {}
 
     public SerialPortPacket(byte packType, byte ack, byte id, byte[] dataLen, byte[] data) {
         this.packType = packType;
@@ -178,11 +178,8 @@ public class SerialPortPacket {
         }
     }
 
-    public String encodeHex() {
-        return HexUtil.byte2hex(encode());
-    }
-
     public SerialPortPacket decodeHex(String hexPack) {
+        this.hexPack = hexPack;
         SerialPortPacket pack = null;
         try {
             pack = decode(HexUtil.hex2byte(hexPack));

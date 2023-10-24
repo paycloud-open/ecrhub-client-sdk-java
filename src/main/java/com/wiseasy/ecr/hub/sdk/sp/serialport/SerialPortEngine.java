@@ -221,8 +221,8 @@ public class SerialPortEngine {
     }
 
     private class SendHeartbeatThread implements Runnable {
-        final SerialPortPacket pack = new SerialPortPacket.HeartBeatPacket();
-        final byte[] buffer = pack.encode();
+        private final byte[] buffer = new SerialPortPacket.HeartBeatPacket().encode();
+
         @Override
         public void run() {
             write(buffer);
@@ -247,8 +247,8 @@ public class SerialPortEngine {
 
     private class ReadDataListener implements SerialPortDataListener {
 
-        private volatile byte lastReceivedDataId = 0x00;
         private final SerialPortPacketDecoder packDecoder = new SerialPortPacketDecoder();
+        private volatile byte lastReceivedDataId = 0x00;
 
         @Override
         public int getListeningEvents() {
@@ -290,29 +290,30 @@ public class SerialPortEngine {
         }
 
         private void handleCommonPack(SerialPortPacket pack) {
-            String hexPack = pack.encodeHex();
-            // ACK packet
             byte ack = pack.getAck();
-            if (0x00 != ack) {
-                log.info("Received ack packet:{}", hexPack);
-                // Remove Sent Times
-                writeMap.remove(ack);
-            }
-            // Common packet
-            byte id = pack.getId();
-            if (0x00 == id) {
+            byte dataId = pack.getId();
+            if (0x00 == ack && 0x00 == dataId) {
                 // Heartbeat packet
-                log.debug("Received heartbeat packet:{}", hexPack);
+                log.debug("Received heartbeat packet:{}", pack.hexPack);
                 heartBeatCounter.incrementAndGet();
             } else {
-                // Data packet
-                log.info("Received data packet:{}", hexPack);
-                // Send data ACK packet
-                sendAck(id);
-                // Cache data
-                if (lastReceivedDataId != id) {
-                    lastReceivedDataId = id;
-                    putCache(pack.data);
+                // ACK packet
+                if (0x00 != ack) {
+                    log.info("Received ack packet:{}", pack.hexPack);
+                    // Remove Sent Times
+                    writeMap.remove(ack);
+                }
+                // Common packet
+                if (0x00 != dataId) {
+                    // Data packet
+                    log.info("Received data packet:{}", pack.hexPack);
+                    // Send data ACK packet
+                    sendAck(dataId);
+                    // Cache data
+                    if (lastReceivedDataId != dataId) {
+                        lastReceivedDataId = dataId;
+                        putCache(pack.data);
+                    }
                 }
             }
         }
