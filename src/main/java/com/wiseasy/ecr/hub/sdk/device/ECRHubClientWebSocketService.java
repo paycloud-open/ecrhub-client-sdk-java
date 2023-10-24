@@ -155,8 +155,8 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
         if (null == device) {
             throw new ECRHubException("device must not null");
         }
-        if (StrUtil.isBlank(device.getWs_address())) {
-            throw new ECRHubException("ws_address must not blank");
+        if (StrUtil.isBlank(device.getTerminal_sn())) {
+            throw new ECRHubException("terminal_sn must not blank");
         }
 
         // The device is not online

@@ -27,12 +27,12 @@ public class WebSocketClientEngine extends WebSocketClient {
 
     @Override
     public void onOpen(ServerHandshake handshakedata) {
-        log.info("socket open success:{}", handshakedata);
+        log.info("socket connect success:{}", this.getRemoteSocketAddress());
     }
 
     @Override
     public void onClose(int code, String reason, boolean remote) {
-        log.info("socket onClose. code:{},reason:{},remote:{}", code, reason, remote);
+        log.info("socket onClose. code: {},reason: {},remote: {}", code, reason, remote);
     }
 
     @Override

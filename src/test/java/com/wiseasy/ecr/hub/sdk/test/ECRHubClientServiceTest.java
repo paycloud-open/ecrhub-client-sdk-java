@@ -44,6 +44,20 @@ public class ECRHubClientServiceTest {
                 case "5":
                     service.start();
                     break;
+                case "6":
+                    try {
+                        for (ECRHubDevice ecrHubDevice : service.getUnpairedDeviceList()) {
+                            service.pair(ecrHubDevice);
+                        }
+                    } catch (ECRHubException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "7":
+                    for (ECRHubDevice ecrHubDevice : service.getPairedDeviceList()) {
+                        service.unpair(ecrHubDevice);
+                    }
+                    break;
             }
         }
 

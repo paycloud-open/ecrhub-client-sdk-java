@@ -9,6 +9,8 @@ import java.util.LinkedHashSet;
 
 public class NetHelper {
 
+    private static String localMacAddress;
+
     public static int getUsableLocalPort(int port) {
         while (!NetUtil.isUsableLocalPort(port)) {
             if (port >= NetUtil.PORT_RANGE_MAX) {
@@ -30,12 +32,15 @@ public class NetHelper {
     }
 
     public static String getLocalMacAddress() {
-        InetAddress address = getLocalhost();
-        if (address != null) {
-            return NetUtil.getMacAddress(address);
-        } else {
-            return NetUtil.getLocalMacAddress();
+        if (null == localMacAddress) {
+            InetAddress address = getLocalhost();
+            if (address != null) {
+                localMacAddress = NetUtil.getMacAddress(address);
+            } else {
+                localMacAddress = NetUtil.getLocalMacAddress();
+            }
         }
+        return localMacAddress;
     }
 
     public static InetAddress getLocalhost() {

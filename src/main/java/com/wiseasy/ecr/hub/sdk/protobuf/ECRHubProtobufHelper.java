@@ -6,6 +6,7 @@ import com.google.protobuf.MessageOrBuilder;
 import com.google.protobuf.util.JsonFormat;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
+import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +25,9 @@ public class ECRHubProtobufHelper {
                 .setVoiceData(buildVoiceData(request))
                 .setPrinterData(buildPrintData(request))
                 .setNotifyData(buildNotifyData(request))
+                .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
+                        .setMacAddress(NetHelper.getLocalMacAddress())
+                        .build())
                 .build().toByteArray();
     }
 
