@@ -35,7 +35,7 @@ public class SerialPortEngine {
     private final FIFOCache<String, byte[]> MSG_CACHE = new FIFOCache<>(20, 10 * 60 * 1000);
     private final SerialPortConfig config;
     private final SerialPort serialPort;
-    private final Map<Byte, Integer> writeMap;
+    private final Map<Byte, Integer> ackMap;
     private volatile boolean handshakeConfirm;
     private final AtomicLong heartBeatCounter;
     private ScheduledExecutorService scheduled;
@@ -44,7 +44,7 @@ public class SerialPortEngine {
     public SerialPortEngine(String portName, SerialPortConfig config) throws ECRHubException {
         this.config = config;
         this.serialPort = getSerialPort(portName);
-        this.writeMap = new ConcurrentHashMap<>();
+        this.ackMap = new ConcurrentHashMap<>();
         this.heartBeatCounter = new AtomicLong();
     }
 
@@ -116,39 +116,36 @@ public class SerialPortEngine {
 
     private void handshake(long startTime) throws ECRHubException {
         log.info("Start handshake connection...");
-        byte[] buffer = new SerialPortPacket.HandshakePacket().encode();
+
         handshakeConfirm = false;
-        while (true) {
-            if (doHandshake(buffer)) {
-                log.info("Handshake connection successful");
-                break;
-            } else {
-                ThreadUtil.safeSleep(10);
-                if (System.currentTimeMillis() - startTime > config.getConnTimeout()) {
-                    serialPort.closePort();
-                    log.error("Handshake connection failed");
-                    throw new ECRHubTimeoutException("Handshake connection timeout");
-                }
+
+        byte[] buffer = new SerialPortPacket.HandshakePacket().encode();
+        while (!doHandshake(buffer)) {
+            ThreadUtil.safeSleep(10);
+            if (System.currentTimeMillis() - startTime > config.getConnTimeout()) {
+                serialPort.closePort();
+                log.error("Handshake connection failed");
+                throw new ECRHubTimeoutException("Handshake connection timeout");
             }
         }
+
+        log.info("Handshake connection successful");
     }
 
     private boolean doHandshake(byte[] buffer) {
         // send handshake packet
         if (!write(buffer)) {
             return false;
-        }
-        // read handshake confirm packet
-        long startTime = System.currentTimeMillis();
-        while (true) {
-            if (handshakeConfirm) {
-                return true;
-            } else {
+        } else {
+            // read handshake confirm packet
+            long startTime = System.currentTimeMillis();
+            while (!handshakeConfirm) {
                 ThreadUtil.safeSleep(5);
                 if (System.currentTimeMillis() - startTime > 1000) {
                     return false;
                 }
             }
+            return true;
         }
     }
 
@@ -169,8 +166,8 @@ public class SerialPortEngine {
                 scheduled.shutdown();
                 scheduled = null;
             }
-            if (writeMap != null) {
-                writeMap.clear();
+            if (ackMap != null) {
+                ackMap.clear();
             }
             return serialPort.closePort();
         }
@@ -190,13 +187,13 @@ public class SerialPortEngine {
         byte[] bytes = pack.encode();
         log.info("Send data packet:{}", HexUtil.byte2hex(bytes));
 
-        writeMap.put(pack.id, 0);
+        ackMap.put(pack.id, 0);
 
-        while (isOpen() && writeMap.containsKey(pack.id)) {
+        while (isOpen() && ackMap.containsKey(pack.id)) {
             write(bytes);
             ThreadUtil.safeSleep(100);
             if (System.currentTimeMillis() - startTime > timeout) {
-                writeMap.remove(pack.id);
+                ackMap.remove(pack.id);
                 throw new ECRHubTimeoutException("Write timeout");
             }
         }
@@ -229,7 +226,7 @@ public class SerialPortEngine {
 
         @Override
         public void run() {
-            write(buffer);
+            SerialPortEngine.this.write(buffer);
             if (log.isDebugEnabled()) {
                 log.debug("Send heartbeat packet:{}", HexUtil.byte2hex(buffer));
             }
@@ -277,7 +274,7 @@ public class SerialPortEngine {
             switch (pack.packType) {
                 case SerialPortPacket.PACK_TYPE_HANDSHAKE_CONFIRM:
                     // Handshake confirm packet
-                    handshakeConfirm = true;
+                    SerialPortEngine.this.handshakeConfirm = true;
                     break;
                 case SerialPortPacket.PACK_TYPE_COMMON:
                     // Common packet
@@ -295,13 +292,13 @@ public class SerialPortEngine {
             if (0x00 == ack && 0x00 == dataId) {
                 // Heartbeat packet
                 log.debug("Received heartbeat packet:{}", hexPack);
-                heartBeatCounter.incrementAndGet();
+                SerialPortEngine.this.heartBeatCounter.incrementAndGet();
             } else {
                 // ACK packet
                 if (0x00 != ack) {
                     log.info("Received ack packet:{}", hexPack);
                     // Remove Sent Times
-                    writeMap.remove(ack);
+                    SerialPortEngine.this.ackMap.remove(ack);
                 }
                 // Common packet
                 if (0x00 != dataId) {

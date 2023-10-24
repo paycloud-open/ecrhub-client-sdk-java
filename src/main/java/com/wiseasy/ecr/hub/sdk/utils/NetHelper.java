@@ -39,15 +39,10 @@ public class NetHelper {
     }
 
     public static InetAddress getLocalhost() {
-        LinkedHashSet<InetAddress> addressList = NetUtil.localAddressList(address -> {
-            // 非loopback地址，指127.*.*.*的地址
-            return false == address.isLoopbackAddress()
-                    // 需为IPV4地址
-                    && address instanceof Inet4Address;
-        });
+        LinkedHashSet<InetAddress> addressList = NetUtil.localAddressList(address -> !address.isLoopbackAddress() && address instanceof Inet4Address);
         for (InetAddress address : addressList) {
             if (address.isSiteLocalAddress()) {
-                // 本地地址，指10.0.0.0 ~ 10.255.255.255、172.16.0.0 ~ 172.31.255.255、192.168.0.0 ~ 192.168.255.255
+                // Local address: 10.0.0.0 ~ 10.255.255.255、172.16.0.0 ~ 172.31.255.255、192.168.0.0 ~ 192.168.255.255
                 return address;
             }
         }
