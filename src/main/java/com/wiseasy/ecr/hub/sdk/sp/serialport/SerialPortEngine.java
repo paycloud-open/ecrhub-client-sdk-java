@@ -249,7 +249,7 @@ public class SerialPortEngine {
     private class ReadDataListener implements SerialPortDataListener {
 
         private final SerialPortPacketDecoder packDecoder = new SerialPortPacketDecoder();
-        private volatile byte lastReceivedDataId = 0x00;
+        private volatile String lastReceivedMsgId = null;
 
         @Override
         public int getListeningEvents() {
@@ -307,10 +307,7 @@ public class SerialPortEngine {
                     // Send data ACK packet
                     sendAck(dataId);
                     // Cache data
-                    if (lastReceivedDataId != dataId) {
-                        lastReceivedDataId = dataId;
-                        putCache(pack.getData());
-                    }
+                    putCache(pack.getData());
                 }
             }
         }
@@ -331,8 +328,13 @@ public class SerialPortEngine {
             } catch (Exception e) {
                 log.warn(e.getMessage(), e);
             }
-            if (respProto != null) {
-                MSG_CACHE.put(respProto.getMsgId(), data);
+            if (respProto == null) {
+                return;
+            }
+            String msgId = respProto.getMsgId();
+            if (StrUtil.isNotBlank(msgId) && !msgId.equals(lastReceivedMsgId)) {
+                lastReceivedMsgId = msgId;
+                MSG_CACHE.put(msgId, data);
             }
         }
     }
