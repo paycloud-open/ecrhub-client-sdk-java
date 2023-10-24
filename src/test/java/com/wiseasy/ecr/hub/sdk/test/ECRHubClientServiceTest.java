@@ -77,7 +77,7 @@ public class ECRHubClientServiceTest {
             @Override
             public boolean onPaired(ECRHubDevice device) {
                 System.out.println("onPaired :" + device);
-                return false;
+                return true;
             }
 
             /**

@@ -76,8 +76,8 @@ public class ECRHubDeviceStorage {
         storageFile = new File(path);
         if (!storageFile.exists()) {
             try {
-                boolean newFile = storageFile.createNewFile();
-                if (newFile) {
+                boolean success = storageFile.createNewFile();
+                if (success) {
                     log.debug("File created successfully, path: {}", path);
                 }
             } catch (IOException e) {

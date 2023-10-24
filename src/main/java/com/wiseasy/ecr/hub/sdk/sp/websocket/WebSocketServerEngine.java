@@ -41,7 +41,9 @@ public class WebSocketServerEngine extends WebSocketServer {
 
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        log.debug("socket open success: {}", conn.getRemoteSocketAddress());
+        if (log.isDebugEnabled()) {
+            log.debug("socket open success: {}", conn.getRemoteSocketAddress());
+        }
         if (null != clientListener) {
             clientListener.onOpen(conn);
         }
@@ -49,7 +51,9 @@ public class WebSocketServerEngine extends WebSocketServer {
 
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-        log.debug("socket onClose. code: {},reason:{},remote:{}", code, reason, remote);
+        if (log.isDebugEnabled()) {
+            log.debug("socket onClose. code: {},reason:{},remote:{}", code, reason, remote);
+        }
         if (null != clientListener) {
             clientListener.onClose(conn, code, reason, remote);
         }
@@ -57,7 +61,9 @@ public class WebSocketServerEngine extends WebSocketServer {
 
     @Override
     public void onMessage(WebSocket conn, String message) {
-        log.debug("socket onMessage. {}", message);
+        if (log.isDebugEnabled()) {
+            log.debug("socket onMessage. {}", message);
+        }
         if (null != clientListener) {
             clientListener.onMessage(conn, message);
         }

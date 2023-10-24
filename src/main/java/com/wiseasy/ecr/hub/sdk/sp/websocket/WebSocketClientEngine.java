@@ -1,7 +1,6 @@
 package com.wiseasy.ecr.hub.sdk.sp.websocket;
 
 import cn.hutool.cache.impl.FIFOCache;
-import cn.hutool.core.codec.Base64;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.StrUtil;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
@@ -44,19 +43,19 @@ public class WebSocketClientEngine extends WebSocketClient {
     @Override
     public void onMessage(String message) {
         byte[] bytes = message.getBytes(StandardCharsets.UTF_8);
-        log.info("onMessage:{}", Base64.encode(bytes));
-
+        if (log.isDebugEnabled()) {
+            log.debug("onMessage:{}", message);
+        }
         ECRHubResponseProto.ECRHubResponse respProto;
         try {
             respProto = ECRHubProtobufHelper.unpack(bytes);
         } catch (ECRHubException e) {
             throw new RuntimeException(e);
         }
-
         MSG_CACHE.put(respProto.getMsgId(), message);
     }
 
-    public String receive(String msgId,long startTime, long timeout) throws ECRHubTimeoutException {
+    public String receive(String msgId, long startTime, long timeout) throws ECRHubTimeoutException {
         while (true) {
             String msg = MSG_CACHE.get(msgId);
             if (StrUtil.isNotBlank(msg)) {
