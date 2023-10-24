@@ -44,7 +44,6 @@ public class SerialPortPacket {
     protected byte[] data;
     protected byte checkCode;
     protected byte[] end = HexUtil.hex2byte(PACK_TAIL);
-    protected String hexPack;
 
     public SerialPortPacket() {}
 
@@ -179,7 +178,6 @@ public class SerialPortPacket {
     }
 
     public SerialPortPacket decodeHex(String hexPack) {
-        this.hexPack = hexPack;
         SerialPortPacket pack = null;
         try {
             pack = decode(HexUtil.hex2byte(hexPack));

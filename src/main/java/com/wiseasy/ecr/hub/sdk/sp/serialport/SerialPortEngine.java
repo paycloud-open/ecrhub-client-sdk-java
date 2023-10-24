@@ -221,7 +221,11 @@ public class SerialPortEngine {
     }
 
     private class SendHeartbeatThread implements Runnable {
-        private final byte[] buffer = new SerialPortPacket.HeartBeatPacket().encode();
+        private final byte[] buffer;
+
+        private SendHeartbeatThread() {
+            this.buffer = new SerialPortPacket.HeartBeatPacket().encode();
+        }
 
         @Override
         public void run() {
@@ -264,20 +268,20 @@ public class SerialPortEngine {
             packDecoder.decode(buffer).forEach(hexPack -> {
                 SerialPortPacket pack = new SerialPortPacket().decodeHex(hexPack);
                 if (pack != null) {
-                    handlePack(pack);
+                    handlePack(pack, hexPack);
                 }
             });
         }
 
-        private void handlePack(SerialPortPacket pack) {
+        private void handlePack(SerialPortPacket pack, String hexPack) {
             switch (pack.packType) {
                 case SerialPortPacket.PACK_TYPE_HANDSHAKE_CONFIRM:
                     // Handshake confirm packet
-                    handleHandshakeConfirmPack(pack);
+                    handshakeConfirm = true;
                     break;
                 case SerialPortPacket.PACK_TYPE_COMMON:
                     // Common packet
-                    handleCommonPack(pack);
+                    handleCommonPack(pack, hexPack);
                     break;
                 default:
                     // Other packet, ignore
@@ -285,34 +289,30 @@ public class SerialPortEngine {
             }
         }
 
-        private void handleHandshakeConfirmPack(SerialPortPacket pack) {
-            handshakeConfirm = true;
-        }
-
-        private void handleCommonPack(SerialPortPacket pack) {
+        private void handleCommonPack(SerialPortPacket pack, String hexPack) {
             byte ack = pack.getAck();
             byte dataId = pack.getId();
             if (0x00 == ack && 0x00 == dataId) {
                 // Heartbeat packet
-                log.debug("Received heartbeat packet:{}", pack.hexPack);
+                log.debug("Received heartbeat packet:{}", hexPack);
                 heartBeatCounter.incrementAndGet();
             } else {
                 // ACK packet
                 if (0x00 != ack) {
-                    log.info("Received ack packet:{}", pack.hexPack);
+                    log.info("Received ack packet:{}", hexPack);
                     // Remove Sent Times
                     writeMap.remove(ack);
                 }
                 // Common packet
                 if (0x00 != dataId) {
                     // Data packet
-                    log.info("Received data packet:{}", pack.hexPack);
+                    log.info("Received data packet:{}", hexPack);
                     // Send data ACK packet
                     sendAck(dataId);
                     // Cache data
                     if (lastReceivedDataId != dataId) {
                         lastReceivedDataId = dataId;
-                        putCache(pack.data);
+                        putCache(pack.getData());
                     }
                 }
             }
