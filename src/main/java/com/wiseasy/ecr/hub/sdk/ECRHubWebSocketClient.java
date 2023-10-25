@@ -97,7 +97,7 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
         ECRHubConfig config = Optional.ofNullable(request.getConfig()).orElse(super.getConfig());
         long timeout = config.getSocketConfig().getReadTimeout();
 
-        String msg = engine.receive(request.getMsg_id(), System.currentTimeMillis(), timeout);
+        String msg = engine.receive(request.getRequest_id(), System.currentTimeMillis(), timeout);
         return decodeRespPack(msg.getBytes(StandardCharsets.UTF_8), request.getResponseClass());
     }
 }

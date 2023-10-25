@@ -13,10 +13,10 @@ import java.util.Map;
 public abstract class ECRHubRequest<T extends ECRHubResponse> {
 
     /**
-     * Message ID, used to receive the corresponding response. The caller needs to remain unique.
+     * Transaction request ID, used to receive the corresponding response. The caller needs to remain unique.
      */
-    @JSONField(name = "msgId")
-    private String msg_id;
+    @JSONField(name = "requestId")
+    private String request_id;
     /**
      * Version number, temporarily fixed: 1.0
      */
@@ -65,15 +65,15 @@ public abstract class ECRHubRequest<T extends ECRHubResponse> {
         this.config = config;
     }
 
-    public String getMsg_id() {
-        if (StrUtil.isBlank(msg_id)) {
-            msg_id = IdUtil.fastSimpleUUID();
+    public String getRequest_id() {
+        if (StrUtil.isBlank(request_id)) {
+            request_id = IdUtil.fastSimpleUUID();
         }
-        return msg_id;
+        return request_id;
     }
 
-    public void setMsg_id(String msg_id) {
-        this.msg_id = msg_id;
+    public void setRequest_id(String request_id) {
+        this.request_id = request_id;
     }
 
     public String getVersion() {

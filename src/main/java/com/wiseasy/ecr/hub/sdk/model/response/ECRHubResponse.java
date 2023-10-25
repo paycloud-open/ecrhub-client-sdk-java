@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class ECRHubResponse {
     /**
-     * Message ID, used to receive the corresponding response. The caller needs to remain unique.
+     * Transaction request ID, used to receive the corresponding response. The caller needs to remain unique.
      */
-    @JSONField(name = "msgId")
-    private String msg_id;
+    @JSONField(name = "requestId")
+    private String request_id;
     /**
      * Execution status, true:success, false:failure
      */
@@ -32,12 +32,12 @@ public class ECRHubResponse {
     @JSONField(name = "deviceData")
     private DeviceData device_data;
 
-    public String getMsg_id() {
-        return msg_id;
+    public String getRequest_id() {
+        return request_id;
     }
 
-    public void setMsg_id(String msg_id) {
-        this.msg_id = msg_id;
+    public void setRequest_id(String request_id) {
+        this.request_id = request_id;
     }
 
     public boolean isSuccess() {

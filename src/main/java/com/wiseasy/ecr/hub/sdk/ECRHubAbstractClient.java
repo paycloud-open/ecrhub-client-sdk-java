@@ -34,7 +34,7 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
     @Override
     public <T extends ECRHubResponse> T execute(ECRHubRequest<T> request) throws ECRHubException {
         if (StrUtil.isBlank(request.getApp_id())) {
-            throw new ECRHubException("AppId cannot be empty.");
+            throw new ECRHubException("Payment AppId cannot be empty.");
         }
         sendReq(request);
         return getResp(request);
@@ -43,7 +43,7 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
     @Override
     public <T extends ECRHubResponse> void asyncExecute(ECRHubRequest<T> request, ECRHubResponseCallBack<T> callback) throws ECRHubException {
         if (StrUtil.isBlank(request.getApp_id())) {
-            throw new ECRHubException("AppId cannot be empty.");
+            throw new ECRHubException("Payment AppId cannot be empty.");
         }
         sendReq(request);
         ThreadUtil.execute(() -> {
@@ -106,7 +106,7 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
             JSONObject bizDataJson = ECRHubProtobufHelper.proto2Json(bizData);
 
             T resp = bizDataJson.toJavaObject(respClass);
-            resp.setMsg_id(respProto.getMsgId());
+            resp.setRequest_id(respProto.getMsgId());
             resp.setSuccess(respProto.getSuccess());
             resp.setError_msg(respProto.getErrorMsg());
             resp.setDevice_data(device);

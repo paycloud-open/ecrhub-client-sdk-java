@@ -35,12 +35,12 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         long startTime = System.currentTimeMillis();
         lock.lock();
         try {
-            log.info("Connecting...");
+            log.info("Serial port connecting...");
 
             engine.connect(startTime);
             ECRHubResponse response = pair(startTime);
 
-            log.info("Connection successful");
+            log.info("Serial port connection successful.");
 
             return response;
         } finally {
@@ -62,11 +62,11 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     public boolean disconnect() throws ECRHubException {
         lock.lock();
         try {
-            log.info("Disconnecting...");
+            log.info("Serial port disconnecting...");
 
             boolean isClosed = engine.close();
             if (isClosed) {
-                log.info("Disconnect successful");
+                log.info("Serial port disconnect successful.");
             }
 
             return isClosed;
@@ -79,7 +79,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         if (!isConnected()) {
             boolean success = connect();
             if (!success) {
-                throw new ECRHubException("The serial port is not connected.");
+                throw new ECRHubException("Serial port is not connected.");
             }
         }
     }
@@ -107,7 +107,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         ECRHubConfig config = Optional.ofNullable(request.getConfig()).orElse(super.getConfig());
         long timeout = config.getSerialPortConfig().getReadTimeout();
 
-        byte[] buffer = engine.read(request.getMsg_id(), System.currentTimeMillis(), timeout);
+        byte[] buffer = engine.read(request.getRequest_id(), System.currentTimeMillis(), timeout);
         return decodeRespPack(buffer, request.getResponseClass());
     }
 }

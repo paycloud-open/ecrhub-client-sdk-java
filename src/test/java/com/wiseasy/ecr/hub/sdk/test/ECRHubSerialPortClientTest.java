@@ -4,6 +4,7 @@ import com.wiseasy.ecr.hub.sdk.ECRHubClient;
 import com.wiseasy.ecr.hub.sdk.ECRHubClientFactory;
 import com.wiseasy.ecr.hub.sdk.ECRHubConfig;
 import com.wiseasy.ecr.hub.sdk.ECRHubResponseCallBack;
+import com.wiseasy.ecr.hub.sdk.enums.EPayMethodCategory;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
 import com.wiseasy.ecr.hub.sdk.model.request.CloseRequest;
@@ -44,7 +45,8 @@ public class ECRHubSerialPortClientTest {
         request.setApp_id(APP_ID);
         request.setMerchant_order_no("O" + System.currentTimeMillis());
         request.setOrder_amount("10");
-        request.setPay_method_category("BANKCARD");
+        request.setPay_method_category(EPayMethodCategory.BANKCARD.getVal());
+        request.setConfirm_on_terminal(true);
         request.setConfig(requestConfig);
 
         // Execute purchase request

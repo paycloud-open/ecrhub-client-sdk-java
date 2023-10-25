@@ -55,11 +55,11 @@ public class WebSocketClientEngine extends WebSocketClient {
         MSG_CACHE.put(respProto.getMsgId(), message);
     }
 
-    public String receive(String msgId, long startTime, long timeout) throws ECRHubTimeoutException {
+    public String receive(String requestId, long startTime, long timeout) throws ECRHubTimeoutException {
         while (true) {
-            String msg = MSG_CACHE.get(msgId);
+            String msg = MSG_CACHE.get(requestId);
             if (StrUtil.isNotBlank(msg)) {
-                MSG_CACHE.remove(msgId);
+                MSG_CACHE.remove(requestId);
                 return msg;
             } else {
                 ThreadUtil.safeSleep(20);
