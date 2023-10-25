@@ -23,9 +23,11 @@ public class ECRHubClientFactory {
 
         if (url.startsWith(SERIAL_PORT_PROTOCOL_PREFIX)) {
             return new ECRHubSerialPortClient(url.substring(SERIAL_PORT_PROTOCOL_PREFIX.length()), config);
-        } else if (url.startsWith(WEB_SOCKET_PROTOCOL_PREFIX) || url.startsWith(WEB_SOCKET_SSL_PROTOCOL_PREFIX)) {
+        }
+        else if (url.startsWith(WEB_SOCKET_PROTOCOL_PREFIX) || url.startsWith(WEB_SOCKET_SSL_PROTOCOL_PREFIX)) {
             return new ECRHubWebSocketClient(url, config);
-        } else {
+        }
+        else {
             throw new ECRHubException("Invalid url:" + url);
         }
     }

@@ -52,7 +52,7 @@ public class WebSocketClientEngine extends WebSocketClient {
         } catch (ECRHubException e) {
             throw new RuntimeException(e);
         }
-        MSG_CACHE.put(respProto.getMsgId(), message);
+        MSG_CACHE.put(respProto.getRequestId(), message);
     }
 
     public String receive(String requestId, long startTime, long timeout) throws ECRHubTimeoutException {

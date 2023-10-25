@@ -172,7 +172,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             String msgId = IdUtil.fastSimpleUUID();
             engine.send(new String(ECRHubRequestProto.ECRHubRequest.newBuilder()
                     .setTopic(ETopic.UN_PAIR.getValue())
-                    .setMsgId(msgId)
+                    .setRequestId(msgId)
                     .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
                             .setMacAddress(NetHelper.getLocalMacAddress())
                             .build())
@@ -263,7 +263,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
 
             socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
                     .setTimestamp(String.valueOf(System.currentTimeMillis()))
-                    .setMsgId(IdUtil.fastSimpleUUID())
+                    .setRequestId(IdUtil.fastSimpleUUID())
                     .setTopic(ETopic.PAIR.getValue())
                     .setSuccess(success)
                     .build().toByteArray()));
@@ -272,7 +272,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             storage.addPairedDevice(device.getTerminal_sn());
             socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
                     .setTimestamp(String.valueOf(System.currentTimeMillis()))
-                    .setMsgId(IdUtil.fastSimpleUUID())
+                    .setRequestId(IdUtil.fastSimpleUUID())
                     .setTopic(ETopic.PAIR.getValue())
                     .setSuccess(true)
                     .build().toByteArray()));
@@ -282,7 +282,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
     private void cancelPair(WebSocket socket, ECRHubDevice device) {
         socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
                 .setTimestamp(String.valueOf(System.currentTimeMillis()))
-                .setMsgId(IdUtil.fastSimpleUUID())
+                .setRequestId(IdUtil.fastSimpleUUID())
                 .setTopic(ETopic.UN_PAIR.getValue())
                 .setSuccess(true)
                 .build().toByteArray()));

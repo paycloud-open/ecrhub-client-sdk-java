@@ -17,7 +17,7 @@ public class ECRHubProtobufHelper {
     public static byte[] pack(ECRHubRequest request) throws ECRHubException {
         return ECRHubRequestProto.ECRHubRequest.newBuilder()
                 .setTimestamp(String.valueOf(System.currentTimeMillis()))
-                .setMsgId(request.getRequest_id())
+                .setRequestId(request.getRequest_id())
                 .setVersion(request.getVersion())
                 .setAppId(request.getApp_id())
                 .setTopic(request.getTopic())
@@ -26,8 +26,8 @@ public class ECRHubProtobufHelper {
                 .setPrinterData(buildPrintData(request))
                 .setNotifyData(buildNotifyData(request))
                 .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
-                        .setMacAddress(NetHelper.getLocalMacAddress())
-                        .build())
+                              .setMacAddress(NetHelper.getLocalMacAddress())
+                              .build())
                 .build().toByteArray();
     }
 

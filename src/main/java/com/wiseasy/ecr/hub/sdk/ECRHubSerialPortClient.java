@@ -88,7 +88,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     protected byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
         long timeout = getConfig().getSerialPortConfig().getConnTimeout();
         engine.write(request.toByteArray(), startTime, timeout);
-        return engine.read(request.getMsgId(), startTime, timeout);
+        return engine.read(request.getRequestId(), startTime, timeout);
     }
 
     @Override

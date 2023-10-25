@@ -82,7 +82,7 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
 
         return ECRHubRequestProto.ECRHubRequest.newBuilder()
                 .setTimestamp(String.valueOf(System.currentTimeMillis()))
-                .setMsgId(IdUtil.fastSimpleUUID())
+                .setRequestId(IdUtil.fastSimpleUUID())
                 .setTopic(ETopic.PAIR.getValue())
                 .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
                               .setDeviceName(hostName)
@@ -106,7 +106,7 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
             JSONObject bizDataJson = ECRHubProtobufHelper.proto2Json(bizData);
 
             T resp = bizDataJson.toJavaObject(respClass);
-            resp.setRequest_id(respProto.getMsgId());
+            resp.setRequest_id(respProto.getRequestId());
             resp.setSuccess(respProto.getSuccess());
             resp.setError_msg(respProto.getErrorMsg());
             resp.setDevice_data(device);

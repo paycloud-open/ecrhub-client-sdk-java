@@ -43,24 +43,24 @@ public final class ECRHubResponseProto {
     /**
      * <pre>
      **
-     *Message ID, used to track the sending and returning of orders
+     *Transaction Request ID, used to track the sending and returning of orders
      * </pre>
      *
-     * <code>string msg_id = 2;</code>
-     * @return The msgId.
+     * <code>string request_id = 2;</code>
+     * @return The requestId.
      */
-    java.lang.String getMsgId();
+    java.lang.String getRequestId();
     /**
      * <pre>
      **
-     *Message ID, used to track the sending and returning of orders
+     *Transaction Request ID, used to track the sending and returning of orders
      * </pre>
      *
-     * <code>string msg_id = 2;</code>
-     * @return The bytes for msgId.
+     * <code>string request_id = 2;</code>
+     * @return The bytes for requestId.
      */
     com.google.protobuf.ByteString
-        getMsgIdBytes();
+        getRequestIdBytes();
 
     /**
      * <pre>
@@ -235,7 +235,7 @@ public final class ECRHubResponseProto {
     }
     private ECRHubResponse() {
       topic_ = "";
-      msgId_ = "";
+      requestId_ = "";
       appId_ = "";
       timestamp_ = "";
       errorMsg_ = "";
@@ -312,49 +312,49 @@ public final class ECRHubResponseProto {
       }
     }
 
-    public static final int MSG_ID_FIELD_NUMBER = 2;
+    public static final int REQUEST_ID_FIELD_NUMBER = 2;
     @SuppressWarnings("serial")
-    private volatile java.lang.Object msgId_ = "";
+    private volatile java.lang.Object requestId_ = "";
     /**
      * <pre>
      **
-     *Message ID, used to track the sending and returning of orders
+     *Transaction Request ID, used to track the sending and returning of orders
      * </pre>
      *
-     * <code>string msg_id = 2;</code>
-     * @return The msgId.
+     * <code>string request_id = 2;</code>
+     * @return The requestId.
      */
     @java.lang.Override
-    public java.lang.String getMsgId() {
-      java.lang.Object ref = msgId_;
+    public java.lang.String getRequestId() {
+      java.lang.Object ref = requestId_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        msgId_ = s;
+        requestId_ = s;
         return s;
       }
     }
     /**
      * <pre>
      **
-     *Message ID, used to track the sending and returning of orders
+     *Transaction Request ID, used to track the sending and returning of orders
      * </pre>
      *
-     * <code>string msg_id = 2;</code>
-     * @return The bytes for msgId.
+     * <code>string request_id = 2;</code>
+     * @return The bytes for requestId.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getMsgIdBytes() {
-      java.lang.Object ref = msgId_;
+        getRequestIdBytes() {
+      java.lang.Object ref = requestId_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        msgId_ = b;
+        requestId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -672,8 +672,8 @@ public final class ECRHubResponseProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(topic_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, topic_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(requestId_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, requestId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(appId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, appId_);
@@ -708,8 +708,8 @@ public final class ECRHubResponseProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(topic_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, topic_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msgId_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, msgId_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(requestId_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, requestId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(appId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, appId_);
@@ -752,8 +752,8 @@ public final class ECRHubResponseProto {
 
       if (!getTopic()
           .equals(other.getTopic())) return false;
-      if (!getMsgId()
-          .equals(other.getMsgId())) return false;
+      if (!getRequestId()
+          .equals(other.getRequestId())) return false;
       if (!getAppId()
           .equals(other.getAppId())) return false;
       if (!getTimestamp()
@@ -787,8 +787,8 @@ public final class ECRHubResponseProto {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TOPIC_FIELD_NUMBER;
       hash = (53 * hash) + getTopic().hashCode();
-      hash = (37 * hash) + MSG_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getMsgId().hashCode();
+      hash = (37 * hash) + REQUEST_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getRequestId().hashCode();
       hash = (37 * hash) + APP_ID_FIELD_NUMBER;
       hash = (53 * hash) + getAppId().hashCode();
       hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
@@ -947,7 +947,7 @@ public final class ECRHubResponseProto {
         super.clear();
         bitField0_ = 0;
         topic_ = "";
-        msgId_ = "";
+        requestId_ = "";
         appId_ = "";
         timestamp_ = "";
         success_ = false;
@@ -1000,7 +1000,7 @@ public final class ECRHubResponseProto {
           result.topic_ = topic_;
         }
         if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.msgId_ = msgId_;
+          result.requestId_ = requestId_;
         }
         if (((from_bitField0_ & 0x00000004) != 0)) {
           result.appId_ = appId_;
@@ -1082,8 +1082,8 @@ public final class ECRHubResponseProto {
           bitField0_ |= 0x00000001;
           onChanged();
         }
-        if (!other.getMsgId().isEmpty()) {
-          msgId_ = other.msgId_;
+        if (!other.getRequestId().isEmpty()) {
+          requestId_ = other.requestId_;
           bitField0_ |= 0x00000002;
           onChanged();
         }
@@ -1148,7 +1148,7 @@ public final class ECRHubResponseProto {
                 break;
               } // case 10
               case 18: {
-                msgId_ = input.readStringRequireUtf8();
+                requestId_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000002;
                 break;
               } // case 18
@@ -1305,23 +1305,23 @@ public final class ECRHubResponseProto {
         return this;
       }
 
-      private java.lang.Object msgId_ = "";
+      private java.lang.Object requestId_ = "";
       /**
        * <pre>
        **
-       *Message ID, used to track the sending and returning of orders
+       *Transaction Request ID, used to track the sending and returning of orders
        * </pre>
        *
-       * <code>string msg_id = 2;</code>
-       * @return The msgId.
+       * <code>string request_id = 2;</code>
+       * @return The requestId.
        */
-      public java.lang.String getMsgId() {
-        java.lang.Object ref = msgId_;
+      public java.lang.String getRequestId() {
+        java.lang.Object ref = requestId_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          msgId_ = s;
+          requestId_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -1330,20 +1330,20 @@ public final class ECRHubResponseProto {
       /**
        * <pre>
        **
-       *Message ID, used to track the sending and returning of orders
+       *Transaction Request ID, used to track the sending and returning of orders
        * </pre>
        *
-       * <code>string msg_id = 2;</code>
-       * @return The bytes for msgId.
+       * <code>string request_id = 2;</code>
+       * @return The bytes for requestId.
        */
       public com.google.protobuf.ByteString
-          getMsgIdBytes() {
-        java.lang.Object ref = msgId_;
+          getRequestIdBytes() {
+        java.lang.Object ref = requestId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          msgId_ = b;
+          requestId_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
@@ -1352,17 +1352,17 @@ public final class ECRHubResponseProto {
       /**
        * <pre>
        **
-       *Message ID, used to track the sending and returning of orders
+       *Transaction Request ID, used to track the sending and returning of orders
        * </pre>
        *
-       * <code>string msg_id = 2;</code>
-       * @param value The msgId to set.
+       * <code>string request_id = 2;</code>
+       * @param value The requestId to set.
        * @return This builder for chaining.
        */
-      public Builder setMsgId(
+      public Builder setRequestId(
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
-        msgId_ = value;
+        requestId_ = value;
         bitField0_ |= 0x00000002;
         onChanged();
         return this;
@@ -1370,14 +1370,14 @@ public final class ECRHubResponseProto {
       /**
        * <pre>
        **
-       *Message ID, used to track the sending and returning of orders
+       *Transaction Request ID, used to track the sending and returning of orders
        * </pre>
        *
-       * <code>string msg_id = 2;</code>
+       * <code>string request_id = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearMsgId() {
-        msgId_ = getDefaultInstance().getMsgId();
+      public Builder clearRequestId() {
+        requestId_ = getDefaultInstance().getRequestId();
         bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
@@ -1385,18 +1385,18 @@ public final class ECRHubResponseProto {
       /**
        * <pre>
        **
-       *Message ID, used to track the sending and returning of orders
+       *Transaction Request ID, used to track the sending and returning of orders
        * </pre>
        *
-       * <code>string msg_id = 2;</code>
-       * @param value The bytes for msgId to set.
+       * <code>string request_id = 2;</code>
+       * @param value The bytes for requestId to set.
        * @return This builder for chaining.
        */
-      public Builder setMsgIdBytes(
+      public Builder setRequestIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
-        msgId_ = value;
+        requestId_ = value;
         bitField0_ |= 0x00000002;
         onChanged();
         return this;
@@ -7130,31 +7130,31 @@ java.lang.String defaultValue) {
   static {
     java.lang.String[] descriptorData = {
       "\n\030ECRHubResponseData.proto\022 com.wiseasy." +
-      "ecr.hub.sdk.protobuf\"\227\002\n\016ECRHubResponse\022" +
-      "\r\n\005topic\030\001 \001(\t\022\016\n\006msg_id\030\002 \001(\t\022\016\n\006app_id" +
-      "\030\003 \001(\t\022\021\n\ttimestamp\030\004 \001(\t\022\017\n\007success\030\005 \001" +
-      "(\010\022\021\n\terror_msg\030\006 \001(\t\022\017\n\007version\030\007 \001(\t\022C" +
-      "\n\010biz_data\030\010 \001(\01321.com.wiseasy.ecr.hub.s" +
-      "dk.protobuf.ResponseBizData\022I\n\013device_da" +
-      "ta\030\t \001(\01324.com.wiseasy.ecr.hub.sdk.proto" +
-      "buf.ResponseDeviceData\"N\n\022ResponseDevice" +
-      "Data\022\020\n\010app_name\030\001 \001(\t\022\021\n\tdevice_sn\030\002 \001(" +
-      "\t\022\023\n\013app_version\030\003 \001(\t\"\217\004\n\017ResponseBizDa" +
-      "ta\022\031\n\021merchant_order_no\030\001 \001(\t\022\024\n\014order_a" +
-      "mount\030\002 \001(\t\022\020\n\010trans_no\030\003 \001(\t\022\026\n\016price_c" +
-      "urrency\030\004 \001(\t\022\022\n\ntrans_type\030\005 \001(\t\022\020\n\010sto" +
-      "re_no\030\006 \001(\t\022\024\n\014pay_scenario\030\007 \001(\t\022\024\n\014tra" +
-      "ns_status\030\010 \001(\t\022\034\n\024pay_channel_trans_no\030" +
-      "\t \001(\t\022\033\n\023pay_user_account_id\030\n \001(\t\022\023\n\013pa" +
-      "id_amount\030\013 \001(\t\022\026\n\016trans_end_time\030\014 \001(\t\022" +
-      "\025\n\rpay_method_id\030\r \001(\t\022\026\n\016discount_bmopc" +
-      "\030\016 \001(\t\022\024\n\014discount_bpc\030\017 \001(\t\022\\\n\016extends_" +
-      "params\030\020 \003(\0132D.com.wiseasy.ecr.hub.sdk.p" +
-      "rotobuf.ResponseBizData.ExtendsParamsEnt" +
-      "ry\022\016\n\006attach\030\021 \001(\t\0324\n\022ExtendsParamsEntry" +
-      "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B7\n com." +
-      "wiseasy.ecr.hub.sdk.protobufB\023ECRHubResp" +
-      "onseProtob\006proto3"
+      "ecr.hub.sdk.protobuf\"\233\002\n\016ECRHubResponse\022" +
+      "\r\n\005topic\030\001 \001(\t\022\022\n\nrequest_id\030\002 \001(\t\022\016\n\006ap" +
+      "p_id\030\003 \001(\t\022\021\n\ttimestamp\030\004 \001(\t\022\017\n\007success" +
+      "\030\005 \001(\010\022\021\n\terror_msg\030\006 \001(\t\022\017\n\007version\030\007 \001" +
+      "(\t\022C\n\010biz_data\030\010 \001(\01321.com.wiseasy.ecr.h" +
+      "ub.sdk.protobuf.ResponseBizData\022I\n\013devic" +
+      "e_data\030\t \001(\01324.com.wiseasy.ecr.hub.sdk.p" +
+      "rotobuf.ResponseDeviceData\"N\n\022ResponseDe" +
+      "viceData\022\020\n\010app_name\030\001 \001(\t\022\021\n\tdevice_sn\030" +
+      "\002 \001(\t\022\023\n\013app_version\030\003 \001(\t\"\217\004\n\017ResponseB" +
+      "izData\022\031\n\021merchant_order_no\030\001 \001(\t\022\024\n\014ord" +
+      "er_amount\030\002 \001(\t\022\020\n\010trans_no\030\003 \001(\t\022\026\n\016pri" +
+      "ce_currency\030\004 \001(\t\022\022\n\ntrans_type\030\005 \001(\t\022\020\n" +
+      "\010store_no\030\006 \001(\t\022\024\n\014pay_scenario\030\007 \001(\t\022\024\n" +
+      "\014trans_status\030\010 \001(\t\022\034\n\024pay_channel_trans" +
+      "_no\030\t \001(\t\022\033\n\023pay_user_account_id\030\n \001(\t\022\023" +
+      "\n\013paid_amount\030\013 \001(\t\022\026\n\016trans_end_time\030\014 " +
+      "\001(\t\022\025\n\rpay_method_id\030\r \001(\t\022\026\n\016discount_b" +
+      "mopc\030\016 \001(\t\022\024\n\014discount_bpc\030\017 \001(\t\022\\\n\016exte" +
+      "nds_params\030\020 \003(\0132D.com.wiseasy.ecr.hub.s" +
+      "dk.protobuf.ResponseBizData.ExtendsParam" +
+      "sEntry\022\016\n\006attach\030\021 \001(\t\0324\n\022ExtendsParamsE" +
+      "ntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B7\n " +
+      "com.wiseasy.ecr.hub.sdk.protobufB\023ECRHub" +
+      "ResponseProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -7165,7 +7165,7 @@ java.lang.String defaultValue) {
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ECRHubResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ECRHubResponse_descriptor,
-        new java.lang.String[] { "Topic", "MsgId", "AppId", "Timestamp", "Success", "ErrorMsg", "Version", "BizData", "DeviceData", });
+        new java.lang.String[] { "Topic", "RequestId", "AppId", "Timestamp", "Success", "ErrorMsg", "Version", "BizData", "DeviceData", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseDeviceData_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseDeviceData_fieldAccessorTable = new

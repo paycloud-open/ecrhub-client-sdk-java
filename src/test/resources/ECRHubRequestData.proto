@@ -8,9 +8,9 @@ message ECRHubRequest {
    */
   string topic = 1;
   /**
-  Message ID, used to track the sending and returning of orders
+  Transaction Request ID, used to track the sending and returning of orders
    */
-  string msg_id = 2;
+  string request_id = 2;
   /**
   AppID of payment application
   */

@@ -331,7 +331,7 @@ public class SerialPortEngine {
             if (respProto == null) {
                 return;
             }
-            String requestId = respProto.getMsgId();
+            String requestId = respProto.getRequestId();
             if (StrUtil.isNotBlank(requestId) && !requestId.equals(lastReceivedRequestId)) {
                 lastReceivedRequestId = requestId;
                 MSG_CACHE.put(requestId, data);
