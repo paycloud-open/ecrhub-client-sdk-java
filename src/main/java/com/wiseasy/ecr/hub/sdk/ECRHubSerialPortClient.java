@@ -64,12 +64,12 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         try {
             log.info("Serial port disconnecting...");
 
-            boolean isClosed = engine.close();
-            if (isClosed) {
+            boolean success = engine.disconnect();
+            if (success) {
                 log.info("Serial port disconnect successful.");
             }
 
-            return isClosed;
+            return success;
         } finally {
             lock.unlock();
         }

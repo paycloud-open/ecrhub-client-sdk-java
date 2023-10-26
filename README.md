@@ -9,7 +9,7 @@ Help Java developers quickly use ECRHubClient SDK to achieve LAN cross-device se
 - **Automatic pair:** This SDK automatically pairs by default, ECR developers do not need to develop additional pairing functions and pairing management interface.
 - **USB serial port：**
     - Automatic port discovery: This SDK supports automatic serial port discovery capability. When creating ECRHubClient, if the serial port name is: "sp://", the SDK will automatically find the available serial ports and then connect them.
-    - Automatic reconnection: This SDK supports heartbeat connection detection, detecting heartbeat once every 30 seconds, if the heartbeat request is not received from ECRHub, it will disconnect and wait for the next transaction request to automatically establish a connection and initiate the transaction.
+    - Automatic reconnection: This SDK supports heartbeat connection detection, detecting heartbeat once every 15 seconds, if the heartbeat request is not received from ECRHub, it will disconnect and wait for the next transaction request to automatically establish a connection and initiate the transaction.
 
 
 ## Getting Started
