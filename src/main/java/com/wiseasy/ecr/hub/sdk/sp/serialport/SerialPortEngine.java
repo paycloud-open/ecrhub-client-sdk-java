@@ -62,7 +62,7 @@ public class SerialPortEngine {
             if (port != null) {
                 return port;
             } else {
-                throw new ECRHubException("Serial port not found, please confirm the USB cable is connected.");
+                throw new ECRHubException("Serial port not found, please check the USB cable is connected or POS terminal cashier app launched.");
             }
         }
     }
