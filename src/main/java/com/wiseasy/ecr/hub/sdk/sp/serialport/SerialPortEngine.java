@@ -117,7 +117,7 @@ public class SerialPortEngine {
                 throw new ECRHubException("Serial port[" + portName +"] opening failed.");
             }
 
-            log.info("Serial port[{}] successful opened.", portName);
+            log.info("Serial port[{}] open successful.", portName);
         }
     }
 
