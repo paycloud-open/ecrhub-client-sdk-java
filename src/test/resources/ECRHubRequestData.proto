@@ -175,3 +175,4 @@ message NotifyData {
   */
   string sound = 4;
 }
+

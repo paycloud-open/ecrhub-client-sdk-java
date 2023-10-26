@@ -1853,10 +1853,32 @@ public final class ECRHubResponseProto {
     /**
      * <pre>
      **
+     *mac address
+     * </pre>
+     *
+     * <code>string mac_address = 1;</code>
+     * @return The macAddress.
+     */
+    java.lang.String getMacAddress();
+    /**
+     * <pre>
+     **
+     *mac address
+     * </pre>
+     *
+     * <code>string mac_address = 1;</code>
+     * @return The bytes for macAddress.
+     */
+    com.google.protobuf.ByteString
+        getMacAddressBytes();
+
+    /**
+     * <pre>
+     **
      *server name
      * </pre>
      *
-     * <code>string app_name = 1;</code>
+     * <code>string app_name = 2;</code>
      * @return The appName.
      */
     java.lang.String getAppName();
@@ -1866,7 +1888,7 @@ public final class ECRHubResponseProto {
      *server name
      * </pre>
      *
-     * <code>string app_name = 1;</code>
+     * <code>string app_name = 2;</code>
      * @return The bytes for appName.
      */
     com.google.protobuf.ByteString
@@ -1878,7 +1900,7 @@ public final class ECRHubResponseProto {
      *device sn
      * </pre>
      *
-     * <code>string device_sn = 2;</code>
+     * <code>string device_sn = 3;</code>
      * @return The deviceSn.
      */
     java.lang.String getDeviceSn();
@@ -1888,7 +1910,7 @@ public final class ECRHubResponseProto {
      *device sn
      * </pre>
      *
-     * <code>string device_sn = 2;</code>
+     * <code>string device_sn = 3;</code>
      * @return The bytes for deviceSn.
      */
     com.google.protobuf.ByteString
@@ -1900,7 +1922,7 @@ public final class ECRHubResponseProto {
      *app version name
      * </pre>
      *
-     * <code>string app_version = 3;</code>
+     * <code>string app_version = 4;</code>
      * @return The appVersion.
      */
     java.lang.String getAppVersion();
@@ -1910,7 +1932,7 @@ public final class ECRHubResponseProto {
      *app version name
      * </pre>
      *
-     * <code>string app_version = 3;</code>
+     * <code>string app_version = 4;</code>
      * @return The bytes for appVersion.
      */
     com.google.protobuf.ByteString
@@ -1929,6 +1951,7 @@ public final class ECRHubResponseProto {
       super(builder);
     }
     private ResponseDeviceData() {
+      macAddress_ = "";
       appName_ = "";
       deviceSn_ = "";
       appVersion_ = "";
@@ -1954,7 +1977,56 @@ public final class ECRHubResponseProto {
               com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData.Builder.class);
     }
 
-    public static final int APP_NAME_FIELD_NUMBER = 1;
+    public static final int MAC_ADDRESS_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object macAddress_ = "";
+    /**
+     * <pre>
+     **
+     *mac address
+     * </pre>
+     *
+     * <code>string mac_address = 1;</code>
+     * @return The macAddress.
+     */
+    @java.lang.Override
+    public java.lang.String getMacAddress() {
+      java.lang.Object ref = macAddress_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        macAddress_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     **
+     *mac address
+     * </pre>
+     *
+     * <code>string mac_address = 1;</code>
+     * @return The bytes for macAddress.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMacAddressBytes() {
+      java.lang.Object ref = macAddress_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        macAddress_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int APP_NAME_FIELD_NUMBER = 2;
     @SuppressWarnings("serial")
     private volatile java.lang.Object appName_ = "";
     /**
@@ -1963,7 +2035,7 @@ public final class ECRHubResponseProto {
      *server name
      * </pre>
      *
-     * <code>string app_name = 1;</code>
+     * <code>string app_name = 2;</code>
      * @return The appName.
      */
     @java.lang.Override
@@ -1985,7 +2057,7 @@ public final class ECRHubResponseProto {
      *server name
      * </pre>
      *
-     * <code>string app_name = 1;</code>
+     * <code>string app_name = 2;</code>
      * @return The bytes for appName.
      */
     @java.lang.Override
@@ -2003,7 +2075,7 @@ public final class ECRHubResponseProto {
       }
     }
 
-    public static final int DEVICE_SN_FIELD_NUMBER = 2;
+    public static final int DEVICE_SN_FIELD_NUMBER = 3;
     @SuppressWarnings("serial")
     private volatile java.lang.Object deviceSn_ = "";
     /**
@@ -2012,7 +2084,7 @@ public final class ECRHubResponseProto {
      *device sn
      * </pre>
      *
-     * <code>string device_sn = 2;</code>
+     * <code>string device_sn = 3;</code>
      * @return The deviceSn.
      */
     @java.lang.Override
@@ -2034,7 +2106,7 @@ public final class ECRHubResponseProto {
      *device sn
      * </pre>
      *
-     * <code>string device_sn = 2;</code>
+     * <code>string device_sn = 3;</code>
      * @return The bytes for deviceSn.
      */
     @java.lang.Override
@@ -2052,7 +2124,7 @@ public final class ECRHubResponseProto {
       }
     }
 
-    public static final int APP_VERSION_FIELD_NUMBER = 3;
+    public static final int APP_VERSION_FIELD_NUMBER = 4;
     @SuppressWarnings("serial")
     private volatile java.lang.Object appVersion_ = "";
     /**
@@ -2061,7 +2133,7 @@ public final class ECRHubResponseProto {
      *app version name
      * </pre>
      *
-     * <code>string app_version = 3;</code>
+     * <code>string app_version = 4;</code>
      * @return The appVersion.
      */
     @java.lang.Override
@@ -2083,7 +2155,7 @@ public final class ECRHubResponseProto {
      *app version name
      * </pre>
      *
-     * <code>string app_version = 3;</code>
+     * <code>string app_version = 4;</code>
      * @return The bytes for appVersion.
      */
     @java.lang.Override
@@ -2115,14 +2187,17 @@ public final class ECRHubResponseProto {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(macAddress_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, macAddress_);
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(appName_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, appName_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, appName_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(deviceSn_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, deviceSn_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, deviceSn_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(appVersion_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, appVersion_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, appVersion_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2133,14 +2208,17 @@ public final class ECRHubResponseProto {
       if (size != -1) return size;
 
       size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(macAddress_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, macAddress_);
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(appName_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, appName_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, appName_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(deviceSn_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, deviceSn_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, deviceSn_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(appVersion_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, appVersion_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, appVersion_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -2157,6 +2235,8 @@ public final class ECRHubResponseProto {
       }
       com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData other = (com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData) obj;
 
+      if (!getMacAddress()
+          .equals(other.getMacAddress())) return false;
       if (!getAppName()
           .equals(other.getAppName())) return false;
       if (!getDeviceSn()
@@ -2174,6 +2254,8 @@ public final class ECRHubResponseProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + MAC_ADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getMacAddress().hashCode();
       hash = (37 * hash) + APP_NAME_FIELD_NUMBER;
       hash = (53 * hash) + getAppName().hashCode();
       hash = (37 * hash) + DEVICE_SN_FIELD_NUMBER;
@@ -2311,6 +2393,7 @@ public final class ECRHubResponseProto {
       public Builder clear() {
         super.clear();
         bitField0_ = 0;
+        macAddress_ = "";
         appName_ = "";
         deviceSn_ = "";
         appVersion_ = "";
@@ -2348,12 +2431,15 @@ public final class ECRHubResponseProto {
       private void buildPartial0(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData result) {
         int from_bitField0_ = bitField0_;
         if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.appName_ = appName_;
+          result.macAddress_ = macAddress_;
         }
         if (((from_bitField0_ & 0x00000002) != 0)) {
-          result.deviceSn_ = deviceSn_;
+          result.appName_ = appName_;
         }
         if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.deviceSn_ = deviceSn_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
           result.appVersion_ = appVersion_;
         }
       }
@@ -2402,19 +2488,24 @@ public final class ECRHubResponseProto {
 
       public Builder mergeFrom(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData other) {
         if (other == com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData.getDefaultInstance()) return this;
+        if (!other.getMacAddress().isEmpty()) {
+          macAddress_ = other.macAddress_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
         if (!other.getAppName().isEmpty()) {
           appName_ = other.appName_;
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (!other.getDeviceSn().isEmpty()) {
           deviceSn_ = other.deviceSn_;
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
         if (!other.getAppVersion().isEmpty()) {
           appVersion_ = other.appVersion_;
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000008;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -2444,20 +2535,25 @@ public final class ECRHubResponseProto {
                 done = true;
                 break;
               case 10: {
-                appName_ = input.readStringRequireUtf8();
+                macAddress_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000001;
                 break;
               } // case 10
               case 18: {
-                deviceSn_ = input.readStringRequireUtf8();
+                appName_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000002;
                 break;
               } // case 18
               case 26: {
-                appVersion_ = input.readStringRequireUtf8();
+                deviceSn_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000004;
                 break;
               } // case 26
+              case 34: {
+                appVersion_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 34
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -2475,6 +2571,103 @@ public final class ECRHubResponseProto {
       }
       private int bitField0_;
 
+      private java.lang.Object macAddress_ = "";
+      /**
+       * <pre>
+       **
+       *mac address
+       * </pre>
+       *
+       * <code>string mac_address = 1;</code>
+       * @return The macAddress.
+       */
+      public java.lang.String getMacAddress() {
+        java.lang.Object ref = macAddress_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          macAddress_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *mac address
+       * </pre>
+       *
+       * <code>string mac_address = 1;</code>
+       * @return The bytes for macAddress.
+       */
+      public com.google.protobuf.ByteString
+          getMacAddressBytes() {
+        java.lang.Object ref = macAddress_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          macAddress_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *mac address
+       * </pre>
+       *
+       * <code>string mac_address = 1;</code>
+       * @param value The macAddress to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMacAddress(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        macAddress_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *mac address
+       * </pre>
+       *
+       * <code>string mac_address = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMacAddress() {
+        macAddress_ = getDefaultInstance().getMacAddress();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *mac address
+       * </pre>
+       *
+       * <code>string mac_address = 1;</code>
+       * @param value The bytes for macAddress to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMacAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        macAddress_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object appName_ = "";
       /**
        * <pre>
@@ -2482,7 +2675,7 @@ public final class ECRHubResponseProto {
        *server name
        * </pre>
        *
-       * <code>string app_name = 1;</code>
+       * <code>string app_name = 2;</code>
        * @return The appName.
        */
       public java.lang.String getAppName() {
@@ -2503,7 +2696,7 @@ public final class ECRHubResponseProto {
        *server name
        * </pre>
        *
-       * <code>string app_name = 1;</code>
+       * <code>string app_name = 2;</code>
        * @return The bytes for appName.
        */
       public com.google.protobuf.ByteString
@@ -2525,7 +2718,7 @@ public final class ECRHubResponseProto {
        *server name
        * </pre>
        *
-       * <code>string app_name = 1;</code>
+       * <code>string app_name = 2;</code>
        * @param value The appName to set.
        * @return This builder for chaining.
        */
@@ -2533,7 +2726,7 @@ public final class ECRHubResponseProto {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         appName_ = value;
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -2543,12 +2736,12 @@ public final class ECRHubResponseProto {
        *server name
        * </pre>
        *
-       * <code>string app_name = 1;</code>
+       * <code>string app_name = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearAppName() {
         appName_ = getDefaultInstance().getAppName();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -2558,7 +2751,7 @@ public final class ECRHubResponseProto {
        *server name
        * </pre>
        *
-       * <code>string app_name = 1;</code>
+       * <code>string app_name = 2;</code>
        * @param value The bytes for appName to set.
        * @return This builder for chaining.
        */
@@ -2567,7 +2760,7 @@ public final class ECRHubResponseProto {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         appName_ = value;
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -2579,7 +2772,7 @@ public final class ECRHubResponseProto {
        *device sn
        * </pre>
        *
-       * <code>string device_sn = 2;</code>
+       * <code>string device_sn = 3;</code>
        * @return The deviceSn.
        */
       public java.lang.String getDeviceSn() {
@@ -2600,7 +2793,7 @@ public final class ECRHubResponseProto {
        *device sn
        * </pre>
        *
-       * <code>string device_sn = 2;</code>
+       * <code>string device_sn = 3;</code>
        * @return The bytes for deviceSn.
        */
       public com.google.protobuf.ByteString
@@ -2622,7 +2815,7 @@ public final class ECRHubResponseProto {
        *device sn
        * </pre>
        *
-       * <code>string device_sn = 2;</code>
+       * <code>string device_sn = 3;</code>
        * @param value The deviceSn to set.
        * @return This builder for chaining.
        */
@@ -2630,7 +2823,7 @@ public final class ECRHubResponseProto {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         deviceSn_ = value;
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -2640,12 +2833,12 @@ public final class ECRHubResponseProto {
        *device sn
        * </pre>
        *
-       * <code>string device_sn = 2;</code>
+       * <code>string device_sn = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearDeviceSn() {
         deviceSn_ = getDefaultInstance().getDeviceSn();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -2655,7 +2848,7 @@ public final class ECRHubResponseProto {
        *device sn
        * </pre>
        *
-       * <code>string device_sn = 2;</code>
+       * <code>string device_sn = 3;</code>
        * @param value The bytes for deviceSn to set.
        * @return This builder for chaining.
        */
@@ -2664,7 +2857,7 @@ public final class ECRHubResponseProto {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         deviceSn_ = value;
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -2676,7 +2869,7 @@ public final class ECRHubResponseProto {
        *app version name
        * </pre>
        *
-       * <code>string app_version = 3;</code>
+       * <code>string app_version = 4;</code>
        * @return The appVersion.
        */
       public java.lang.String getAppVersion() {
@@ -2697,7 +2890,7 @@ public final class ECRHubResponseProto {
        *app version name
        * </pre>
        *
-       * <code>string app_version = 3;</code>
+       * <code>string app_version = 4;</code>
        * @return The bytes for appVersion.
        */
       public com.google.protobuf.ByteString
@@ -2719,7 +2912,7 @@ public final class ECRHubResponseProto {
        *app version name
        * </pre>
        *
-       * <code>string app_version = 3;</code>
+       * <code>string app_version = 4;</code>
        * @param value The appVersion to set.
        * @return This builder for chaining.
        */
@@ -2727,7 +2920,7 @@ public final class ECRHubResponseProto {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         appVersion_ = value;
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -2737,12 +2930,12 @@ public final class ECRHubResponseProto {
        *app version name
        * </pre>
        *
-       * <code>string app_version = 3;</code>
+       * <code>string app_version = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearAppVersion() {
         appVersion_ = getDefaultInstance().getAppVersion();
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
@@ -2752,7 +2945,7 @@ public final class ECRHubResponseProto {
        *app version name
        * </pre>
        *
-       * <code>string app_version = 3;</code>
+       * <code>string app_version = 4;</code>
        * @param value The bytes for appVersion to set.
        * @return This builder for chaining.
        */
@@ -2761,7 +2954,7 @@ public final class ECRHubResponseProto {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         appVersion_ = value;
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -2946,32 +3139,10 @@ public final class ECRHubResponseProto {
     /**
      * <pre>
      **
-     *store no
-     * </pre>
-     *
-     * <code>string store_no = 6;</code>
-     * @return The storeNo.
-     */
-    java.lang.String getStoreNo();
-    /**
-     * <pre>
-     **
-     *store no
-     * </pre>
-     *
-     * <code>string store_no = 6;</code>
-     * @return The bytes for storeNo.
-     */
-    com.google.protobuf.ByteString
-        getStoreNoBytes();
-
-    /**
-     * <pre>
-     **
      *pay scenario
      * </pre>
      *
-     * <code>string pay_scenario = 7;</code>
+     * <code>string pay_scenario = 6;</code>
      * @return The payScenario.
      */
     java.lang.String getPayScenario();
@@ -2981,7 +3152,7 @@ public final class ECRHubResponseProto {
      *pay scenario
      * </pre>
      *
-     * <code>string pay_scenario = 7;</code>
+     * <code>string pay_scenario = 6;</code>
      * @return The bytes for payScenario.
      */
     com.google.protobuf.ByteString
@@ -2993,7 +3164,7 @@ public final class ECRHubResponseProto {
      *trans status
      * </pre>
      *
-     * <code>string trans_status = 8;</code>
+     * <code>string trans_status = 7;</code>
      * @return The transStatus.
      */
     java.lang.String getTransStatus();
@@ -3003,7 +3174,7 @@ public final class ECRHubResponseProto {
      *trans status
      * </pre>
      *
-     * <code>string trans_status = 8;</code>
+     * <code>string trans_status = 7;</code>
      * @return The bytes for transStatus.
      */
     com.google.protobuf.ByteString
@@ -3015,7 +3186,7 @@ public final class ECRHubResponseProto {
      *pay channel trans_no
      * </pre>
      *
-     * <code>string pay_channel_trans_no = 9;</code>
+     * <code>string pay_channel_trans_no = 8;</code>
      * @return The payChannelTransNo.
      */
     java.lang.String getPayChannelTransNo();
@@ -3025,7 +3196,7 @@ public final class ECRHubResponseProto {
      *pay channel trans_no
      * </pre>
      *
-     * <code>string pay_channel_trans_no = 9;</code>
+     * <code>string pay_channel_trans_no = 8;</code>
      * @return The bytes for payChannelTransNo.
      */
     com.google.protobuf.ByteString
@@ -3034,54 +3205,10 @@ public final class ECRHubResponseProto {
     /**
      * <pre>
      **
-     *pay account id
-     * </pre>
-     *
-     * <code>string pay_user_account_id = 10;</code>
-     * @return The payUserAccountId.
-     */
-    java.lang.String getPayUserAccountId();
-    /**
-     * <pre>
-     **
-     *pay account id
-     * </pre>
-     *
-     * <code>string pay_user_account_id = 10;</code>
-     * @return The bytes for payUserAccountId.
-     */
-    com.google.protobuf.ByteString
-        getPayUserAccountIdBytes();
-
-    /**
-     * <pre>
-     **
-     *paid amount
-     * </pre>
-     *
-     * <code>string paid_amount = 11;</code>
-     * @return The paidAmount.
-     */
-    java.lang.String getPaidAmount();
-    /**
-     * <pre>
-     **
-     *paid amount
-     * </pre>
-     *
-     * <code>string paid_amount = 11;</code>
-     * @return The bytes for paidAmount.
-     */
-    com.google.protobuf.ByteString
-        getPaidAmountBytes();
-
-    /**
-     * <pre>
-     **
      *trans end time
      * </pre>
      *
-     * <code>string trans_end_time = 12;</code>
+     * <code>string trans_end_time = 9;</code>
      * @return The transEndTime.
      */
     java.lang.String getTransEndTime();
@@ -3091,7 +3218,7 @@ public final class ECRHubResponseProto {
      *trans end time
      * </pre>
      *
-     * <code>string trans_end_time = 12;</code>
+     * <code>string trans_end_time = 9;</code>
      * @return The bytes for transEndTime.
      */
     com.google.protobuf.ByteString
@@ -3103,7 +3230,7 @@ public final class ECRHubResponseProto {
      *pay method id
      * </pre>
      *
-     * <code>string pay_method_id = 13;</code>
+     * <code>string pay_method_id = 10;</code>
      * @return The payMethodId.
      */
     java.lang.String getPayMethodId();
@@ -3113,7 +3240,7 @@ public final class ECRHubResponseProto {
      *pay method id
      * </pre>
      *
-     * <code>string pay_method_id = 13;</code>
+     * <code>string pay_method_id = 10;</code>
      * @return The bytes for payMethodId.
      */
     com.google.protobuf.ByteString
@@ -3125,7 +3252,7 @@ public final class ECRHubResponseProto {
      *merchant discount
      * </pre>
      *
-     * <code>string discount_bmopc = 14;</code>
+     * <code>string discount_bmopc = 11;</code>
      * @return The discountBmopc.
      */
     java.lang.String getDiscountBmopc();
@@ -3135,7 +3262,7 @@ public final class ECRHubResponseProto {
      *merchant discount
      * </pre>
      *
-     * <code>string discount_bmopc = 14;</code>
+     * <code>string discount_bmopc = 11;</code>
      * @return The bytes for discountBmopc.
      */
     com.google.protobuf.ByteString
@@ -3147,7 +3274,7 @@ public final class ECRHubResponseProto {
      *pay channel discount
      * </pre>
      *
-     * <code>string discount_bpc = 15;</code>
+     * <code>string discount_bpc = 12;</code>
      * @return The discountBpc.
      */
     java.lang.String getDiscountBpc();
@@ -3157,7 +3284,7 @@ public final class ECRHubResponseProto {
      *pay channel discount
      * </pre>
      *
-     * <code>string discount_bpc = 15;</code>
+     * <code>string discount_bpc = 12;</code>
      * @return The bytes for discountBpc.
      */
     com.google.protobuf.ByteString
@@ -3169,7 +3296,7 @@ public final class ECRHubResponseProto {
      *extends params
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extends_params = 16;</code>
+     * <code>map&lt;string, string&gt; extends_params = 13;</code>
      */
     int getExtendsParamsCount();
     /**
@@ -3178,7 +3305,7 @@ public final class ECRHubResponseProto {
      *extends params
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extends_params = 16;</code>
+     * <code>map&lt;string, string&gt; extends_params = 13;</code>
      */
     boolean containsExtendsParams(
         java.lang.String key);
@@ -3194,7 +3321,7 @@ public final class ECRHubResponseProto {
      *extends params
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extends_params = 16;</code>
+     * <code>map&lt;string, string&gt; extends_params = 13;</code>
      */
     java.util.Map<java.lang.String, java.lang.String>
     getExtendsParamsMap();
@@ -3204,7 +3331,7 @@ public final class ECRHubResponseProto {
      *extends params
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extends_params = 16;</code>
+     * <code>map&lt;string, string&gt; extends_params = 13;</code>
      */
     /* nullable */
 java.lang.String getExtendsParamsOrDefault(
@@ -3217,7 +3344,7 @@ java.lang.String defaultValue);
      *extends params
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extends_params = 16;</code>
+     * <code>map&lt;string, string&gt; extends_params = 13;</code>
      */
     java.lang.String getExtendsParamsOrThrow(
         java.lang.String key);
@@ -3228,7 +3355,7 @@ java.lang.String defaultValue);
      *Additional information
      * </pre>
      *
-     * <code>string attach = 17;</code>
+     * <code>string attach = 14;</code>
      * @return The attach.
      */
     java.lang.String getAttach();
@@ -3238,7 +3365,7 @@ java.lang.String defaultValue);
      *Additional information
      * </pre>
      *
-     * <code>string attach = 17;</code>
+     * <code>string attach = 14;</code>
      * @return The bytes for attach.
      */
     com.google.protobuf.ByteString
@@ -3247,32 +3374,10 @@ java.lang.String defaultValue);
     /**
      * <pre>
      **
-     *token
-     * </pre>
-     *
-     * <code>string token = 18;</code>
-     * @return The token.
-     */
-    java.lang.String getToken();
-    /**
-     * <pre>
-     **
-     *token
-     * </pre>
-     *
-     * <code>string token = 18;</code>
-     * @return The bytes for token.
-     */
-    com.google.protobuf.ByteString
-        getTokenBytes();
-
-    /**
-     * <pre>
-     **
      *Cashback amount
      * </pre>
      *
-     * <code>string cashback_amount = 19;</code>
+     * <code>string cashback_amount = 15;</code>
      * @return The cashbackAmount.
      */
     java.lang.String getCashbackAmount();
@@ -3282,11 +3387,33 @@ java.lang.String defaultValue);
      *Cashback amount
      * </pre>
      *
-     * <code>string cashback_amount = 19;</code>
+     * <code>string cashback_amount = 15;</code>
      * @return The bytes for cashbackAmount.
      */
     com.google.protobuf.ByteString
         getCashbackAmountBytes();
+
+    /**
+     * <pre>
+     **
+     *tip amount
+     * </pre>
+     *
+     * <code>string tip_amount = 16;</code>
+     * @return The tipAmount.
+     */
+    java.lang.String getTipAmount();
+    /**
+     * <pre>
+     **
+     *tip amount
+     * </pre>
+     *
+     * <code>string tip_amount = 16;</code>
+     * @return The bytes for tipAmount.
+     */
+    com.google.protobuf.ByteString
+        getTipAmountBytes();
   }
   /**
    * Protobuf type {@code com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData}
@@ -3306,19 +3433,16 @@ java.lang.String defaultValue);
       transNo_ = "";
       priceCurrency_ = "";
       transType_ = "";
-      storeNo_ = "";
       payScenario_ = "";
       transStatus_ = "";
       payChannelTransNo_ = "";
-      payUserAccountId_ = "";
-      paidAmount_ = "";
       transEndTime_ = "";
       payMethodId_ = "";
       discountBmopc_ = "";
       discountBpc_ = "";
       attach_ = "";
-      token_ = "";
       cashbackAmount_ = "";
+      tipAmount_ = "";
     }
 
     @java.lang.Override
@@ -3338,7 +3462,7 @@ java.lang.String defaultValue);
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 16:
+        case 13:
           return internalGetExtendsParams();
         default:
           throw new RuntimeException(
@@ -3598,56 +3722,7 @@ java.lang.String defaultValue);
       }
     }
 
-    public static final int STORE_NO_FIELD_NUMBER = 6;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object storeNo_ = "";
-    /**
-     * <pre>
-     **
-     *store no
-     * </pre>
-     *
-     * <code>string store_no = 6;</code>
-     * @return The storeNo.
-     */
-    @java.lang.Override
-    public java.lang.String getStoreNo() {
-      java.lang.Object ref = storeNo_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        storeNo_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     **
-     *store no
-     * </pre>
-     *
-     * <code>string store_no = 6;</code>
-     * @return The bytes for storeNo.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getStoreNoBytes() {
-      java.lang.Object ref = storeNo_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        storeNo_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int PAY_SCENARIO_FIELD_NUMBER = 7;
+    public static final int PAY_SCENARIO_FIELD_NUMBER = 6;
     @SuppressWarnings("serial")
     private volatile java.lang.Object payScenario_ = "";
     /**
@@ -3656,7 +3731,7 @@ java.lang.String defaultValue);
      *pay scenario
      * </pre>
      *
-     * <code>string pay_scenario = 7;</code>
+     * <code>string pay_scenario = 6;</code>
      * @return The payScenario.
      */
     @java.lang.Override
@@ -3678,7 +3753,7 @@ java.lang.String defaultValue);
      *pay scenario
      * </pre>
      *
-     * <code>string pay_scenario = 7;</code>
+     * <code>string pay_scenario = 6;</code>
      * @return The bytes for payScenario.
      */
     @java.lang.Override
@@ -3696,7 +3771,7 @@ java.lang.String defaultValue);
       }
     }
 
-    public static final int TRANS_STATUS_FIELD_NUMBER = 8;
+    public static final int TRANS_STATUS_FIELD_NUMBER = 7;
     @SuppressWarnings("serial")
     private volatile java.lang.Object transStatus_ = "";
     /**
@@ -3705,7 +3780,7 @@ java.lang.String defaultValue);
      *trans status
      * </pre>
      *
-     * <code>string trans_status = 8;</code>
+     * <code>string trans_status = 7;</code>
      * @return The transStatus.
      */
     @java.lang.Override
@@ -3727,7 +3802,7 @@ java.lang.String defaultValue);
      *trans status
      * </pre>
      *
-     * <code>string trans_status = 8;</code>
+     * <code>string trans_status = 7;</code>
      * @return The bytes for transStatus.
      */
     @java.lang.Override
@@ -3745,7 +3820,7 @@ java.lang.String defaultValue);
       }
     }
 
-    public static final int PAY_CHANNEL_TRANS_NO_FIELD_NUMBER = 9;
+    public static final int PAY_CHANNEL_TRANS_NO_FIELD_NUMBER = 8;
     @SuppressWarnings("serial")
     private volatile java.lang.Object payChannelTransNo_ = "";
     /**
@@ -3754,7 +3829,7 @@ java.lang.String defaultValue);
      *pay channel trans_no
      * </pre>
      *
-     * <code>string pay_channel_trans_no = 9;</code>
+     * <code>string pay_channel_trans_no = 8;</code>
      * @return The payChannelTransNo.
      */
     @java.lang.Override
@@ -3776,7 +3851,7 @@ java.lang.String defaultValue);
      *pay channel trans_no
      * </pre>
      *
-     * <code>string pay_channel_trans_no = 9;</code>
+     * <code>string pay_channel_trans_no = 8;</code>
      * @return The bytes for payChannelTransNo.
      */
     @java.lang.Override
@@ -3794,105 +3869,7 @@ java.lang.String defaultValue);
       }
     }
 
-    public static final int PAY_USER_ACCOUNT_ID_FIELD_NUMBER = 10;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object payUserAccountId_ = "";
-    /**
-     * <pre>
-     **
-     *pay account id
-     * </pre>
-     *
-     * <code>string pay_user_account_id = 10;</code>
-     * @return The payUserAccountId.
-     */
-    @java.lang.Override
-    public java.lang.String getPayUserAccountId() {
-      java.lang.Object ref = payUserAccountId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        payUserAccountId_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     **
-     *pay account id
-     * </pre>
-     *
-     * <code>string pay_user_account_id = 10;</code>
-     * @return The bytes for payUserAccountId.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getPayUserAccountIdBytes() {
-      java.lang.Object ref = payUserAccountId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        payUserAccountId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int PAID_AMOUNT_FIELD_NUMBER = 11;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object paidAmount_ = "";
-    /**
-     * <pre>
-     **
-     *paid amount
-     * </pre>
-     *
-     * <code>string paid_amount = 11;</code>
-     * @return The paidAmount.
-     */
-    @java.lang.Override
-    public java.lang.String getPaidAmount() {
-      java.lang.Object ref = paidAmount_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        paidAmount_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     **
-     *paid amount
-     * </pre>
-     *
-     * <code>string paid_amount = 11;</code>
-     * @return The bytes for paidAmount.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getPaidAmountBytes() {
-      java.lang.Object ref = paidAmount_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        paidAmount_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int TRANS_END_TIME_FIELD_NUMBER = 12;
+    public static final int TRANS_END_TIME_FIELD_NUMBER = 9;
     @SuppressWarnings("serial")
     private volatile java.lang.Object transEndTime_ = "";
     /**
@@ -3901,7 +3878,7 @@ java.lang.String defaultValue);
      *trans end time
      * </pre>
      *
-     * <code>string trans_end_time = 12;</code>
+     * <code>string trans_end_time = 9;</code>
      * @return The transEndTime.
      */
     @java.lang.Override
@@ -3923,7 +3900,7 @@ java.lang.String defaultValue);
      *trans end time
      * </pre>
      *
-     * <code>string trans_end_time = 12;</code>
+     * <code>string trans_end_time = 9;</code>
      * @return The bytes for transEndTime.
      */
     @java.lang.Override
@@ -3941,7 +3918,7 @@ java.lang.String defaultValue);
       }
     }
 
-    public static final int PAY_METHOD_ID_FIELD_NUMBER = 13;
+    public static final int PAY_METHOD_ID_FIELD_NUMBER = 10;
     @SuppressWarnings("serial")
     private volatile java.lang.Object payMethodId_ = "";
     /**
@@ -3950,7 +3927,7 @@ java.lang.String defaultValue);
      *pay method id
      * </pre>
      *
-     * <code>string pay_method_id = 13;</code>
+     * <code>string pay_method_id = 10;</code>
      * @return The payMethodId.
      */
     @java.lang.Override
@@ -3972,7 +3949,7 @@ java.lang.String defaultValue);
      *pay method id
      * </pre>
      *
-     * <code>string pay_method_id = 13;</code>
+     * <code>string pay_method_id = 10;</code>
      * @return The bytes for payMethodId.
      */
     @java.lang.Override
@@ -3990,7 +3967,7 @@ java.lang.String defaultValue);
       }
     }
 
-    public static final int DISCOUNT_BMOPC_FIELD_NUMBER = 14;
+    public static final int DISCOUNT_BMOPC_FIELD_NUMBER = 11;
     @SuppressWarnings("serial")
     private volatile java.lang.Object discountBmopc_ = "";
     /**
@@ -3999,7 +3976,7 @@ java.lang.String defaultValue);
      *merchant discount
      * </pre>
      *
-     * <code>string discount_bmopc = 14;</code>
+     * <code>string discount_bmopc = 11;</code>
      * @return The discountBmopc.
      */
     @java.lang.Override
@@ -4021,7 +3998,7 @@ java.lang.String defaultValue);
      *merchant discount
      * </pre>
      *
-     * <code>string discount_bmopc = 14;</code>
+     * <code>string discount_bmopc = 11;</code>
      * @return The bytes for discountBmopc.
      */
     @java.lang.Override
@@ -4039,7 +4016,7 @@ java.lang.String defaultValue);
       }
     }
 
-    public static final int DISCOUNT_BPC_FIELD_NUMBER = 15;
+    public static final int DISCOUNT_BPC_FIELD_NUMBER = 12;
     @SuppressWarnings("serial")
     private volatile java.lang.Object discountBpc_ = "";
     /**
@@ -4048,7 +4025,7 @@ java.lang.String defaultValue);
      *pay channel discount
      * </pre>
      *
-     * <code>string discount_bpc = 15;</code>
+     * <code>string discount_bpc = 12;</code>
      * @return The discountBpc.
      */
     @java.lang.Override
@@ -4070,7 +4047,7 @@ java.lang.String defaultValue);
      *pay channel discount
      * </pre>
      *
-     * <code>string discount_bpc = 15;</code>
+     * <code>string discount_bpc = 12;</code>
      * @return The bytes for discountBpc.
      */
     @java.lang.Override
@@ -4088,7 +4065,7 @@ java.lang.String defaultValue);
       }
     }
 
-    public static final int EXTENDS_PARAMS_FIELD_NUMBER = 16;
+    public static final int EXTENDS_PARAMS_FIELD_NUMBER = 13;
     private static final class ExtendsParamsDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           java.lang.String, java.lang.String> defaultEntry =
@@ -4120,7 +4097,7 @@ java.lang.String defaultValue);
      *extends params
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extends_params = 16;</code>
+     * <code>map&lt;string, string&gt; extends_params = 13;</code>
      */
     @java.lang.Override
     public boolean containsExtendsParams(
@@ -4142,7 +4119,7 @@ java.lang.String defaultValue);
      *extends params
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extends_params = 16;</code>
+     * <code>map&lt;string, string&gt; extends_params = 13;</code>
      */
     @java.lang.Override
     public java.util.Map<java.lang.String, java.lang.String> getExtendsParamsMap() {
@@ -4154,7 +4131,7 @@ java.lang.String defaultValue);
      *extends params
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extends_params = 16;</code>
+     * <code>map&lt;string, string&gt; extends_params = 13;</code>
      */
     @java.lang.Override
     public /* nullable */
@@ -4173,7 +4150,7 @@ java.lang.String defaultValue) {
      *extends params
      * </pre>
      *
-     * <code>map&lt;string, string&gt; extends_params = 16;</code>
+     * <code>map&lt;string, string&gt; extends_params = 13;</code>
      */
     @java.lang.Override
     public java.lang.String getExtendsParamsOrThrow(
@@ -4187,7 +4164,7 @@ java.lang.String defaultValue) {
       return map.get(key);
     }
 
-    public static final int ATTACH_FIELD_NUMBER = 17;
+    public static final int ATTACH_FIELD_NUMBER = 14;
     @SuppressWarnings("serial")
     private volatile java.lang.Object attach_ = "";
     /**
@@ -4196,7 +4173,7 @@ java.lang.String defaultValue) {
      *Additional information
      * </pre>
      *
-     * <code>string attach = 17;</code>
+     * <code>string attach = 14;</code>
      * @return The attach.
      */
     @java.lang.Override
@@ -4218,7 +4195,7 @@ java.lang.String defaultValue) {
      *Additional information
      * </pre>
      *
-     * <code>string attach = 17;</code>
+     * <code>string attach = 14;</code>
      * @return The bytes for attach.
      */
     @java.lang.Override
@@ -4236,56 +4213,7 @@ java.lang.String defaultValue) {
       }
     }
 
-    public static final int TOKEN_FIELD_NUMBER = 18;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object token_ = "";
-    /**
-     * <pre>
-     **
-     *token
-     * </pre>
-     *
-     * <code>string token = 18;</code>
-     * @return The token.
-     */
-    @java.lang.Override
-    public java.lang.String getToken() {
-      java.lang.Object ref = token_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        token_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     **
-     *token
-     * </pre>
-     *
-     * <code>string token = 18;</code>
-     * @return The bytes for token.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getTokenBytes() {
-      java.lang.Object ref = token_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        token_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int CASHBACK_AMOUNT_FIELD_NUMBER = 19;
+    public static final int CASHBACK_AMOUNT_FIELD_NUMBER = 15;
     @SuppressWarnings("serial")
     private volatile java.lang.Object cashbackAmount_ = "";
     /**
@@ -4294,7 +4222,7 @@ java.lang.String defaultValue) {
      *Cashback amount
      * </pre>
      *
-     * <code>string cashback_amount = 19;</code>
+     * <code>string cashback_amount = 15;</code>
      * @return The cashbackAmount.
      */
     @java.lang.Override
@@ -4316,7 +4244,7 @@ java.lang.String defaultValue) {
      *Cashback amount
      * </pre>
      *
-     * <code>string cashback_amount = 19;</code>
+     * <code>string cashback_amount = 15;</code>
      * @return The bytes for cashbackAmount.
      */
     @java.lang.Override
@@ -4328,6 +4256,55 @@ java.lang.String defaultValue) {
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         cashbackAmount_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TIP_AMOUNT_FIELD_NUMBER = 16;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object tipAmount_ = "";
+    /**
+     * <pre>
+     **
+     *tip amount
+     * </pre>
+     *
+     * <code>string tip_amount = 16;</code>
+     * @return The tipAmount.
+     */
+    @java.lang.Override
+    public java.lang.String getTipAmount() {
+      java.lang.Object ref = tipAmount_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        tipAmount_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     **
+     *tip amount
+     * </pre>
+     *
+     * <code>string tip_amount = 16;</code>
+     * @return The bytes for tipAmount.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getTipAmountBytes() {
+      java.lang.Object ref = tipAmount_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tipAmount_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -4363,50 +4340,41 @@ java.lang.String defaultValue) {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(transType_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, transType_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(storeNo_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, storeNo_);
-      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(payScenario_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, payScenario_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, payScenario_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(transStatus_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, transStatus_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, transStatus_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(payChannelTransNo_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, payChannelTransNo_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(payUserAccountId_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, payUserAccountId_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(paidAmount_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, paidAmount_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, payChannelTransNo_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(transEndTime_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 12, transEndTime_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, transEndTime_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(payMethodId_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 13, payMethodId_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, payMethodId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(discountBmopc_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, discountBmopc_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, discountBmopc_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(discountBpc_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 15, discountBpc_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 12, discountBpc_);
       }
       com.google.protobuf.GeneratedMessageV3
         .serializeStringMapTo(
           output,
           internalGetExtendsParams(),
           ExtendsParamsDefaultEntryHolder.defaultEntry,
-          16);
+          13);
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(attach_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 17, attach_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(token_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 18, token_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, attach_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cashbackAmount_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 19, cashbackAmount_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 15, cashbackAmount_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(tipAmount_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 16, tipAmount_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4432,35 +4400,26 @@ java.lang.String defaultValue) {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(transType_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, transType_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(storeNo_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, storeNo_);
-      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(payScenario_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, payScenario_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, payScenario_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(transStatus_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, transStatus_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, transStatus_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(payChannelTransNo_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, payChannelTransNo_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(payUserAccountId_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, payUserAccountId_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(paidAmount_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, paidAmount_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, payChannelTransNo_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(transEndTime_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, transEndTime_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, transEndTime_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(payMethodId_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(13, payMethodId_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, payMethodId_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(discountBmopc_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, discountBmopc_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, discountBmopc_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(discountBpc_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(15, discountBpc_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, discountBpc_);
       }
       for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
            : internalGetExtendsParams().getMap().entrySet()) {
@@ -4470,16 +4429,16 @@ java.lang.String defaultValue) {
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(16, extendsParams__);
+            .computeMessageSize(13, extendsParams__);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(attach_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(17, attach_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(token_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(18, token_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, attach_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cashbackAmount_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(19, cashbackAmount_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(15, cashbackAmount_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(tipAmount_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(16, tipAmount_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -4506,18 +4465,12 @@ java.lang.String defaultValue) {
           .equals(other.getPriceCurrency())) return false;
       if (!getTransType()
           .equals(other.getTransType())) return false;
-      if (!getStoreNo()
-          .equals(other.getStoreNo())) return false;
       if (!getPayScenario()
           .equals(other.getPayScenario())) return false;
       if (!getTransStatus()
           .equals(other.getTransStatus())) return false;
       if (!getPayChannelTransNo()
           .equals(other.getPayChannelTransNo())) return false;
-      if (!getPayUserAccountId()
-          .equals(other.getPayUserAccountId())) return false;
-      if (!getPaidAmount()
-          .equals(other.getPaidAmount())) return false;
       if (!getTransEndTime()
           .equals(other.getTransEndTime())) return false;
       if (!getPayMethodId()
@@ -4530,10 +4483,10 @@ java.lang.String defaultValue) {
           other.internalGetExtendsParams())) return false;
       if (!getAttach()
           .equals(other.getAttach())) return false;
-      if (!getToken()
-          .equals(other.getToken())) return false;
       if (!getCashbackAmount()
           .equals(other.getCashbackAmount())) return false;
+      if (!getTipAmount()
+          .equals(other.getTipAmount())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -4555,18 +4508,12 @@ java.lang.String defaultValue) {
       hash = (53 * hash) + getPriceCurrency().hashCode();
       hash = (37 * hash) + TRANS_TYPE_FIELD_NUMBER;
       hash = (53 * hash) + getTransType().hashCode();
-      hash = (37 * hash) + STORE_NO_FIELD_NUMBER;
-      hash = (53 * hash) + getStoreNo().hashCode();
       hash = (37 * hash) + PAY_SCENARIO_FIELD_NUMBER;
       hash = (53 * hash) + getPayScenario().hashCode();
       hash = (37 * hash) + TRANS_STATUS_FIELD_NUMBER;
       hash = (53 * hash) + getTransStatus().hashCode();
       hash = (37 * hash) + PAY_CHANNEL_TRANS_NO_FIELD_NUMBER;
       hash = (53 * hash) + getPayChannelTransNo().hashCode();
-      hash = (37 * hash) + PAY_USER_ACCOUNT_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getPayUserAccountId().hashCode();
-      hash = (37 * hash) + PAID_AMOUNT_FIELD_NUMBER;
-      hash = (53 * hash) + getPaidAmount().hashCode();
       hash = (37 * hash) + TRANS_END_TIME_FIELD_NUMBER;
       hash = (53 * hash) + getTransEndTime().hashCode();
       hash = (37 * hash) + PAY_METHOD_ID_FIELD_NUMBER;
@@ -4581,10 +4528,10 @@ java.lang.String defaultValue) {
       }
       hash = (37 * hash) + ATTACH_FIELD_NUMBER;
       hash = (53 * hash) + getAttach().hashCode();
-      hash = (37 * hash) + TOKEN_FIELD_NUMBER;
-      hash = (53 * hash) + getToken().hashCode();
       hash = (37 * hash) + CASHBACK_AMOUNT_FIELD_NUMBER;
       hash = (53 * hash) + getCashbackAmount().hashCode();
+      hash = (37 * hash) + TIP_AMOUNT_FIELD_NUMBER;
+      hash = (53 * hash) + getTipAmount().hashCode();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4698,7 +4645,7 @@ java.lang.String defaultValue) {
       protected com.google.protobuf.MapField internalGetMapField(
           int number) {
         switch (number) {
-          case 16:
+          case 13:
             return internalGetExtendsParams();
           default:
             throw new RuntimeException(
@@ -4709,7 +4656,7 @@ java.lang.String defaultValue) {
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
         switch (number) {
-          case 16:
+          case 13:
             return internalGetMutableExtendsParams();
           default:
             throw new RuntimeException(
@@ -4743,20 +4690,17 @@ java.lang.String defaultValue) {
         transNo_ = "";
         priceCurrency_ = "";
         transType_ = "";
-        storeNo_ = "";
         payScenario_ = "";
         transStatus_ = "";
         payChannelTransNo_ = "";
-        payUserAccountId_ = "";
-        paidAmount_ = "";
         transEndTime_ = "";
         payMethodId_ = "";
         discountBmopc_ = "";
         discountBpc_ = "";
         internalGetMutableExtendsParams().clear();
         attach_ = "";
-        token_ = "";
         cashbackAmount_ = "";
+        tipAmount_ = "";
         return this;
       }
 
@@ -4806,47 +4750,38 @@ java.lang.String defaultValue) {
           result.transType_ = transType_;
         }
         if (((from_bitField0_ & 0x00000020) != 0)) {
-          result.storeNo_ = storeNo_;
-        }
-        if (((from_bitField0_ & 0x00000040) != 0)) {
           result.payScenario_ = payScenario_;
         }
-        if (((from_bitField0_ & 0x00000080) != 0)) {
+        if (((from_bitField0_ & 0x00000040) != 0)) {
           result.transStatus_ = transStatus_;
         }
-        if (((from_bitField0_ & 0x00000100) != 0)) {
+        if (((from_bitField0_ & 0x00000080) != 0)) {
           result.payChannelTransNo_ = payChannelTransNo_;
         }
-        if (((from_bitField0_ & 0x00000200) != 0)) {
-          result.payUserAccountId_ = payUserAccountId_;
-        }
-        if (((from_bitField0_ & 0x00000400) != 0)) {
-          result.paidAmount_ = paidAmount_;
-        }
-        if (((from_bitField0_ & 0x00000800) != 0)) {
+        if (((from_bitField0_ & 0x00000100) != 0)) {
           result.transEndTime_ = transEndTime_;
         }
-        if (((from_bitField0_ & 0x00001000) != 0)) {
+        if (((from_bitField0_ & 0x00000200) != 0)) {
           result.payMethodId_ = payMethodId_;
         }
-        if (((from_bitField0_ & 0x00002000) != 0)) {
+        if (((from_bitField0_ & 0x00000400) != 0)) {
           result.discountBmopc_ = discountBmopc_;
         }
-        if (((from_bitField0_ & 0x00004000) != 0)) {
+        if (((from_bitField0_ & 0x00000800) != 0)) {
           result.discountBpc_ = discountBpc_;
         }
-        if (((from_bitField0_ & 0x00008000) != 0)) {
+        if (((from_bitField0_ & 0x00001000) != 0)) {
           result.extendsParams_ = internalGetExtendsParams();
           result.extendsParams_.makeImmutable();
         }
-        if (((from_bitField0_ & 0x00010000) != 0)) {
+        if (((from_bitField0_ & 0x00002000) != 0)) {
           result.attach_ = attach_;
         }
-        if (((from_bitField0_ & 0x00020000) != 0)) {
-          result.token_ = token_;
-        }
-        if (((from_bitField0_ & 0x00040000) != 0)) {
+        if (((from_bitField0_ & 0x00004000) != 0)) {
           result.cashbackAmount_ = cashbackAmount_;
+        }
+        if (((from_bitField0_ & 0x00008000) != 0)) {
+          result.tipAmount_ = tipAmount_;
         }
       }
 
@@ -4919,72 +4854,57 @@ java.lang.String defaultValue) {
           bitField0_ |= 0x00000010;
           onChanged();
         }
-        if (!other.getStoreNo().isEmpty()) {
-          storeNo_ = other.storeNo_;
-          bitField0_ |= 0x00000020;
-          onChanged();
-        }
         if (!other.getPayScenario().isEmpty()) {
           payScenario_ = other.payScenario_;
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000020;
           onChanged();
         }
         if (!other.getTransStatus().isEmpty()) {
           transStatus_ = other.transStatus_;
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000040;
           onChanged();
         }
         if (!other.getPayChannelTransNo().isEmpty()) {
           payChannelTransNo_ = other.payChannelTransNo_;
-          bitField0_ |= 0x00000100;
-          onChanged();
-        }
-        if (!other.getPayUserAccountId().isEmpty()) {
-          payUserAccountId_ = other.payUserAccountId_;
-          bitField0_ |= 0x00000200;
-          onChanged();
-        }
-        if (!other.getPaidAmount().isEmpty()) {
-          paidAmount_ = other.paidAmount_;
-          bitField0_ |= 0x00000400;
+          bitField0_ |= 0x00000080;
           onChanged();
         }
         if (!other.getTransEndTime().isEmpty()) {
           transEndTime_ = other.transEndTime_;
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00000100;
           onChanged();
         }
         if (!other.getPayMethodId().isEmpty()) {
           payMethodId_ = other.payMethodId_;
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00000200;
           onChanged();
         }
         if (!other.getDiscountBmopc().isEmpty()) {
           discountBmopc_ = other.discountBmopc_;
-          bitField0_ |= 0x00002000;
+          bitField0_ |= 0x00000400;
           onChanged();
         }
         if (!other.getDiscountBpc().isEmpty()) {
           discountBpc_ = other.discountBpc_;
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00000800;
           onChanged();
         }
         internalGetMutableExtendsParams().mergeFrom(
             other.internalGetExtendsParams());
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00001000;
         if (!other.getAttach().isEmpty()) {
           attach_ = other.attach_;
-          bitField0_ |= 0x00010000;
-          onChanged();
-        }
-        if (!other.getToken().isEmpty()) {
-          token_ = other.token_;
-          bitField0_ |= 0x00020000;
+          bitField0_ |= 0x00002000;
           onChanged();
         }
         if (!other.getCashbackAmount().isEmpty()) {
           cashbackAmount_ = other.cashbackAmount_;
-          bitField0_ |= 0x00040000;
+          bitField0_ |= 0x00004000;
+          onChanged();
+        }
+        if (!other.getTipAmount().isEmpty()) {
+          tipAmount_ = other.tipAmount_;
+          bitField0_ |= 0x00008000;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -5039,79 +4959,64 @@ java.lang.String defaultValue) {
                 break;
               } // case 42
               case 50: {
-                storeNo_ = input.readStringRequireUtf8();
+                payScenario_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000020;
                 break;
               } // case 50
               case 58: {
-                payScenario_ = input.readStringRequireUtf8();
+                transStatus_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000040;
                 break;
               } // case 58
               case 66: {
-                transStatus_ = input.readStringRequireUtf8();
+                payChannelTransNo_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000080;
                 break;
               } // case 66
               case 74: {
-                payChannelTransNo_ = input.readStringRequireUtf8();
+                transEndTime_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000100;
                 break;
               } // case 74
               case 82: {
-                payUserAccountId_ = input.readStringRequireUtf8();
+                payMethodId_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000200;
                 break;
               } // case 82
               case 90: {
-                paidAmount_ = input.readStringRequireUtf8();
+                discountBmopc_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000400;
                 break;
               } // case 90
               case 98: {
-                transEndTime_ = input.readStringRequireUtf8();
+                discountBpc_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000800;
                 break;
               } // case 98
               case 106: {
-                payMethodId_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00001000;
-                break;
-              } // case 106
-              case 114: {
-                discountBmopc_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00002000;
-                break;
-              } // case 114
-              case 122: {
-                discountBpc_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00004000;
-                break;
-              } // case 122
-              case 130: {
                 com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
                 extendsParams__ = input.readMessage(
                     ExtendsParamsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
                 internalGetMutableExtendsParams().getMutableMap().put(
                     extendsParams__.getKey(), extendsParams__.getValue());
+                bitField0_ |= 0x00001000;
+                break;
+              } // case 106
+              case 114: {
+                attach_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00002000;
+                break;
+              } // case 114
+              case 122: {
+                cashbackAmount_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00004000;
+                break;
+              } // case 122
+              case 130: {
+                tipAmount_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00008000;
                 break;
               } // case 130
-              case 138: {
-                attach_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00010000;
-                break;
-              } // case 138
-              case 146: {
-                token_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00020000;
-                break;
-              } // case 146
-              case 154: {
-                cashbackAmount_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00040000;
-                break;
-              } // case 154
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -5614,103 +5519,6 @@ java.lang.String defaultValue) {
         return this;
       }
 
-      private java.lang.Object storeNo_ = "";
-      /**
-       * <pre>
-       **
-       *store no
-       * </pre>
-       *
-       * <code>string store_no = 6;</code>
-       * @return The storeNo.
-       */
-      public java.lang.String getStoreNo() {
-        java.lang.Object ref = storeNo_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          storeNo_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *store no
-       * </pre>
-       *
-       * <code>string store_no = 6;</code>
-       * @return The bytes for storeNo.
-       */
-      public com.google.protobuf.ByteString
-          getStoreNoBytes() {
-        java.lang.Object ref = storeNo_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          storeNo_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *store no
-       * </pre>
-       *
-       * <code>string store_no = 6;</code>
-       * @param value The storeNo to set.
-       * @return This builder for chaining.
-       */
-      public Builder setStoreNo(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        storeNo_ = value;
-        bitField0_ |= 0x00000020;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *store no
-       * </pre>
-       *
-       * <code>string store_no = 6;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearStoreNo() {
-        storeNo_ = getDefaultInstance().getStoreNo();
-        bitField0_ = (bitField0_ & ~0x00000020);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *store no
-       * </pre>
-       *
-       * <code>string store_no = 6;</code>
-       * @param value The bytes for storeNo to set.
-       * @return This builder for chaining.
-       */
-      public Builder setStoreNoBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        storeNo_ = value;
-        bitField0_ |= 0x00000020;
-        onChanged();
-        return this;
-      }
-
       private java.lang.Object payScenario_ = "";
       /**
        * <pre>
@@ -5718,7 +5526,7 @@ java.lang.String defaultValue) {
        *pay scenario
        * </pre>
        *
-       * <code>string pay_scenario = 7;</code>
+       * <code>string pay_scenario = 6;</code>
        * @return The payScenario.
        */
       public java.lang.String getPayScenario() {
@@ -5739,7 +5547,7 @@ java.lang.String defaultValue) {
        *pay scenario
        * </pre>
        *
-       * <code>string pay_scenario = 7;</code>
+       * <code>string pay_scenario = 6;</code>
        * @return The bytes for payScenario.
        */
       public com.google.protobuf.ByteString
@@ -5761,7 +5569,7 @@ java.lang.String defaultValue) {
        *pay scenario
        * </pre>
        *
-       * <code>string pay_scenario = 7;</code>
+       * <code>string pay_scenario = 6;</code>
        * @param value The payScenario to set.
        * @return This builder for chaining.
        */
@@ -5769,7 +5577,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         payScenario_ = value;
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -5779,12 +5587,12 @@ java.lang.String defaultValue) {
        *pay scenario
        * </pre>
        *
-       * <code>string pay_scenario = 7;</code>
+       * <code>string pay_scenario = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearPayScenario() {
         payScenario_ = getDefaultInstance().getPayScenario();
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         onChanged();
         return this;
       }
@@ -5794,7 +5602,7 @@ java.lang.String defaultValue) {
        *pay scenario
        * </pre>
        *
-       * <code>string pay_scenario = 7;</code>
+       * <code>string pay_scenario = 6;</code>
        * @param value The bytes for payScenario to set.
        * @return This builder for chaining.
        */
@@ -5803,7 +5611,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         payScenario_ = value;
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -5815,7 +5623,7 @@ java.lang.String defaultValue) {
        *trans status
        * </pre>
        *
-       * <code>string trans_status = 8;</code>
+       * <code>string trans_status = 7;</code>
        * @return The transStatus.
        */
       public java.lang.String getTransStatus() {
@@ -5836,7 +5644,7 @@ java.lang.String defaultValue) {
        *trans status
        * </pre>
        *
-       * <code>string trans_status = 8;</code>
+       * <code>string trans_status = 7;</code>
        * @return The bytes for transStatus.
        */
       public com.google.protobuf.ByteString
@@ -5858,7 +5666,7 @@ java.lang.String defaultValue) {
        *trans status
        * </pre>
        *
-       * <code>string trans_status = 8;</code>
+       * <code>string trans_status = 7;</code>
        * @param value The transStatus to set.
        * @return This builder for chaining.
        */
@@ -5866,7 +5674,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         transStatus_ = value;
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -5876,12 +5684,12 @@ java.lang.String defaultValue) {
        *trans status
        * </pre>
        *
-       * <code>string trans_status = 8;</code>
+       * <code>string trans_status = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearTransStatus() {
         transStatus_ = getDefaultInstance().getTransStatus();
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
       }
@@ -5891,7 +5699,7 @@ java.lang.String defaultValue) {
        *trans status
        * </pre>
        *
-       * <code>string trans_status = 8;</code>
+       * <code>string trans_status = 7;</code>
        * @param value The bytes for transStatus to set.
        * @return This builder for chaining.
        */
@@ -5900,7 +5708,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         transStatus_ = value;
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -5912,7 +5720,7 @@ java.lang.String defaultValue) {
        *pay channel trans_no
        * </pre>
        *
-       * <code>string pay_channel_trans_no = 9;</code>
+       * <code>string pay_channel_trans_no = 8;</code>
        * @return The payChannelTransNo.
        */
       public java.lang.String getPayChannelTransNo() {
@@ -5933,7 +5741,7 @@ java.lang.String defaultValue) {
        *pay channel trans_no
        * </pre>
        *
-       * <code>string pay_channel_trans_no = 9;</code>
+       * <code>string pay_channel_trans_no = 8;</code>
        * @return The bytes for payChannelTransNo.
        */
       public com.google.protobuf.ByteString
@@ -5955,7 +5763,7 @@ java.lang.String defaultValue) {
        *pay channel trans_no
        * </pre>
        *
-       * <code>string pay_channel_trans_no = 9;</code>
+       * <code>string pay_channel_trans_no = 8;</code>
        * @param value The payChannelTransNo to set.
        * @return This builder for chaining.
        */
@@ -5963,7 +5771,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         payChannelTransNo_ = value;
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -5973,12 +5781,12 @@ java.lang.String defaultValue) {
        *pay channel trans_no
        * </pre>
        *
-       * <code>string pay_channel_trans_no = 9;</code>
+       * <code>string pay_channel_trans_no = 8;</code>
        * @return This builder for chaining.
        */
       public Builder clearPayChannelTransNo() {
         payChannelTransNo_ = getDefaultInstance().getPayChannelTransNo();
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
@@ -5988,7 +5796,7 @@ java.lang.String defaultValue) {
        *pay channel trans_no
        * </pre>
        *
-       * <code>string pay_channel_trans_no = 9;</code>
+       * <code>string pay_channel_trans_no = 8;</code>
        * @param value The bytes for payChannelTransNo to set.
        * @return This builder for chaining.
        */
@@ -5997,201 +5805,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         payChannelTransNo_ = value;
-        bitField0_ |= 0x00000100;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object payUserAccountId_ = "";
-      /**
-       * <pre>
-       **
-       *pay account id
-       * </pre>
-       *
-       * <code>string pay_user_account_id = 10;</code>
-       * @return The payUserAccountId.
-       */
-      public java.lang.String getPayUserAccountId() {
-        java.lang.Object ref = payUserAccountId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          payUserAccountId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *pay account id
-       * </pre>
-       *
-       * <code>string pay_user_account_id = 10;</code>
-       * @return The bytes for payUserAccountId.
-       */
-      public com.google.protobuf.ByteString
-          getPayUserAccountIdBytes() {
-        java.lang.Object ref = payUserAccountId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          payUserAccountId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *pay account id
-       * </pre>
-       *
-       * <code>string pay_user_account_id = 10;</code>
-       * @param value The payUserAccountId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setPayUserAccountId(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        payUserAccountId_ = value;
-        bitField0_ |= 0x00000200;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *pay account id
-       * </pre>
-       *
-       * <code>string pay_user_account_id = 10;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearPayUserAccountId() {
-        payUserAccountId_ = getDefaultInstance().getPayUserAccountId();
-        bitField0_ = (bitField0_ & ~0x00000200);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *pay account id
-       * </pre>
-       *
-       * <code>string pay_user_account_id = 10;</code>
-       * @param value The bytes for payUserAccountId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setPayUserAccountIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        payUserAccountId_ = value;
-        bitField0_ |= 0x00000200;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object paidAmount_ = "";
-      /**
-       * <pre>
-       **
-       *paid amount
-       * </pre>
-       *
-       * <code>string paid_amount = 11;</code>
-       * @return The paidAmount.
-       */
-      public java.lang.String getPaidAmount() {
-        java.lang.Object ref = paidAmount_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          paidAmount_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *paid amount
-       * </pre>
-       *
-       * <code>string paid_amount = 11;</code>
-       * @return The bytes for paidAmount.
-       */
-      public com.google.protobuf.ByteString
-          getPaidAmountBytes() {
-        java.lang.Object ref = paidAmount_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          paidAmount_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *paid amount
-       * </pre>
-       *
-       * <code>string paid_amount = 11;</code>
-       * @param value The paidAmount to set.
-       * @return This builder for chaining.
-       */
-      public Builder setPaidAmount(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        paidAmount_ = value;
-        bitField0_ |= 0x00000400;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *paid amount
-       * </pre>
-       *
-       * <code>string paid_amount = 11;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearPaidAmount() {
-        paidAmount_ = getDefaultInstance().getPaidAmount();
-        bitField0_ = (bitField0_ & ~0x00000400);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *paid amount
-       * </pre>
-       *
-       * <code>string paid_amount = 11;</code>
-       * @param value The bytes for paidAmount to set.
-       * @return This builder for chaining.
-       */
-      public Builder setPaidAmountBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        paidAmount_ = value;
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000080;
         onChanged();
         return this;
       }
@@ -6203,7 +5817,7 @@ java.lang.String defaultValue) {
        *trans end time
        * </pre>
        *
-       * <code>string trans_end_time = 12;</code>
+       * <code>string trans_end_time = 9;</code>
        * @return The transEndTime.
        */
       public java.lang.String getTransEndTime() {
@@ -6224,7 +5838,7 @@ java.lang.String defaultValue) {
        *trans end time
        * </pre>
        *
-       * <code>string trans_end_time = 12;</code>
+       * <code>string trans_end_time = 9;</code>
        * @return The bytes for transEndTime.
        */
       public com.google.protobuf.ByteString
@@ -6246,7 +5860,7 @@ java.lang.String defaultValue) {
        *trans end time
        * </pre>
        *
-       * <code>string trans_end_time = 12;</code>
+       * <code>string trans_end_time = 9;</code>
        * @param value The transEndTime to set.
        * @return This builder for chaining.
        */
@@ -6254,7 +5868,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         transEndTime_ = value;
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
@@ -6264,12 +5878,12 @@ java.lang.String defaultValue) {
        *trans end time
        * </pre>
        *
-       * <code>string trans_end_time = 12;</code>
+       * <code>string trans_end_time = 9;</code>
        * @return This builder for chaining.
        */
       public Builder clearTransEndTime() {
         transEndTime_ = getDefaultInstance().getTransEndTime();
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000100);
         onChanged();
         return this;
       }
@@ -6279,7 +5893,7 @@ java.lang.String defaultValue) {
        *trans end time
        * </pre>
        *
-       * <code>string trans_end_time = 12;</code>
+       * <code>string trans_end_time = 9;</code>
        * @param value The bytes for transEndTime to set.
        * @return This builder for chaining.
        */
@@ -6288,7 +5902,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         transEndTime_ = value;
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00000100;
         onChanged();
         return this;
       }
@@ -6300,7 +5914,7 @@ java.lang.String defaultValue) {
        *pay method id
        * </pre>
        *
-       * <code>string pay_method_id = 13;</code>
+       * <code>string pay_method_id = 10;</code>
        * @return The payMethodId.
        */
       public java.lang.String getPayMethodId() {
@@ -6321,7 +5935,7 @@ java.lang.String defaultValue) {
        *pay method id
        * </pre>
        *
-       * <code>string pay_method_id = 13;</code>
+       * <code>string pay_method_id = 10;</code>
        * @return The bytes for payMethodId.
        */
       public com.google.protobuf.ByteString
@@ -6343,7 +5957,7 @@ java.lang.String defaultValue) {
        *pay method id
        * </pre>
        *
-       * <code>string pay_method_id = 13;</code>
+       * <code>string pay_method_id = 10;</code>
        * @param value The payMethodId to set.
        * @return This builder for chaining.
        */
@@ -6351,7 +5965,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         payMethodId_ = value;
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
@@ -6361,12 +5975,12 @@ java.lang.String defaultValue) {
        *pay method id
        * </pre>
        *
-       * <code>string pay_method_id = 13;</code>
+       * <code>string pay_method_id = 10;</code>
        * @return This builder for chaining.
        */
       public Builder clearPayMethodId() {
         payMethodId_ = getDefaultInstance().getPayMethodId();
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000200);
         onChanged();
         return this;
       }
@@ -6376,7 +5990,7 @@ java.lang.String defaultValue) {
        *pay method id
        * </pre>
        *
-       * <code>string pay_method_id = 13;</code>
+       * <code>string pay_method_id = 10;</code>
        * @param value The bytes for payMethodId to set.
        * @return This builder for chaining.
        */
@@ -6385,7 +5999,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         payMethodId_ = value;
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00000200;
         onChanged();
         return this;
       }
@@ -6397,7 +6011,7 @@ java.lang.String defaultValue) {
        *merchant discount
        * </pre>
        *
-       * <code>string discount_bmopc = 14;</code>
+       * <code>string discount_bmopc = 11;</code>
        * @return The discountBmopc.
        */
       public java.lang.String getDiscountBmopc() {
@@ -6418,7 +6032,7 @@ java.lang.String defaultValue) {
        *merchant discount
        * </pre>
        *
-       * <code>string discount_bmopc = 14;</code>
+       * <code>string discount_bmopc = 11;</code>
        * @return The bytes for discountBmopc.
        */
       public com.google.protobuf.ByteString
@@ -6440,7 +6054,7 @@ java.lang.String defaultValue) {
        *merchant discount
        * </pre>
        *
-       * <code>string discount_bmopc = 14;</code>
+       * <code>string discount_bmopc = 11;</code>
        * @param value The discountBmopc to set.
        * @return This builder for chaining.
        */
@@ -6448,7 +6062,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         discountBmopc_ = value;
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00000400;
         onChanged();
         return this;
       }
@@ -6458,12 +6072,12 @@ java.lang.String defaultValue) {
        *merchant discount
        * </pre>
        *
-       * <code>string discount_bmopc = 14;</code>
+       * <code>string discount_bmopc = 11;</code>
        * @return This builder for chaining.
        */
       public Builder clearDiscountBmopc() {
         discountBmopc_ = getDefaultInstance().getDiscountBmopc();
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00000400);
         onChanged();
         return this;
       }
@@ -6473,7 +6087,7 @@ java.lang.String defaultValue) {
        *merchant discount
        * </pre>
        *
-       * <code>string discount_bmopc = 14;</code>
+       * <code>string discount_bmopc = 11;</code>
        * @param value The bytes for discountBmopc to set.
        * @return This builder for chaining.
        */
@@ -6482,7 +6096,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         discountBmopc_ = value;
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00000400;
         onChanged();
         return this;
       }
@@ -6494,7 +6108,7 @@ java.lang.String defaultValue) {
        *pay channel discount
        * </pre>
        *
-       * <code>string discount_bpc = 15;</code>
+       * <code>string discount_bpc = 12;</code>
        * @return The discountBpc.
        */
       public java.lang.String getDiscountBpc() {
@@ -6515,7 +6129,7 @@ java.lang.String defaultValue) {
        *pay channel discount
        * </pre>
        *
-       * <code>string discount_bpc = 15;</code>
+       * <code>string discount_bpc = 12;</code>
        * @return The bytes for discountBpc.
        */
       public com.google.protobuf.ByteString
@@ -6537,7 +6151,7 @@ java.lang.String defaultValue) {
        *pay channel discount
        * </pre>
        *
-       * <code>string discount_bpc = 15;</code>
+       * <code>string discount_bpc = 12;</code>
        * @param value The discountBpc to set.
        * @return This builder for chaining.
        */
@@ -6545,7 +6159,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         discountBpc_ = value;
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00000800;
         onChanged();
         return this;
       }
@@ -6555,12 +6169,12 @@ java.lang.String defaultValue) {
        *pay channel discount
        * </pre>
        *
-       * <code>string discount_bpc = 15;</code>
+       * <code>string discount_bpc = 12;</code>
        * @return This builder for chaining.
        */
       public Builder clearDiscountBpc() {
         discountBpc_ = getDefaultInstance().getDiscountBpc();
-        bitField0_ = (bitField0_ & ~0x00004000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         onChanged();
         return this;
       }
@@ -6570,7 +6184,7 @@ java.lang.String defaultValue) {
        *pay channel discount
        * </pre>
        *
-       * <code>string discount_bpc = 15;</code>
+       * <code>string discount_bpc = 12;</code>
        * @param value The bytes for discountBpc to set.
        * @return This builder for chaining.
        */
@@ -6579,7 +6193,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         discountBpc_ = value;
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00000800;
         onChanged();
         return this;
       }
@@ -6603,7 +6217,7 @@ java.lang.String defaultValue) {
         if (!extendsParams_.isMutable()) {
           extendsParams_ = extendsParams_.copy();
         }
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00001000;
         onChanged();
         return extendsParams_;
       }
@@ -6616,7 +6230,7 @@ java.lang.String defaultValue) {
        *extends params
        * </pre>
        *
-       * <code>map&lt;string, string&gt; extends_params = 16;</code>
+       * <code>map&lt;string, string&gt; extends_params = 13;</code>
        */
       @java.lang.Override
       public boolean containsExtendsParams(
@@ -6638,7 +6252,7 @@ java.lang.String defaultValue) {
        *extends params
        * </pre>
        *
-       * <code>map&lt;string, string&gt; extends_params = 16;</code>
+       * <code>map&lt;string, string&gt; extends_params = 13;</code>
        */
       @java.lang.Override
       public java.util.Map<java.lang.String, java.lang.String> getExtendsParamsMap() {
@@ -6650,7 +6264,7 @@ java.lang.String defaultValue) {
        *extends params
        * </pre>
        *
-       * <code>map&lt;string, string&gt; extends_params = 16;</code>
+       * <code>map&lt;string, string&gt; extends_params = 13;</code>
        */
       @java.lang.Override
       public /* nullable */
@@ -6669,7 +6283,7 @@ java.lang.String defaultValue) {
        *extends params
        * </pre>
        *
-       * <code>map&lt;string, string&gt; extends_params = 16;</code>
+       * <code>map&lt;string, string&gt; extends_params = 13;</code>
        */
       @java.lang.Override
       public java.lang.String getExtendsParamsOrThrow(
@@ -6683,7 +6297,7 @@ java.lang.String defaultValue) {
         return map.get(key);
       }
       public Builder clearExtendsParams() {
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00001000);
         internalGetMutableExtendsParams().getMutableMap()
             .clear();
         return this;
@@ -6694,7 +6308,7 @@ java.lang.String defaultValue) {
        *extends params
        * </pre>
        *
-       * <code>map&lt;string, string&gt; extends_params = 16;</code>
+       * <code>map&lt;string, string&gt; extends_params = 13;</code>
        */
       public Builder removeExtendsParams(
           java.lang.String key) {
@@ -6709,7 +6323,7 @@ java.lang.String defaultValue) {
       @java.lang.Deprecated
       public java.util.Map<java.lang.String, java.lang.String>
           getMutableExtendsParams() {
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00001000;
         return internalGetMutableExtendsParams().getMutableMap();
       }
       /**
@@ -6718,7 +6332,7 @@ java.lang.String defaultValue) {
        *extends params
        * </pre>
        *
-       * <code>map&lt;string, string&gt; extends_params = 16;</code>
+       * <code>map&lt;string, string&gt; extends_params = 13;</code>
        */
       public Builder putExtendsParams(
           java.lang.String key,
@@ -6727,7 +6341,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException("map value"); }
         internalGetMutableExtendsParams().getMutableMap()
             .put(key, value);
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00001000;
         return this;
       }
       /**
@@ -6736,13 +6350,13 @@ java.lang.String defaultValue) {
        *extends params
        * </pre>
        *
-       * <code>map&lt;string, string&gt; extends_params = 16;</code>
+       * <code>map&lt;string, string&gt; extends_params = 13;</code>
        */
       public Builder putAllExtendsParams(
           java.util.Map<java.lang.String, java.lang.String> values) {
         internalGetMutableExtendsParams().getMutableMap()
             .putAll(values);
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00001000;
         return this;
       }
 
@@ -6753,7 +6367,7 @@ java.lang.String defaultValue) {
        *Additional information
        * </pre>
        *
-       * <code>string attach = 17;</code>
+       * <code>string attach = 14;</code>
        * @return The attach.
        */
       public java.lang.String getAttach() {
@@ -6774,7 +6388,7 @@ java.lang.String defaultValue) {
        *Additional information
        * </pre>
        *
-       * <code>string attach = 17;</code>
+       * <code>string attach = 14;</code>
        * @return The bytes for attach.
        */
       public com.google.protobuf.ByteString
@@ -6796,7 +6410,7 @@ java.lang.String defaultValue) {
        *Additional information
        * </pre>
        *
-       * <code>string attach = 17;</code>
+       * <code>string attach = 14;</code>
        * @param value The attach to set.
        * @return This builder for chaining.
        */
@@ -6804,7 +6418,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         attach_ = value;
-        bitField0_ |= 0x00010000;
+        bitField0_ |= 0x00002000;
         onChanged();
         return this;
       }
@@ -6814,12 +6428,12 @@ java.lang.String defaultValue) {
        *Additional information
        * </pre>
        *
-       * <code>string attach = 17;</code>
+       * <code>string attach = 14;</code>
        * @return This builder for chaining.
        */
       public Builder clearAttach() {
         attach_ = getDefaultInstance().getAttach();
-        bitField0_ = (bitField0_ & ~0x00010000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         onChanged();
         return this;
       }
@@ -6829,7 +6443,7 @@ java.lang.String defaultValue) {
        *Additional information
        * </pre>
        *
-       * <code>string attach = 17;</code>
+       * <code>string attach = 14;</code>
        * @param value The bytes for attach to set.
        * @return This builder for chaining.
        */
@@ -6838,104 +6452,7 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         attach_ = value;
-        bitField0_ |= 0x00010000;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object token_ = "";
-      /**
-       * <pre>
-       **
-       *token
-       * </pre>
-       *
-       * <code>string token = 18;</code>
-       * @return The token.
-       */
-      public java.lang.String getToken() {
-        java.lang.Object ref = token_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          token_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *token
-       * </pre>
-       *
-       * <code>string token = 18;</code>
-       * @return The bytes for token.
-       */
-      public com.google.protobuf.ByteString
-          getTokenBytes() {
-        java.lang.Object ref = token_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          token_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *token
-       * </pre>
-       *
-       * <code>string token = 18;</code>
-       * @param value The token to set.
-       * @return This builder for chaining.
-       */
-      public Builder setToken(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        token_ = value;
-        bitField0_ |= 0x00020000;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *token
-       * </pre>
-       *
-       * <code>string token = 18;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearToken() {
-        token_ = getDefaultInstance().getToken();
-        bitField0_ = (bitField0_ & ~0x00020000);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *token
-       * </pre>
-       *
-       * <code>string token = 18;</code>
-       * @param value The bytes for token to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTokenBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        token_ = value;
-        bitField0_ |= 0x00020000;
+        bitField0_ |= 0x00002000;
         onChanged();
         return this;
       }
@@ -6947,7 +6464,7 @@ java.lang.String defaultValue) {
        *Cashback amount
        * </pre>
        *
-       * <code>string cashback_amount = 19;</code>
+       * <code>string cashback_amount = 15;</code>
        * @return The cashbackAmount.
        */
       public java.lang.String getCashbackAmount() {
@@ -6968,7 +6485,7 @@ java.lang.String defaultValue) {
        *Cashback amount
        * </pre>
        *
-       * <code>string cashback_amount = 19;</code>
+       * <code>string cashback_amount = 15;</code>
        * @return The bytes for cashbackAmount.
        */
       public com.google.protobuf.ByteString
@@ -6990,7 +6507,7 @@ java.lang.String defaultValue) {
        *Cashback amount
        * </pre>
        *
-       * <code>string cashback_amount = 19;</code>
+       * <code>string cashback_amount = 15;</code>
        * @param value The cashbackAmount to set.
        * @return This builder for chaining.
        */
@@ -6998,7 +6515,7 @@ java.lang.String defaultValue) {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         cashbackAmount_ = value;
-        bitField0_ |= 0x00040000;
+        bitField0_ |= 0x00004000;
         onChanged();
         return this;
       }
@@ -7008,12 +6525,12 @@ java.lang.String defaultValue) {
        *Cashback amount
        * </pre>
        *
-       * <code>string cashback_amount = 19;</code>
+       * <code>string cashback_amount = 15;</code>
        * @return This builder for chaining.
        */
       public Builder clearCashbackAmount() {
         cashbackAmount_ = getDefaultInstance().getCashbackAmount();
-        bitField0_ = (bitField0_ & ~0x00040000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         onChanged();
         return this;
       }
@@ -7023,7 +6540,7 @@ java.lang.String defaultValue) {
        *Cashback amount
        * </pre>
        *
-       * <code>string cashback_amount = 19;</code>
+       * <code>string cashback_amount = 15;</code>
        * @param value The bytes for cashbackAmount to set.
        * @return This builder for chaining.
        */
@@ -7032,7 +6549,104 @@ java.lang.String defaultValue) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         cashbackAmount_ = value;
-        bitField0_ |= 0x00040000;
+        bitField0_ |= 0x00004000;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object tipAmount_ = "";
+      /**
+       * <pre>
+       **
+       *tip amount
+       * </pre>
+       *
+       * <code>string tip_amount = 16;</code>
+       * @return The tipAmount.
+       */
+      public java.lang.String getTipAmount() {
+        java.lang.Object ref = tipAmount_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tipAmount_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *tip amount
+       * </pre>
+       *
+       * <code>string tip_amount = 16;</code>
+       * @return The bytes for tipAmount.
+       */
+      public com.google.protobuf.ByteString
+          getTipAmountBytes() {
+        java.lang.Object ref = tipAmount_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tipAmount_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *tip amount
+       * </pre>
+       *
+       * <code>string tip_amount = 16;</code>
+       * @param value The tipAmount to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTipAmount(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        tipAmount_ = value;
+        bitField0_ |= 0x00008000;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *tip amount
+       * </pre>
+       *
+       * <code>string tip_amount = 16;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTipAmount() {
+        tipAmount_ = getDefaultInstance().getTipAmount();
+        bitField0_ = (bitField0_ & ~0x00008000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *tip amount
+       * </pre>
+       *
+       * <code>string tip_amount = 16;</code>
+       * @param value The bytes for tipAmount to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTipAmountBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        tipAmount_ = value;
+        bitField0_ |= 0x00008000;
         onChanged();
         return this;
       }
@@ -7136,25 +6750,24 @@ java.lang.String defaultValue) {
       "\030\005 \001(\t\022C\n\010biz_data\030\006 \001(\01321.com.wiseasy.e" +
       "cr.hub.sdk.protobuf.ResponseBizData\022I\n\013d" +
       "evice_data\030\007 \001(\01324.com.wiseasy.ecr.hub.s" +
-      "dk.protobuf.ResponseDeviceData\"N\n\022Respon" +
-      "seDeviceData\022\020\n\010app_name\030\001 \001(\t\022\021\n\tdevice" +
-      "_sn\030\002 \001(\t\022\023\n\013app_version\030\003 \001(\t\"\267\004\n\017Respo" +
-      "nseBizData\022\031\n\021merchant_order_no\030\001 \001(\t\022\024\n" +
-      "\014order_amount\030\002 \001(\t\022\020\n\010trans_no\030\003 \001(\t\022\026\n" +
-      "\016price_currency\030\004 \001(\t\022\022\n\ntrans_type\030\005 \001(" +
-      "\t\022\020\n\010store_no\030\006 \001(\t\022\024\n\014pay_scenario\030\007 \001(" +
-      "\t\022\024\n\014trans_status\030\010 \001(\t\022\034\n\024pay_channel_t" +
-      "rans_no\030\t \001(\t\022\033\n\023pay_user_account_id\030\n \001" +
-      "(\t\022\023\n\013paid_amount\030\013 \001(\t\022\026\n\016trans_end_tim" +
-      "e\030\014 \001(\t\022\025\n\rpay_method_id\030\r \001(\t\022\026\n\016discou" +
-      "nt_bmopc\030\016 \001(\t\022\024\n\014discount_bpc\030\017 \001(\t\022\\\n\016" +
-      "extends_params\030\020 \003(\0132D.com.wiseasy.ecr.h" +
-      "ub.sdk.protobuf.ResponseBizData.ExtendsP" +
-      "aramsEntry\022\016\n\006attach\030\021 \001(\t\022\r\n\005token\030\022 \001(" +
-      "\t\022\027\n\017cashback_amount\030\023 \001(\t\0324\n\022ExtendsPar" +
-      "amsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001" +
-      "B7\n com.wiseasy.ecr.hub.sdk.protobufB\023EC" +
-      "RHubResponseProtob\006proto3"
+      "dk.protobuf.ResponseDeviceData\"c\n\022Respon" +
+      "seDeviceData\022\023\n\013mac_address\030\001 \001(\t\022\020\n\010app" +
+      "_name\030\002 \001(\t\022\021\n\tdevice_sn\030\003 \001(\t\022\023\n\013app_ve" +
+      "rsion\030\004 \001(\t\"\370\003\n\017ResponseBizData\022\031\n\021merch" +
+      "ant_order_no\030\001 \001(\t\022\024\n\014order_amount\030\002 \001(\t" +
+      "\022\020\n\010trans_no\030\003 \001(\t\022\026\n\016price_currency\030\004 \001" +
+      "(\t\022\022\n\ntrans_type\030\005 \001(\t\022\024\n\014pay_scenario\030\006" +
+      " \001(\t\022\024\n\014trans_status\030\007 \001(\t\022\034\n\024pay_channe" +
+      "l_trans_no\030\010 \001(\t\022\026\n\016trans_end_time\030\t \001(\t" +
+      "\022\025\n\rpay_method_id\030\n \001(\t\022\026\n\016discount_bmop" +
+      "c\030\013 \001(\t\022\024\n\014discount_bpc\030\014 \001(\t\022\\\n\016extends" +
+      "_params\030\r \003(\0132D.com.wiseasy.ecr.hub.sdk." +
+      "protobuf.ResponseBizData.ExtendsParamsEn" +
+      "try\022\016\n\006attach\030\016 \001(\t\022\027\n\017cashback_amount\030\017" +
+      " \001(\t\022\022\n\ntip_amount\030\020 \001(\t\0324\n\022ExtendsParam" +
+      "sEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B7" +
+      "\n com.wiseasy.ecr.hub.sdk.protobufB\023ECRH" +
+      "ubResponseProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -7171,13 +6784,13 @@ java.lang.String defaultValue) {
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseDeviceData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseDeviceData_descriptor,
-        new java.lang.String[] { "AppName", "DeviceSn", "AppVersion", });
+        new java.lang.String[] { "MacAddress", "AppName", "DeviceSn", "AppVersion", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_descriptor,
-        new java.lang.String[] { "MerchantOrderNo", "OrderAmount", "TransNo", "PriceCurrency", "TransType", "StoreNo", "PayScenario", "TransStatus", "PayChannelTransNo", "PayUserAccountId", "PaidAmount", "TransEndTime", "PayMethodId", "DiscountBmopc", "DiscountBpc", "ExtendsParams", "Attach", "Token", "CashbackAmount", });
+        new java.lang.String[] { "MerchantOrderNo", "OrderAmount", "TransNo", "PriceCurrency", "TransType", "PayScenario", "TransStatus", "PayChannelTransNo", "TransEndTime", "PayMethodId", "DiscountBmopc", "DiscountBpc", "ExtendsParams", "Attach", "CashbackAmount", "TipAmount", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_ExtendsParamsEntry_descriptor =
       internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_descriptor.getNestedTypes().get(0);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_ExtendsParamsEntry_fieldAccessorTable = new

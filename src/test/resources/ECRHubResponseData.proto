@@ -35,17 +35,21 @@ message ECRHubResponse {
 
 message ResponseDeviceData {
   /**
+  mac address
+   */
+  string mac_address = 1;
+  /**
   server name
    */
-  string app_name = 1;
+  string app_name = 2;
   /**
   device sn
    */
-  string device_sn = 2;
+  string device_sn = 3;
   /**
   app version name
   */
-  string app_version = 3;
+  string app_version = 4;
 }
 
 message ResponseBizData {
@@ -70,60 +74,48 @@ message ResponseBizData {
   */
   string trans_type = 5;
   /**
-  store no
-  */
-  string store_no = 6;
-  /**
   pay scenario
   */
-  string pay_scenario = 7;
+  string pay_scenario = 6;
   /**
   trans status
   */
-  string trans_status = 8;
+  string trans_status = 7;
   /**
   pay channel trans_no
   */
-  string pay_channel_trans_no = 9;
-  /**
-  pay account id
-  */
-  string pay_user_account_id = 10;
-  /**
-  paid amount
-  */
-  string paid_amount = 11;
+  string pay_channel_trans_no = 8;
   /**
   trans end time
   */
-  string trans_end_time = 12;
+  string trans_end_time = 9;
   /**
   pay method id
   */
-  string pay_method_id = 13;
+  string pay_method_id = 10;
   /**
   merchant discount
   */
-  string discount_bmopc = 14;
+  string discount_bmopc = 11;
   /**
    pay channel discount
   */
-  string discount_bpc = 15;
+  string discount_bpc = 12;
   /**
  extends params
  */
-  map<string, string> extends_params = 16;
+  map<string, string> extends_params = 13;
   /**
   Additional information
    */
-  string attach = 17;
-  /**
-  token
-   */
-  string token = 18;
+  string attach = 14;
   /**
  Cashback amount
  */
-  string cashback_amount = 19;
+  string cashback_amount = 15;
+  /**
+  tip amount
+  */
+  string tip_amount = 16;
 }
 
