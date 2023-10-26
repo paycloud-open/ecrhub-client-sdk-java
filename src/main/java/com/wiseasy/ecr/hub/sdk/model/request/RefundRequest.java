@@ -59,6 +59,14 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
     @JSONField(name = "tipAmount")
     private String tip_amount;
     /**
+     * Cashback Amount
+     * The amount of the tip is expressed in the currency in which it is denominated, for example, 1 USD stands for one dollar, not one cent.
+     *
+     * For example: 1.00
+     */
+    @JSONField(name = "cashbackAmount")
+    private String cashback_amount;
+    /**
      * Transaction type
      *
      * @see com.wiseasy.ecr.hub.sdk.enums.ETransType
@@ -76,15 +84,6 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
      */
     @JSONField(name = "payMethodCategory")
     private String pay_method_category;
-    /**
-     * Payment method id
-     *
-     * @see com.wiseasy.ecr.hub.sdk.enums.EPayMethod
-     *
-     * For example: Visa
-     */
-    @JSONField(name = "payMethodId")
-    private String pay_method_id;
     /**
      * Attach
      * Allows merchants to submit an additional data to the gateway, which will be returned as-is for payment notifications and inquiries
@@ -110,6 +109,13 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
     @JSONField(name = "notifyUrl")
     private String notify_url;
     /**
+     * Order expires time, in seconds. Default to 300 seconds.
+     *
+     * For example: 300
+     */
+    @JSONField(name = "expires")
+    private String expires;
+    /**
      * Order need terminal confirmation. Default: true
      * - true: Terminal confirmation is required;
      * - false: No terminal confirmation is required.
@@ -118,13 +124,6 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
      */
     @JSONField(name = "confirmOnTerminal")
     private Boolean confirm_on_terminal;
-    /**
-     * Order expires time, in seconds. Default to 300 seconds.
-     *
-     * For example: 300
-     */
-    @JSONField(name = "expires")
-    private String expires;
 
     public String getMerchant_order_no() {
         return merchant_order_no;
@@ -174,6 +173,14 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
         this.tip_amount = tip_amount;
     }
 
+    public String getCashback_amount() {
+        return cashback_amount;
+    }
+
+    public void setCashback_amount(String cashback_amount) {
+        this.cashback_amount = cashback_amount;
+    }
+
     public String getTrans_type() {
         return trans_type;
     }
@@ -184,14 +191,6 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
 
     public void setPay_method_category(String pay_method_category) {
         this.pay_method_category = pay_method_category;
-    }
-
-    public String getPay_method_id() {
-        return pay_method_id;
-    }
-
-    public void setPay_method_id(String pay_method_id) {
-        this.pay_method_id = pay_method_id;
     }
 
     public String getAttach() {
@@ -218,19 +217,19 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
         this.notify_url = notify_url;
     }
 
-    public Boolean getConfirm_on_terminal() {
-        return confirm_on_terminal;
-    }
-
-    public void setConfirm_on_terminal(Boolean confirm_on_terminal) {
-        this.confirm_on_terminal = confirm_on_terminal;
-    }
-
     public String getExpires() {
         return expires;
     }
 
     public void setExpires(String expires) {
         this.expires = expires;
+    }
+
+    public Boolean getConfirm_on_terminal() {
+        return confirm_on_terminal;
+    }
+
+    public void setConfirm_on_terminal(Boolean confirm_on_terminal) {
+        this.confirm_on_terminal = confirm_on_terminal;
     }
 }

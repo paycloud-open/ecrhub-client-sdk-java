@@ -12,6 +12,13 @@ public class RefundResponse extends ECRHubResponse {
     @JSONField(name = "merchantOrderNo")
     private String merchant_order_no;
     /**
+     * Price Currency, ISO-4217 compliant, described in a three-character code
+     *
+     * For example: USD
+     */
+    @JSONField(name = "priceCurrency")
+    private String price_currency;
+    /**
      * Order Amount
      * Expressed in the quoted currency, for example, One USD stands for one dollar, not one cent
      *
@@ -28,6 +35,14 @@ public class RefundResponse extends ECRHubResponse {
     @JSONField(name = "tipAmount")
     private String tip_amount;
     /**
+     * Cashback Amount
+     * The amount of the tip is expressed in the currency in which it is denominated, for example, 1 USD stands for one dollar, not one cent.
+     *
+     * For example: 1.00
+     */
+    @JSONField(name = "cashbackAmount")
+    private String cashback_amount;
+    /**
      * Attach
      * Allows merchants to submit an additional data to the gateway, which will be returned as-is for payment notifications and inquiries
      *
@@ -35,6 +50,22 @@ public class RefundResponse extends ECRHubResponse {
      */
     @JSONField(name = "attach")
     private String attach;
+    /**
+     * Transaction type
+     *
+     * @see com.wiseasy.ecr.hub.sdk.enums.ETransType
+     *
+     * For example: 1
+     */
+    @JSONField(name = "transType")
+    private String trans_type;
+    /**
+     * PayCloud transaction No.
+     *
+     * For example: 51230016492309010000001
+     */
+    @JSONField(name = "transNo")
+    private String trans_no;
     /**
      * Transaction status
      *
@@ -45,12 +76,21 @@ public class RefundResponse extends ECRHubResponse {
     @JSONField(name = "transStatus")
     private String trans_status;
     /**
-     * PayCloud transaction No.
+     * Payment scenario
      *
-     * For example: 51230016492309010000001
+     * @see com.wiseasy.ecr.hub.sdk.enums.EPayScenario
      */
-    @JSONField(name = "transNo")
-    private String trans_no;
+    @JSONField(name = "payScenario")
+    private String pay_scenario;
+    /**
+     * Payment method id
+     *
+     * @see com.wiseasy.ecr.hub.sdk.enums.EPayMethod
+     *
+     * For example: Visa
+     */
+    @JSONField(name = "payMethodId")
+    private String pay_method_id;
     /**
      * Payment Channel Transaction No. such as WeChat, Alipay, Visa, Mastercard and other payment platforms
      *
@@ -73,11 +113,6 @@ public class RefundResponse extends ECRHubResponse {
     @JSONField(name = "discountBpc")
     private String discount_bpc;
     /**
-     * Store no
-     */
-    @JSONField(name = "storeNo")
-    private String store_no;
-    /**
      * Time of successful trade, time zone: UTC/GMT+0, format: YYYY-MM-DD HH:mm:ss
      *
      * For Example: 2021-06-03 12:48:51
@@ -91,6 +126,14 @@ public class RefundResponse extends ECRHubResponse {
 
     public void setMerchant_order_no(String merchant_order_no) {
         this.merchant_order_no = merchant_order_no;
+    }
+
+    public String getPrice_currency() {
+        return price_currency;
+    }
+
+    public void setPrice_currency(String price_currency) {
+        this.price_currency = price_currency;
     }
 
     public String getOrder_amount() {
@@ -109,12 +152,36 @@ public class RefundResponse extends ECRHubResponse {
         this.tip_amount = tip_amount;
     }
 
+    public String getCashback_amount() {
+        return cashback_amount;
+    }
+
+    public void setCashback_amount(String cashback_amount) {
+        this.cashback_amount = cashback_amount;
+    }
+
     public String getAttach() {
         return attach;
     }
 
     public void setAttach(String attach) {
         this.attach = attach;
+    }
+
+    public String getTrans_type() {
+        return trans_type;
+    }
+
+    public void setTrans_type(String trans_type) {
+        this.trans_type = trans_type;
+    }
+
+    public String getTrans_no() {
+        return trans_no;
+    }
+
+    public void setTrans_no(String trans_no) {
+        this.trans_no = trans_no;
     }
 
     public String getTrans_status() {
@@ -125,12 +192,20 @@ public class RefundResponse extends ECRHubResponse {
         this.trans_status = trans_status;
     }
 
-    public String getTrans_no() {
-        return trans_no;
+    public String getPay_scenario() {
+        return pay_scenario;
     }
 
-    public void setTrans_no(String trans_no) {
-        this.trans_no = trans_no;
+    public void setPay_scenario(String pay_scenario) {
+        this.pay_scenario = pay_scenario;
+    }
+
+    public String getPay_method_id() {
+        return pay_method_id;
+    }
+
+    public void setPay_method_id(String pay_method_id) {
+        this.pay_method_id = pay_method_id;
     }
 
     public String getPay_channel_trans_no() {
@@ -155,14 +230,6 @@ public class RefundResponse extends ECRHubResponse {
 
     public void setDiscount_bpc(String discount_bpc) {
         this.discount_bpc = discount_bpc;
-    }
-
-    public String getStore_no() {
-        return store_no;
-    }
-
-    public void setStore_no(String store_no) {
-        this.store_no = store_no;
     }
 
     public String getTrans_end_time() {

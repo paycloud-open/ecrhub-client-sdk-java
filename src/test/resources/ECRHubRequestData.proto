@@ -8,7 +8,7 @@ message ECRHubRequest {
    */
   string topic = 1;
   /**
-  Transaction Request ID, used to track the sending and returning of orders
+  Request ID, used to track the sending and returning of orders
    */
   string request_id = 2;
   /**
@@ -90,41 +90,45 @@ message RequestBizData {
   */
   string tip_amount = 5;
   /**
+  Cashback amount
+  */
+  string cashback_amount = 6;
+  /**
   trans type
   */
-  string trans_type = 6;
+  string trans_type = 7;
   /**
   Payment method category: QR_ C_ SCAN_ B: Main scanning; QR_ B_ SCAN_ C: Scan code is scanned; BANKCARD: Bank card; OTP: OTP one-time password payment
   */
-  string pay_method_category = 7;
+  string pay_method_category = 8;
   /**
   Additional information
    */
-  string attach = 8;
+  string attach = 9;
   /**
   Descriptive information
    */
-  string description = 9;
+  string description = 10;
   /**
   Notification callback address
   */
-  string notify_url = 10;
+  string notify_url = 11;
   /**
  Extended parameters
  */
-  map<string, string> extends_params = 11;
+  map<string, string> extends_params = 12;
   /**
   confirm on terminal
    */
-  bool confirm_on_terminal = 12;
+  bool confirm_on_terminal = 13;
   /**
    order expire
    */
-  string expires = 13;
+  string expires = 14;
   /**
  pay channel trans_no
  */
-  string orig_pay_channel_trans_no = 14;
+  string orig_pay_channel_trans_no = 15;
 }
 
 message VoiceData {
@@ -171,4 +175,3 @@ message NotifyData {
   */
   string sound = 4;
 }
-

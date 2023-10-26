@@ -43,7 +43,7 @@ public final class ECRHubResponseProto {
     /**
      * <pre>
      **
-     *Transaction Request ID, used to track the sending and returning of orders
+     *Request ID, used to track the sending and returning of orders
      * </pre>
      *
      * <code>string request_id = 2;</code>
@@ -53,7 +53,7 @@ public final class ECRHubResponseProto {
     /**
      * <pre>
      **
-     *Transaction Request ID, used to track the sending and returning of orders
+     *Request ID, used to track the sending and returning of orders
      * </pre>
      *
      * <code>string request_id = 2;</code>
@@ -87,32 +87,10 @@ public final class ECRHubResponseProto {
     /**
      * <pre>
      **
-     *time stamp
-     * </pre>
-     *
-     * <code>string timestamp = 4;</code>
-     * @return The timestamp.
-     */
-    java.lang.String getTimestamp();
-    /**
-     * <pre>
-     **
-     *time stamp
-     * </pre>
-     *
-     * <code>string timestamp = 4;</code>
-     * @return The bytes for timestamp.
-     */
-    com.google.protobuf.ByteString
-        getTimestampBytes();
-
-    /**
-     * <pre>
-     **
      *status
      * </pre>
      *
-     * <code>bool success = 5;</code>
+     * <code>bool success = 4;</code>
      * @return The success.
      */
     boolean getSuccess();
@@ -123,7 +101,7 @@ public final class ECRHubResponseProto {
      *error message
      * </pre>
      *
-     * <code>string error_msg = 6;</code>
+     * <code>string error_msg = 5;</code>
      * @return The errorMsg.
      */
     java.lang.String getErrorMsg();
@@ -133,7 +111,7 @@ public final class ECRHubResponseProto {
      *error message
      * </pre>
      *
-     * <code>string error_msg = 6;</code>
+     * <code>string error_msg = 5;</code>
      * @return The bytes for errorMsg.
      */
     com.google.protobuf.ByteString
@@ -142,32 +120,10 @@ public final class ECRHubResponseProto {
     /**
      * <pre>
      **
-     *sdk version
-     * </pre>
-     *
-     * <code>string version = 7;</code>
-     * @return The version.
-     */
-    java.lang.String getVersion();
-    /**
-     * <pre>
-     **
-     *sdk version
-     * </pre>
-     *
-     * <code>string version = 7;</code>
-     * @return The bytes for version.
-     */
-    com.google.protobuf.ByteString
-        getVersionBytes();
-
-    /**
-     * <pre>
-     **
      *Response Business Data
      * </pre>
      *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
      * @return Whether the bizData field is set.
      */
     boolean hasBizData();
@@ -177,7 +133,7 @@ public final class ECRHubResponseProto {
      *Response Business Data
      * </pre>
      *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
      * @return The bizData.
      */
     com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData getBizData();
@@ -187,7 +143,7 @@ public final class ECRHubResponseProto {
      *Response Business Data
      * </pre>
      *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
      */
     com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizDataOrBuilder getBizDataOrBuilder();
 
@@ -197,7 +153,7 @@ public final class ECRHubResponseProto {
      *Response device data
      * </pre>
      *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
      * @return Whether the deviceData field is set.
      */
     boolean hasDeviceData();
@@ -207,7 +163,7 @@ public final class ECRHubResponseProto {
      *Response device data
      * </pre>
      *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
      * @return The deviceData.
      */
     com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData getDeviceData();
@@ -217,7 +173,7 @@ public final class ECRHubResponseProto {
      *Response device data
      * </pre>
      *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
      */
     com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceDataOrBuilder getDeviceDataOrBuilder();
   }
@@ -237,9 +193,7 @@ public final class ECRHubResponseProto {
       topic_ = "";
       requestId_ = "";
       appId_ = "";
-      timestamp_ = "";
       errorMsg_ = "";
-      version_ = "";
     }
 
     @java.lang.Override
@@ -318,7 +272,7 @@ public final class ECRHubResponseProto {
     /**
      * <pre>
      **
-     *Transaction Request ID, used to track the sending and returning of orders
+     *Request ID, used to track the sending and returning of orders
      * </pre>
      *
      * <code>string request_id = 2;</code>
@@ -340,7 +294,7 @@ public final class ECRHubResponseProto {
     /**
      * <pre>
      **
-     *Transaction Request ID, used to track the sending and returning of orders
+     *Request ID, used to track the sending and returning of orders
      * </pre>
      *
      * <code>string request_id = 2;</code>
@@ -410,56 +364,7 @@ public final class ECRHubResponseProto {
       }
     }
 
-    public static final int TIMESTAMP_FIELD_NUMBER = 4;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object timestamp_ = "";
-    /**
-     * <pre>
-     **
-     *time stamp
-     * </pre>
-     *
-     * <code>string timestamp = 4;</code>
-     * @return The timestamp.
-     */
-    @java.lang.Override
-    public java.lang.String getTimestamp() {
-      java.lang.Object ref = timestamp_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        timestamp_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     **
-     *time stamp
-     * </pre>
-     *
-     * <code>string timestamp = 4;</code>
-     * @return The bytes for timestamp.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getTimestampBytes() {
-      java.lang.Object ref = timestamp_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        timestamp_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int SUCCESS_FIELD_NUMBER = 5;
+    public static final int SUCCESS_FIELD_NUMBER = 4;
     private boolean success_ = false;
     /**
      * <pre>
@@ -467,7 +372,7 @@ public final class ECRHubResponseProto {
      *status
      * </pre>
      *
-     * <code>bool success = 5;</code>
+     * <code>bool success = 4;</code>
      * @return The success.
      */
     @java.lang.Override
@@ -475,7 +380,7 @@ public final class ECRHubResponseProto {
       return success_;
     }
 
-    public static final int ERROR_MSG_FIELD_NUMBER = 6;
+    public static final int ERROR_MSG_FIELD_NUMBER = 5;
     @SuppressWarnings("serial")
     private volatile java.lang.Object errorMsg_ = "";
     /**
@@ -484,7 +389,7 @@ public final class ECRHubResponseProto {
      *error message
      * </pre>
      *
-     * <code>string error_msg = 6;</code>
+     * <code>string error_msg = 5;</code>
      * @return The errorMsg.
      */
     @java.lang.Override
@@ -506,7 +411,7 @@ public final class ECRHubResponseProto {
      *error message
      * </pre>
      *
-     * <code>string error_msg = 6;</code>
+     * <code>string error_msg = 5;</code>
      * @return The bytes for errorMsg.
      */
     @java.lang.Override
@@ -524,56 +429,7 @@ public final class ECRHubResponseProto {
       }
     }
 
-    public static final int VERSION_FIELD_NUMBER = 7;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object version_ = "";
-    /**
-     * <pre>
-     **
-     *sdk version
-     * </pre>
-     *
-     * <code>string version = 7;</code>
-     * @return The version.
-     */
-    @java.lang.Override
-    public java.lang.String getVersion() {
-      java.lang.Object ref = version_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        version_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     **
-     *sdk version
-     * </pre>
-     *
-     * <code>string version = 7;</code>
-     * @return The bytes for version.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getVersionBytes() {
-      java.lang.Object ref = version_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        version_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int BIZ_DATA_FIELD_NUMBER = 8;
+    public static final int BIZ_DATA_FIELD_NUMBER = 6;
     private com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData bizData_;
     /**
      * <pre>
@@ -581,7 +437,7 @@ public final class ECRHubResponseProto {
      *Response Business Data
      * </pre>
      *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
      * @return Whether the bizData field is set.
      */
     @java.lang.Override
@@ -594,7 +450,7 @@ public final class ECRHubResponseProto {
      *Response Business Data
      * </pre>
      *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
      * @return The bizData.
      */
     @java.lang.Override
@@ -607,14 +463,14 @@ public final class ECRHubResponseProto {
      *Response Business Data
      * </pre>
      *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
      */
     @java.lang.Override
     public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizDataOrBuilder getBizDataOrBuilder() {
       return bizData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData.getDefaultInstance() : bizData_;
     }
 
-    public static final int DEVICE_DATA_FIELD_NUMBER = 9;
+    public static final int DEVICE_DATA_FIELD_NUMBER = 7;
     private com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData deviceData_;
     /**
      * <pre>
@@ -622,7 +478,7 @@ public final class ECRHubResponseProto {
      *Response device data
      * </pre>
      *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
      * @return Whether the deviceData field is set.
      */
     @java.lang.Override
@@ -635,7 +491,7 @@ public final class ECRHubResponseProto {
      *Response device data
      * </pre>
      *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
      * @return The deviceData.
      */
     @java.lang.Override
@@ -648,7 +504,7 @@ public final class ECRHubResponseProto {
      *Response device data
      * </pre>
      *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
      */
     @java.lang.Override
     public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceDataOrBuilder getDeviceDataOrBuilder() {
@@ -678,23 +534,17 @@ public final class ECRHubResponseProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(appId_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, appId_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(timestamp_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, timestamp_);
-      }
       if (success_ != false) {
-        output.writeBool(5, success_);
+        output.writeBool(4, success_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(errorMsg_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, errorMsg_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(version_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, version_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, errorMsg_);
       }
       if (((bitField0_ & 0x00000001) != 0)) {
-        output.writeMessage(8, getBizData());
+        output.writeMessage(6, getBizData());
       }
       if (((bitField0_ & 0x00000002) != 0)) {
-        output.writeMessage(9, getDeviceData());
+        output.writeMessage(7, getDeviceData());
       }
       getUnknownFields().writeTo(output);
     }
@@ -714,26 +564,20 @@ public final class ECRHubResponseProto {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(appId_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, appId_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(timestamp_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, timestamp_);
-      }
       if (success_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, success_);
+          .computeBoolSize(4, success_);
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(errorMsg_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, errorMsg_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(version_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, version_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, errorMsg_);
       }
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, getBizData());
+          .computeMessageSize(6, getBizData());
       }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, getDeviceData());
+          .computeMessageSize(7, getDeviceData());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -756,14 +600,10 @@ public final class ECRHubResponseProto {
           .equals(other.getRequestId())) return false;
       if (!getAppId()
           .equals(other.getAppId())) return false;
-      if (!getTimestamp()
-          .equals(other.getTimestamp())) return false;
       if (getSuccess()
           != other.getSuccess()) return false;
       if (!getErrorMsg()
           .equals(other.getErrorMsg())) return false;
-      if (!getVersion()
-          .equals(other.getVersion())) return false;
       if (hasBizData() != other.hasBizData()) return false;
       if (hasBizData()) {
         if (!getBizData()
@@ -791,15 +631,11 @@ public final class ECRHubResponseProto {
       hash = (53 * hash) + getRequestId().hashCode();
       hash = (37 * hash) + APP_ID_FIELD_NUMBER;
       hash = (53 * hash) + getAppId().hashCode();
-      hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
-      hash = (53 * hash) + getTimestamp().hashCode();
       hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getSuccess());
       hash = (37 * hash) + ERROR_MSG_FIELD_NUMBER;
       hash = (53 * hash) + getErrorMsg().hashCode();
-      hash = (37 * hash) + VERSION_FIELD_NUMBER;
-      hash = (53 * hash) + getVersion().hashCode();
       if (hasBizData()) {
         hash = (37 * hash) + BIZ_DATA_FIELD_NUMBER;
         hash = (53 * hash) + getBizData().hashCode();
@@ -949,10 +785,8 @@ public final class ECRHubResponseProto {
         topic_ = "";
         requestId_ = "";
         appId_ = "";
-        timestamp_ = "";
         success_ = false;
         errorMsg_ = "";
-        version_ = "";
         bizData_ = null;
         if (bizDataBuilder_ != null) {
           bizDataBuilder_.dispose();
@@ -1006,25 +840,19 @@ public final class ECRHubResponseProto {
           result.appId_ = appId_;
         }
         if (((from_bitField0_ & 0x00000008) != 0)) {
-          result.timestamp_ = timestamp_;
-        }
-        if (((from_bitField0_ & 0x00000010) != 0)) {
           result.success_ = success_;
         }
-        if (((from_bitField0_ & 0x00000020) != 0)) {
+        if (((from_bitField0_ & 0x00000010) != 0)) {
           result.errorMsg_ = errorMsg_;
         }
-        if (((from_bitField0_ & 0x00000040) != 0)) {
-          result.version_ = version_;
-        }
         int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000080) != 0)) {
+        if (((from_bitField0_ & 0x00000020) != 0)) {
           result.bizData_ = bizDataBuilder_ == null
               ? bizData_
               : bizDataBuilder_.build();
           to_bitField0_ |= 0x00000001;
         }
-        if (((from_bitField0_ & 0x00000100) != 0)) {
+        if (((from_bitField0_ & 0x00000040) != 0)) {
           result.deviceData_ = deviceDataBuilder_ == null
               ? deviceData_
               : deviceDataBuilder_.build();
@@ -1092,22 +920,12 @@ public final class ECRHubResponseProto {
           bitField0_ |= 0x00000004;
           onChanged();
         }
-        if (!other.getTimestamp().isEmpty()) {
-          timestamp_ = other.timestamp_;
-          bitField0_ |= 0x00000008;
-          onChanged();
-        }
         if (other.getSuccess() != false) {
           setSuccess(other.getSuccess());
         }
         if (!other.getErrorMsg().isEmpty()) {
           errorMsg_ = other.errorMsg_;
-          bitField0_ |= 0x00000020;
-          onChanged();
-        }
-        if (!other.getVersion().isEmpty()) {
-          version_ = other.version_;
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000010;
           onChanged();
         }
         if (other.hasBizData()) {
@@ -1157,40 +975,30 @@ public final class ECRHubResponseProto {
                 bitField0_ |= 0x00000004;
                 break;
               } // case 26
-              case 34: {
-                timestamp_ = input.readStringRequireUtf8();
+              case 32: {
+                success_ = input.readBool();
                 bitField0_ |= 0x00000008;
                 break;
-              } // case 34
-              case 40: {
-                success_ = input.readBool();
+              } // case 32
+              case 42: {
+                errorMsg_ = input.readStringRequireUtf8();
                 bitField0_ |= 0x00000010;
                 break;
-              } // case 40
+              } // case 42
               case 50: {
-                errorMsg_ = input.readStringRequireUtf8();
+                input.readMessage(
+                    getBizDataFieldBuilder().getBuilder(),
+                    extensionRegistry);
                 bitField0_ |= 0x00000020;
                 break;
               } // case 50
               case 58: {
-                version_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000040;
-                break;
-              } // case 58
-              case 66: {
-                input.readMessage(
-                    getBizDataFieldBuilder().getBuilder(),
-                    extensionRegistry);
-                bitField0_ |= 0x00000080;
-                break;
-              } // case 66
-              case 74: {
                 input.readMessage(
                     getDeviceDataFieldBuilder().getBuilder(),
                     extensionRegistry);
-                bitField0_ |= 0x00000100;
+                bitField0_ |= 0x00000040;
                 break;
-              } // case 74
+              } // case 58
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -1309,7 +1117,7 @@ public final class ECRHubResponseProto {
       /**
        * <pre>
        **
-       *Transaction Request ID, used to track the sending and returning of orders
+       *Request ID, used to track the sending and returning of orders
        * </pre>
        *
        * <code>string request_id = 2;</code>
@@ -1330,7 +1138,7 @@ public final class ECRHubResponseProto {
       /**
        * <pre>
        **
-       *Transaction Request ID, used to track the sending and returning of orders
+       *Request ID, used to track the sending and returning of orders
        * </pre>
        *
        * <code>string request_id = 2;</code>
@@ -1352,7 +1160,7 @@ public final class ECRHubResponseProto {
       /**
        * <pre>
        **
-       *Transaction Request ID, used to track the sending and returning of orders
+       *Request ID, used to track the sending and returning of orders
        * </pre>
        *
        * <code>string request_id = 2;</code>
@@ -1370,7 +1178,7 @@ public final class ECRHubResponseProto {
       /**
        * <pre>
        **
-       *Transaction Request ID, used to track the sending and returning of orders
+       *Request ID, used to track the sending and returning of orders
        * </pre>
        *
        * <code>string request_id = 2;</code>
@@ -1385,7 +1193,7 @@ public final class ECRHubResponseProto {
       /**
        * <pre>
        **
-       *Transaction Request ID, used to track the sending and returning of orders
+       *Request ID, used to track the sending and returning of orders
        * </pre>
        *
        * <code>string request_id = 2;</code>
@@ -1499,103 +1307,6 @@ public final class ECRHubResponseProto {
         return this;
       }
 
-      private java.lang.Object timestamp_ = "";
-      /**
-       * <pre>
-       **
-       *time stamp
-       * </pre>
-       *
-       * <code>string timestamp = 4;</code>
-       * @return The timestamp.
-       */
-      public java.lang.String getTimestamp() {
-        java.lang.Object ref = timestamp_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          timestamp_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *time stamp
-       * </pre>
-       *
-       * <code>string timestamp = 4;</code>
-       * @return The bytes for timestamp.
-       */
-      public com.google.protobuf.ByteString
-          getTimestampBytes() {
-        java.lang.Object ref = timestamp_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          timestamp_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *time stamp
-       * </pre>
-       *
-       * <code>string timestamp = 4;</code>
-       * @param value The timestamp to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTimestamp(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        timestamp_ = value;
-        bitField0_ |= 0x00000008;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *time stamp
-       * </pre>
-       *
-       * <code>string timestamp = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearTimestamp() {
-        timestamp_ = getDefaultInstance().getTimestamp();
-        bitField0_ = (bitField0_ & ~0x00000008);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *time stamp
-       * </pre>
-       *
-       * <code>string timestamp = 4;</code>
-       * @param value The bytes for timestamp to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTimestampBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        timestamp_ = value;
-        bitField0_ |= 0x00000008;
-        onChanged();
-        return this;
-      }
-
       private boolean success_ ;
       /**
        * <pre>
@@ -1603,7 +1314,7 @@ public final class ECRHubResponseProto {
        *status
        * </pre>
        *
-       * <code>bool success = 5;</code>
+       * <code>bool success = 4;</code>
        * @return The success.
        */
       @java.lang.Override
@@ -1616,14 +1327,14 @@ public final class ECRHubResponseProto {
        *status
        * </pre>
        *
-       * <code>bool success = 5;</code>
+       * <code>bool success = 4;</code>
        * @param value The success to set.
        * @return This builder for chaining.
        */
       public Builder setSuccess(boolean value) {
 
         success_ = value;
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -1633,11 +1344,11 @@ public final class ECRHubResponseProto {
        *status
        * </pre>
        *
-       * <code>bool success = 5;</code>
+       * <code>bool success = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearSuccess() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         success_ = false;
         onChanged();
         return this;
@@ -1650,7 +1361,7 @@ public final class ECRHubResponseProto {
        *error message
        * </pre>
        *
-       * <code>string error_msg = 6;</code>
+       * <code>string error_msg = 5;</code>
        * @return The errorMsg.
        */
       public java.lang.String getErrorMsg() {
@@ -1671,7 +1382,7 @@ public final class ECRHubResponseProto {
        *error message
        * </pre>
        *
-       * <code>string error_msg = 6;</code>
+       * <code>string error_msg = 5;</code>
        * @return The bytes for errorMsg.
        */
       public com.google.protobuf.ByteString
@@ -1693,7 +1404,7 @@ public final class ECRHubResponseProto {
        *error message
        * </pre>
        *
-       * <code>string error_msg = 6;</code>
+       * <code>string error_msg = 5;</code>
        * @param value The errorMsg to set.
        * @return This builder for chaining.
        */
@@ -1701,7 +1412,7 @@ public final class ECRHubResponseProto {
           java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         errorMsg_ = value;
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -1711,12 +1422,12 @@ public final class ECRHubResponseProto {
        *error message
        * </pre>
        *
-       * <code>string error_msg = 6;</code>
+       * <code>string error_msg = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearErrorMsg() {
         errorMsg_ = getDefaultInstance().getErrorMsg();
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
@@ -1726,7 +1437,7 @@ public final class ECRHubResponseProto {
        *error message
        * </pre>
        *
-       * <code>string error_msg = 6;</code>
+       * <code>string error_msg = 5;</code>
        * @param value The bytes for errorMsg to set.
        * @return This builder for chaining.
        */
@@ -1735,104 +1446,7 @@ public final class ECRHubResponseProto {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         errorMsg_ = value;
-        bitField0_ |= 0x00000020;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object version_ = "";
-      /**
-       * <pre>
-       **
-       *sdk version
-       * </pre>
-       *
-       * <code>string version = 7;</code>
-       * @return The version.
-       */
-      public java.lang.String getVersion() {
-        java.lang.Object ref = version_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          version_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *sdk version
-       * </pre>
-       *
-       * <code>string version = 7;</code>
-       * @return The bytes for version.
-       */
-      public com.google.protobuf.ByteString
-          getVersionBytes() {
-        java.lang.Object ref = version_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          version_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *sdk version
-       * </pre>
-       *
-       * <code>string version = 7;</code>
-       * @param value The version to set.
-       * @return This builder for chaining.
-       */
-      public Builder setVersion(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        version_ = value;
-        bitField0_ |= 0x00000040;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *sdk version
-       * </pre>
-       *
-       * <code>string version = 7;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearVersion() {
-        version_ = getDefaultInstance().getVersion();
-        bitField0_ = (bitField0_ & ~0x00000040);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *sdk version
-       * </pre>
-       *
-       * <code>string version = 7;</code>
-       * @param value The bytes for version to set.
-       * @return This builder for chaining.
-       */
-      public Builder setVersionBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        version_ = value;
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -1846,11 +1460,11 @@ public final class ECRHubResponseProto {
        *Response Business Data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
        * @return Whether the bizData field is set.
        */
       public boolean hasBizData() {
-        return ((bitField0_ & 0x00000080) != 0);
+        return ((bitField0_ & 0x00000020) != 0);
       }
       /**
        * <pre>
@@ -1858,7 +1472,7 @@ public final class ECRHubResponseProto {
        *Response Business Data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
        * @return The bizData.
        */
       public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData getBizData() {
@@ -1874,7 +1488,7 @@ public final class ECRHubResponseProto {
        *Response Business Data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
        */
       public Builder setBizData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData value) {
         if (bizDataBuilder_ == null) {
@@ -1885,7 +1499,7 @@ public final class ECRHubResponseProto {
         } else {
           bizDataBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -1895,7 +1509,7 @@ public final class ECRHubResponseProto {
        *Response Business Data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
        */
       public Builder setBizData(
           com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData.Builder builderForValue) {
@@ -1904,7 +1518,7 @@ public final class ECRHubResponseProto {
         } else {
           bizDataBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000020;
         onChanged();
         return this;
       }
@@ -1914,11 +1528,11 @@ public final class ECRHubResponseProto {
        *Response Business Data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
        */
       public Builder mergeBizData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData value) {
         if (bizDataBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) != 0) &&
+          if (((bitField0_ & 0x00000020) != 0) &&
             bizData_ != null &&
             bizData_ != com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData.getDefaultInstance()) {
             getBizDataBuilder().mergeFrom(value);
@@ -1929,7 +1543,7 @@ public final class ECRHubResponseProto {
           bizDataBuilder_.mergeFrom(value);
         }
         if (bizData_ != null) {
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000020;
           onChanged();
         }
         return this;
@@ -1940,10 +1554,10 @@ public final class ECRHubResponseProto {
        *Response Business Data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
        */
       public Builder clearBizData() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000020);
         bizData_ = null;
         if (bizDataBuilder_ != null) {
           bizDataBuilder_.dispose();
@@ -1958,10 +1572,10 @@ public final class ECRHubResponseProto {
        *Response Business Data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
        */
       public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData.Builder getBizDataBuilder() {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000020;
         onChanged();
         return getBizDataFieldBuilder().getBuilder();
       }
@@ -1971,7 +1585,7 @@ public final class ECRHubResponseProto {
        *Response Business Data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
        */
       public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizDataOrBuilder getBizDataOrBuilder() {
         if (bizDataBuilder_ != null) {
@@ -1987,7 +1601,7 @@ public final class ECRHubResponseProto {
        *Response Business Data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 8;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData biz_data = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizDataOrBuilder> 
@@ -2012,11 +1626,11 @@ public final class ECRHubResponseProto {
        *Response device data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
        * @return Whether the deviceData field is set.
        */
       public boolean hasDeviceData() {
-        return ((bitField0_ & 0x00000100) != 0);
+        return ((bitField0_ & 0x00000040) != 0);
       }
       /**
        * <pre>
@@ -2024,7 +1638,7 @@ public final class ECRHubResponseProto {
        *Response device data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
        * @return The deviceData.
        */
       public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData getDeviceData() {
@@ -2040,7 +1654,7 @@ public final class ECRHubResponseProto {
        *Response device data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
        */
       public Builder setDeviceData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData value) {
         if (deviceDataBuilder_ == null) {
@@ -2051,7 +1665,7 @@ public final class ECRHubResponseProto {
         } else {
           deviceDataBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -2061,7 +1675,7 @@ public final class ECRHubResponseProto {
        *Response device data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
        */
       public Builder setDeviceData(
           com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData.Builder builderForValue) {
@@ -2070,7 +1684,7 @@ public final class ECRHubResponseProto {
         } else {
           deviceDataBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000040;
         onChanged();
         return this;
       }
@@ -2080,11 +1694,11 @@ public final class ECRHubResponseProto {
        *Response device data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
        */
       public Builder mergeDeviceData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData value) {
         if (deviceDataBuilder_ == null) {
-          if (((bitField0_ & 0x00000100) != 0) &&
+          if (((bitField0_ & 0x00000040) != 0) &&
             deviceData_ != null &&
             deviceData_ != com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData.getDefaultInstance()) {
             getDeviceDataBuilder().mergeFrom(value);
@@ -2095,7 +1709,7 @@ public final class ECRHubResponseProto {
           deviceDataBuilder_.mergeFrom(value);
         }
         if (deviceData_ != null) {
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000040;
           onChanged();
         }
         return this;
@@ -2106,10 +1720,10 @@ public final class ECRHubResponseProto {
        *Response device data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
        */
       public Builder clearDeviceData() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         deviceData_ = null;
         if (deviceDataBuilder_ != null) {
           deviceDataBuilder_.dispose();
@@ -2124,10 +1738,10 @@ public final class ECRHubResponseProto {
        *Response device data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
        */
       public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData.Builder getDeviceDataBuilder() {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000040;
         onChanged();
         return getDeviceDataFieldBuilder().getBuilder();
       }
@@ -2137,7 +1751,7 @@ public final class ECRHubResponseProto {
        *Response device data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
        */
       public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceDataOrBuilder getDeviceDataOrBuilder() {
         if (deviceDataBuilder_ != null) {
@@ -2153,7 +1767,7 @@ public final class ECRHubResponseProto {
        *Response device data
        * </pre>
        *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 9;</code>
+       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceDataOrBuilder> 
@@ -3629,6 +3243,50 @@ java.lang.String defaultValue);
      */
     com.google.protobuf.ByteString
         getAttachBytes();
+
+    /**
+     * <pre>
+     **
+     *token
+     * </pre>
+     *
+     * <code>string token = 18;</code>
+     * @return The token.
+     */
+    java.lang.String getToken();
+    /**
+     * <pre>
+     **
+     *token
+     * </pre>
+     *
+     * <code>string token = 18;</code>
+     * @return The bytes for token.
+     */
+    com.google.protobuf.ByteString
+        getTokenBytes();
+
+    /**
+     * <pre>
+     **
+     *Cashback amount
+     * </pre>
+     *
+     * <code>string cashback_amount = 19;</code>
+     * @return The cashbackAmount.
+     */
+    java.lang.String getCashbackAmount();
+    /**
+     * <pre>
+     **
+     *Cashback amount
+     * </pre>
+     *
+     * <code>string cashback_amount = 19;</code>
+     * @return The bytes for cashbackAmount.
+     */
+    com.google.protobuf.ByteString
+        getCashbackAmountBytes();
   }
   /**
    * Protobuf type {@code com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData}
@@ -3659,6 +3317,8 @@ java.lang.String defaultValue);
       discountBmopc_ = "";
       discountBpc_ = "";
       attach_ = "";
+      token_ = "";
+      cashbackAmount_ = "";
     }
 
     @java.lang.Override
@@ -4576,6 +4236,104 @@ java.lang.String defaultValue) {
       }
     }
 
+    public static final int TOKEN_FIELD_NUMBER = 18;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object token_ = "";
+    /**
+     * <pre>
+     **
+     *token
+     * </pre>
+     *
+     * <code>string token = 18;</code>
+     * @return The token.
+     */
+    @java.lang.Override
+    public java.lang.String getToken() {
+      java.lang.Object ref = token_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        token_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     **
+     *token
+     * </pre>
+     *
+     * <code>string token = 18;</code>
+     * @return The bytes for token.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getTokenBytes() {
+      java.lang.Object ref = token_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        token_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CASHBACK_AMOUNT_FIELD_NUMBER = 19;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object cashbackAmount_ = "";
+    /**
+     * <pre>
+     **
+     *Cashback amount
+     * </pre>
+     *
+     * <code>string cashback_amount = 19;</code>
+     * @return The cashbackAmount.
+     */
+    @java.lang.Override
+    public java.lang.String getCashbackAmount() {
+      java.lang.Object ref = cashbackAmount_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        cashbackAmount_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     **
+     *Cashback amount
+     * </pre>
+     *
+     * <code>string cashback_amount = 19;</code>
+     * @return The bytes for cashbackAmount.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getCashbackAmountBytes() {
+      java.lang.Object ref = cashbackAmount_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cashbackAmount_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4644,6 +4402,12 @@ java.lang.String defaultValue) {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(attach_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 17, attach_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(token_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 18, token_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cashbackAmount_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 19, cashbackAmount_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -4711,6 +4475,12 @@ java.lang.String defaultValue) {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(attach_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(17, attach_);
       }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(token_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(18, token_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(cashbackAmount_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(19, cashbackAmount_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
@@ -4760,6 +4530,10 @@ java.lang.String defaultValue) {
           other.internalGetExtendsParams())) return false;
       if (!getAttach()
           .equals(other.getAttach())) return false;
+      if (!getToken()
+          .equals(other.getToken())) return false;
+      if (!getCashbackAmount()
+          .equals(other.getCashbackAmount())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -4807,6 +4581,10 @@ java.lang.String defaultValue) {
       }
       hash = (37 * hash) + ATTACH_FIELD_NUMBER;
       hash = (53 * hash) + getAttach().hashCode();
+      hash = (37 * hash) + TOKEN_FIELD_NUMBER;
+      hash = (53 * hash) + getToken().hashCode();
+      hash = (37 * hash) + CASHBACK_AMOUNT_FIELD_NUMBER;
+      hash = (53 * hash) + getCashbackAmount().hashCode();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4977,6 +4755,8 @@ java.lang.String defaultValue) {
         discountBpc_ = "";
         internalGetMutableExtendsParams().clear();
         attach_ = "";
+        token_ = "";
+        cashbackAmount_ = "";
         return this;
       }
 
@@ -5061,6 +4841,12 @@ java.lang.String defaultValue) {
         }
         if (((from_bitField0_ & 0x00010000) != 0)) {
           result.attach_ = attach_;
+        }
+        if (((from_bitField0_ & 0x00020000) != 0)) {
+          result.token_ = token_;
+        }
+        if (((from_bitField0_ & 0x00040000) != 0)) {
+          result.cashbackAmount_ = cashbackAmount_;
         }
       }
 
@@ -5191,6 +4977,16 @@ java.lang.String defaultValue) {
           bitField0_ |= 0x00010000;
           onChanged();
         }
+        if (!other.getToken().isEmpty()) {
+          token_ = other.token_;
+          bitField0_ |= 0x00020000;
+          onChanged();
+        }
+        if (!other.getCashbackAmount().isEmpty()) {
+          cashbackAmount_ = other.cashbackAmount_;
+          bitField0_ |= 0x00040000;
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -5306,6 +5102,16 @@ java.lang.String defaultValue) {
                 bitField0_ |= 0x00010000;
                 break;
               } // case 138
+              case 146: {
+                token_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00020000;
+                break;
+              } // case 146
+              case 154: {
+                cashbackAmount_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00040000;
+                break;
+              } // case 154
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -7036,6 +6842,200 @@ java.lang.String defaultValue) {
         onChanged();
         return this;
       }
+
+      private java.lang.Object token_ = "";
+      /**
+       * <pre>
+       **
+       *token
+       * </pre>
+       *
+       * <code>string token = 18;</code>
+       * @return The token.
+       */
+      public java.lang.String getToken() {
+        java.lang.Object ref = token_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          token_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *token
+       * </pre>
+       *
+       * <code>string token = 18;</code>
+       * @return The bytes for token.
+       */
+      public com.google.protobuf.ByteString
+          getTokenBytes() {
+        java.lang.Object ref = token_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          token_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *token
+       * </pre>
+       *
+       * <code>string token = 18;</code>
+       * @param value The token to set.
+       * @return This builder for chaining.
+       */
+      public Builder setToken(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        token_ = value;
+        bitField0_ |= 0x00020000;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *token
+       * </pre>
+       *
+       * <code>string token = 18;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearToken() {
+        token_ = getDefaultInstance().getToken();
+        bitField0_ = (bitField0_ & ~0x00020000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *token
+       * </pre>
+       *
+       * <code>string token = 18;</code>
+       * @param value The bytes for token to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTokenBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        token_ = value;
+        bitField0_ |= 0x00020000;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object cashbackAmount_ = "";
+      /**
+       * <pre>
+       **
+       *Cashback amount
+       * </pre>
+       *
+       * <code>string cashback_amount = 19;</code>
+       * @return The cashbackAmount.
+       */
+      public java.lang.String getCashbackAmount() {
+        java.lang.Object ref = cashbackAmount_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          cashbackAmount_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *Cashback amount
+       * </pre>
+       *
+       * <code>string cashback_amount = 19;</code>
+       * @return The bytes for cashbackAmount.
+       */
+      public com.google.protobuf.ByteString
+          getCashbackAmountBytes() {
+        java.lang.Object ref = cashbackAmount_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cashbackAmount_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       **
+       *Cashback amount
+       * </pre>
+       *
+       * <code>string cashback_amount = 19;</code>
+       * @param value The cashbackAmount to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCashbackAmount(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        cashbackAmount_ = value;
+        bitField0_ |= 0x00040000;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *Cashback amount
+       * </pre>
+       *
+       * <code>string cashback_amount = 19;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCashbackAmount() {
+        cashbackAmount_ = getDefaultInstance().getCashbackAmount();
+        bitField0_ = (bitField0_ & ~0x00040000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *Cashback amount
+       * </pre>
+       *
+       * <code>string cashback_amount = 19;</code>
+       * @param value The bytes for cashbackAmount to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCashbackAmountBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        cashbackAmount_ = value;
+        bitField0_ |= 0x00040000;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -7130,31 +7130,31 @@ java.lang.String defaultValue) {
   static {
     java.lang.String[] descriptorData = {
       "\n\030ECRHubResponseData.proto\022 com.wiseasy." +
-      "ecr.hub.sdk.protobuf\"\233\002\n\016ECRHubResponse\022" +
+      "ecr.hub.sdk.protobuf\"\367\001\n\016ECRHubResponse\022" +
       "\r\n\005topic\030\001 \001(\t\022\022\n\nrequest_id\030\002 \001(\t\022\016\n\006ap" +
-      "p_id\030\003 \001(\t\022\021\n\ttimestamp\030\004 \001(\t\022\017\n\007success" +
-      "\030\005 \001(\010\022\021\n\terror_msg\030\006 \001(\t\022\017\n\007version\030\007 \001" +
-      "(\t\022C\n\010biz_data\030\010 \001(\01321.com.wiseasy.ecr.h" +
-      "ub.sdk.protobuf.ResponseBizData\022I\n\013devic" +
-      "e_data\030\t \001(\01324.com.wiseasy.ecr.hub.sdk.p" +
-      "rotobuf.ResponseDeviceData\"N\n\022ResponseDe" +
-      "viceData\022\020\n\010app_name\030\001 \001(\t\022\021\n\tdevice_sn\030" +
-      "\002 \001(\t\022\023\n\013app_version\030\003 \001(\t\"\217\004\n\017ResponseB" +
-      "izData\022\031\n\021merchant_order_no\030\001 \001(\t\022\024\n\014ord" +
-      "er_amount\030\002 \001(\t\022\020\n\010trans_no\030\003 \001(\t\022\026\n\016pri" +
-      "ce_currency\030\004 \001(\t\022\022\n\ntrans_type\030\005 \001(\t\022\020\n" +
-      "\010store_no\030\006 \001(\t\022\024\n\014pay_scenario\030\007 \001(\t\022\024\n" +
-      "\014trans_status\030\010 \001(\t\022\034\n\024pay_channel_trans" +
-      "_no\030\t \001(\t\022\033\n\023pay_user_account_id\030\n \001(\t\022\023" +
-      "\n\013paid_amount\030\013 \001(\t\022\026\n\016trans_end_time\030\014 " +
-      "\001(\t\022\025\n\rpay_method_id\030\r \001(\t\022\026\n\016discount_b" +
-      "mopc\030\016 \001(\t\022\024\n\014discount_bpc\030\017 \001(\t\022\\\n\016exte" +
-      "nds_params\030\020 \003(\0132D.com.wiseasy.ecr.hub.s" +
-      "dk.protobuf.ResponseBizData.ExtendsParam" +
-      "sEntry\022\016\n\006attach\030\021 \001(\t\0324\n\022ExtendsParamsE" +
-      "ntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B7\n " +
-      "com.wiseasy.ecr.hub.sdk.protobufB\023ECRHub" +
-      "ResponseProtob\006proto3"
+      "p_id\030\003 \001(\t\022\017\n\007success\030\004 \001(\010\022\021\n\terror_msg" +
+      "\030\005 \001(\t\022C\n\010biz_data\030\006 \001(\01321.com.wiseasy.e" +
+      "cr.hub.sdk.protobuf.ResponseBizData\022I\n\013d" +
+      "evice_data\030\007 \001(\01324.com.wiseasy.ecr.hub.s" +
+      "dk.protobuf.ResponseDeviceData\"N\n\022Respon" +
+      "seDeviceData\022\020\n\010app_name\030\001 \001(\t\022\021\n\tdevice" +
+      "_sn\030\002 \001(\t\022\023\n\013app_version\030\003 \001(\t\"\267\004\n\017Respo" +
+      "nseBizData\022\031\n\021merchant_order_no\030\001 \001(\t\022\024\n" +
+      "\014order_amount\030\002 \001(\t\022\020\n\010trans_no\030\003 \001(\t\022\026\n" +
+      "\016price_currency\030\004 \001(\t\022\022\n\ntrans_type\030\005 \001(" +
+      "\t\022\020\n\010store_no\030\006 \001(\t\022\024\n\014pay_scenario\030\007 \001(" +
+      "\t\022\024\n\014trans_status\030\010 \001(\t\022\034\n\024pay_channel_t" +
+      "rans_no\030\t \001(\t\022\033\n\023pay_user_account_id\030\n \001" +
+      "(\t\022\023\n\013paid_amount\030\013 \001(\t\022\026\n\016trans_end_tim" +
+      "e\030\014 \001(\t\022\025\n\rpay_method_id\030\r \001(\t\022\026\n\016discou" +
+      "nt_bmopc\030\016 \001(\t\022\024\n\014discount_bpc\030\017 \001(\t\022\\\n\016" +
+      "extends_params\030\020 \003(\0132D.com.wiseasy.ecr.h" +
+      "ub.sdk.protobuf.ResponseBizData.ExtendsP" +
+      "aramsEntry\022\016\n\006attach\030\021 \001(\t\022\r\n\005token\030\022 \001(" +
+      "\t\022\027\n\017cashback_amount\030\023 \001(\t\0324\n\022ExtendsPar" +
+      "amsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001" +
+      "B7\n com.wiseasy.ecr.hub.sdk.protobufB\023EC" +
+      "RHubResponseProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -7165,7 +7165,7 @@ java.lang.String defaultValue) {
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ECRHubResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ECRHubResponse_descriptor,
-        new java.lang.String[] { "Topic", "RequestId", "AppId", "Timestamp", "Success", "ErrorMsg", "Version", "BizData", "DeviceData", });
+        new java.lang.String[] { "Topic", "RequestId", "AppId", "Success", "ErrorMsg", "BizData", "DeviceData", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseDeviceData_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseDeviceData_fieldAccessorTable = new
@@ -7177,7 +7177,7 @@ java.lang.String defaultValue) {
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_descriptor,
-        new java.lang.String[] { "MerchantOrderNo", "OrderAmount", "TransNo", "PriceCurrency", "TransType", "StoreNo", "PayScenario", "TransStatus", "PayChannelTransNo", "PayUserAccountId", "PaidAmount", "TransEndTime", "PayMethodId", "DiscountBmopc", "DiscountBpc", "ExtendsParams", "Attach", });
+        new java.lang.String[] { "MerchantOrderNo", "OrderAmount", "TransNo", "PriceCurrency", "TransType", "StoreNo", "PayScenario", "TransStatus", "PayChannelTransNo", "PayUserAccountId", "PaidAmount", "TransEndTime", "PayMethodId", "DiscountBmopc", "DiscountBpc", "ExtendsParams", "Attach", "Token", "CashbackAmount", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_ExtendsParamsEntry_descriptor =
       internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_descriptor.getNestedTypes().get(0);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_ExtendsParamsEntry_fieldAccessorTable = new

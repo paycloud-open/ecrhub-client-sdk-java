@@ -8,37 +8,29 @@ message ECRHubResponse {
    */
   string topic = 1;
   /**
-  Transaction Request ID, used to track the sending and returning of orders
+  Request ID, used to track the sending and returning of orders
   */
   string request_id = 2;
   /**
   AppID of payment application
   */
-  string app_id = 3;
-  /**
-  time stamp
-  */
-  string timestamp = 4;
+  string  app_id = 3;
   /**
   status
  */
-  bool success = 5;
+  bool success = 4;
   /**
   error message
   */
-  string error_msg = 6;
-  /**
-  sdk version
-  */
-  string version = 7;
+  string error_msg = 5;
   /**
   Response Business Data
   */
-  ResponseBizData biz_data = 8;
+  ResponseBizData biz_data = 6;
   /**
    Response device data
   */
-  ResponseDeviceData device_data = 9;
+  ResponseDeviceData device_data = 7;
 }
 
 message ResponseDeviceData {
@@ -125,5 +117,13 @@ message ResponseBizData {
   Additional information
    */
   string attach = 17;
+  /**
+  token
+   */
+  string token = 18;
+  /**
+ Cashback amount
+ */
+  string cashback_amount = 19;
 }
 

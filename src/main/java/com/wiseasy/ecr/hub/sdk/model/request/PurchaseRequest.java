@@ -44,6 +44,14 @@ public class PurchaseRequest extends ECRHubRequest<PurchaseResponse> {
     @JSONField(name = "tipAmount")
     private String tip_amount;
     /**
+     * Cashback Amount
+     * The amount of the tip is expressed in the currency in which it is denominated, for example, 1 USD stands for one dollar, not one cent.
+     *
+     * For example: 1.00
+     */
+    @JSONField(name = "cashbackAmount")
+    private String cashback_amount;
+    /**
      * Transaction type
      *
      * @see com.wiseasy.ecr.hub.sdk.enums.ETransType
@@ -86,6 +94,13 @@ public class PurchaseRequest extends ECRHubRequest<PurchaseResponse> {
     @JSONField(name = "notifyUrl")
     private String notify_url;
     /**
+     * Order expires time, in seconds. Default to 300 seconds.
+     *
+     * For example: 300
+     */
+    @JSONField(name = "expires")
+    private String expires;
+    /**
      * Order need terminal confirmation. Default: true
      * - true: Terminal confirmation is required;
      * - false: No terminal confirmation is required.
@@ -94,13 +109,6 @@ public class PurchaseRequest extends ECRHubRequest<PurchaseResponse> {
      */
     @JSONField(name = "confirmOnTerminal")
     private Boolean confirm_on_terminal;
-    /**
-     * Order expires time, in seconds. Default to 300 seconds.
-     *
-     * For example: 300
-     */
-    @JSONField(name = "expires")
-    private String expires;
 
     public String getMerchant_order_no() {
         return merchant_order_no;
@@ -132,6 +140,14 @@ public class PurchaseRequest extends ECRHubRequest<PurchaseResponse> {
 
     public void setTip_amount(String tip_amount) {
         this.tip_amount = tip_amount;
+    }
+
+    public String getCashback_amount() {
+        return cashback_amount;
+    }
+
+    public void setCashback_amount(String cashback_amount) {
+        this.cashback_amount = cashback_amount;
     }
 
     public String getTrans_type() {
@@ -170,19 +186,19 @@ public class PurchaseRequest extends ECRHubRequest<PurchaseResponse> {
         this.notify_url = notify_url;
     }
 
-    public Boolean getConfirm_on_terminal() {
-        return confirm_on_terminal;
-    }
-
-    public void setConfirm_on_terminal(Boolean confirm_on_terminal) {
-        this.confirm_on_terminal = confirm_on_terminal;
-    }
-
     public String getExpires() {
         return expires;
     }
 
     public void setExpires(String expires) {
         this.expires = expires;
+    }
+
+    public Boolean getConfirm_on_terminal() {
+        return confirm_on_terminal;
+    }
+
+    public void setConfirm_on_terminal(Boolean confirm_on_terminal) {
+        this.confirm_on_terminal = confirm_on_terminal;
     }
 }

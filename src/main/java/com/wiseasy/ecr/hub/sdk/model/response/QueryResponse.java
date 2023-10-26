@@ -35,6 +35,22 @@ public class QueryResponse extends ECRHubResponse {
     @JSONField(name = "tipAmount")
     private String tip_amount;
     /**
+     * Cashback Amount
+     * The amount of the tip is expressed in the currency in which it is denominated, for example, 1 USD stands for one dollar, not one cent.
+     *
+     * For example: 1.00
+     */
+    @JSONField(name = "cashbackAmount")
+    private String cashback_amount;
+    /**
+     * Attach
+     * Allows merchants to submit an additional data to the gateway, which will be returned as-is for payment notifications and inquiries
+     *
+     * For example: abc
+     */
+    @JSONField(name = "attach")
+    private String attach;
+    /**
      * Transaction type
      *
      * @see com.wiseasy.ecr.hub.sdk.enums.ETransType
@@ -44,13 +60,12 @@ public class QueryResponse extends ECRHubResponse {
     @JSONField(name = "transType")
     private String trans_type;
     /**
-     * Attach
-     * Allows merchants to submit an additional data to the gateway, which will be returned as-is for payment notifications and inquiries
+     * PayCloud transaction No.
      *
-     * For example: abc
+     * For example: 51230016492309010000001
      */
-    @JSONField(name = "attach")
-    private String attach;
+    @JSONField(name = "transNo")
+    private String trans_no;
     /**
      * Transaction status
      *
@@ -61,12 +76,21 @@ public class QueryResponse extends ECRHubResponse {
     @JSONField(name = "transStatus")
     private String trans_status;
     /**
-     * PayCloud transaction No.
+     * Payment scenario
      *
-     * For example: 51230016492309010000001
+     * @see com.wiseasy.ecr.hub.sdk.enums.EPayScenario
      */
-    @JSONField(name = "transNo")
-    private String trans_no;
+    @JSONField(name = "payScenario")
+    private String pay_scenario;
+    /**
+     * Payment method id
+     *
+     * @see com.wiseasy.ecr.hub.sdk.enums.EPayMethod
+     *
+     * For example: Visa
+     */
+    @JSONField(name = "payMethodId")
+    private String pay_method_id;
     /**
      * Payment Channel Transaction No. such as WeChat, Alipay, Visa, Mastercard and other payment platforms
      *
@@ -74,14 +98,6 @@ public class QueryResponse extends ECRHubResponse {
      */
     @JSONField(name = "payChannelTransNo")
     private String pay_channel_trans_no;
-    /**
-     * Amount paid by customer
-     * The actual amount paid by the customer
-     *
-     * For example: 36.00
-     */
-    @JSONField(name = "paidAmount")
-    private String paid_amount;
     /**
      * Merchant discount amount
      *
@@ -96,34 +112,6 @@ public class QueryResponse extends ECRHubResponse {
      */
     @JSONField(name = "discountBpc")
     private String discount_bpc;
-    /**
-     * Payment User Account
-     *
-     * For example: 6227***6666
-     */
-    @JSONField(name = "payUserAccountId")
-    private String pay_user_account_id;
-    /**
-     * Payment method id
-     *
-     * @see com.wiseasy.ecr.hub.sdk.enums.EPayMethod
-     *
-     * For example: Visa
-     */
-    @JSONField(name = "payMethodId")
-    private String pay_method_id;
-    /**
-     * Payment scenario
-     *
-     * @see com.wiseasy.ecr.hub.sdk.enums.EPayScenario
-     */
-    @JSONField(name = "payScenario")
-    private String pay_scenario;
-    /**
-     * Store no
-     */
-    @JSONField(name = "storeNo")
-    private String store_no;
     /**
      * Time of successful trade, time zone: UTC/GMT+0, format: YYYY-MM-DD HH:mm:ss
      *
@@ -164,12 +152,12 @@ public class QueryResponse extends ECRHubResponse {
         this.tip_amount = tip_amount;
     }
 
-    public String getTrans_type() {
-        return trans_type;
+    public String getCashback_amount() {
+        return cashback_amount;
     }
 
-    public void setTrans_type(String trans_type) {
-        this.trans_type = trans_type;
+    public void setCashback_amount(String cashback_amount) {
+        this.cashback_amount = cashback_amount;
     }
 
     public String getAttach() {
@@ -180,12 +168,12 @@ public class QueryResponse extends ECRHubResponse {
         this.attach = attach;
     }
 
-    public String getTrans_status() {
-        return trans_status;
+    public String getTrans_type() {
+        return trans_type;
     }
 
-    public void setTrans_status(String trans_status) {
-        this.trans_status = trans_status;
+    public void setTrans_type(String trans_type) {
+        this.trans_type = trans_type;
     }
 
     public String getTrans_no() {
@@ -196,20 +184,36 @@ public class QueryResponse extends ECRHubResponse {
         this.trans_no = trans_no;
     }
 
+    public String getTrans_status() {
+        return trans_status;
+    }
+
+    public void setTrans_status(String trans_status) {
+        this.trans_status = trans_status;
+    }
+
+    public String getPay_scenario() {
+        return pay_scenario;
+    }
+
+    public void setPay_scenario(String pay_scenario) {
+        this.pay_scenario = pay_scenario;
+    }
+
+    public String getPay_method_id() {
+        return pay_method_id;
+    }
+
+    public void setPay_method_id(String pay_method_id) {
+        this.pay_method_id = pay_method_id;
+    }
+
     public String getPay_channel_trans_no() {
         return pay_channel_trans_no;
     }
 
     public void setPay_channel_trans_no(String pay_channel_trans_no) {
         this.pay_channel_trans_no = pay_channel_trans_no;
-    }
-
-    public String getPaid_amount() {
-        return paid_amount;
-    }
-
-    public void setPaid_amount(String paid_amount) {
-        this.paid_amount = paid_amount;
     }
 
     public String getDiscount_bmopc() {
@@ -226,38 +230,6 @@ public class QueryResponse extends ECRHubResponse {
 
     public void setDiscount_bpc(String discount_bpc) {
         this.discount_bpc = discount_bpc;
-    }
-
-    public String getPay_user_account_id() {
-        return pay_user_account_id;
-    }
-
-    public void setPay_user_account_id(String pay_user_account_id) {
-        this.pay_user_account_id = pay_user_account_id;
-    }
-
-    public String getPay_method_id() {
-        return pay_method_id;
-    }
-
-    public void setPay_method_id(String pay_method_id) {
-        this.pay_method_id = pay_method_id;
-    }
-
-    public String getPay_scenario() {
-        return pay_scenario;
-    }
-
-    public void setPay_scenario(String pay_scenario) {
-        this.pay_scenario = pay_scenario;
-    }
-
-    public String getStore_no() {
-        return store_no;
-    }
-
-    public void setStore_no(String store_no) {
-        this.store_no = store_no;
     }
 
     public String getTrans_end_time() {
