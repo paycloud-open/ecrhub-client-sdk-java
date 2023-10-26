@@ -40,7 +40,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
             engine.connect(startTime);
             ECRHubResponse response = pair(startTime);
 
-            log.info("Serial port connection successful.");
+            log.info("Serial port connection successful");
 
             return response;
         } finally {
@@ -66,7 +66,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
             boolean success = engine.disconnect();
             if (success) {
-                log.info("Serial port disconnect successful.");
+                log.info("Serial port disconnect successful");
             }
 
             return success;
@@ -79,7 +79,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         if (!isConnected()) {
             boolean success = connect();
             if (!success) {
-                throw new ECRHubException("Serial port is not connected.");
+                throw new ECRHubException("Serial port is not connected");
             }
         }
     }

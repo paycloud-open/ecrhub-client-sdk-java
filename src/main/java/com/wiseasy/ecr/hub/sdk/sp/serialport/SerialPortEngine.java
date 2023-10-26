@@ -62,7 +62,7 @@ public class SerialPortEngine {
             if (port != null) {
                 return port;
             } else {
-                throw new ECRHubException("Serial port not found, please check the USB cable is connected or POS terminal cashier App is launched.");
+                throw new ECRHubException("Serial port not found, please check the USB cable is connected or POS terminal cashier App is launched");
             }
         }
     }
@@ -111,11 +111,11 @@ public class SerialPortEngine {
             serialPort.setComPortTimeouts(config.getTimeoutMode(), config.getReadTimeout(), config.getWriteTimeout());
             boolean opened = serialPort.openPort(5);
             if (!opened) {
-                log.error("Serial port[{}] open failed.", portName);
-                throw new ECRHubException("Serial port[" + portName +"] open failed.");
+                log.error("Serial port[{}] open failed", portName);
+                throw new ECRHubException("Serial port[" + portName +"] open failed");
             }
 
-            log.info("Serial port[{}] open successful.", portName);
+            log.info("Serial port[{}] open successful", portName);
         }
     }
 
@@ -124,14 +124,14 @@ public class SerialPortEngine {
         byte[] buffer = new SerialPortMessage.HandshakeMessage().encode();
         while (true) {
             if (doHandshake(buffer)) {
-                log.info("Serial port handshake connection successful.");
+                log.info("Serial port handshake connection successful");
                 break;
             } else {
                 ThreadUtil.safeSleep(10);
                 if (System.currentTimeMillis() - startTime > config.getConnTimeout()) {
                     this.close();
-                    log.error("Serial port handshake connection failed.");
-                    throw new ECRHubTimeoutException("Serial port handshake connection timeout.");
+                    log.error("Serial port handshake connection failed");
+                    throw new ECRHubTimeoutException("Serial port handshake connection timeout");
                 }
             }
         }
@@ -196,7 +196,7 @@ public class SerialPortEngine {
             return f.get(timeout, timeUnit);
         } catch (TimeoutException e) {
             log.error("Serial port write data timeout:", e);
-            throw new ECRHubTimeoutException("Write timeout.");
+            throw new ECRHubTimeoutException("Write timeout");
         } catch (Exception e) {
             log.error("Serial port write data error:", e);
             throw new ECRHubException("Serial port write data error:", e);
@@ -218,7 +218,7 @@ public class SerialPortEngine {
             ThreadUtil.safeSleep(100);
             if (System.currentTimeMillis() - startTime > timeout) {
                 ackMap.remove(message.messageId);
-                throw new ECRHubTimeoutException("Write timeout.");
+                throw new ECRHubTimeoutException("Write timeout");
             }
         }
     }
@@ -234,7 +234,7 @@ public class SerialPortEngine {
             } else {
                 ThreadUtil.safeSleep(20);
                 if (System.currentTimeMillis() - startTime > timeout) {
-                    throw new ECRHubTimeoutException("Read timeout.");
+                    throw new ECRHubTimeoutException("Read timeout");
                 }
             }
         }
