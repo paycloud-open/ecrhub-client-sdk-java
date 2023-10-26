@@ -262,7 +262,6 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             }
 
             socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
-                    .setTimestamp(String.valueOf(System.currentTimeMillis()))
                     .setRequestId(IdUtil.fastSimpleUUID())
                     .setTopic(ETopic.PAIR.getValue())
                     .setSuccess(success)
@@ -271,7 +270,6 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             // The default pairing is not set successfully
             storage.addPairedDevice(device.getTerminal_sn());
             socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
-                    .setTimestamp(String.valueOf(System.currentTimeMillis()))
                     .setRequestId(IdUtil.fastSimpleUUID())
                     .setTopic(ETopic.PAIR.getValue())
                     .setSuccess(true)
@@ -281,7 +279,6 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
 
     private void cancelPair(WebSocket socket, ECRHubDevice device) {
         socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
-                .setTimestamp(String.valueOf(System.currentTimeMillis()))
                 .setRequestId(IdUtil.fastSimpleUUID())
                 .setTopic(ETopic.UN_PAIR.getValue())
                 .setSuccess(true)
