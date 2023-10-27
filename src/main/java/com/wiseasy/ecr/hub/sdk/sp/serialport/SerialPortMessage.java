@@ -73,15 +73,13 @@ public class SerialPortMessage {
     /**
      * messageId in 1..255
      */
-    private static byte getDataId() {
-        synchronized(SerialPortMessage.class) {
-            int id = COUNTER.incrementAndGet();
-            if (id > 255) {
-                COUNTER.set(0);
-                id = COUNTER.incrementAndGet();
-            }
-            return (byte) id;
+    synchronized private static byte getDataId() {
+        int id = COUNTER.incrementAndGet();
+        if (id > 255) {
+            COUNTER.set(0);
+            id = COUNTER.incrementAndGet();
         }
+        return (byte) id;
     }
 
     private static byte[] getDataLen(int length) {

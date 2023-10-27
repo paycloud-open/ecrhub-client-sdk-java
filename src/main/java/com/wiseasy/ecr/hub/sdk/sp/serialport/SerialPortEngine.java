@@ -107,10 +107,11 @@ public class SerialPortEngine {
             String portName = serialPort.getSystemPortName();
             log.info("Serial port[{}] opening...", portName);
 
-            serialPort.setComPortParameters(config.getBaudRate(), config.getDataBits(), config.getStopBits(), config.getParity());
-            serialPort.setComPortTimeouts(config.getTimeoutMode(), config.getReadTimeout(), config.getWriteTimeout());
-            boolean opened = serialPort.openPort(5);
-            if (!opened) {
+            boolean success = serialPort.openPort(10);
+            if (success) {
+                serialPort.setComPortParameters(config.getBaudRate(), config.getDataBits(), config.getStopBits(), config.getParity());
+                serialPort.setComPortTimeouts(config.getTimeoutMode(), config.getReadTimeout(), config.getWriteTimeout());
+            } else {
                 log.error("Serial port[{}] open failed", portName);
                 throw new ECRHubException("Serial port[" + portName +"] open failed");
             }
@@ -121,9 +122,9 @@ public class SerialPortEngine {
 
     private void handshake(long startTime) throws ECRHubException {
         log.info("Serial port handshake connecting...");
-        byte[] buffer = new SerialPortMessage.HandshakeMessage().encode();
+        byte[] byteMsg = new SerialPortMessage.HandshakeMessage().encode();
         while (true) {
-            if (doHandshake(buffer)) {
+            if (doHandshake(byteMsg)) {
                 log.info("Serial port handshake connection successful");
                 break;
             } else {
@@ -137,10 +138,10 @@ public class SerialPortEngine {
         }
     }
 
-    private boolean doHandshake(byte[] buffer) throws ECRHubException {
+    private boolean doHandshake(byte[] byteMsg) throws ECRHubException {
         // send handshake message
         try {
-            write(buffer, config.getWriteTimeout(), TimeUnit.MILLISECONDS);
+            write(byteMsg, config.getWriteTimeout(), TimeUnit.MILLISECONDS);
         } catch (ECRHubException e) {
             this.close();
             throw e;
@@ -192,29 +193,25 @@ public class SerialPortEngine {
 
     public boolean write(byte[] buffer, long timeout, TimeUnit timeUnit) throws ECRHubException {
         try {
-            Future<Boolean> f = ThreadUtil.execAsync(() -> write(buffer));
+            Future<Boolean> f = CompletableFuture.supplyAsync(() -> write(buffer));
             return f.get(timeout, timeUnit);
         } catch (TimeoutException e) {
-            log.error("Serial port write data timeout:", e);
             throw new ECRHubTimeoutException("Write timeout");
         } catch (Exception e) {
-            log.error("Serial port write data error:", e);
-            throw new ECRHubException("Serial port write data error:", e);
+            Thread.currentThread().interrupt();
+            throw new ECRHubException(e);
         }
     }
 
     public void write(byte[] buffer, long startTime, long timeout) throws ECRHubException {
         SerialPortMessage message = new SerialPortMessage.DataMessage(buffer);
-        byte[] byteMessage = message.encode();
-        log.info("Send data message:{}", HexUtil.byte2hex(byteMessage));
+        byte[] byteMsg = message.encode();
+        log.info("Send data message:{}", HexUtil.byte2hex(byteMsg));
 
         ackMap.put(message.messageId, 0);
 
-        while (isRunning) {
-            if (!ackMap.containsKey(message.messageId)) {
-                break;
-            }
-            write(byteMessage, timeout, TimeUnit.MILLISECONDS);
+        while (isRunning && ackMap.containsKey(message.messageId)) {
+            write(byteMsg, timeout, TimeUnit.MILLISECONDS);
             ThreadUtil.safeSleep(100);
             if (System.currentTimeMillis() - startTime > timeout) {
                 ackMap.remove(message.messageId);
@@ -354,9 +351,9 @@ public class SerialPortEngine {
 
         private void sendAck(byte id) {
             try {
-                byte[] buffer = new SerialPortMessage.AckMessage(id).encode();
-                write(buffer,1, TimeUnit.SECONDS);
-                log.info("Send ack message:{}", HexUtil.byte2hex(buffer));
+                byte[] byteMsg = new SerialPortMessage.AckMessage(id).encode();
+                write(byteMsg,1, TimeUnit.SECONDS);
+                log.info("Send ack message:{}", HexUtil.byte2hex(byteMsg));
             } catch (Exception e) {
                 // do nothing
             }

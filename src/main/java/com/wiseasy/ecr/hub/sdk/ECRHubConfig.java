@@ -93,7 +93,7 @@ public class ECRHubConfig {
          * Full blocking read mode: #TIMEOUT_READ_BLOCKING [In this mode, the readBytes(byte[], long) call will block until the specified timeout is reached or until at least 1 byte can be returned as requested].
          * Scanner mode: #TIMEOUT_SCANNER [This mode applies to reading from the serial port using Java's java.util.Scanner class, and ignores manually specified timeout values to ensure compatibility with the Java specification].
          */
-        public int timeoutMode = SerialPort.TIMEOUT_READ_BLOCKING | SerialPort.TIMEOUT_WRITE_BLOCKING;
+        public int timeoutMode = SerialPort.TIMEOUT_READ_SEMI_BLOCKING;
         /**
          * Write timeout (milliseconds)
          */
@@ -101,7 +101,7 @@ public class ECRHubConfig {
         /**
          * Read timeout (milliseconds)
          */
-        private int readTimeout = 301 * 1000;
+        private int readTimeout = 180 * 1000;
         /**
          * Connection timeout (milliseconds)
          */
@@ -185,25 +185,17 @@ public class ECRHubConfig {
      */
     public static class SocketConfig {
         /**
-         * Connection timeout (milliseconds)
-         */
-        private int connTimeout = 30 * 1000;
-        /**
          * Write timeout (milliseconds)
          */
         private int writeTimeout = 10 * 1000;
         /**
          * Read timeout (milliseconds)
          */
-        private int readTimeout = 301 * 1000;
-
-        public int getConnTimeout() {
-            return connTimeout;
-        }
-
-        public void setConnTimeout(int connTimeout) {
-            this.connTimeout = connTimeout;
-        }
+        private int readTimeout = 180 * 1000;
+        /**
+         * Connection timeout (milliseconds)
+         */
+        private int connTimeout = 30 * 1000;
 
         public int getWriteTimeout() {
             return writeTimeout;
@@ -219,6 +211,14 @@ public class ECRHubConfig {
 
         public void setReadTimeout(int readTimeout) {
             this.readTimeout = readTimeout;
+        }
+
+        public int getConnTimeout() {
+            return connTimeout;
+        }
+
+        public void setConnTimeout(int connTimeout) {
+            this.connTimeout = connTimeout;
         }
     }
 }
