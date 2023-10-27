@@ -95,25 +95,22 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
         if (respPack == null) {
             return null;
         } else {
-            ECRHubResponseProto.ECRHubResponse respProto = ECRHubProtobufHelper.unpack(respPack);
+            ECRHubResponseProto.ECRHubResponse resp = ECRHubProtobufHelper.unpack(respPack);
 
-            ResponseDeviceData deviceData = respProto.getDeviceData();
-            JSONObject deviceDataJson = ECRHubProtobufHelper.proto2Json(deviceData);
-            DeviceData device = deviceDataJson.toJavaObject(DeviceData.class);
+            ResponseDeviceData respDeviceData = resp.getDeviceData();
+            JSONObject deviceDataJson = ECRHubProtobufHelper.proto2Json(respDeviceData);
+            DeviceData deviceData = deviceDataJson.toJavaObject(DeviceData.class);
 
-            JSONObject bizDataJson;
-            if (ETopic.PAY_INIT.getVal().equals(respProto.getTopic())) {
-                bizDataJson = ECRHubProtobufHelper.proto2Json(respProto.getInitData());
-            } else {
-                bizDataJson = ECRHubProtobufHelper.proto2Json(respProto.getBizData());
-            }
+            JSONObject respDataJson = ETopic.PAY_INIT.getVal().equals(resp.getTopic()) ?
+                                      ECRHubProtobufHelper.proto2Json(resp.getInitData()) :
+                                      ECRHubProtobufHelper.proto2Json(resp.getBizData());
 
-            T resp = bizDataJson.toJavaObject(respClass);
-            resp.setRequest_id(respProto.getRequestId());
-            resp.setSuccess(respProto.getSuccess());
-            resp.setError_msg(respProto.getErrorMsg());
-            resp.setDevice_data(device);
-            return resp;
+            T response = respDataJson.toJavaObject(respClass);
+            response.setRequest_id(resp.getRequestId());
+            response.setSuccess(resp.getSuccess());
+            response.setError_msg(resp.getErrorMsg());
+            response.setDevice_data(deviceData);
+            return response;
         }
     }
 }
