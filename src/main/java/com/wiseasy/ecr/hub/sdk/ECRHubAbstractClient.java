@@ -78,7 +78,7 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
     protected ECRHubRequestProto.ECRHubRequest buildPairRequest() {
         String hostName = Optional.ofNullable(config.getHostName()).orElse(NetHelper.getLocalHostName());
         String aliasName = Optional.ofNullable(config.getAliasName()).orElse(hostName);
-        String macAddress = Optional.ofNullable(NetHelper.getLocalMacAddress()).orElse(hostName);
+        String macAddress = NetHelper.getLocalMacAddress();
 
         return ECRHubRequestProto.ECRHubRequest.newBuilder()
                 .setTimestamp(String.valueOf(System.currentTimeMillis()))

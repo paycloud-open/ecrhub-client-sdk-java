@@ -1,6 +1,7 @@
 package com.wiseasy.ecr.hub.sdk.utils;
 
 import cn.hutool.core.net.NetUtil;
+import cn.hutool.core.util.StrUtil;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -32,12 +33,15 @@ public class NetHelper {
     }
 
     public static String getLocalMacAddress() {
-        if (null == localMacAddress) {
+        if (StrUtil.isBlank(localMacAddress)) {
             InetAddress address = getLocalhost();
             if (address != null) {
                 localMacAddress = NetUtil.getMacAddress(address);
             } else {
                 localMacAddress = NetUtil.getLocalMacAddress();
+            }
+            if (StrUtil.isBlank(localMacAddress)) {
+                localMacAddress = NetUtil.getLocalHostName();
             }
         }
         return localMacAddress;
