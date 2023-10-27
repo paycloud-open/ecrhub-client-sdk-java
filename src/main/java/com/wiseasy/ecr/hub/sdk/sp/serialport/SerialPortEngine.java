@@ -35,6 +35,7 @@ public class SerialPortEngine {
     private final Lock lock = new ReentrantLock();
     private final SerialPortConfig config;
     private final SerialPort serialPort;
+    private final String serialPortName;
     private final Map<Byte, Integer> ackMap;
     private ScheduledExecutorService scheduled;
     private volatile boolean handshakeConfirm;
@@ -44,6 +45,7 @@ public class SerialPortEngine {
     public SerialPortEngine(String portName, SerialPortConfig config) throws ECRHubException {
         this.config = config;
         this.serialPort = getSerialPort(portName);
+        this.serialPortName = serialPort.getSystemPortName();
         this.ackMap = new ConcurrentHashMap<>();
     }
 
@@ -95,7 +97,7 @@ public class SerialPortEngine {
             if (scheduled == null) {
                 scheduled = ThreadUtil.createScheduledExecutor(2);
                 scheduled.scheduleAtFixedRate(new SendHeartbeatThread(), 0, 2, TimeUnit.SECONDS);
-                scheduled.scheduleAtFixedRate(new CheckHeartbeatThread(), 15, 15, TimeUnit.SECONDS);
+                scheduled.scheduleAtFixedRate(new CheckHeartbeatThread(), 30, 30, TimeUnit.SECONDS);
             }
         } finally {
             lock.unlock();
@@ -104,35 +106,32 @@ public class SerialPortEngine {
 
     private void open() throws ECRHubException {
         if (!serialPort.isOpen()) {
-            String portName = serialPort.getSystemPortName();
-            log.info("Serial port[{}] opening...", portName);
-
+            log.info("Serial port[{}] opening...", serialPortName);
             boolean success = serialPort.openPort(10);
             if (success) {
                 serialPort.setComPortParameters(config.getBaudRate(), config.getDataBits(), config.getStopBits(), config.getParity());
                 serialPort.setComPortTimeouts(config.getTimeoutMode(), config.getReadTimeout(), config.getWriteTimeout());
+                log.info("Serial port[{}] open successful", serialPortName);
             } else {
-                log.error("Serial port[{}] open failed", portName);
-                throw new ECRHubException("Serial port[" + portName +"] open failed");
+                log.error("Serial port[{}] open failed", serialPortName);
+                throw new ECRHubException("Serial port["+ serialPortName +"] open failed");
             }
-
-            log.info("Serial port[{}] open successful", portName);
         }
     }
 
     private void handshake(long startTime) throws ECRHubException {
-        log.info("Serial port handshake connecting...");
+        log.info("Serial port[{}] handshake connecting...", serialPortName);
         byte[] byteMsg = new SerialPortMessage.HandshakeMessage().encode();
         while (true) {
             if (doHandshake(byteMsg)) {
-                log.info("Serial port handshake connection successful");
+                log.info("Serial port[{}] handshake connection successful", serialPortName);
                 break;
             } else {
                 ThreadUtil.safeSleep(10);
                 if (System.currentTimeMillis() - startTime > config.getConnTimeout()) {
                     this.close();
-                    log.error("Serial port handshake connection failed");
-                    throw new ECRHubTimeoutException("Serial port handshake connection timeout");
+                    log.error("Serial port[{}] handshake connection failed", serialPortName);
+                    throw new ECRHubTimeoutException("Serial port["+ serialPortName +"] handshake connection timeout");
                 }
             }
         }
@@ -143,6 +142,7 @@ public class SerialPortEngine {
         try {
             write(byteMsg, config.getWriteTimeout(), TimeUnit.MILLISECONDS);
         } catch (ECRHubException e) {
+            log.error("Serial port[{}] handshake connection failed, {}", serialPortName, e.getMessage());
             this.close();
             throw e;
         }
@@ -162,8 +162,14 @@ public class SerialPortEngine {
     }
 
     public boolean close() {
-        serialPort.removeDataListener();
-        return serialPort.closePort();
+        if (!serialPort.isOpen()) {
+            return true;
+        } else {
+            serialPort.removeDataListener();
+            boolean isClosed = serialPort.closePort();
+            log.info("Close the serial port[{}]", serialPortName);
+            return isClosed;
+        }
     }
 
     public boolean disconnect() {
@@ -249,7 +255,7 @@ public class SerialPortEngine {
 
         @Override
         public void run() {
-            if (isOpen()) {
+            if (handshakeConfirm) {
                 try {
                     write(byteMsg, 1, TimeUnit.SECONDS);
                     log.debug("Send heartbeat message:{}", hexMsg);
@@ -273,6 +279,7 @@ public class SerialPortEngine {
         private void reconnect() {
             lock.lock();
             try {
+                log.info("No heartbeat message received from POS terminal, trying to reconnect");
                 close();
                 connect(System.currentTimeMillis());
             } catch (Exception e) {
