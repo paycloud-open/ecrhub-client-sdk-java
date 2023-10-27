@@ -279,7 +279,7 @@ public class SerialPortEngine {
         private void reconnect() {
             lock.lock();
             try {
-                log.info("No heartbeat message received from POS terminal, trying to reconnect");
+                log.info("Not received heartbeat message from POS terminal, trying to reconnect");
                 close();
                 connect(System.currentTimeMillis());
             } catch (Exception e) {
