@@ -211,7 +211,7 @@ public class SerialPortEngine {
         ackMap.put(message.messageId, 0);
 
         while (isRunning && ackMap.containsKey(message.messageId)) {
-            write(byteMsg, timeout, TimeUnit.MILLISECONDS);
+            write(byteMsg);
             ThreadUtil.safeSleep(100);
             if (System.currentTimeMillis() - startTime > timeout) {
                 ackMap.remove(message.messageId);
@@ -250,12 +250,8 @@ public class SerialPortEngine {
         @Override
         public void run() {
             if (isOpen()) {
-                try {
-                    write(byteMsg, 1, TimeUnit.SECONDS);
-                    log.debug("Send heartbeat message:{}", hexMsg);
-                } catch (Exception e) {
-                    // do nothing
-                }
+                write(byteMsg);
+                log.debug("Send heartbeat message:{}", hexMsg);
             }
         }
     }
@@ -350,13 +346,9 @@ public class SerialPortEngine {
         }
 
         private void sendAck(byte id) {
-            try {
-                byte[] byteMsg = new SerialPortMessage.AckMessage(id).encode();
-                write(byteMsg,1, TimeUnit.SECONDS);
-                log.info("Send ack message:{}", HexUtil.byte2hex(byteMsg));
-            } catch (Exception e) {
-                // do nothing
-            }
+            byte[] byteMsg = new SerialPortMessage.AckMessage(id).encode();
+            write(byteMsg);
+            log.info("Send ack message:{}", HexUtil.byte2hex(byteMsg));
         }
 
         private void putCache(byte[] data) {
