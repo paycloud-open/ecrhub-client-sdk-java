@@ -2,7 +2,6 @@ package com.wiseasy.ecr.hub.sdk;
 
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.wiseasy.ecr.hub.sdk.enums.ETopic;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
@@ -32,19 +31,15 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
 
     @Override
     public <T extends ECRHubResponse> T execute(ECRHubRequest<T> request) throws ECRHubException {
-        if (StrUtil.isBlank(request.getApp_id())) {
-            throw new ECRHubException("Payment AppId cannot be empty.");
-        }
         sendReq(request);
+
         return getResp(request);
     }
 
     @Override
     public <T extends ECRHubResponse> void asyncExecute(ECRHubRequest<T> request, ECRHubResponseCallBack<T> callback) throws ECRHubException {
-        if (StrUtil.isBlank(request.getApp_id())) {
-            throw new ECRHubException("Payment AppId cannot be empty.");
-        }
         sendReq(request);
+
         ThreadUtil.execute(() -> {
             try {
                 callback.onResponse(getResp(request));

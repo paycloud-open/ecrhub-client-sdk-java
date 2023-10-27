@@ -51,16 +51,22 @@ public class PaymentInitResponse extends ECRHubResponse {
         public static class PayMethod {
             /**
              * Payment method id
+             *
+             * Example: Visa
              */
             @JSONField(name = "payMethodId")
             private String pay_method_id;
             /**
              * Payment method name
+             *
+             * Example: Visa
              */
             @JSONField(name = "payMethodName")
             private String pay_method_name;
             /**
-             * Support trans type list
+             * Support transaction type list
+             *
+             * Example: ["1", "2", "3", ...]
              */
             @JSONField(name = "supportedTransTypeList")
             private List<String> supported_trans_type_list;

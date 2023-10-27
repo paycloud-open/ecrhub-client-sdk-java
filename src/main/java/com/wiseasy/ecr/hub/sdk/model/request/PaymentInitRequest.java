@@ -12,21 +12,25 @@ public class PaymentInitRequest extends ECRHubRequest<PaymentInitResponse> {
     }
 
     /**
-     * Order need terminal confirmation. Default: false
+     * Whether the transaction requires the cashier to click confirmation at the POS terminal.
+     *
+     * default value: false
      *
      * Value range:
-     * - true: Terminal confirmation is required;
-     * - false: No terminal confirmation is required.
+     * true: terminal confirmation is required;
+     * false: terminal confirmation is not required;
      *
-     * For example: true
+     * Example: false
      */
     @JSONField(name = "confirmOnTerminal")
     private Boolean confirm_on_terminal;
     /**
      * Order queue mode, which sets the sorting rules for orders. When pushing multiple orders, priority is given to new or old orders.
      *
+     * default value: FIFO
+     *
      * Value range:
-     * FIFO: first-in, first-out, default value
+     * FIFO: first-in first-out
      * FILO: first-in last-out
      *
      * Example: FIFO
@@ -34,13 +38,15 @@ public class PaymentInitRequest extends ECRHubRequest<PaymentInitResponse> {
     @JSONField(name = "orderQueueMode")
     private String order_queue_mode;
     /**
-     * Order auto settlement. Default: true
+     * Whether transactions are automatically batch settlement.
+     *
+     * default value: true
      *
      * Value range:
-     * - true: auto settlement;
-     * - false: not auto settlement.
+     * true: auto settlement;
+     * false: manual settlement;
      *
-     * For example: true
+     * Example: true
      */
     @JSONField(name = "isAutoSettlement")
     private Boolean is_auto_settlement;
