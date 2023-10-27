@@ -255,7 +255,7 @@ public class SerialPortEngine {
 
         @Override
         public void run() {
-            if (handshakeConfirm) {
+            if (isOpen() && handshakeConfirm) {
                 try {
                     write(byteMsg, 1, TimeUnit.SECONDS);
                     log.debug("Send heartbeat message:{}", hexMsg);
