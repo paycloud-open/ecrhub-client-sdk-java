@@ -8,7 +8,7 @@ public class QueryRequest extends ECRHubRequest<QueryResponse> {
 
     @Override
     public String getTopic() {
-        return ETopic.QUERY_ORDER.getValue();
+        return ETopic.QUERY_ORDER.getVal();
     }
 
     /**

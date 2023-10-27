@@ -171,7 +171,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             engine.connectBlocking(30, TimeUnit.SECONDS);
             String msgId = IdUtil.fastSimpleUUID();
             engine.send(new String(ECRHubRequestProto.ECRHubRequest.newBuilder()
-                    .setTopic(ETopic.UN_PAIR.getValue())
+                    .setTopic(ETopic.UN_PAIR.getVal())
                     .setRequestId(msgId)
                     .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
                             .setMacAddress(NetHelper.getLocalMacAddress())
@@ -246,9 +246,9 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
         device.setWs_address(buildWSAddress(deviceData.getIpAddress(), Integer.parseInt(deviceData.getPort())));
 
         String topic = ecrHubRequest.getTopic();
-        if (ETopic.PAIR.getValue().equals(topic)) {
+        if (ETopic.PAIR.getVal().equals(topic)) {
             doPair(conn, device);
-        } else if (ETopic.UN_PAIR.getValue().equals(topic)) {
+        } else if (ETopic.UN_PAIR.getVal().equals(topic)) {
             cancelPair(conn, device);
         }
     }
@@ -263,7 +263,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
 
             socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
                     .setRequestId(IdUtil.fastSimpleUUID())
-                    .setTopic(ETopic.PAIR.getValue())
+                    .setTopic(ETopic.PAIR.getVal())
                     .setSuccess(success)
                     .build().toByteArray()));
         } else {
@@ -271,7 +271,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             storage.addPairedDevice(device.getTerminal_sn());
             socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
                     .setRequestId(IdUtil.fastSimpleUUID())
-                    .setTopic(ETopic.PAIR.getValue())
+                    .setTopic(ETopic.PAIR.getVal())
                     .setSuccess(true)
                     .build().toByteArray()));
         }
@@ -280,7 +280,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
     private void cancelPair(WebSocket socket, ECRHubDevice device) {
         socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
                 .setRequestId(IdUtil.fastSimpleUUID())
-                .setTopic(ETopic.UN_PAIR.getValue())
+                .setTopic(ETopic.UN_PAIR.getVal())
                 .setSuccess(true)
                 .build().toByteArray()));
 

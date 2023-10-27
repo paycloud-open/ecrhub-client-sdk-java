@@ -8,7 +8,7 @@ public class CloseRequest extends ECRHubRequest<CloseResponse> {
 
     @Override
     public String getTopic() {
-        return ETopic.CLOSE_ORDER.getValue();
+        return ETopic.CLOSE_ORDER.getVal();
     }
 
     /**

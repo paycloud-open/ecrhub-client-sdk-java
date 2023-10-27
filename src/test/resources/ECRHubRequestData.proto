@@ -4,7 +4,7 @@ option java_package = "com.wiseasy.ecr.hub.sdk.protobuf";
 option java_outer_classname = "ECRHubRequestProto";
 message ECRHubRequest {
   /**
-  topic ：ecrhub.init：init（Handshake）；ecrhub.pay.order：payment；ecrhub.pay.query：query；ecrhub.pay.close：close order；ecrhub.heartbeat：heart beat
+  topic:ecrhub.pay.init:init;ecrhub.pay.order:payment;ecrhub.pay.query:query;ecrhub.pay.close:close order;
    */
   string topic = 1;
   /**
@@ -43,6 +43,30 @@ message ECRHubRequest {
   request pair data
    */
   RequestDeviceData device_data = 10;
+
+  /**
+  request init data
+   */
+  RequestInitData init_data  = 11;
+}
+
+message RequestInitData {
+  /**
+  confirm on terminal
+   */
+  bool confirm_on_terminal = 1;
+  /**
+ Order queue mode, which sets the sorting rules for orders. When pushing multiple orders, priority is given to new or old orders.
+ Value range:
+ FIFO: first-in, first-out, default values
+ FILO: first-in last-out
+ Example: FIFO
+ */
+  string order_queue_mode = 2;
+  /**
+   auto settlement
+   */
+  bool is_auto_settlement = 3;
 }
 
 message RequestDeviceData {
@@ -118,17 +142,13 @@ message RequestBizData {
  */
   map<string, string> extends_params = 12;
   /**
-  confirm on terminal
-   */
-  bool confirm_on_terminal = 13;
-  /**
    order expire
    */
-  string expires = 14;
+  string expires = 13;
   /**
  pay channel trans_no
  */
-  string orig_pay_channel_trans_no = 15;
+  string orig_pay_channel_trans_no = 14;
 }
 
 message VoiceData {

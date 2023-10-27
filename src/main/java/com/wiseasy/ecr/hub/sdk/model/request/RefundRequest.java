@@ -9,7 +9,7 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
 
     @Override
     public String getTopic() {
-        return ETopic.PAY_ORDER.getValue();
+        return ETopic.PAY_ORDER.getVal();
     }
 
     /**

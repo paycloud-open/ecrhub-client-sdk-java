@@ -4,7 +4,7 @@ option java_package = "com.wiseasy.ecr.hub.sdk.protobuf";
 option java_outer_classname = "ECRHubResponseProto";
 message ECRHubResponse {
   /**
-  topic ：ecrhub.init：init（Handshake）；ecrhub.pay.order：payment；ecrhub.pay.query：query；ecrhub.pay.close：close order；ecrhub.heartbeat：heart beat
+  topic:ecrhub.pay.init:init;ecrhub.pay.order:payment;ecrhub.pay.query:query;ecrhub.pay.close:close order;
    */
   string topic = 1;
   /**
@@ -14,7 +14,7 @@ message ECRHubResponse {
   /**
   AppID of payment application
   */
-  string  app_id = 3;
+  string app_id = 3;
   /**
   status
  */
@@ -31,6 +31,43 @@ message ECRHubResponse {
    Response device data
   */
   ResponseDeviceData device_data = 7;
+  /**
+  Response init data
+  */
+  ResponseInitData init_data = 8;
+}
+
+message ResponseInitData {
+  /**
+  list payment method category
+   */
+  repeated PayMethodCategory pay_method_category_list = 1;
+}
+
+message PayMethodCategory {
+  /**
+  payment method category
+   */
+  string pay_method_category = 1;
+  /**
+  list pay method
+   */
+  repeated PayMethod pay_method_list = 2;
+}
+
+message PayMethod{
+  /**
+  pay method id
+   */
+  string pay_method_id = 1;
+  /**
+  pay method name
+   */
+  string pay_method_name=2;
+  /**
+  support trans type
+   */
+  repeated string supported_trans_type_list=3;
 }
 
 message ResponseDeviceData {

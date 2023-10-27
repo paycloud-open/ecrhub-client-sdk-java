@@ -4,17 +4,12 @@ import com.wiseasy.ecr.hub.sdk.ECRHubClient;
 import com.wiseasy.ecr.hub.sdk.ECRHubClientFactory;
 import com.wiseasy.ecr.hub.sdk.ECRHubConfig;
 import com.wiseasy.ecr.hub.sdk.ECRHubResponseCallBack;
+import com.wiseasy.ecr.hub.sdk.enums.EOrderQueueMode;
 import com.wiseasy.ecr.hub.sdk.enums.EPayMethodCategory;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
-import com.wiseasy.ecr.hub.sdk.model.request.CloseRequest;
-import com.wiseasy.ecr.hub.sdk.model.request.PurchaseRequest;
-import com.wiseasy.ecr.hub.sdk.model.request.QueryRequest;
-import com.wiseasy.ecr.hub.sdk.model.request.RefundRequest;
-import com.wiseasy.ecr.hub.sdk.model.response.CloseResponse;
-import com.wiseasy.ecr.hub.sdk.model.response.PurchaseResponse;
-import com.wiseasy.ecr.hub.sdk.model.response.QueryResponse;
-import com.wiseasy.ecr.hub.sdk.model.response.RefundResponse;
+import com.wiseasy.ecr.hub.sdk.model.request.*;
+import com.wiseasy.ecr.hub.sdk.model.response.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,6 +29,21 @@ public class ECRHubSerialPortClientTest {
     }
 
     @Test
+    @DisplayName("paymentInit")
+    public void paymentInit() throws ECRHubException {
+        // Payment init
+        PaymentInitRequest request = new PaymentInitRequest();
+        request.setApp_id(APP_ID);
+        request.setIs_auto_settlement(true);
+        request.setConfirm_on_terminal(true);
+        request.setOrder_queue_mode(EOrderQueueMode.FIFO.getVal());
+
+        // Execute payment init request
+        PaymentInitResponse response = client.execute(request);
+        System.out.println("Payment init Response:" + response);
+    }
+
+    @Test
     @DisplayName("purchase")
     public void purchase() throws ECRHubException {
         // Setting read timeout,the timeout set here is valid for this request
@@ -46,7 +56,6 @@ public class ECRHubSerialPortClientTest {
         request.setMerchant_order_no("O" + System.currentTimeMillis());
         request.setOrder_amount("10");
         request.setPay_method_category(EPayMethodCategory.BANKCARD.getVal());
-        request.setConfirm_on_terminal(true);
         request.setConfig(requestConfig);
 
         // Execute purchase request

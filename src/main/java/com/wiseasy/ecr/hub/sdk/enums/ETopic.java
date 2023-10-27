@@ -10,13 +10,9 @@ public enum ETopic {
      */
     UN_PAIR("ecrhub.unpair"),
     /**
-     * init
+     * pay.init
      */
-    INIT("ecrhub.init"),
-    /**
-     * heartbeat
-     */
-    HEARTBEAT("ecrhub.heartbeat"),
+    PAY_INIT("ecrhub.pay.init"),
     /**
      * pay.order
      */
@@ -30,13 +26,13 @@ public enum ETopic {
      */
     CLOSE_ORDER("ecrhub.pay.close");
 
-    ETopic(String value) {
-        this.value = value;
+    ETopic(String val) {
+        this.val = val;
     }
 
-    private String value;
+    private String val;
 
-    public String getValue() {
-        return value;
+    public String getVal() {
+        return val;
     }
 }
