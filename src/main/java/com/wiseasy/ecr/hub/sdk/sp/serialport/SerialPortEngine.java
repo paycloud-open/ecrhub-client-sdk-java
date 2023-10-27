@@ -94,7 +94,7 @@ public class SerialPortEngine {
             // Start HeartBeat
             if (scheduled == null) {
                 scheduled = ThreadUtil.createScheduledExecutor(2);
-                scheduled.scheduleAtFixedRate(new SendHeartbeatThread(), 0, 1, TimeUnit.SECONDS);
+                scheduled.scheduleAtFixedRate(new SendHeartbeatThread(), 0, 2, TimeUnit.SECONDS);
                 scheduled.scheduleAtFixedRate(new CheckHeartbeatThread(), 15, 15, TimeUnit.SECONDS);
             }
         } finally {
