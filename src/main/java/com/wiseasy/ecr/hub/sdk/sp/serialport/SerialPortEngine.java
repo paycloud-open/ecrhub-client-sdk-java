@@ -75,7 +75,7 @@ public class SerialPortEngine {
         if (scheduled == null) {
             scheduled = ThreadUtil.createScheduledExecutor(2);
             scheduled.scheduleAtFixedRate(new SendHeartbeatThread(), 0, 1, TimeUnit.SECONDS);
-            scheduled.scheduleAtFixedRate(new CheckHeartbeatThread(), 2, 2, TimeUnit.SECONDS);
+            scheduled.scheduleAtFixedRate(new CheckHeartbeatThread(), 0, 2, TimeUnit.SECONDS);
         }
     }
 
@@ -191,6 +191,7 @@ public class SerialPortEngine {
     }
 
     private class HandshakeHandler {
+
         private final byte[] byteMsg = new SerialPortMessage.HandshakeMessage().encode();
 
         private void handshake(long startTime) throws ECRHubException {
@@ -232,6 +233,7 @@ public class SerialPortEngine {
     }
 
     private class SendHeartbeatThread implements Runnable {
+
         private final byte[] byteMsg = new SerialPortMessage.HeartbeatMessage().encode();
         private final String hexMsg = HexUtil.byte2hex(byteMsg);
 
