@@ -38,10 +38,10 @@ public class SerialPortEngine {
     private final Map<Byte, Integer> ackMap;
     private final FIFOCache<String, byte[]> msgCache;
     private ScheduledExecutorService scheduled;
-    private volatile boolean handshakeConfirm;
-    private volatile boolean recvHeartbeat;
-    private volatile boolean hasHeartbeat;
-    private volatile boolean isRunning;
+    private volatile boolean isConnected;
+    private volatile boolean isReceivedHeartbeat;
+    private volatile boolean isInHeartbeat;
+    private volatile boolean isWorking;
 
     public SerialPortEngine(String portName, SerialPortConfig config) throws ECRHubException {
         this.config = config;
@@ -56,7 +56,7 @@ public class SerialPortEngine {
         try {
             doConnect(startTime);
             startWorkThread();
-            isRunning = true;
+            isWorking = true;
         } finally {
             lock.unlock();
         }
@@ -109,16 +109,16 @@ public class SerialPortEngine {
         }
     }
 
-    public boolean hasHeartbeat() {
-        return hasHeartbeat;
+    public boolean isInHeartbeat() {
+        return isInHeartbeat;
     }
 
     public boolean isConnected() {
-        return isOpen() && handshakeConfirm;
+        return isConnected;
     }
 
     public boolean disconnect() {
-        if (!isRunning) {
+        if (!isWorking) {
             return true;
         } else {
             if (scheduled != null && !scheduled.isShutdown()) {
@@ -126,10 +126,10 @@ public class SerialPortEngine {
                 scheduled = null;
             }
             ackMap.clear();
-            handshakeConfirm = false;
-            recvHeartbeat = false;
-            hasHeartbeat = false;
-            isRunning = false;
+            isConnected = false;
+            isReceivedHeartbeat = false;
+            isInHeartbeat = false;
+            isWorking = false;
             return close();
         }
     }
@@ -162,7 +162,7 @@ public class SerialPortEngine {
 
         ackMap.put(message.messageId, 0);
 
-        while (isRunning && ackMap.containsKey(message.messageId)) {
+        while (isWorking && ackMap.containsKey(message.messageId)) {
             write(byteMsg, timeout, TimeUnit.MILLISECONDS);
             ThreadUtil.safeSleep(100);
             if (System.currentTimeMillis() - startTime > timeout) {
@@ -174,7 +174,7 @@ public class SerialPortEngine {
 
     public byte[] read(String requestId, long startTime, long timeout) throws ECRHubException {
         byte[] buffer = new byte[0];
-        while (isRunning) {
+        while (isWorking) {
             byte[] msg = msgCache.get(requestId);
             if (ArrayUtil.isNotEmpty(msg)) {
                 msgCache.remove(requestId);
@@ -222,7 +222,7 @@ public class SerialPortEngine {
             }
             // Read handshake confirm message
             long startTime = System.currentTimeMillis();
-            while (!handshakeConfirm) {
+            while (!isConnected) {
                 ThreadUtil.safeSleep(5);
                 if (System.currentTimeMillis() - startTime > 1000) {
                     return false;
@@ -253,11 +253,11 @@ public class SerialPortEngine {
     private class CheckHeartbeatThread implements Runnable {
         @Override
         public void run() {
-            if (recvHeartbeat) {
-                recvHeartbeat = false;
-                hasHeartbeat = true;
+            if (isReceivedHeartbeat) {
+                isReceivedHeartbeat = false;
+                isInHeartbeat = true;
             } else {
-                hasHeartbeat = false;
+                isInHeartbeat = false;
             }
         }
     }
@@ -290,7 +290,7 @@ public class SerialPortEngine {
             switch (message.messageType) {
                 case SerialPortMessage.MESSAGE_TYPE_HANDSHAKE_CONFIRM:
                     // Handshake confirm message
-                    SerialPortEngine.this.handshakeConfirm = true;
+                    SerialPortEngine.this.isConnected = true;
                     break;
                 case SerialPortMessage.MESSAGE_TYPE_COMMON:
                     // Common message
@@ -308,7 +308,7 @@ public class SerialPortEngine {
             if (0x00 == messageAck && 0x00 == messageId) {
                 // Heartbeat packet
                 log.debug("Received heartbeat message:{}", hexMsg);
-                SerialPortEngine.this.recvHeartbeat = true;
+                SerialPortEngine.this.isReceivedHeartbeat = true;
             } else {
                 // ACK packet
                 if (0x00 != messageAck) {

@@ -53,7 +53,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     public boolean isConnected() throws ECRHubException {
         lock.lock();
         try {
-            return engine.isConnected() && engine.hasHeartbeat();
+            return engine.isConnected() && engine.isInHeartbeat();
         } finally {
             lock.unlock();
         }
@@ -77,7 +77,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     @Override
     protected void autoConnect() throws ECRHubException {
         if (engine.isConnected()) {
-            if (!engine.hasHeartbeat()) {
+            if (!engine.isInHeartbeat()) {
                 throw new ECRHubException("Serial port is not connected, " +
                         "please check the USB cable is connected and POS terminal cashier App is launched");
             }
