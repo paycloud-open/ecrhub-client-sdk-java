@@ -176,36 +176,6 @@ public final class ECRHubResponseProto {
      * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseDeviceData device_data = 7;</code>
      */
     com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceDataOrBuilder getDeviceDataOrBuilder();
-
-    /**
-     * <pre>
-     **
-     *Response init data
-     * </pre>
-     *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-     * @return Whether the initData field is set.
-     */
-    boolean hasInitData();
-    /**
-     * <pre>
-     **
-     *Response init data
-     * </pre>
-     *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-     * @return The initData.
-     */
-    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData getInitData();
-    /**
-     * <pre>
-     **
-     *Response init data
-     * </pre>
-     *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-     */
-    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitDataOrBuilder getInitDataOrBuilder();
   }
   /**
    * Protobuf type {@code com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponse}
@@ -541,47 +511,6 @@ public final class ECRHubResponseProto {
       return deviceData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData.getDefaultInstance() : deviceData_;
     }
 
-    public static final int INIT_DATA_FIELD_NUMBER = 8;
-    private com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData initData_;
-    /**
-     * <pre>
-     **
-     *Response init data
-     * </pre>
-     *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-     * @return Whether the initData field is set.
-     */
-    @java.lang.Override
-    public boolean hasInitData() {
-      return ((bitField0_ & 0x00000004) != 0);
-    }
-    /**
-     * <pre>
-     **
-     *Response init data
-     * </pre>
-     *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-     * @return The initData.
-     */
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData getInitData() {
-      return initData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.getDefaultInstance() : initData_;
-    }
-    /**
-     * <pre>
-     **
-     *Response init data
-     * </pre>
-     *
-     * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-     */
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitDataOrBuilder getInitDataOrBuilder() {
-      return initData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.getDefaultInstance() : initData_;
-    }
-
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -617,9 +546,6 @@ public final class ECRHubResponseProto {
       if (((bitField0_ & 0x00000002) != 0)) {
         output.writeMessage(7, getDeviceData());
       }
-      if (((bitField0_ & 0x00000004) != 0)) {
-        output.writeMessage(8, getInitData());
-      }
       getUnknownFields().writeTo(output);
     }
 
@@ -652,10 +578,6 @@ public final class ECRHubResponseProto {
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, getDeviceData());
-      }
-      if (((bitField0_ & 0x00000004) != 0)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, getInitData());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -692,11 +614,6 @@ public final class ECRHubResponseProto {
         if (!getDeviceData()
             .equals(other.getDeviceData())) return false;
       }
-      if (hasInitData() != other.hasInitData()) return false;
-      if (hasInitData()) {
-        if (!getInitData()
-            .equals(other.getInitData())) return false;
-      }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -726,10 +643,6 @@ public final class ECRHubResponseProto {
       if (hasDeviceData()) {
         hash = (37 * hash) + DEVICE_DATA_FIELD_NUMBER;
         hash = (53 * hash) + getDeviceData().hashCode();
-      }
-      if (hasInitData()) {
-        hash = (37 * hash) + INIT_DATA_FIELD_NUMBER;
-        hash = (53 * hash) + getInitData().hashCode();
       }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
@@ -863,7 +776,6 @@ public final class ECRHubResponseProto {
                 .alwaysUseFieldBuilders) {
           getBizDataFieldBuilder();
           getDeviceDataFieldBuilder();
-          getInitDataFieldBuilder();
         }
       }
       @java.lang.Override
@@ -884,11 +796,6 @@ public final class ECRHubResponseProto {
         if (deviceDataBuilder_ != null) {
           deviceDataBuilder_.dispose();
           deviceDataBuilder_ = null;
-        }
-        initData_ = null;
-        if (initDataBuilder_ != null) {
-          initDataBuilder_.dispose();
-          initDataBuilder_ = null;
         }
         return this;
       }
@@ -950,12 +857,6 @@ public final class ECRHubResponseProto {
               ? deviceData_
               : deviceDataBuilder_.build();
           to_bitField0_ |= 0x00000002;
-        }
-        if (((from_bitField0_ & 0x00000080) != 0)) {
-          result.initData_ = initDataBuilder_ == null
-              ? initData_
-              : initDataBuilder_.build();
-          to_bitField0_ |= 0x00000004;
         }
         result.bitField0_ |= to_bitField0_;
       }
@@ -1033,9 +934,6 @@ public final class ECRHubResponseProto {
         if (other.hasDeviceData()) {
           mergeDeviceData(other.getDeviceData());
         }
-        if (other.hasInitData()) {
-          mergeInitData(other.getInitData());
-        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -1101,13 +999,6 @@ public final class ECRHubResponseProto {
                 bitField0_ |= 0x00000040;
                 break;
               } // case 58
-              case 66: {
-                input.readMessage(
-                    getInitDataFieldBuilder().getBuilder(),
-                    extensionRegistry);
-                bitField0_ |= 0x00000080;
-                break;
-              } // case 66
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -1891,172 +1782,6 @@ public final class ECRHubResponseProto {
         }
         return deviceDataBuilder_;
       }
-
-      private com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData initData_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitDataOrBuilder> initDataBuilder_;
-      /**
-       * <pre>
-       **
-       *Response init data
-       * </pre>
-       *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-       * @return Whether the initData field is set.
-       */
-      public boolean hasInitData() {
-        return ((bitField0_ & 0x00000080) != 0);
-      }
-      /**
-       * <pre>
-       **
-       *Response init data
-       * </pre>
-       *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-       * @return The initData.
-       */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData getInitData() {
-        if (initDataBuilder_ == null) {
-          return initData_ == null ? com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.getDefaultInstance() : initData_;
-        } else {
-          return initDataBuilder_.getMessage();
-        }
-      }
-      /**
-       * <pre>
-       **
-       *Response init data
-       * </pre>
-       *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-       */
-      public Builder setInitData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData value) {
-        if (initDataBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          initData_ = value;
-        } else {
-          initDataBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000080;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *Response init data
-       * </pre>
-       *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-       */
-      public Builder setInitData(
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.Builder builderForValue) {
-        if (initDataBuilder_ == null) {
-          initData_ = builderForValue.build();
-        } else {
-          initDataBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000080;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *Response init data
-       * </pre>
-       *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-       */
-      public Builder mergeInitData(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData value) {
-        if (initDataBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) != 0) &&
-            initData_ != null &&
-            initData_ != com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.getDefaultInstance()) {
-            getInitDataBuilder().mergeFrom(value);
-          } else {
-            initData_ = value;
-          }
-        } else {
-          initDataBuilder_.mergeFrom(value);
-        }
-        if (initData_ != null) {
-          bitField0_ |= 0x00000080;
-          onChanged();
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *Response init data
-       * </pre>
-       *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-       */
-      public Builder clearInitData() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        initData_ = null;
-        if (initDataBuilder_ != null) {
-          initDataBuilder_.dispose();
-          initDataBuilder_ = null;
-        }
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *Response init data
-       * </pre>
-       *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-       */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.Builder getInitDataBuilder() {
-        bitField0_ |= 0x00000080;
-        onChanged();
-        return getInitDataFieldBuilder().getBuilder();
-      }
-      /**
-       * <pre>
-       **
-       *Response init data
-       * </pre>
-       *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-       */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitDataOrBuilder getInitDataOrBuilder() {
-        if (initDataBuilder_ != null) {
-          return initDataBuilder_.getMessageOrBuilder();
-        } else {
-          return initData_ == null ?
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.getDefaultInstance() : initData_;
-        }
-      }
-      /**
-       * <pre>
-       **
-       *Response init data
-       * </pre>
-       *
-       * <code>.com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData init_data = 8;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitDataOrBuilder> 
-          getInitDataFieldBuilder() {
-        if (initDataBuilder_ == null) {
-          initDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitDataOrBuilder>(
-                  getInitData(),
-                  getParentForChildren(),
-                  isClean());
-          initData_ = null;
-        }
-        return initDataBuilder_;
-      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2116,928 +1841,6 @@ public final class ECRHubResponseProto {
 
     @java.lang.Override
     public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ECRHubResponse getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ResponseInitDataOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     **
-     *list payment method category
-     * </pre>
-     *
-     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-     */
-    java.util.List<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory> 
-        getPayMethodCategoryListList();
-    /**
-     * <pre>
-     **
-     *list payment method category
-     * </pre>
-     *
-     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-     */
-    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory getPayMethodCategoryList(int index);
-    /**
-     * <pre>
-     **
-     *list payment method category
-     * </pre>
-     *
-     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-     */
-    int getPayMethodCategoryListCount();
-    /**
-     * <pre>
-     **
-     *list payment method category
-     * </pre>
-     *
-     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-     */
-    java.util.List<? extends com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder> 
-        getPayMethodCategoryListOrBuilderList();
-    /**
-     * <pre>
-     **
-     *list payment method category
-     * </pre>
-     *
-     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-     */
-    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder getPayMethodCategoryListOrBuilder(
-        int index);
-  }
-  /**
-   * Protobuf type {@code com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData}
-   */
-  public static final class ResponseInitData extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData)
-      ResponseInitDataOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use ResponseInitData.newBuilder() to construct.
-    private ResponseInitData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ResponseInitData() {
-      payMethodCategoryList_ = java.util.Collections.emptyList();
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new ResponseInitData();
-    }
-
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseInitData_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseInitData_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.Builder.class);
-    }
-
-    public static final int PAY_METHOD_CATEGORY_LIST_FIELD_NUMBER = 1;
-    @SuppressWarnings("serial")
-    private java.util.List<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory> payMethodCategoryList_;
-    /**
-     * <pre>
-     **
-     *list payment method category
-     * </pre>
-     *
-     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-     */
-    @java.lang.Override
-    public java.util.List<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory> getPayMethodCategoryListList() {
-      return payMethodCategoryList_;
-    }
-    /**
-     * <pre>
-     **
-     *list payment method category
-     * </pre>
-     *
-     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-     */
-    @java.lang.Override
-    public java.util.List<? extends com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder> 
-        getPayMethodCategoryListOrBuilderList() {
-      return payMethodCategoryList_;
-    }
-    /**
-     * <pre>
-     **
-     *list payment method category
-     * </pre>
-     *
-     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-     */
-    @java.lang.Override
-    public int getPayMethodCategoryListCount() {
-      return payMethodCategoryList_.size();
-    }
-    /**
-     * <pre>
-     **
-     *list payment method category
-     * </pre>
-     *
-     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-     */
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory getPayMethodCategoryList(int index) {
-      return payMethodCategoryList_.get(index);
-    }
-    /**
-     * <pre>
-     **
-     *list payment method category
-     * </pre>
-     *
-     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-     */
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder getPayMethodCategoryListOrBuilder(
-        int index) {
-      return payMethodCategoryList_.get(index);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      for (int i = 0; i < payMethodCategoryList_.size(); i++) {
-        output.writeMessage(1, payMethodCategoryList_.get(i));
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      for (int i = 0; i < payMethodCategoryList_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, payMethodCategoryList_.get(i));
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData)) {
-        return super.equals(obj);
-      }
-      com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData other = (com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData) obj;
-
-      if (!getPayMethodCategoryListList()
-          .equals(other.getPayMethodCategoryListList())) return false;
-      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (getPayMethodCategoryListCount() > 0) {
-        hash = (37 * hash) + PAY_METHOD_CATEGORY_LIST_FIELD_NUMBER;
-        hash = (53 * hash) + getPayMethodCategoryListList().hashCode();
-      }
-      hash = (29 * hash) + getUnknownFields().hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData)
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitDataOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseInitData_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseInitData_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.class, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.Builder.class);
-      }
-
-      // Construct using com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.newBuilder()
-      private Builder() {
-
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        bitField0_ = 0;
-        if (payMethodCategoryListBuilder_ == null) {
-          payMethodCategoryList_ = java.util.Collections.emptyList();
-        } else {
-          payMethodCategoryList_ = null;
-          payMethodCategoryListBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseInitData_descriptor;
-      }
-
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData getDefaultInstanceForType() {
-        return com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData build() {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData buildPartial() {
-        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData result = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData(this);
-        buildPartialRepeatedFields(result);
-        if (bitField0_ != 0) { buildPartial0(result); }
-        onBuilt();
-        return result;
-      }
-
-      private void buildPartialRepeatedFields(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData result) {
-        if (payMethodCategoryListBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
-            payMethodCategoryList_ = java.util.Collections.unmodifiableList(payMethodCategoryList_);
-            bitField0_ = (bitField0_ & ~0x00000001);
-          }
-          result.payMethodCategoryList_ = payMethodCategoryList_;
-        } else {
-          result.payMethodCategoryList_ = payMethodCategoryListBuilder_.build();
-        }
-      }
-
-      private void buildPartial0(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData result) {
-        int from_bitField0_ = bitField0_;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData) {
-          return mergeFrom((com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData other) {
-        if (other == com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData.getDefaultInstance()) return this;
-        if (payMethodCategoryListBuilder_ == null) {
-          if (!other.payMethodCategoryList_.isEmpty()) {
-            if (payMethodCategoryList_.isEmpty()) {
-              payMethodCategoryList_ = other.payMethodCategoryList_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-            } else {
-              ensurePayMethodCategoryListIsMutable();
-              payMethodCategoryList_.addAll(other.payMethodCategoryList_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.payMethodCategoryList_.isEmpty()) {
-            if (payMethodCategoryListBuilder_.isEmpty()) {
-              payMethodCategoryListBuilder_.dispose();
-              payMethodCategoryListBuilder_ = null;
-              payMethodCategoryList_ = other.payMethodCategoryList_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-              payMethodCategoryListBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getPayMethodCategoryListFieldBuilder() : null;
-            } else {
-              payMethodCategoryListBuilder_.addAllMessages(other.payMethodCategoryList_);
-            }
-          }
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        if (extensionRegistry == null) {
-          throw new java.lang.NullPointerException();
-        }
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              case 10: {
-                com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory m =
-                    input.readMessage(
-                        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.parser(),
-                        extensionRegistry);
-                if (payMethodCategoryListBuilder_ == null) {
-                  ensurePayMethodCategoryListIsMutable();
-                  payMethodCategoryList_.add(m);
-                } else {
-                  payMethodCategoryListBuilder_.addMessage(m);
-                }
-                break;
-              } // case 10
-              default: {
-                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                  done = true; // was an endgroup tag
-                }
-                break;
-              } // default:
-            } // switch (tag)
-          } // while (!done)
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.unwrapIOException();
-        } finally {
-          onChanged();
-        } // finally
-        return this;
-      }
-      private int bitField0_;
-
-      private java.util.List<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory> payMethodCategoryList_ =
-        java.util.Collections.emptyList();
-      private void ensurePayMethodCategoryListIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
-          payMethodCategoryList_ = new java.util.ArrayList<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory>(payMethodCategoryList_);
-          bitField0_ |= 0x00000001;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder> payMethodCategoryListBuilder_;
-
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public java.util.List<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory> getPayMethodCategoryListList() {
-        if (payMethodCategoryListBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(payMethodCategoryList_);
-        } else {
-          return payMethodCategoryListBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public int getPayMethodCategoryListCount() {
-        if (payMethodCategoryListBuilder_ == null) {
-          return payMethodCategoryList_.size();
-        } else {
-          return payMethodCategoryListBuilder_.getCount();
-        }
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory getPayMethodCategoryList(int index) {
-        if (payMethodCategoryListBuilder_ == null) {
-          return payMethodCategoryList_.get(index);
-        } else {
-          return payMethodCategoryListBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public Builder setPayMethodCategoryList(
-          int index, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory value) {
-        if (payMethodCategoryListBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePayMethodCategoryListIsMutable();
-          payMethodCategoryList_.set(index, value);
-          onChanged();
-        } else {
-          payMethodCategoryListBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public Builder setPayMethodCategoryList(
-          int index, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder builderForValue) {
-        if (payMethodCategoryListBuilder_ == null) {
-          ensurePayMethodCategoryListIsMutable();
-          payMethodCategoryList_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          payMethodCategoryListBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public Builder addPayMethodCategoryList(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory value) {
-        if (payMethodCategoryListBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePayMethodCategoryListIsMutable();
-          payMethodCategoryList_.add(value);
-          onChanged();
-        } else {
-          payMethodCategoryListBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public Builder addPayMethodCategoryList(
-          int index, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory value) {
-        if (payMethodCategoryListBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePayMethodCategoryListIsMutable();
-          payMethodCategoryList_.add(index, value);
-          onChanged();
-        } else {
-          payMethodCategoryListBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public Builder addPayMethodCategoryList(
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder builderForValue) {
-        if (payMethodCategoryListBuilder_ == null) {
-          ensurePayMethodCategoryListIsMutable();
-          payMethodCategoryList_.add(builderForValue.build());
-          onChanged();
-        } else {
-          payMethodCategoryListBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public Builder addPayMethodCategoryList(
-          int index, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder builderForValue) {
-        if (payMethodCategoryListBuilder_ == null) {
-          ensurePayMethodCategoryListIsMutable();
-          payMethodCategoryList_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          payMethodCategoryListBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public Builder addAllPayMethodCategoryList(
-          java.lang.Iterable<? extends com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory> values) {
-        if (payMethodCategoryListBuilder_ == null) {
-          ensurePayMethodCategoryListIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, payMethodCategoryList_);
-          onChanged();
-        } else {
-          payMethodCategoryListBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public Builder clearPayMethodCategoryList() {
-        if (payMethodCategoryListBuilder_ == null) {
-          payMethodCategoryList_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
-          onChanged();
-        } else {
-          payMethodCategoryListBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public Builder removePayMethodCategoryList(int index) {
-        if (payMethodCategoryListBuilder_ == null) {
-          ensurePayMethodCategoryListIsMutable();
-          payMethodCategoryList_.remove(index);
-          onChanged();
-        } else {
-          payMethodCategoryListBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder getPayMethodCategoryListBuilder(
-          int index) {
-        return getPayMethodCategoryListFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder getPayMethodCategoryListOrBuilder(
-          int index) {
-        if (payMethodCategoryListBuilder_ == null) {
-          return payMethodCategoryList_.get(index);  } else {
-          return payMethodCategoryListBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public java.util.List<? extends com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder> 
-           getPayMethodCategoryListOrBuilderList() {
-        if (payMethodCategoryListBuilder_ != null) {
-          return payMethodCategoryListBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(payMethodCategoryList_);
-        }
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder addPayMethodCategoryListBuilder() {
-        return getPayMethodCategoryListFieldBuilder().addBuilder(
-            com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder addPayMethodCategoryListBuilder(
-          int index) {
-        return getPayMethodCategoryListFieldBuilder().addBuilder(
-            index, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       **
-       *list payment method category
-       * </pre>
-       *
-       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 1;</code>
-       */
-      public java.util.List<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder> 
-           getPayMethodCategoryListBuilderList() {
-        return getPayMethodCategoryListFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder> 
-          getPayMethodCategoryListFieldBuilder() {
-        if (payMethodCategoryListBuilder_ == null) {
-          payMethodCategoryListBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder>(
-                  payMethodCategoryList_,
-                  ((bitField0_ & 0x00000001) != 0),
-                  getParentForChildren(),
-                  isClean());
-          payMethodCategoryList_ = null;
-        }
-        return payMethodCategoryListBuilder_;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData)
-    }
-
-    // @@protoc_insertion_point(class_scope:com.wiseasy.ecr.hub.sdk.protobuf.ResponseInitData)
-    private static final com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData();
-    }
-
-    public static com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ResponseInitData>
-        PARSER = new com.google.protobuf.AbstractParser<ResponseInitData>() {
-      @java.lang.Override
-      public ResponseInitData parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        Builder builder = newBuilder();
-        try {
-          builder.mergeFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(builder.buildPartial());
-        } catch (com.google.protobuf.UninitializedMessageException e) {
-          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
-        }
-        return builder.buildPartial();
-      }
-    };
-
-    public static com.google.protobuf.Parser<ResponseInitData> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ResponseInitData> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseInitData getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6815,6 +5618,55 @@ java.lang.String defaultValue);
      */
     com.google.protobuf.ByteString
         getTipAmountBytes();
+
+    /**
+     * <pre>
+     **
+     *support pay method category,only topic is ecrhub.pay.init return
+     * </pre>
+     *
+     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+     */
+    java.util.List<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory> 
+        getPayMethodCategoryListList();
+    /**
+     * <pre>
+     **
+     *support pay method category,only topic is ecrhub.pay.init return
+     * </pre>
+     *
+     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+     */
+    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory getPayMethodCategoryList(int index);
+    /**
+     * <pre>
+     **
+     *support pay method category,only topic is ecrhub.pay.init return
+     * </pre>
+     *
+     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+     */
+    int getPayMethodCategoryListCount();
+    /**
+     * <pre>
+     **
+     *support pay method category,only topic is ecrhub.pay.init return
+     * </pre>
+     *
+     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+     */
+    java.util.List<? extends com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder> 
+        getPayMethodCategoryListOrBuilderList();
+    /**
+     * <pre>
+     **
+     *support pay method category,only topic is ecrhub.pay.init return
+     * </pre>
+     *
+     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+     */
+    com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder getPayMethodCategoryListOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.wiseasy.ecr.hub.sdk.protobuf.ResponseBizData}
@@ -6844,6 +5696,7 @@ java.lang.String defaultValue);
       attach_ = "";
       cashbackAmount_ = "";
       tipAmount_ = "";
+      payMethodCategoryList_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -7712,6 +6565,72 @@ java.lang.String defaultValue) {
       }
     }
 
+    public static final int PAY_METHOD_CATEGORY_LIST_FIELD_NUMBER = 17;
+    @SuppressWarnings("serial")
+    private java.util.List<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory> payMethodCategoryList_;
+    /**
+     * <pre>
+     **
+     *support pay method category,only topic is ecrhub.pay.init return
+     * </pre>
+     *
+     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+     */
+    @java.lang.Override
+    public java.util.List<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory> getPayMethodCategoryListList() {
+      return payMethodCategoryList_;
+    }
+    /**
+     * <pre>
+     **
+     *support pay method category,only topic is ecrhub.pay.init return
+     * </pre>
+     *
+     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder> 
+        getPayMethodCategoryListOrBuilderList() {
+      return payMethodCategoryList_;
+    }
+    /**
+     * <pre>
+     **
+     *support pay method category,only topic is ecrhub.pay.init return
+     * </pre>
+     *
+     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+     */
+    @java.lang.Override
+    public int getPayMethodCategoryListCount() {
+      return payMethodCategoryList_.size();
+    }
+    /**
+     * <pre>
+     **
+     *support pay method category,only topic is ecrhub.pay.init return
+     * </pre>
+     *
+     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+     */
+    @java.lang.Override
+    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory getPayMethodCategoryList(int index) {
+      return payMethodCategoryList_.get(index);
+    }
+    /**
+     * <pre>
+     **
+     *support pay method category,only topic is ecrhub.pay.init return
+     * </pre>
+     *
+     * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+     */
+    @java.lang.Override
+    public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder getPayMethodCategoryListOrBuilder(
+        int index) {
+      return payMethodCategoryList_.get(index);
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -7777,6 +6696,9 @@ java.lang.String defaultValue) {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(tipAmount_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 16, tipAmount_);
       }
+      for (int i = 0; i < payMethodCategoryList_.size(); i++) {
+        output.writeMessage(17, payMethodCategoryList_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -7841,6 +6763,10 @@ java.lang.String defaultValue) {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(tipAmount_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(16, tipAmount_);
       }
+      for (int i = 0; i < payMethodCategoryList_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(17, payMethodCategoryList_.get(i));
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
@@ -7888,6 +6814,8 @@ java.lang.String defaultValue) {
           .equals(other.getCashbackAmount())) return false;
       if (!getTipAmount()
           .equals(other.getTipAmount())) return false;
+      if (!getPayMethodCategoryListList()
+          .equals(other.getPayMethodCategoryListList())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -7933,6 +6861,10 @@ java.lang.String defaultValue) {
       hash = (53 * hash) + getCashbackAmount().hashCode();
       hash = (37 * hash) + TIP_AMOUNT_FIELD_NUMBER;
       hash = (53 * hash) + getTipAmount().hashCode();
+      if (getPayMethodCategoryListCount() > 0) {
+        hash = (37 * hash) + PAY_METHOD_CATEGORY_LIST_FIELD_NUMBER;
+        hash = (53 * hash) + getPayMethodCategoryListList().hashCode();
+      }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -8102,6 +7034,13 @@ java.lang.String defaultValue) {
         attach_ = "";
         cashbackAmount_ = "";
         tipAmount_ = "";
+        if (payMethodCategoryListBuilder_ == null) {
+          payMethodCategoryList_ = java.util.Collections.emptyList();
+        } else {
+          payMethodCategoryList_ = null;
+          payMethodCategoryListBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00010000);
         return this;
       }
 
@@ -8128,9 +7067,22 @@ java.lang.String defaultValue) {
       @java.lang.Override
       public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData buildPartial() {
         com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData result = new com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData(this);
+        buildPartialRepeatedFields(result);
         if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
+      }
+
+      private void buildPartialRepeatedFields(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData result) {
+        if (payMethodCategoryListBuilder_ == null) {
+          if (((bitField0_ & 0x00010000) != 0)) {
+            payMethodCategoryList_ = java.util.Collections.unmodifiableList(payMethodCategoryList_);
+            bitField0_ = (bitField0_ & ~0x00010000);
+          }
+          result.payMethodCategoryList_ = payMethodCategoryList_;
+        } else {
+          result.payMethodCategoryList_ = payMethodCategoryListBuilder_.build();
+        }
       }
 
       private void buildPartial0(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData result) {
@@ -8308,6 +7260,32 @@ java.lang.String defaultValue) {
           bitField0_ |= 0x00008000;
           onChanged();
         }
+        if (payMethodCategoryListBuilder_ == null) {
+          if (!other.payMethodCategoryList_.isEmpty()) {
+            if (payMethodCategoryList_.isEmpty()) {
+              payMethodCategoryList_ = other.payMethodCategoryList_;
+              bitField0_ = (bitField0_ & ~0x00010000);
+            } else {
+              ensurePayMethodCategoryListIsMutable();
+              payMethodCategoryList_.addAll(other.payMethodCategoryList_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.payMethodCategoryList_.isEmpty()) {
+            if (payMethodCategoryListBuilder_.isEmpty()) {
+              payMethodCategoryListBuilder_.dispose();
+              payMethodCategoryListBuilder_ = null;
+              payMethodCategoryList_ = other.payMethodCategoryList_;
+              bitField0_ = (bitField0_ & ~0x00010000);
+              payMethodCategoryListBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getPayMethodCategoryListFieldBuilder() : null;
+            } else {
+              payMethodCategoryListBuilder_.addAllMessages(other.payMethodCategoryList_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -8418,6 +7396,19 @@ java.lang.String defaultValue) {
                 bitField0_ |= 0x00008000;
                 break;
               } // case 130
+              case 138: {
+                com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory m =
+                    input.readMessage(
+                        com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.parser(),
+                        extensionRegistry);
+                if (payMethodCategoryListBuilder_ == null) {
+                  ensurePayMethodCategoryListIsMutable();
+                  payMethodCategoryList_.add(m);
+                } else {
+                  payMethodCategoryListBuilder_.addMessage(m);
+                }
+                break;
+              } // case 138
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -10051,6 +9042,336 @@ java.lang.String defaultValue) {
         onChanged();
         return this;
       }
+
+      private java.util.List<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory> payMethodCategoryList_ =
+        java.util.Collections.emptyList();
+      private void ensurePayMethodCategoryListIsMutable() {
+        if (!((bitField0_ & 0x00010000) != 0)) {
+          payMethodCategoryList_ = new java.util.ArrayList<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory>(payMethodCategoryList_);
+          bitField0_ |= 0x00010000;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder> payMethodCategoryListBuilder_;
+
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public java.util.List<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory> getPayMethodCategoryListList() {
+        if (payMethodCategoryListBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(payMethodCategoryList_);
+        } else {
+          return payMethodCategoryListBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public int getPayMethodCategoryListCount() {
+        if (payMethodCategoryListBuilder_ == null) {
+          return payMethodCategoryList_.size();
+        } else {
+          return payMethodCategoryListBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory getPayMethodCategoryList(int index) {
+        if (payMethodCategoryListBuilder_ == null) {
+          return payMethodCategoryList_.get(index);
+        } else {
+          return payMethodCategoryListBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public Builder setPayMethodCategoryList(
+          int index, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory value) {
+        if (payMethodCategoryListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePayMethodCategoryListIsMutable();
+          payMethodCategoryList_.set(index, value);
+          onChanged();
+        } else {
+          payMethodCategoryListBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public Builder setPayMethodCategoryList(
+          int index, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder builderForValue) {
+        if (payMethodCategoryListBuilder_ == null) {
+          ensurePayMethodCategoryListIsMutable();
+          payMethodCategoryList_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          payMethodCategoryListBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public Builder addPayMethodCategoryList(com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory value) {
+        if (payMethodCategoryListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePayMethodCategoryListIsMutable();
+          payMethodCategoryList_.add(value);
+          onChanged();
+        } else {
+          payMethodCategoryListBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public Builder addPayMethodCategoryList(
+          int index, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory value) {
+        if (payMethodCategoryListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePayMethodCategoryListIsMutable();
+          payMethodCategoryList_.add(index, value);
+          onChanged();
+        } else {
+          payMethodCategoryListBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public Builder addPayMethodCategoryList(
+          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder builderForValue) {
+        if (payMethodCategoryListBuilder_ == null) {
+          ensurePayMethodCategoryListIsMutable();
+          payMethodCategoryList_.add(builderForValue.build());
+          onChanged();
+        } else {
+          payMethodCategoryListBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public Builder addPayMethodCategoryList(
+          int index, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder builderForValue) {
+        if (payMethodCategoryListBuilder_ == null) {
+          ensurePayMethodCategoryListIsMutable();
+          payMethodCategoryList_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          payMethodCategoryListBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public Builder addAllPayMethodCategoryList(
+          java.lang.Iterable<? extends com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory> values) {
+        if (payMethodCategoryListBuilder_ == null) {
+          ensurePayMethodCategoryListIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, payMethodCategoryList_);
+          onChanged();
+        } else {
+          payMethodCategoryListBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public Builder clearPayMethodCategoryList() {
+        if (payMethodCategoryListBuilder_ == null) {
+          payMethodCategoryList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00010000);
+          onChanged();
+        } else {
+          payMethodCategoryListBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public Builder removePayMethodCategoryList(int index) {
+        if (payMethodCategoryListBuilder_ == null) {
+          ensurePayMethodCategoryListIsMutable();
+          payMethodCategoryList_.remove(index);
+          onChanged();
+        } else {
+          payMethodCategoryListBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder getPayMethodCategoryListBuilder(
+          int index) {
+        return getPayMethodCategoryListFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder getPayMethodCategoryListOrBuilder(
+          int index) {
+        if (payMethodCategoryListBuilder_ == null) {
+          return payMethodCategoryList_.get(index);  } else {
+          return payMethodCategoryListBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public java.util.List<? extends com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder> 
+           getPayMethodCategoryListOrBuilderList() {
+        if (payMethodCategoryListBuilder_ != null) {
+          return payMethodCategoryListBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(payMethodCategoryList_);
+        }
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder addPayMethodCategoryListBuilder() {
+        return getPayMethodCategoryListFieldBuilder().addBuilder(
+            com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder addPayMethodCategoryListBuilder(
+          int index) {
+        return getPayMethodCategoryListFieldBuilder().addBuilder(
+            index, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       **
+       *support pay method category,only topic is ecrhub.pay.init return
+       * </pre>
+       *
+       * <code>repeated .com.wiseasy.ecr.hub.sdk.protobuf.PayMethodCategory pay_method_category_list = 17;</code>
+       */
+      public java.util.List<com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder> 
+           getPayMethodCategoryListBuilderList() {
+        return getPayMethodCategoryListFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder> 
+          getPayMethodCategoryListFieldBuilder() {
+        if (payMethodCategoryListBuilder_ == null) {
+          payMethodCategoryListBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategory.Builder, com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.PayMethodCategoryOrBuilder>(
+                  payMethodCategoryList_,
+                  ((bitField0_ & 0x00010000) != 0),
+                  getParentForChildren(),
+                  isClean());
+          payMethodCategoryList_ = null;
+        }
+        return payMethodCategoryListBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -10121,11 +9442,6 @@ java.lang.String defaultValue) {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ECRHubResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseInitData_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseInitData_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_PayMethodCategory_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -10160,40 +9476,38 @@ java.lang.String defaultValue) {
   static {
     java.lang.String[] descriptorData = {
       "\n\030ECRHubResponseData.proto\022 com.wiseasy." +
-      "ecr.hub.sdk.protobuf\"\276\002\n\016ECRHubResponse\022" +
+      "ecr.hub.sdk.protobuf\"\367\001\n\016ECRHubResponse\022" +
       "\r\n\005topic\030\001 \001(\t\022\022\n\nrequest_id\030\002 \001(\t\022\016\n\006ap" +
       "p_id\030\003 \001(\t\022\017\n\007success\030\004 \001(\010\022\021\n\terror_msg" +
       "\030\005 \001(\t\022C\n\010biz_data\030\006 \001(\01321.com.wiseasy.e" +
       "cr.hub.sdk.protobuf.ResponseBizData\022I\n\013d" +
       "evice_data\030\007 \001(\01324.com.wiseasy.ecr.hub.s" +
-      "dk.protobuf.ResponseDeviceData\022E\n\tinit_d" +
-      "ata\030\010 \001(\01322.com.wiseasy.ecr.hub.sdk.prot" +
-      "obuf.ResponseInitData\"i\n\020ResponseInitDat" +
-      "a\022U\n\030pay_method_category_list\030\001 \003(\01323.co" +
-      "m.wiseasy.ecr.hub.sdk.protobuf.PayMethod" +
-      "Category\"v\n\021PayMethodCategory\022\033\n\023pay_met" +
-      "hod_category\030\001 \001(\t\022D\n\017pay_method_list\030\002 " +
-      "\003(\0132+.com.wiseasy.ecr.hub.sdk.protobuf.P" +
-      "ayMethod\"^\n\tPayMethod\022\025\n\rpay_method_id\030\001" +
-      " \001(\t\022\027\n\017pay_method_name\030\002 \001(\t\022!\n\031support" +
-      "ed_trans_type_list\030\003 \003(\t\"c\n\022ResponseDevi" +
-      "ceData\022\023\n\013mac_address\030\001 \001(\t\022\020\n\010app_name\030" +
-      "\002 \001(\t\022\021\n\tdevice_sn\030\003 \001(\t\022\023\n\013app_version\030" +
-      "\004 \001(\t\"\370\003\n\017ResponseBizData\022\031\n\021merchant_or" +
-      "der_no\030\001 \001(\t\022\024\n\014order_amount\030\002 \001(\t\022\020\n\010tr" +
-      "ans_no\030\003 \001(\t\022\026\n\016price_currency\030\004 \001(\t\022\022\n\n" +
-      "trans_type\030\005 \001(\t\022\024\n\014pay_scenario\030\006 \001(\t\022\024" +
-      "\n\014trans_status\030\007 \001(\t\022\034\n\024pay_channel_tran" +
-      "s_no\030\010 \001(\t\022\026\n\016trans_end_time\030\t \001(\t\022\025\n\rpa" +
-      "y_method_id\030\n \001(\t\022\026\n\016discount_bmopc\030\013 \001(" +
-      "\t\022\024\n\014discount_bpc\030\014 \001(\t\022\\\n\016extends_param" +
-      "s\030\r \003(\0132D.com.wiseasy.ecr.hub.sdk.protob" +
-      "uf.ResponseBizData.ExtendsParamsEntry\022\016\n" +
-      "\006attach\030\016 \001(\t\022\027\n\017cashback_amount\030\017 \001(\t\022\022" +
-      "\n\ntip_amount\030\020 \001(\t\0324\n\022ExtendsParamsEntry" +
-      "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B7\n com." +
-      "wiseasy.ecr.hub.sdk.protobufB\023ECRHubResp" +
-      "onseProtob\006proto3"
+      "dk.protobuf.ResponseDeviceData\"v\n\021PayMet" +
+      "hodCategory\022\033\n\023pay_method_category\030\001 \001(\t" +
+      "\022D\n\017pay_method_list\030\002 \003(\0132+.com.wiseasy." +
+      "ecr.hub.sdk.protobuf.PayMethod\"^\n\tPayMet" +
+      "hod\022\025\n\rpay_method_id\030\001 \001(\t\022\027\n\017pay_method" +
+      "_name\030\002 \001(\t\022!\n\031supported_trans_type_list" +
+      "\030\003 \003(\t\"c\n\022ResponseDeviceData\022\023\n\013mac_addr" +
+      "ess\030\001 \001(\t\022\020\n\010app_name\030\002 \001(\t\022\021\n\tdevice_sn" +
+      "\030\003 \001(\t\022\023\n\013app_version\030\004 \001(\t\"\317\004\n\017Response" +
+      "BizData\022\031\n\021merchant_order_no\030\001 \001(\t\022\024\n\014or" +
+      "der_amount\030\002 \001(\t\022\020\n\010trans_no\030\003 \001(\t\022\026\n\016pr" +
+      "ice_currency\030\004 \001(\t\022\022\n\ntrans_type\030\005 \001(\t\022\024" +
+      "\n\014pay_scenario\030\006 \001(\t\022\024\n\014trans_status\030\007 \001" +
+      "(\t\022\034\n\024pay_channel_trans_no\030\010 \001(\t\022\026\n\016tran" +
+      "s_end_time\030\t \001(\t\022\025\n\rpay_method_id\030\n \001(\t\022" +
+      "\026\n\016discount_bmopc\030\013 \001(\t\022\024\n\014discount_bpc\030" +
+      "\014 \001(\t\022\\\n\016extends_params\030\r \003(\0132D.com.wise" +
+      "asy.ecr.hub.sdk.protobuf.ResponseBizData" +
+      ".ExtendsParamsEntry\022\016\n\006attach\030\016 \001(\t\022\027\n\017c" +
+      "ashback_amount\030\017 \001(\t\022\022\n\ntip_amount\030\020 \001(\t" +
+      "\022U\n\030pay_method_category_list\030\021 \003(\01323.com" +
+      ".wiseasy.ecr.hub.sdk.protobuf.PayMethodC" +
+      "ategory\0324\n\022ExtendsParamsEntry\022\013\n\003key\030\001 \001" +
+      "(\t\022\r\n\005value\030\002 \001(\t:\0028\001B7\n com.wiseasy.ecr" +
+      ".hub.sdk.protobufB\023ECRHubResponseProtob\006" +
+      "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -10204,37 +9518,31 @@ java.lang.String defaultValue) {
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ECRHubResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ECRHubResponse_descriptor,
-        new java.lang.String[] { "Topic", "RequestId", "AppId", "Success", "ErrorMsg", "BizData", "DeviceData", "InitData", });
-    internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseInitData_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseInitData_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseInitData_descriptor,
-        new java.lang.String[] { "PayMethodCategoryList", });
+        new java.lang.String[] { "Topic", "RequestId", "AppId", "Success", "ErrorMsg", "BizData", "DeviceData", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_PayMethodCategory_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_PayMethodCategory_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_PayMethodCategory_descriptor,
         new java.lang.String[] { "PayMethodCategory", "PayMethodList", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_PayMethod_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_PayMethod_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_PayMethod_descriptor,
         new java.lang.String[] { "PayMethodId", "PayMethodName", "SupportedTransTypeList", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseDeviceData_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseDeviceData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseDeviceData_descriptor,
         new java.lang.String[] { "MacAddress", "AppName", "DeviceSn", "AppVersion", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_descriptor,
-        new java.lang.String[] { "MerchantOrderNo", "OrderAmount", "TransNo", "PriceCurrency", "TransType", "PayScenario", "TransStatus", "PayChannelTransNo", "TransEndTime", "PayMethodId", "DiscountBmopc", "DiscountBpc", "ExtendsParams", "Attach", "CashbackAmount", "TipAmount", });
+        new java.lang.String[] { "MerchantOrderNo", "OrderAmount", "TransNo", "PriceCurrency", "TransType", "PayScenario", "TransStatus", "PayChannelTransNo", "TransEndTime", "PayMethodId", "DiscountBmopc", "DiscountBpc", "ExtendsParams", "Attach", "CashbackAmount", "TipAmount", "PayMethodCategoryList", });
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_ExtendsParamsEntry_descriptor =
       internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_descriptor.getNestedTypes().get(0);
     internal_static_com_wiseasy_ecr_hub_sdk_protobuf_ResponseBizData_ExtendsParamsEntry_fieldAccessorTable = new

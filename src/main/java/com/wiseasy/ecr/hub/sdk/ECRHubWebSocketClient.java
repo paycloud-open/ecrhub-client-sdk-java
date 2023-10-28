@@ -6,6 +6,7 @@ import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
+import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto;
 import com.wiseasy.ecr.hub.sdk.sp.websocket.WebSocketClientEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,19 +78,19 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
     }
 
     @Override
-    protected byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
+    protected ECRHubResponseProto.ECRHubResponse sendReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
         long timeout = getConfig().getSocketConfig().getConnTimeout();
 
         engine.send(new String(request.toByteArray()));
 
         String msg = engine.receive(request.getRequestId(), startTime, timeout);
-        return msg.getBytes(StandardCharsets.UTF_8);
+        return ECRHubProtobufHelper.unpack(msg.getBytes(StandardCharsets.UTF_8));
     }
 
     @Override
     protected <T extends ECRHubResponse> void sendReq(ECRHubRequest<T> request) throws ECRHubException {
-        byte[] msg = ECRHubProtobufHelper.pack(request);
-        engine.send(new String(msg));
+        byte[] buffer = ECRHubProtobufHelper.pack(request);
+        engine.send(new String(buffer));
     }
 
     @Override
@@ -98,6 +99,6 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
         long timeout = config.getSocketConfig().getReadTimeout();
 
         String msg = engine.receive(request.getRequest_id(), System.currentTimeMillis(), timeout);
-        return decodeRespPack(msg.getBytes(StandardCharsets.UTF_8), request.getResponseClass());
+        return buildResp(request.getResponseClass(), msg.getBytes(StandardCharsets.UTF_8));
     }
 }

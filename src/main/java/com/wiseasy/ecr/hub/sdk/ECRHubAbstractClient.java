@@ -13,6 +13,7 @@ import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData;
+import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData;
 import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
 
 import java.util.Optional;
@@ -31,15 +32,15 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
 
     @Override
     public <T extends ECRHubResponse> T execute(ECRHubRequest<T> request) throws ECRHubException {
+        autoConnect();
         sendReq(request);
-
         return getResp(request);
     }
 
     @Override
     public <T extends ECRHubResponse> void asyncExecute(ECRHubRequest<T> request, ECRHubResponseCallBack<T> callback) throws ECRHubException {
+        autoConnect();
         sendReq(request);
-
         ThreadUtil.execute(() -> {
             try {
                 callback.onResponse(getResp(request));
@@ -53,23 +54,25 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
         });
     }
 
-    protected abstract byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException;
+    protected void autoConnect() throws ECRHubException {
+    }
 
     protected abstract <T extends ECRHubResponse> void sendReq(ECRHubRequest<T> request) throws ECRHubException;
 
     protected abstract <T extends ECRHubResponse> T getResp(ECRHubRequest<T> request) throws ECRHubException;
 
+    protected abstract ECRHubResponseProto.ECRHubResponse sendReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException;
+
     protected ECRHubResponse pair(long startTime) throws ECRHubException {
-        byte[] pack = sendPairReq(buildPairRequest(), startTime);
-        ECRHubResponse response = decodeRespPack(pack, ECRHubResponse.class);
-        if (response.isSuccess()) {
-            return response;
-        } else {
+        ECRHubResponseProto.ECRHubResponse resp = sendReq(buildPairReq(), startTime);
+        ECRHubResponse response = buildResp(ECRHubResponse.class, resp);
+        if (!response.isSuccess()) {
             throw new ECRHubException(response.getError_msg());
         }
+        return response;
     }
 
-    protected ECRHubRequestProto.ECRHubRequest buildPairRequest() {
+    protected ECRHubRequestProto.ECRHubRequest buildPairReq() {
         String hostName = Optional.ofNullable(config.getHostName()).orElse(NetHelper.getLocalHostName());
         String aliasName = Optional.ofNullable(config.getAliasName()).orElse(hostName);
         String macAddress = NetHelper.getLocalMacAddress();
@@ -86,26 +89,28 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
                 .build();
     }
 
-    protected <T extends ECRHubResponse> T decodeRespPack(byte[] respPack, Class<T> respClass) throws ECRHubException {
-        if (respPack == null) {
+    protected <T extends ECRHubResponse> T buildResp(Class<T> respClass, byte[] respBuffer) throws ECRHubException {
+        if (respBuffer == null) {
             return null;
         } else {
-            ECRHubResponseProto.ECRHubResponse resp = ECRHubProtobufHelper.unpack(respPack);
-
-            ResponseDeviceData respDeviceData = resp.getDeviceData();
-            JSONObject deviceDataJson = ECRHubProtobufHelper.proto2Json(respDeviceData);
-            DeviceData deviceData = deviceDataJson.toJavaObject(DeviceData.class);
-
-            JSONObject respDataJson = ETopic.PAY_INIT.getVal().equals(resp.getTopic()) ?
-                                      ECRHubProtobufHelper.proto2Json(resp.getInitData()) :
-                                      ECRHubProtobufHelper.proto2Json(resp.getBizData());
-
-            T response = respDataJson.toJavaObject(respClass);
-            response.setRequest_id(resp.getRequestId());
-            response.setSuccess(resp.getSuccess());
-            response.setError_msg(resp.getErrorMsg());
-            response.setDevice_data(deviceData);
-            return response;
+            ECRHubResponseProto.ECRHubResponse resp = ECRHubProtobufHelper.unpack(respBuffer);
+            return buildResp(respClass, resp);
         }
+    }
+
+    protected <T extends ECRHubResponse> T buildResp(Class<T> respClass, ECRHubResponseProto.ECRHubResponse resp) throws ECRHubException {
+        ResponseDeviceData respDeviceData = resp.getDeviceData();
+        JSONObject deviceDataJson = ECRHubProtobufHelper.proto2Json(respDeviceData);
+        DeviceData deviceData = deviceDataJson.toJavaObject(DeviceData.class);
+
+        ResponseBizData respBizData = resp.getBizData();
+        JSONObject respDataJson = ECRHubProtobufHelper.proto2Json(respBizData);
+
+        T response = respDataJson.toJavaObject(respClass);
+        response.setRequest_id(resp.getRequestId());
+        response.setSuccess(resp.getSuccess());
+        response.setError_msg(resp.getErrorMsg());
+        response.setDevice_data(deviceData);
+        return response;
     }
 }

@@ -31,138 +31,75 @@ public class SerialPortEngine {
 
     private static final Logger log = LoggerFactory.getLogger(SerialPortEngine.class);
 
-    private final FIFOCache<String, byte[]> MSG_CACHE = new FIFOCache<>(50, 10 * 60 * 1000);
     private final Lock lock = new ReentrantLock();
     private final SerialPortConfig config;
     private final SerialPort serialPort;
     private final String serialPortName;
     private final Map<Byte, Integer> ackMap;
+    private final FIFOCache<String, byte[]> msgCache;
     private ScheduledExecutorService scheduled;
     private volatile boolean handshakeConfirm;
     private volatile boolean recvHeartbeat;
+    private volatile boolean hasHeartbeat;
     private volatile boolean isRunning;
 
     public SerialPortEngine(String portName, SerialPortConfig config) throws ECRHubException {
         this.config = config;
-        this.serialPort = getSerialPort(portName);
+        this.serialPort = SerialPortHelper.getSerialPort(portName, config.getPortNameKeyword());
         this.serialPortName = serialPort.getSystemPortName();
         this.ackMap = new ConcurrentHashMap<>();
-    }
-
-    private SerialPort getSerialPort(String portName) throws ECRHubException {
-        if (StrUtil.isNotBlank(portName)) {
-            // Specify the serial port name
-            try {
-                return SerialPort.getCommPort(portName);
-            } catch (Exception e) {
-                log.error("Serial port[{}] is invalid.", portName);
-                throw new ECRHubException(e);
-            }
-        } else {
-            // No serial port name specified, automatic search for serial port
-            SerialPort port = findSerialPort(config.getPortNameKeyword());
-            if (port != null) {
-                return port;
-            } else {
-                throw new ECRHubException("Serial port not found, please check the USB cable is connected or POS terminal cashier App is launched");
-            }
-        }
-    }
-
-    private SerialPort findSerialPort(String portNameKeyword) {
-        for (SerialPort port : SerialPort.getCommPorts()) {
-            String portName = port.getDescriptivePortName();
-            if (StrUtil.contains(portName, portNameKeyword)) {
-                return port;
-            }
-        }
-        return null;
+        this.msgCache = new FIFOCache<>(50, 10 * 60 * 1000);
     }
 
     public void connect(long startTime) throws ECRHubException {
         lock.lock();
         try {
-            // Open serial port
-            open();
-
-            // Add data listener
-            serialPort.addDataListener(new ReadDataListener());
-
-            // Handshake
-            handshakeConfirm = false;
-            handshake(startTime);
+            doConnect(startTime);
+            startWorkThread();
             isRunning = true;
-
-            // Start HeartBeat
-            if (scheduled == null) {
-                scheduled = ThreadUtil.createScheduledExecutor(2);
-                scheduled.scheduleAtFixedRate(new SendHeartbeatThread(), 0, 2, TimeUnit.SECONDS);
-                scheduled.scheduleAtFixedRate(new CheckHeartbeatThread(), 30, 30, TimeUnit.SECONDS);
-            }
         } finally {
             lock.unlock();
         }
     }
 
-    private void open() throws ECRHubException {
-        if (!serialPort.isOpen()) {
-            log.info("Serial port[{}] opening...", serialPortName);
-            boolean success = serialPort.openPort(10);
-            if (success) {
-                serialPort.setComPortParameters(config.getBaudRate(), config.getDataBits(), config.getStopBits(), config.getParity());
-                serialPort.setComPortTimeouts(config.getTimeoutMode(), config.getReadTimeout(), config.getWriteTimeout());
-                log.info("Serial port[{}] open successful", serialPortName);
-            } else {
-                log.error("Serial port[{}] open failed", serialPortName);
-                throw new ECRHubException("Serial port["+ serialPortName +"] open failed");
-            }
+    private void doConnect(long startTime) throws ECRHubException {
+        if (!isOpen()) {
+            // Open serial port
+            open();
+            // Handshake connect
+            new HandshakeHandler().handshake(startTime);
         }
     }
 
-    private void handshake(long startTime) throws ECRHubException {
-        log.info("Serial port[{}] handshake connecting...", serialPortName);
-        byte[] byteMsg = new SerialPortMessage.HandshakeMessage().encode();
-        while (true) {
-            if (doHandshake(byteMsg)) {
-                log.info("Serial port[{}] handshake connection successful", serialPortName);
-                break;
-            } else {
-                ThreadUtil.safeSleep(10);
-                if (System.currentTimeMillis() - startTime > config.getConnTimeout()) {
-                    this.close();
-                    log.error("Serial port[{}] handshake connection failed", serialPortName);
-                    throw new ECRHubTimeoutException("Serial port["+ serialPortName +"] handshake connection timeout");
-                }
-            }
+    private void startWorkThread() {
+        if (scheduled == null) {
+            scheduled = ThreadUtil.createScheduledExecutor(2);
+            scheduled.scheduleAtFixedRate(new SendHeartbeatThread(), 0, 1, TimeUnit.SECONDS);
+            scheduled.scheduleAtFixedRate(new CheckHeartbeatThread(), 2, 2, TimeUnit.SECONDS);
         }
     }
 
-    private boolean doHandshake(byte[] byteMsg) throws ECRHubException {
-        // send handshake message
-        try {
-            write(byteMsg, config.getWriteTimeout(), TimeUnit.MILLISECONDS);
-        } catch (ECRHubException e) {
-            log.error("Serial port[{}] handshake connection failed, {}", serialPortName, e.getMessage());
-            this.close();
-            throw e;
-        }
-        // read handshake confirm message
-        long startTime = System.currentTimeMillis();
-        while (!handshakeConfirm) {
-            ThreadUtil.safeSleep(5);
-            if (System.currentTimeMillis() - startTime > 1000) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isOpen() {
+    private boolean isOpen() {
         return serialPort.isOpen();
     }
 
-    public boolean close() {
-        if (!serialPort.isOpen()) {
+    private void open() throws ECRHubException {
+        log.info("Serial port[{}] opening...", serialPortName);
+        boolean success = serialPort.openPort(10);
+        if (success) {
+            serialPort.setComPortParameters(config.getBaudRate(), config.getDataBits(), config.getStopBits(), config.getParity());
+            serialPort.setComPortTimeouts(config.getTimeoutMode(), config.getReadTimeout(), config.getWriteTimeout());
+            // Add data listener
+            serialPort.addDataListener(new ReadDataListener());
+            log.info("Serial port[{}] open successful", serialPortName);
+        } else {
+            log.error("Serial port[{}] open failed", serialPortName);
+            throw new ECRHubException("Serial port[" + serialPortName + "] open failed");
+        }
+    }
+
+    private boolean close() {
+        if (!isOpen()) {
             return true;
         } else {
             serialPort.removeDataListener();
@@ -170,6 +107,14 @@ public class SerialPortEngine {
             log.info("Close the serial port[{}]", serialPortName);
             return isClosed;
         }
+    }
+
+    public boolean hasHeartbeat() {
+        return hasHeartbeat;
+    }
+
+    public boolean isConnected() {
+        return isOpen() && handshakeConfirm;
     }
 
     public boolean disconnect() {
@@ -183,6 +128,7 @@ public class SerialPortEngine {
             ackMap.clear();
             handshakeConfirm = false;
             recvHeartbeat = false;
+            hasHeartbeat = false;
             isRunning = false;
             return close();
         }
@@ -229,9 +175,9 @@ public class SerialPortEngine {
     public byte[] read(String requestId, long startTime, long timeout) throws ECRHubException {
         byte[] buffer = new byte[0];
         while (isRunning) {
-            byte[] msg = MSG_CACHE.get(requestId);
+            byte[] msg = msgCache.get(requestId);
             if (ArrayUtil.isNotEmpty(msg)) {
-                MSG_CACHE.remove(requestId);
+                msgCache.remove(requestId);
                 buffer = msg;
                 break;
             } else {
@@ -244,18 +190,54 @@ public class SerialPortEngine {
         return buffer;
     }
 
-    private class SendHeartbeatThread implements Runnable {
-        private final byte[] byteMsg;
-        private final String hexMsg;
+    private class HandshakeHandler {
+        private final byte[] byteMsg = new SerialPortMessage.HandshakeMessage().encode();
 
-        private SendHeartbeatThread() {
-            this.byteMsg = new SerialPortMessage.HeartbeatMessage().encode();
-            this.hexMsg = HexUtil.byte2hex(byteMsg);
+        private void handshake(long startTime) throws ECRHubException {
+            log.info("Serial port[{}] handshake connecting...", serialPortName);
+            while (true) {
+                if (doHandshake()) {
+                    log.info("Serial port[{}] handshake connection successful", serialPortName);
+                    break;
+                } else {
+                    ThreadUtil.safeSleep(10);
+                    if (System.currentTimeMillis() - startTime > config.getConnTimeout()) {
+                        SerialPortEngine.this.close();
+                        log.error("Serial port[{}] handshake connection failed", serialPortName);
+                        throw new ECRHubTimeoutException("Serial port["+ serialPortName +"] handshake connection timeout");
+                    }
+                }
+            }
         }
+
+        private boolean doHandshake() throws ECRHubException {
+            // Send handshake message
+            try {
+                write(byteMsg, config.getWriteTimeout(), TimeUnit.MILLISECONDS);
+            } catch (ECRHubException e) {
+                log.error("Serial port[{}] handshake connection failed, {}", serialPortName, e.getMessage());
+                SerialPortEngine.this.close();
+                throw e;
+            }
+            // Read handshake confirm message
+            long startTime = System.currentTimeMillis();
+            while (!handshakeConfirm) {
+                ThreadUtil.safeSleep(5);
+                if (System.currentTimeMillis() - startTime > 1000) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    private class SendHeartbeatThread implements Runnable {
+        private final byte[] byteMsg = new SerialPortMessage.HeartbeatMessage().encode();
+        private final String hexMsg = HexUtil.byte2hex(byteMsg);
 
         @Override
         public void run() {
-            if (isOpen() && handshakeConfirm) {
+            if (isConnected()) {
                 try {
                     write(byteMsg, 1, TimeUnit.SECONDS);
                     log.debug("Send heartbeat message:{}", hexMsg);
@@ -266,26 +248,14 @@ public class SerialPortEngine {
         }
     }
 
-    public class CheckHeartbeatThread implements Runnable {
+    private class CheckHeartbeatThread implements Runnable {
         @Override
         public void run() {
             if (recvHeartbeat) {
                 recvHeartbeat = false;
+                hasHeartbeat = true;
             } else {
-                reconnect();
-            }
-        }
-
-        private void reconnect() {
-            log.info("Not received heartbeat message from POS terminal cashier App, trying to reconnect");
-            lock.lock();
-            try {
-                close();
-                connect(System.currentTimeMillis());
-            } catch (Exception e) {
-                // do nothing
-            } finally {
-                lock.unlock();
+                hasHeartbeat = false;
             }
         }
     }
@@ -370,19 +340,19 @@ public class SerialPortEngine {
             if (data == null || data.length == 0) {
                 return;
             }
-            ECRHubResponseProto.ECRHubResponse respProto = null;
+            ECRHubResponseProto.ECRHubResponse response = null;
             try {
-                respProto = ECRHubProtobufHelper.unpack(data);
+                response = ECRHubProtobufHelper.unpack(data);
             } catch (Exception e) {
                 log.warn(e.getMessage(), e);
             }
-            if (respProto == null) {
+            if (response == null) {
                 return;
             }
-            String requestId = respProto.getRequestId();
+            String requestId = response.getRequestId();
             if (StrUtil.isNotBlank(requestId) && !requestId.equals(lastReceivedRequestId)) {
                 lastReceivedRequestId = requestId;
-                MSG_CACHE.put(requestId, data);
+                msgCache.put(requestId, data);
             }
         }
     }

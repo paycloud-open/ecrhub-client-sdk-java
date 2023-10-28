@@ -5,6 +5,7 @@ import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
+import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto;
 import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +53,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     public boolean isConnected() throws ECRHubException {
         lock.lock();
         try {
-            return engine.isOpen();
+            return engine.isConnected() && engine.hasHeartbeat();
         } finally {
             lock.unlock();
         }
@@ -63,38 +64,42 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         lock.lock();
         try {
             log.info("Serial port disconnecting...");
-
             boolean success = engine.disconnect();
             if (success) {
                 log.info("Serial port disconnect successful");
             }
-
             return success;
         } finally {
             lock.unlock();
         }
     }
 
-    private void autoConnect() throws ECRHubException {
-        if (!isConnected()) {
-            boolean success = connect();
-            if (!success) {
-                throw new ECRHubException("Serial port is not connected");
+    @Override
+    protected void autoConnect() throws ECRHubException {
+        if (engine.isConnected()) {
+            if (!engine.hasHeartbeat()) {
+                throw new ECRHubException("Serial port is not connected, " +
+                        "please check the USB cable is connected and POS terminal cashier App is launched");
+            }
+        } else {
+            if (!this.connect()) {
+                throw new ECRHubException("Serial port connection failed");
             }
         }
     }
 
     @Override
-    protected byte[] sendPairReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
+    protected ECRHubResponseProto.ECRHubResponse sendReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
         long timeout = getConfig().getSerialPortConfig().getConnTimeout();
+
         engine.write(request.toByteArray(), startTime, timeout);
-        return engine.read(request.getRequestId(), startTime, timeout);
+
+        byte[] buffer = engine.read(request.getRequestId(), startTime, timeout);
+        return ECRHubProtobufHelper.unpack(buffer);
     }
 
     @Override
     protected <T extends ECRHubResponse> void sendReq(ECRHubRequest<T> request) throws ECRHubException {
-        autoConnect();
-
         ECRHubConfig config = Optional.ofNullable(request.getConfig()).orElse(super.getConfig());
         long timeout = config.getSerialPortConfig().getWriteTimeout();
 
@@ -108,6 +113,6 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         long timeout = config.getSerialPortConfig().getReadTimeout();
 
         byte[] buffer = engine.read(request.getRequest_id(), System.currentTimeMillis(), timeout);
-        return decodeRespPack(buffer, request.getResponseClass());
+        return buildResp(request.getResponseClass(), buffer);
     }
 }
