@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -31,6 +32,12 @@ public class SerialPortEngine {
 
     private static final Logger log = LoggerFactory.getLogger(SerialPortEngine.class);
 
+    private static final long SEND_HEART_INTERVAL = 1000;
+    private static final long CHECK_HEART_INTERVAL = 1500;
+    private static final long CHECK_CONN_INTERVAL = 30 * 1000;
+    private static final long MAX_RECONN_TIMES = 5;
+    private final AtomicInteger reconnectTimes = new AtomicInteger();
+
     private final Lock lock = new ReentrantLock();
     private final SerialPortConfig config;
     private final SerialPort serialPort;
@@ -39,7 +46,7 @@ public class SerialPortEngine {
     private final FIFOCache<String, byte[]> msgCache;
     private ScheduledExecutorService scheduled;
     private volatile boolean isConnected;
-    private volatile boolean isReceivedHeartbeat;
+    private volatile long lastReceivedHeartbeatTime;
     private volatile boolean isInHeartbeat;
     private volatile boolean isWorking;
 
@@ -68,14 +75,17 @@ public class SerialPortEngine {
             open();
             // Handshake connect
             new HandshakeHandler().handshake(startTime);
+            // Set reconnection times as 0
+            reconnectTimes.set(0);
         }
     }
 
     private void startWorkThread() {
         if (scheduled == null) {
-            scheduled = ThreadUtil.createScheduledExecutor(2);
-            scheduled.scheduleAtFixedRate(new SendHeartbeatThread(), 0, 1000, TimeUnit.MILLISECONDS);
-            scheduled.scheduleAtFixedRate(new CheckHeartbeatThread(), 0, 1500, TimeUnit.MILLISECONDS);
+            scheduled = ThreadUtil.createScheduledExecutor(3);
+            scheduled.scheduleAtFixedRate(new SendHeartbeatThread(), 0, SEND_HEART_INTERVAL, TimeUnit.MILLISECONDS);
+            scheduled.scheduleAtFixedRate(new CheckHeartbeatThread(), 0, CHECK_HEART_INTERVAL, TimeUnit.MILLISECONDS);
+            scheduled.scheduleAtFixedRate(new CheckConnectThread(), CHECK_CONN_INTERVAL, CHECK_CONN_INTERVAL, TimeUnit.MILLISECONDS);
         }
     }
 
@@ -102,10 +112,11 @@ public class SerialPortEngine {
         if (!isOpen()) {
             return true;
         } else {
-            serialPort.removeDataListener();
-            boolean isClosed = serialPort.closePort();
             log.info("Close the serial port[{}]", serialPortName);
-            return isClosed;
+            isConnected = false;
+            isInHeartbeat = false;
+            serialPort.removeDataListener();
+            return serialPort.closePort();
         }
     }
 
@@ -126,9 +137,6 @@ public class SerialPortEngine {
                 scheduled = null;
             }
             ackMap.clear();
-            isConnected = false;
-            isReceivedHeartbeat = false;
-            isInHeartbeat = false;
             isWorking = false;
             return close();
         }
@@ -251,13 +259,43 @@ public class SerialPortEngine {
     }
 
     private class CheckHeartbeatThread implements Runnable {
+
+        private static final long HEARTBEAT_TIME = 1000;
+
         @Override
         public void run() {
-            if (isReceivedHeartbeat) {
-                isReceivedHeartbeat = false;
-                isInHeartbeat = true;
-            } else {
-                isInHeartbeat = false;
+            long nowTime = System.currentTimeMillis();
+            long intervalTime = nowTime - lastReceivedHeartbeatTime;
+            isInHeartbeat = (intervalTime < HEARTBEAT_TIME);
+        }
+    }
+
+    private class CheckConnectThread implements Runnable {
+
+        private static final long KEEPALIVE_TIME = 30 * 1000;
+
+        @Override
+        public void run() {
+            long nowTime = System.currentTimeMillis();
+            long intervalTime = nowTime - lastReceivedHeartbeatTime;
+            if (intervalTime < KEEPALIVE_TIME) {
+                return;
+            }
+            if (reconnectTimes.get() < MAX_RECONN_TIMES) {
+                log.info("Not received heartbeat message from POS terminal cashier App, trying to reconnect");
+                reconnect();
+                reconnectTimes.incrementAndGet();
+            }
+        }
+
+        private void reconnect() {
+            try {
+                // Close serial port
+                close();
+                // Connect
+                connect(System.currentTimeMillis());
+            } catch (Exception e) {
+                // do nothing
             }
         }
     }
@@ -308,13 +346,13 @@ public class SerialPortEngine {
             if (0x00 == messageAck && 0x00 == messageId) {
                 // Heartbeat packet
                 log.debug("Received heartbeat message:{}", hexMsg);
-                SerialPortEngine.this.isReceivedHeartbeat = true;
+                lastReceivedHeartbeatTime = System.currentTimeMillis();
             } else {
                 // ACK packet
                 if (0x00 != messageAck) {
                     log.info("Received ack message:{}", hexMsg);
                     // Remove Sent Times
-                    SerialPortEngine.this.ackMap.remove(messageAck);
+                    ackMap.remove(messageAck);
                 }
                 // Common packet
                 if (0x00 != messageId) {
