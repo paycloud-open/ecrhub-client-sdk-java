@@ -10,6 +10,7 @@ import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Base64;
 import java.util.Optional;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -92,10 +93,11 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     protected ECRHubResponseProto.ECRHubResponse sendReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
         long timeout = getConfig().getSerialPortConfig().getConnTimeout();
 
-        engine.write(request.toByteArray(), startTime, timeout);
+        byte[] sendBuffer = Base64.getEncoder().encode(request.toByteArray());
+        engine.write(sendBuffer, startTime, timeout);
 
-        byte[] buffer = engine.read(request.getRequestId(), startTime, timeout);
-        return ECRHubProtobufHelper.unpack(buffer);
+        byte[] readBuffer = engine.read(request.getRequestId(), startTime, timeout);
+        return ECRHubProtobufHelper.unpack(readBuffer);
     }
 
     @Override
