@@ -33,10 +33,10 @@ public class SerialPortEngine {
     private static final Logger log = LoggerFactory.getLogger(SerialPortEngine.class);
 
     private static final long SEND_HEART_INTERVAL = 1000;
-    private static final long CHECK_HEART_INTERVAL = 1500;
-    private static final long CHECK_CONN_INTERVAL = 30 * 1000;
+    private static final long CHECK_HEART_INTERVAL = 30 * 1000;
+    private static final long HEART_TIMEOUT = 2000;
+    private static final long CONN_KEEPALIVE_TIMEOUT = 30 * 1000;
     private static final long MAX_RECONN_TIMES = 5;
-    private final AtomicInteger reconnectTimes = new AtomicInteger();
 
     private final Lock lock = new ReentrantLock();
     private final SerialPortConfig config;
@@ -44,10 +44,10 @@ public class SerialPortEngine {
     private final String serialPortName;
     private final Map<Byte, Integer> ackMap;
     private final FIFOCache<String, byte[]> msgCache;
-    private ScheduledExecutorService scheduled;
+    private final AtomicInteger reconnectTimes;
+    private ScheduledExecutorService scheduledExecutor;
+    private volatile long lastReceivedHeartTime;
     private volatile boolean isConnected;
-    private volatile long lastReceivedHeartbeatTime;
-    private volatile boolean isInHeartbeat;
     private volatile boolean isWorking;
 
     public SerialPortEngine(String portName, SerialPortConfig config) throws ECRHubException {
@@ -56,13 +56,14 @@ public class SerialPortEngine {
         this.serialPortName = serialPort.getSystemPortName();
         this.ackMap = new ConcurrentHashMap<>();
         this.msgCache = new FIFOCache<>(50, 10 * 60 * 1000);
+        this.reconnectTimes = new AtomicInteger();
     }
 
     public void connect(long startTime) throws ECRHubException {
         lock.lock();
         try {
             doConnect(startTime);
-            startWorkThread();
+            startScheduledTask();
             isWorking = true;
         } finally {
             lock.unlock();
@@ -75,17 +76,25 @@ public class SerialPortEngine {
             open();
             // Handshake connect
             new HandshakeHandler().handshake(startTime);
-            // Set reconnection times as 0
+            // Refresh last received heart time
+            refreshLastReceivedHeartTime();
+            // Reset the reconnection times is zero
             reconnectTimes.set(0);
         }
     }
 
-    private void startWorkThread() {
-        if (scheduled == null) {
-            scheduled = ThreadUtil.createScheduledExecutor(3);
-            scheduled.scheduleAtFixedRate(new SendHeartbeatThread(), 0, SEND_HEART_INTERVAL, TimeUnit.MILLISECONDS);
-            scheduled.scheduleAtFixedRate(new CheckHeartbeatThread(), 0, CHECK_HEART_INTERVAL, TimeUnit.MILLISECONDS);
-            scheduled.scheduleAtFixedRate(new CheckConnectThread(), CHECK_CONN_INTERVAL, CHECK_CONN_INTERVAL, TimeUnit.MILLISECONDS);
+    private void startScheduledTask() {
+        if (scheduledExecutor == null) {
+            scheduledExecutor = ThreadUtil.createScheduledExecutor(2);
+            scheduledExecutor.scheduleAtFixedRate(new SendHeartbeatThread(), 0, SEND_HEART_INTERVAL, TimeUnit.MILLISECONDS);
+            scheduledExecutor.scheduleAtFixedRate(new CheckHeartbeatThread(), CHECK_HEART_INTERVAL, CHECK_HEART_INTERVAL, TimeUnit.MILLISECONDS);
+        }
+    }
+
+    private void shutdownScheduledTask() {
+        if (scheduledExecutor != null && !scheduledExecutor.isShutdown()) {
+            scheduledExecutor.shutdown();
+            scheduledExecutor = null;
         }
     }
 
@@ -112,16 +121,22 @@ public class SerialPortEngine {
         if (!isOpen()) {
             return true;
         } else {
-            log.info("Close the serial port[{}]", serialPortName);
             isConnected = false;
-            isInHeartbeat = false;
             serialPort.removeDataListener();
-            return serialPort.closePort();
+            boolean isClosed = serialPort.closePort();
+            log.info("Close the serial port[{}]", serialPortName);
+            return isClosed;
         }
     }
 
-    public boolean isInHeartbeat() {
-        return isInHeartbeat;
+    public void refreshLastReceivedHeartTime() {
+        this.lastReceivedHeartTime = System.currentTimeMillis();
+    }
+
+    public boolean isReceivedHeart() {
+        long nowTime = System.currentTimeMillis();
+        long intervalTime = nowTime - lastReceivedHeartTime;
+        return intervalTime > HEART_TIMEOUT;
     }
 
     public boolean isConnected() {
@@ -132,10 +147,7 @@ public class SerialPortEngine {
         if (!isWorking) {
             return true;
         } else {
-            if (scheduled != null && !scheduled.isShutdown()) {
-                scheduled.shutdown();
-                scheduled = null;
-            }
+            shutdownScheduledTask();
             ackMap.clear();
             isWorking = false;
             return close();
@@ -248,54 +260,43 @@ public class SerialPortEngine {
         @Override
         public void run() {
             if (isConnected()) {
-                try {
-                    write(byteMsg, 1, TimeUnit.SECONDS);
-                    log.debug("Send heartbeat message:{}", hexMsg);
-                } catch (Exception e) {
-                    // do nothing
-                }
+                sendHeartbeat();
+            }
+        }
+
+        private void sendHeartbeat() {
+            try {
+                write(byteMsg, 1, TimeUnit.SECONDS);
+                log.debug("Send heartbeat message:{}", hexMsg);
+            } catch (Exception e) {
+                // do nothing
             }
         }
     }
 
     private class CheckHeartbeatThread implements Runnable {
 
-        private static final long HEARTBEAT_TIME = 1000;
-
         @Override
         public void run() {
             long nowTime = System.currentTimeMillis();
-            long intervalTime = nowTime - lastReceivedHeartbeatTime;
-            isInHeartbeat = (intervalTime < HEARTBEAT_TIME);
-        }
-    }
-
-    private class CheckConnectThread implements Runnable {
-
-        private static final long KEEPALIVE_TIME = 30 * 1000;
-
-        @Override
-        public void run() {
-            long nowTime = System.currentTimeMillis();
-            long intervalTime = nowTime - lastReceivedHeartbeatTime;
-            if (intervalTime < KEEPALIVE_TIME) {
+            long intervalTime = nowTime - lastReceivedHeartTime;
+            if (intervalTime < CONN_KEEPALIVE_TIMEOUT) {
                 return;
             }
             if (reconnectTimes.get() < MAX_RECONN_TIMES) {
-                log.info("Not received heartbeat message from POS terminal cashier App, trying to reconnect");
+                log.info("Not received heartbeat message from POS terminal cashier App, try to reconnect");
                 reconnect();
                 reconnectTimes.incrementAndGet();
             }
         }
 
-        private void reconnect() {
+        private boolean reconnect() {
             try {
-                // Close serial port
                 close();
-                // Connect
                 connect(System.currentTimeMillis());
+                return true;
             } catch (Exception e) {
-                // do nothing
+                return false;
             }
         }
     }
@@ -344,11 +345,11 @@ public class SerialPortEngine {
             byte messageAck = message.getMessageAck();
             byte messageId = message.getMessageId();
             if (0x00 == messageAck && 0x00 == messageId) {
-                // Heartbeat packet
+                // Heartbeat message
                 log.debug("Received heartbeat message:{}", hexMsg);
-                lastReceivedHeartbeatTime = System.currentTimeMillis();
+                refreshLastReceivedHeartTime();
             } else {
-                // ACK packet
+                // ACK message
                 if (0x00 != messageAck) {
                     log.info("Received ack message:{}", hexMsg);
                     // Remove Sent Times
@@ -356,9 +357,9 @@ public class SerialPortEngine {
                 }
                 // Common packet
                 if (0x00 != messageId) {
-                    // Data packet
+                    // Data message
                     log.info("Received data message:{}", hexMsg);
-                    // Send data ACK packet
+                    // Send data ACK message
                     sendAck(messageId);
                     // Cache data
                     putCache(message.getMessageData());

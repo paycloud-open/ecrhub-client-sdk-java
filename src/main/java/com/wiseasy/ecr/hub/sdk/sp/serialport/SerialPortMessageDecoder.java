@@ -28,23 +28,24 @@ public class SerialPortMessageDecoder {
         Set<String> messageList = new LinkedHashSet<>();
         while (StrUtil.isNotBlank(messagee)) {
             if (messagee.startsWith(SerialPortMessage.MESSAGE_STX)) {
-                // Start with HEAD
-                int tailIndex = messagee.indexOf(SerialPortMessage.MESSAGE_ETX);
-                if (tailIndex == -1) {
+                // Start with STX
+                int stxAndEtxIndex = messagee.indexOf(SerialPortMessage.MESSAGE_ETX + SerialPortMessage.MESSAGE_STX);
+                int etxIndex = (stxAndEtxIndex != -1 ? stxAndEtxIndex : messagee.indexOf(SerialPortMessage.MESSAGE_ETX));
+                if (etxIndex == -1) {
                     lastRemainingBuffer.append(messagee);
                     break;
                 }
-                String validMessage = StrUtil.subPre(messagee, tailIndex + SerialPortMessage.MESSAGE_ETX.length());
+                String validMessage = StrUtil.subPre(messagee, etxIndex + SerialPortMessage.MESSAGE_ETX.length());
                 messageList.add(validMessage);
                 messagee = StrUtil.removePrefix(messagee, validMessage);
             } else {
-                // Not start with HEAD
-                int headIndex = messagee.indexOf(SerialPortMessage.MESSAGE_STX);
-                if (headIndex == -1) {
+                // Not start with STX
+                int stxIndex = messagee.indexOf(SerialPortMessage.MESSAGE_STX);
+                if (stxIndex == -1) {
                     break;
                 }
                 // Remove invalid message
-                String invalidMessage = StrUtil.subPre(messagee, headIndex);
+                String invalidMessage = StrUtil.subPre(messagee, stxIndex);
                 messagee = StrUtil.removePrefix(messagee, invalidMessage);
             }
         }
