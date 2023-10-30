@@ -34,9 +34,7 @@ public class SerialPortEngine {
 
     private static final long SEND_HEART_INTERVAL = 1000;
     private static final long CHECK_HEART_INTERVAL = 30 * 1000;
-    private static final long HEART_TIMEOUT = 2000;
-    private static final long CONN_KEEPALIVE_TIMEOUT = 30 * 1000;
-    private static final long MAX_RECONN_TIMES = 5;
+    private static final long HEART_TIMEOUT = 1500;
 
     private final Lock lock = new ReentrantLock();
     private final SerialPortConfig config;
@@ -275,6 +273,9 @@ public class SerialPortEngine {
     }
 
     private class CheckHeartbeatThread implements Runnable {
+
+        private static final long CONN_KEEPALIVE_TIMEOUT = 30 * 1000;
+        private static final long MAX_RECONN_TIMES = 5;
 
         @Override
         public void run() {
