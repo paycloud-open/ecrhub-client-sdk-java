@@ -185,6 +185,10 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
         return trans_type;
     }
 
+    public void setTrans_type(String trans_type) {
+        this.trans_type = trans_type;
+    }
+
     public String getPay_method_category() {
         return pay_method_category;
     }
