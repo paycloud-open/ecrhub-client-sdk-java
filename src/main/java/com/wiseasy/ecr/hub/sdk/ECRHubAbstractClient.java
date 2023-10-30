@@ -16,6 +16,7 @@ import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData;
 import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
 
+import java.util.Base64;
 import java.util.Optional;
 
 public abstract class ECRHubAbstractClient implements ECRHubClient {
