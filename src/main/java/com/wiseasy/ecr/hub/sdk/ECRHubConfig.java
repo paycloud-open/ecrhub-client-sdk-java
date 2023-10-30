@@ -105,7 +105,7 @@ public class ECRHubConfig {
         /**
          * Connection timeout (milliseconds)
          */
-        private int connTimeout = 30 * 1000;
+        private int connTimeout = 10 * 1000;
 
         public String getPortNameKeyword() {
             return portNameKeyword;
