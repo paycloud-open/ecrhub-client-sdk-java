@@ -29,7 +29,16 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     @Override
     public boolean connect() throws ECRHubException {
-        return connect2().isSuccess();
+        long startTime = System.currentTimeMillis();
+        lock.lock();
+        try {
+            log.info("Serial port connecting...");
+            engine.connect(startTime);
+            log.info("Serial port connection successful");
+            return true;
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
@@ -38,12 +47,11 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         lock.lock();
         try {
             log.info("Serial port connecting...");
-
             engine.connect(startTime);
             ECRHubResponse response = pair(startTime);
-
-            log.info("Serial port connection successful");
-
+            if (response.isSuccess()) {
+                log.info("Serial port connection successful");
+            }
             return response;
         } finally {
             lock.unlock();
