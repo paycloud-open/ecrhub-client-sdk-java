@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
@@ -81,7 +82,7 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
     protected ECRHubResponseProto.ECRHubResponse sendReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
         long timeout = getConfig().getSocketConfig().getConnTimeout();
 
-        engine.send(new String(request.toByteArray()));
+        engine.send(new String(Base64.getEncoder().encode(request.toByteArray())));
 
         String msg = engine.receive(request.getRequestId(), startTime, timeout);
         return ECRHubProtobufHelper.unpack(msg.getBytes(StandardCharsets.UTF_8));
