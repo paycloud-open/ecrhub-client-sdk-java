@@ -7,19 +7,12 @@ import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto;
 import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortEngine;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Base64;
 import java.util.Optional;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
-    private static final Logger log = LoggerFactory.getLogger(ECRHubSerialPortClient.class);
-
-    private final Lock lock = new ReentrantLock();
     private final SerialPortEngine engine;
 
     public ECRHubSerialPortClient(String port, ECRHubConfig config) throws ECRHubException {
@@ -30,57 +23,26 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     @Override
     public boolean connect() throws ECRHubException {
         long startTime = System.currentTimeMillis();
-        lock.lock();
-        try {
-            log.info("Serial port connecting...");
-            engine.connect(startTime);
-            log.info("Serial port connection successful");
-            return true;
-        } finally {
-            lock.unlock();
-        }
+        engine.connect(startTime);
+        return true;
     }
 
     @Override
     public ECRHubResponse connect2() throws ECRHubException {
         long startTime = System.currentTimeMillis();
-        lock.lock();
-        try {
-            log.info("Serial port connecting...");
-            engine.connect(startTime);
-            ECRHubResponse response = pair(startTime);
-            if (response.isSuccess()) {
-                log.info("Serial port connection successful");
-            }
-            return response;
-        } finally {
-            lock.unlock();
-        }
+        engine.connect(startTime);
+        return pair(startTime);
     }
 
     @Override
     public boolean isConnected() throws ECRHubException {
-        lock.lock();
-        try {
-            return engine.isConnected() && engine.isReceivedHeart();
-        } finally {
-            lock.unlock();
-        }
+        return engine.isConnected() && engine.isReceivedHeart();
     }
 
     @Override
     public boolean disconnect() throws ECRHubException {
-        lock.lock();
-        try {
-            log.info("Serial port disconnecting...");
-            boolean success = engine.disconnect();
-            if (success) {
-                log.info("Serial port disconnect successful");
-            }
-            return success;
-        } finally {
-            lock.unlock();
-        }
+         engine.disconnect();
+         return true;
     }
 
     @Override

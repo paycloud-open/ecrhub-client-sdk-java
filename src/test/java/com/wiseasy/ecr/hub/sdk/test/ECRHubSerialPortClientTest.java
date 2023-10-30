@@ -39,8 +39,9 @@ public class ECRHubSerialPortClientTest {
         request.setOrder_queue_mode(EOrderQueueMode.FIFO.getVal());
 
         // Execute payment init request
+        System.out.println("Payment init request:" + request);
         PaymentInitResponse response = client.execute(request);
-        System.out.println("Payment init Response:" + response);
+        System.out.println("Payment init response:" + response);
     }
 
     @Test
@@ -59,8 +60,9 @@ public class ECRHubSerialPortClientTest {
         request.setConfig(requestConfig);
 
         // Execute purchase request
+        System.out.println("Purchase request:" + request);
         PurchaseResponse response = client.execute(request);
-        System.out.println("Purchase Response:" + response);
+        System.out.println("Purchase response:" + response);
     }
 
     @Test
@@ -104,8 +106,9 @@ public class ECRHubSerialPortClientTest {
         request.setOrder_amount("1");
         request.setPay_method_category("BANKCARD");
 
+        System.out.println("Refund request:" + request);
         RefundResponse response = client.execute(request);
-        System.out.println("Refund Response:" + response);
+        System.out.println("Refund response:" + response);
     }
 
     @Test
@@ -115,8 +118,9 @@ public class ECRHubSerialPortClientTest {
         request.setApp_id(APP_ID);
         request.setMerchant_order_no("O1695032342508");
 
+        System.out.println("Close request:" + request);
         CloseResponse response = client.execute(request);
-        System.out.println("Close Response:" + response);
+        System.out.println("Close response:" + response);
     }
 
     @Test
@@ -126,7 +130,8 @@ public class ECRHubSerialPortClientTest {
         request.setApp_id(APP_ID);
         request.setMerchant_order_no("O1695032342508");
 
+        System.out.println("Query request:" + request);
         QueryResponse response = client.execute(request);
-        System.out.println("Query Response:" + response);
+        System.out.println("Query response:" + response);
     }
 }

@@ -22,7 +22,7 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
 
     private final ECRHubConfig config;
 
-    public ECRHubAbstractClient(ECRHubConfig config) {
+    protected ECRHubAbstractClient(ECRHubConfig config) {
         this.config = config;
     }
 
@@ -32,15 +32,25 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
 
     @Override
     public <T extends ECRHubResponse> T execute(ECRHubRequest<T> request) throws ECRHubException {
+        // Auto connect
         autoConnect();
+
+        // Send request
         sendReq(request);
+
+        // Sync receive response
         return getResp(request);
     }
 
     @Override
     public <T extends ECRHubResponse> void asyncExecute(ECRHubRequest<T> request, ECRHubResponseCallBack<T> callback) throws ECRHubException {
+        // Auto connect
         autoConnect();
+
+        // Send request
         sendReq(request);
+
+        // Async receive response
         ThreadUtil.execute(() -> {
             try {
                 callback.onResponse(getResp(request));

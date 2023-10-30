@@ -60,9 +60,13 @@ public class SerialPortEngine {
     public void connect(long startTime) throws ECRHubException {
         lock.lock();
         try {
+            log.info("Serial port[{}] connecting...", serialPortName);
             doConnect(startTime);
             startScheduledTask();
+
             isWorking = true;
+
+            log.info("Serial port[{}] connection successful", serialPortName);
         } finally {
             lock.unlock();
         }
@@ -115,15 +119,12 @@ public class SerialPortEngine {
         }
     }
 
-    private boolean close() {
-        if (!isOpen()) {
-            return true;
-        } else {
-            isConnected = false;
-            serialPort.removeDataListener();
-            boolean isClosed = serialPort.closePort();
+    private void close() {
+        if (isOpen()) {
             log.info("Close the serial port[{}]", serialPortName);
-            return isClosed;
+            serialPort.removeDataListener();
+            serialPort.closePort();
+            isConnected = false;
         }
     }
 
@@ -141,14 +142,19 @@ public class SerialPortEngine {
         return isConnected;
     }
 
-    public boolean disconnect() {
-        if (!isWorking) {
-            return true;
-        } else {
+    public void disconnect() {
+        lock.lock();
+        try {
+            log.info("Serial port[{}] disconnecting...", serialPortName);
             shutdownScheduledTask();
+            close();
+
             ackMap.clear();
             isWorking = false;
-            return close();
+
+            log.info("Serial port[{}] disconnect successful", serialPortName);
+        } finally {
+            lock.unlock();
         }
     }
 
