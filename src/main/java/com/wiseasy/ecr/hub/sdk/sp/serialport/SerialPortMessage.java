@@ -1,8 +1,6 @@
 package com.wiseasy.ecr.hub.sdk.sp.serialport;
 
 import com.wiseasy.ecr.hub.sdk.utils.HexUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -14,8 +12,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @create: 2023-09-08 12:05
  **/
 public class SerialPortMessage {
-
-    private static final Logger log = LoggerFactory.getLogger(SerialPortMessage.class);
 
     public static final byte MESSAGE_TYPE_COMMON = 0x00;
     public static final byte MESSAGE_TYPE_HANDSHAKE = 0x01;
