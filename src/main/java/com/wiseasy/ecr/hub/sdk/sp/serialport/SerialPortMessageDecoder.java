@@ -1,54 +1,65 @@
 package com.wiseasy.ecr.hub.sdk.sp.serialport;
 
-import cn.hutool.core.util.StrUtil;
-import com.wiseasy.ecr.hub.sdk.utils.HexUtil;
+import cn.hutool.core.util.ArrayUtil;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class SerialPortMessageDecoder {
 
-    private final StringBuilder lastRemainingBuffer = new StringBuilder();
     private final Lock lock = new ReentrantLock();
 
-    public Set<String> decode(byte[] bytes) {
+    private final SerialPortMessageHandler messageHandler;
+    private byte[] lastRemainingBuffer;
+
+    public SerialPortMessageDecoder(SerialPortMessageHandler messageHandler) {
+        this.messageHandler = messageHandler;
+    }
+
+    public void decode(byte[] bytes) {
         lock.lock();
         try {
-            String hexMessage = lastRemainingBuffer + HexUtil.byte2hex(bytes);
-            lastRemainingBuffer.setLength(0);
-            return decode(hexMessage, lastRemainingBuffer);
+            byte[] buffer = ArrayUtil.addAll(lastRemainingBuffer, bytes);
+            lastRemainingBuffer = null;
+            doDecode(buffer);
         } finally {
             lock.unlock();
         }
     }
 
-    private Set<String> decode(String messagee, StringBuilder lastRemainingBuffer) {
-        Set<String> messageList = new LinkedHashSet<>();
-        while (StrUtil.isNotBlank(messagee)) {
-            if (messagee.startsWith(SerialPortMessage.MESSAGE_STX)) {
-                // Start with STX
-                int stxAndEtxIndex = messagee.indexOf(SerialPortMessage.MESSAGE_ETX + SerialPortMessage.MESSAGE_STX);
-                int etxIndex = (stxAndEtxIndex != -1 ? stxAndEtxIndex : messagee.indexOf(SerialPortMessage.MESSAGE_ETX));
-                if (etxIndex == -1) {
-                    lastRemainingBuffer.append(messagee);
-                    break;
-                }
-                String validMessage = StrUtil.subPre(messagee, etxIndex + SerialPortMessage.MESSAGE_ETX.length());
-                messageList.add(validMessage);
-                messagee = StrUtil.removePrefix(messagee, validMessage);
-            } else {
-                // Not start with STX
-                int stxIndex = messagee.indexOf(SerialPortMessage.MESSAGE_STX);
-                if (stxIndex == -1) {
-                    break;
-                }
-                // Remove invalid message
-                String invalidMessage = StrUtil.subPre(messagee, stxIndex);
-                messagee = StrUtil.removePrefix(messagee, invalidMessage);
+    private void doDecode(byte[] buffer) {
+        int currentLength = buffer.length;
+        int cursor = 0;
+        while (currentLength >= SerialPortMessage.MESSAGE_HEADER_LENGTH) {
+            // Retrieve the header start character, and the data before the start character will be discarded
+            if (!(buffer[cursor] == SerialPortMessage.MESSAGE_STX1 && buffer[cursor + 1] == SerialPortMessage.MESSAGE_STX2)) {
+                --currentLength;
+                ++cursor;
+                continue;
             }
+
+            // If the current length is less than the length of the entire packet, the loop continues to receive data
+            int len = SerialPortMessage.MESSAGE_STX_LENGTH + SerialPortMessage.MESSAGE_TYPE_LENGTH + SerialPortMessage.MESSAGE_ACK_LENGTH + SerialPortMessage.MESSAGE_ID_LENGTH;
+            int dataLength = SerialPortMessage.parseDataLen(buffer[cursor + len], buffer[cursor + len + 1]);
+            int packLength = SerialPortMessage.MESSAGE_HEADER_LENGTH + dataLength + SerialPortMessage.MESSAGE_CRC_LENGTH + SerialPortMessage.MESSAGE_ETX_LENGTH;
+            if (currentLength < packLength) {
+                break;
+            }
+
+            // Handle valid packet
+            byte[] pack = new byte[packLength];
+            System.arraycopy(buffer, cursor, pack, 0, packLength);
+            messageHandler.handle(pack);
+
+            // The cursor moves to the end of the packet and the length is the remaining data length
+            currentLength -= packLength;
+            cursor += packLength;
         }
-        return messageList;
+
+        // The remaining bytes are put into the buffer
+        if (currentLength > 0 && cursor > 0) {
+            lastRemainingBuffer = new byte[currentLength];
+            System.arraycopy(buffer, cursor, lastRemainingBuffer, 0, currentLength);
+        }
     }
 }

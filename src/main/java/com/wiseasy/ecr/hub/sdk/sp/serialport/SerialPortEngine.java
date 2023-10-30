@@ -176,7 +176,7 @@ public class SerialPortEngine {
     public void write(byte[] buffer, long startTime, long timeout) throws ECRHubException {
         SerialPortMessage message = new SerialPortMessage.DataMessage(buffer);
         byte[] byteMsg = message.encode();
-        log.info("Send data message:{}", HexUtil.byte2hex(byteMsg));
+        log.info("Send data message:{}", message.getHexMessage());
 
         ackMap.put(message.messageId, 0);
 
@@ -252,8 +252,8 @@ public class SerialPortEngine {
 
     private class SendHeartbeatThread implements Runnable {
 
-        private final byte[] byteMsg = new SerialPortMessage.HeartbeatMessage().encode();
-        private final String hexMsg = HexUtil.byte2hex(byteMsg);
+        private final SerialPortMessage message = new SerialPortMessage.HeartbeatMessage();
+        private final byte[] byteMsg = message.encode();
 
         @Override
         public void run() {
@@ -265,7 +265,7 @@ public class SerialPortEngine {
         private void sendHeartbeat() {
             try {
                 write(byteMsg, 1, TimeUnit.SECONDS);
-                log.debug("Send heartbeat message:{}", hexMsg);
+                log.debug("Send heartbeat message:{}", message.getHexMessage());
             } catch (Exception e) {
                 // do nothing
             }
@@ -304,8 +304,11 @@ public class SerialPortEngine {
 
     private class ReadDataListener implements SerialPortDataListener {
 
-        private final SerialPortMessageDecoder messageDecoder = new SerialPortMessageDecoder();
-        private volatile String lastReceivedRequestId = null;
+        private final SerialPortMessageDecoder decoder;
+
+        private ReadDataListener() {
+            this.decoder = new SerialPortMessageDecoder(new MessageHandler());
+        }
 
         @Override
         public int getListeningEvents() {
@@ -314,19 +317,35 @@ public class SerialPortEngine {
 
         @Override
         public void serialEvent(SerialPortEvent event) {
-            byte[] buffer = event.getReceivedData();
+            byte[] data = event.getReceivedData();
+            if (data != null && data.length > 0) {
+                decoder.decode(data);
+            }
+        }
+    }
+
+    private class MessageHandler implements SerialPortMessageHandler {
+
+        private volatile String lastReceivedRequestId = null;
+
+        @Override
+        public void handle(byte[] buffer) {
             if (buffer == null || buffer.length == 0) {
                 return;
             }
-            messageDecoder.decode(buffer).forEach(hexMsg -> {
-                SerialPortMessage message = new SerialPortMessage().decodeHex(hexMsg);
+            SerialPortMessage message = null;
+            try {
+                message = new SerialPortMessage().decode(buffer);
                 if (message != null) {
-                    handlePack(message, hexMsg);
+                    handle(message);
                 }
-            });
+            } catch (Exception e) {
+                String hexMsg = HexUtil.byte2hex(buffer);
+                log.warn("Handle message["+ hexMsg +"] error: ", e);
+            }
         }
 
-        private void handlePack(SerialPortMessage message, String hexMsg) {
+        private void handle(SerialPortMessage message) {
             switch (message.messageType) {
                 case SerialPortMessage.MESSAGE_TYPE_HANDSHAKE_CONFIRM:
                     // Handshake confirm message
@@ -334,7 +353,7 @@ public class SerialPortEngine {
                     break;
                 case SerialPortMessage.MESSAGE_TYPE_COMMON:
                     // Common message
-                    handleCommonPack(message, hexMsg);
+                    handleCommonPack(message);
                     break;
                 default:
                     // Other message, ignore
@@ -342,24 +361,25 @@ public class SerialPortEngine {
             }
         }
 
-        private void handleCommonPack(SerialPortMessage message, String hexMsg) {
+        private void handleCommonPack(SerialPortMessage message) {
+            String hexMessage = message.getHexMessage();
             byte messageAck = message.getMessageAck();
             byte messageId = message.getMessageId();
             if (0x00 == messageAck && 0x00 == messageId) {
                 // Heartbeat message
-                log.debug("Received heartbeat message:{}", hexMsg);
+                log.debug("Received heartbeat message:{}", hexMessage);
                 refreshLastReceivedHeartTime();
             } else {
                 // ACK message
                 if (0x00 != messageAck) {
-                    log.info("Received ack message:{}", hexMsg);
+                    log.info("Received ack message:{}", hexMessage);
                     // Remove Sent Times
                     ackMap.remove(messageAck);
                 }
                 // Common packet
                 if (0x00 != messageId) {
                     // Data message
-                    log.info("Received data message:{}", hexMsg);
+                    log.info("Received data message:{}", hexMessage);
                     // Send data ACK message
                     sendAck(messageId);
                     // Cache data
@@ -369,10 +389,11 @@ public class SerialPortEngine {
         }
 
         private void sendAck(byte id) {
-            byte[] byteMsg = new SerialPortMessage.AckMessage(id).encode();
+            SerialPortMessage message = new SerialPortMessage.AckMessage(id);
+            byte[] byteMsg = message.encode();
             try {
                 write(byteMsg, 1, TimeUnit.SECONDS);
-                log.info("Send ack message:{}", HexUtil.byte2hex(byteMsg));
+                log.info("Send ack message:{}", message.getHexMessage());
             } catch (Exception e) {
                 // do nothing
             }

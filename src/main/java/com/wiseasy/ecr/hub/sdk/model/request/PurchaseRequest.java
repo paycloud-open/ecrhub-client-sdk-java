@@ -70,6 +70,15 @@ public class PurchaseRequest extends ECRHubRequest<PurchaseResponse> {
     @JSONField(name = "payMethodCategory")
     private String pay_method_category;
     /**
+     * Payment method id
+     *
+     * @see com.wiseasy.ecr.hub.sdk.enums.EPayMethod
+     *
+     * For example: Visa
+     */
+    @JSONField(name = "payMethodId")
+    private String pay_method_id;
+    /**
      * Attach
      * Allows merchants to submit an additional data to the gateway, which will be returned as-is for payment notifications and inquiries
      *
@@ -164,6 +173,14 @@ public class PurchaseRequest extends ECRHubRequest<PurchaseResponse> {
 
     public void setPay_method_category(String pay_method_category) {
         this.pay_method_category = pay_method_category;
+    }
+
+    public String getPay_method_id() {
+        return pay_method_id;
+    }
+
+    public void setPay_method_id(String pay_method_id) {
+        this.pay_method_id = pay_method_id;
     }
 
     public String getAttach() {

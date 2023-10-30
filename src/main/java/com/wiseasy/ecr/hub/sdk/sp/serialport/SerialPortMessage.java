@@ -23,17 +23,19 @@ public class SerialPortMessage {
 
     public static final String MESSAGE_STX = "55AA";
     public static final String MESSAGE_ETX = "CC33";
+    public static final byte MESSAGE_STX1 = HexUtil.hex2byte("55")[0];
+    public static final byte MESSAGE_STX2 = HexUtil.hex2byte("AA")[0];
+
+    public static final int MESSAGE_STX_LENGTH = 2;//Message start text length
+    public static final int MESSAGE_TYPE_LENGTH = 1;//Message type length
+    public static final int MESSAGE_ACK_LENGTH = 1;//Message ack length
+    public static final int MESSAGE_ID_LENGTH = 1;//Message id length
+    public static final int MESSAGE_DATA_LENGTH = 2;//Message data length
+    public static final int MESSAGE_CRC_LENGTH = 1;//Message CRC length
+    public static final int MESSAGE_ETX_LENGTH = 2;//Message end text length
+    public static final int MESSAGE_HEADER_LENGTH = MESSAGE_STX_LENGTH + MESSAGE_TYPE_LENGTH + MESSAGE_ACK_LENGTH + MESSAGE_ID_LENGTH + MESSAGE_DATA_LENGTH;//Protocol header length, length before valid data
 
     private static final AtomicInteger COUNTER = new AtomicInteger(0);
-
-    private int messageStxLength = 2;//Message start text length
-    private int messageTypeLength = 1;//Message type length
-    private int messageAckLength = 1;//Message ack length
-    private int messageIdLength = 1;//Message id length
-    private int messageDataLength = 2;//Message data length
-    private int messageCrcLength = 1;//Message CRC length
-    private int messageEtxLength = 2;//Message end text length
-    private int headerLength = messageStxLength + messageTypeLength + messageAckLength + messageIdLength + messageDataLength;//Protocol header length, length before valid data
 
     protected byte[] messageStx = HexUtil.hex2byte(MESSAGE_STX);
     protected byte messageType;
@@ -43,6 +45,7 @@ public class SerialPortMessage {
     protected byte[] messageData;
     protected byte messageCrc;
     protected byte[] messageEtx = HexUtil.hex2byte(MESSAGE_ETX);
+    protected String hexMessage;
 
     public SerialPortMessage() {}
 
@@ -70,6 +73,10 @@ public class SerialPortMessage {
         return messageData;
     }
 
+    public String getHexMessage() {
+        return hexMessage;
+    }
+
     /**
      * messageId in 1..255
      */
@@ -82,26 +89,26 @@ public class SerialPortMessage {
         return (byte) id;
     }
 
-    private static byte[] getDataLen(int length) {
+    public static byte[] getDataLen(int length) {
         byte[] len = new byte[2];
         len[0] = (byte) ((length >> 8) & 0xFF);
         len[1] = (byte) ((length >> 0) & 0xFF);
         return len;
     }
 
-    private byte[] getDataLen(byte[] pack) {
-        byte[] dataLen = new byte[messageDataLength];
-        System.arraycopy(pack, messageStxLength + messageTypeLength + messageAckLength + messageIdLength, dataLen, 0, messageDataLength);
+    public static byte[] getDataLen(byte[] pack) {
+        byte[] dataLen = new byte[MESSAGE_DATA_LENGTH];
+        System.arraycopy(pack, MESSAGE_STX_LENGTH + MESSAGE_TYPE_LENGTH + MESSAGE_ACK_LENGTH + MESSAGE_ID_LENGTH, dataLen, 0, MESSAGE_DATA_LENGTH);
         return dataLen;
     }
 
-    private int parseDataLen(byte a, byte b) {
+    public static int parseDataLen(byte a, byte b) {
         int rlt = (a & 0xFF) << 8;
         rlt += (b & 0xFF) << 0;
         return rlt;
     }
 
-    private byte getCRC(byte[] bytes) {
+    public static byte getCRC(byte[] bytes) {
         byte temp = bytes[0];
         for (int i = 1; i < bytes.length; i++) {
             temp = (byte) (temp ^ bytes[i]);
@@ -111,7 +118,7 @@ public class SerialPortMessage {
 
     public byte[] encode() {
         int dataRealLength = messageData != null ? messageData.length : 0;
-        int checkLength = headerLength - messageStxLength + dataRealLength;
+        int checkLength = MESSAGE_HEADER_LENGTH - MESSAGE_STX_LENGTH + dataRealLength;
         ByteBuffer checkBuffer = ByteBuffer.allocate(checkLength);
         checkBuffer.put(messageType);
         checkBuffer.put(messageAck);
@@ -120,46 +127,43 @@ public class SerialPortMessage {
         if (dataRealLength > 0) {
             checkBuffer.put(messageData);
         }
+
         this.messageCrc = getCRC(checkBuffer.array());
-        ByteBuffer buffer = ByteBuffer.allocate(messageStxLength + checkLength + messageCrcLength + messageEtxLength);
+
+        ByteBuffer buffer = ByteBuffer.allocate(MESSAGE_STX_LENGTH + checkLength + MESSAGE_CRC_LENGTH + MESSAGE_ETX_LENGTH);
         buffer.put(messageStx);
         buffer.put(checkBuffer.array());
         buffer.put(messageCrc);
         buffer.put(messageEtx);
-        return buffer.array();
+        byte[] message = buffer.array();
+
+        this.hexMessage = HexUtil.byte2hex(message);
+        return message;
     }
 
     public SerialPortMessage decode(byte[] pack) {
-        int checkDataLen = pack.length - messageStxLength - messageCrcLength - messageEtxLength;
-        byte[] checkDataBuffer = new byte[checkDataLen];
-        System.arraycopy(pack, messageStxLength, checkDataBuffer, 0, checkDataLen);
+        this.hexMessage = HexUtil.byte2hex(pack);
 
-        this.messageCrc = pack[pack.length - 1 - messageEtxLength];
+        int checkDataLen = pack.length - MESSAGE_STX_LENGTH - MESSAGE_CRC_LENGTH - MESSAGE_ETX_LENGTH;
+        byte[] checkDataBuffer = new byte[checkDataLen];
+        System.arraycopy(pack, MESSAGE_STX_LENGTH, checkDataBuffer, 0, checkDataLen);
+
+        this.messageCrc = pack[pack.length - 1 - MESSAGE_ETX_LENGTH];
         if (getCRC(checkDataBuffer) != messageCrc) {
             // Faulty calibration packets are not handled
             return null;
         } else {
-            this.messageType = pack[messageStxLength];
-            this.messageAck = pack[messageStxLength + messageTypeLength];
-            this.messageId = pack[messageStxLength + messageTypeLength + messageAckLength];
+            this.messageType = pack[MESSAGE_STX_LENGTH];
+            this.messageAck = pack[MESSAGE_STX_LENGTH + MESSAGE_TYPE_LENGTH];
+            this.messageId = pack[MESSAGE_STX_LENGTH + MESSAGE_TYPE_LENGTH + MESSAGE_ACK_LENGTH];
             this.messageDataLen = getDataLen(pack);
             int dataLenInt = parseDataLen(messageDataLen[0], messageDataLen[1]);
             this.messageData = new byte[dataLenInt];
             if (dataLenInt > 0) {
-                System.arraycopy(pack, headerLength, messageData, 0, dataLenInt);
+                System.arraycopy(pack, MESSAGE_HEADER_LENGTH, messageData, 0, dataLenInt);
             }
             return this;
         }
-    }
-
-    public SerialPortMessage decodeHex(String hexMessage) {
-        SerialPortMessage message = null;
-        try {
-            message = decode(HexUtil.hex2byte(hexMessage));
-        } catch (Exception e) {
-            log.warn("Decode hex message[{}] error:{}", hexMessage, e);
-        }
-        return message;
     }
 
     @Override
