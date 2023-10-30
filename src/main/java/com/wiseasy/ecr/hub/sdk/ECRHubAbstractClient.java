@@ -13,6 +13,7 @@ import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseDeviceData;
+import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto.ResponseBizData;
 import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
 
 import java.util.Optional;
@@ -102,9 +103,8 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
         JSONObject deviceDataJson = ECRHubProtobufHelper.proto2Json(respDeviceData);
         DeviceData deviceData = deviceDataJson.toJavaObject(DeviceData.class);
 
-        JSONObject respDataJson = ETopic.PAY_INIT.getVal().equals(resp.getTopic()) ?
-                                  ECRHubProtobufHelper.proto2Json(resp.getInitData()) :
-                                  ECRHubProtobufHelper.proto2Json(resp.getBizData());
+        ResponseBizData respBizData = resp.getBizData();
+        JSONObject respDataJson = ECRHubProtobufHelper.proto2Json(respBizData);
 
         T response = respDataJson.toJavaObject(respClass);
         response.setRequest_id(resp.getRequestId());
