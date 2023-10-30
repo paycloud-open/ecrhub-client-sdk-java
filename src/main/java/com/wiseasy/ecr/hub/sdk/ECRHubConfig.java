@@ -93,7 +93,7 @@ public class ECRHubConfig {
          * Full blocking read mode: #TIMEOUT_READ_BLOCKING [In this mode, the readBytes(byte[], long) call will block until the specified timeout is reached or until at least 1 byte can be returned as requested].
          * Scanner mode: #TIMEOUT_SCANNER [This mode applies to reading from the serial port using Java's java.util.Scanner class, and ignores manually specified timeout values to ensure compatibility with the Java specification].
          */
-        public int timeoutMode = SerialPort.TIMEOUT_READ_SEMI_BLOCKING;
+        private int timeoutMode = SerialPort.TIMEOUT_READ_SEMI_BLOCKING;
         /**
          * Write timeout (milliseconds)
          */
