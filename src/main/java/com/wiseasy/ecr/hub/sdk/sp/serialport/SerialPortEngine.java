@@ -34,7 +34,7 @@ public class SerialPortEngine {
 
     private static final long SEND_HEART_INTERVAL = 1000;
     private static final long CHECK_HEART_INTERVAL = 30 * 1000;
-    private static final long HEART_TIMEOUT = 3000;
+    private static final long HEART_TIMEOUT = 2000;
 
     private final Lock lock = new ReentrantLock();
     private final SerialPortConfig config;
