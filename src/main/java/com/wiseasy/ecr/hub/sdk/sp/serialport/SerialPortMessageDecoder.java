@@ -35,25 +35,24 @@ public class SerialPortMessageDecoder {
             if (!(buffer[cursor] == SerialPortMessage.MESSAGE_STX1 && buffer[cursor + 1] == SerialPortMessage.MESSAGE_STX2)) {
                 --currentLength;
                 ++cursor;
-                continue;
+            } else {
+                // If the current length is less than the length of the entire packet, the loop continues to receive data
+                int len = SerialPortMessage.MESSAGE_STX_LENGTH + SerialPortMessage.MESSAGE_TYPE_LENGTH + SerialPortMessage.MESSAGE_ACK_LENGTH + SerialPortMessage.MESSAGE_ID_LENGTH;
+                int dataLength = SerialPortMessage.parseDataLen(buffer[cursor + len], buffer[cursor + len + 1]);
+                int packLength = SerialPortMessage.MESSAGE_HEADER_LENGTH + dataLength + SerialPortMessage.MESSAGE_CRC_LENGTH + SerialPortMessage.MESSAGE_ETX_LENGTH;
+                if (currentLength < packLength) {
+                    break;
+                }
+
+                // Handle valid packet
+                byte[] pack = new byte[packLength];
+                System.arraycopy(buffer, cursor, pack, 0, packLength);
+                messageHandler.handle(pack);
+
+                // The cursor moves to the end of the packet and the length is the remaining data length
+                currentLength -= packLength;
+                cursor += packLength;
             }
-
-            // If the current length is less than the length of the entire packet, the loop continues to receive data
-            int len = SerialPortMessage.MESSAGE_STX_LENGTH + SerialPortMessage.MESSAGE_TYPE_LENGTH + SerialPortMessage.MESSAGE_ACK_LENGTH + SerialPortMessage.MESSAGE_ID_LENGTH;
-            int dataLength = SerialPortMessage.parseDataLen(buffer[cursor + len], buffer[cursor + len + 1]);
-            int packLength = SerialPortMessage.MESSAGE_HEADER_LENGTH + dataLength + SerialPortMessage.MESSAGE_CRC_LENGTH + SerialPortMessage.MESSAGE_ETX_LENGTH;
-            if (currentLength < packLength) {
-                break;
-            }
-
-            // Handle valid packet
-            byte[] pack = new byte[packLength];
-            System.arraycopy(buffer, cursor, pack, 0, packLength);
-            messageHandler.handle(pack);
-
-            // The cursor moves to the end of the packet and the length is the remaining data length
-            currentLength -= packLength;
-            cursor += packLength;
         }
 
         // The remaining bytes are put into the buffer

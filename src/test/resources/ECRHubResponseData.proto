@@ -31,17 +31,32 @@ message ECRHubResponse {
    Response device data
   */
   ResponseDeviceData device_data = 7;
-  /**
-  Response init data
-  */
-  ResponseInitData init_data = 8;
 }
 
-message ResponseInitData {
+message PayMethodCategory {
   /**
-  list payment method category
+  payment method category
    */
-   string pay_method_category_list = 1;
+  string pay_method_category = 1;
+  /**
+  list pay method
+   */
+  repeated PayMethod pay_method_list = 2;
+}
+
+message PayMethod{
+  /**
+  pay method id
+   */
+  string pay_method_id = 1;
+  /**
+  pay method name
+   */
+  string pay_method_name = 2;
+  /**
+  support trans type
+   */
+  repeated string supported_trans_type_list = 3;
 }
 
 message ResponseDeviceData {
@@ -128,5 +143,9 @@ message ResponseBizData {
   tip amount
   */
   string tip_amount = 16;
+  /**
+  list payment method category
+   */
+  repeated PayMethodCategory pay_method_category_list = 17;
 }
 

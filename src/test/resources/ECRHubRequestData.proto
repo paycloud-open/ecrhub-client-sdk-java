@@ -43,30 +43,6 @@ message ECRHubRequest {
   request pair data
    */
   RequestDeviceData device_data = 10;
-
-  /**
-  request init data
-   */
-  RequestInitData init_data  = 11;
-}
-
-message RequestInitData {
-  /**
-  confirm on terminal
-   */
-  bool confirm_on_terminal = 1;
-  /**
- Order queue mode, which sets the sorting rules for orders. When pushing multiple orders, priority is given to new or old orders.
- Value range:
- FIFO: first-in, first-out, default values
- FILO: first-in last-out
- Example: FIFO
- */
-  string order_queue_mode = 2;
-  /**
-   auto settlement
-   */
-  bool is_auto_settlement = 3;
 }
 
 message RequestDeviceData {
@@ -150,9 +126,25 @@ message RequestBizData {
  */
   string orig_pay_channel_trans_no = 14;
   /**
- pay channel id
+  confirm on terminal
+   */
+  bool confirm_on_terminal = 15;
+  /**
+ Order queue mode, which sets the sorting rules for orders. When pushing multiple orders, priority is given to new or old orders.
+ Value range:
+ FIFO: first-in, first-out, default values
+ FILO: first-in last-out
+ Example: FIFO
  */
-  string  pay_channel_id = 15;
+  string order_queue_mode = 16;
+  /**
+   auto settlement
+   */
+  bool is_auto_settlement = 17;
+  /**
+  pay method id
+   */
+  string pay_method_id = 18;
 }
 
 message VoiceData {

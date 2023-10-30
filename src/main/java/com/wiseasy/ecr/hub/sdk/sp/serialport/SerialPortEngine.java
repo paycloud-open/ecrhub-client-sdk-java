@@ -390,9 +390,8 @@ public class SerialPortEngine {
 
         private void sendAck(byte id) {
             SerialPortMessage message = new SerialPortMessage.AckMessage(id);
-            byte[] byteMsg = message.encode();
             try {
-                write(byteMsg, 1, TimeUnit.SECONDS);
+                write(message.encode(), 1, TimeUnit.SECONDS);
                 log.info("Send ack message:{}", message.getHexMessage());
             } catch (Exception e) {
                 // do nothing
