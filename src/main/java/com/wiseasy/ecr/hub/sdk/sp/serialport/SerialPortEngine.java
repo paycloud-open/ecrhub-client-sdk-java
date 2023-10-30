@@ -134,7 +134,7 @@ public class SerialPortEngine {
     public boolean isReceivedHeart() {
         long nowTime = System.currentTimeMillis();
         long intervalTime = nowTime - lastReceivedHeartTime;
-        return intervalTime > HEART_TIMEOUT;
+        return intervalTime < HEART_TIMEOUT;
     }
 
     public boolean isConnected() {
