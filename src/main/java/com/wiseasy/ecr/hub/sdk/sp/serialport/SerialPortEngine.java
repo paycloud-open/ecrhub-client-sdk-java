@@ -16,7 +16,6 @@ import com.wiseasy.ecr.hub.sdk.utils.HexUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Base64;
 import java.util.Map;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -155,8 +154,7 @@ public class SerialPortEngine {
 
     public boolean write(byte[] buffer) {
         if (isOpen()) {
-            byte[] byteMsg = Base64.getEncoder().encode(buffer);
-            int numWritten = serialPort.writeBytes(byteMsg, byteMsg.length);
+            int numWritten = serialPort.writeBytes(buffer, buffer.length);
             return numWritten > 0;
         } else {
             return false;
@@ -337,8 +335,7 @@ public class SerialPortEngine {
             }
             SerialPortMessage message = null;
             try {
-                byte[] byteMsg = Base64.getDecoder().decode(buffer);
-                message = new SerialPortMessage().decode(byteMsg);
+                message = new SerialPortMessage().decode(buffer);
                 if (message != null) {
                     handle(message);
                 }
