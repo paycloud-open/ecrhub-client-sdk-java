@@ -405,7 +405,7 @@ public class SerialPortEngine {
             ECRHubResponseProto.ECRHubResponse response = null;
             try {
                 response = ECRHubProtobufHelper.unpack(data);
-                log.debug("Received protobuf message:{}", response);
+                log.debug("Received protobuf message:\n{}", response);
             } catch (Exception e) {
                 log.warn(e.getMessage(), e);
             }
