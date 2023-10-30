@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Base64;
+import java.util.Optional;
 
 public class ECRHubProtobufHelper {
 
@@ -21,15 +22,13 @@ public class ECRHubProtobufHelper {
                       .setTimestamp(String.valueOf(System.currentTimeMillis()))
                       .setRequestId(request.getRequest_id())
                       .setVersion(request.getVersion())
-                      .setAppId(request.getApp_id())
+                      .setAppId(Optional.ofNullable(request.getApp_id()).orElse(""))
                       .setTopic(request.getTopic())
+                      .setDeviceData(buildDeviceData())
                       .setBizData(buildBizData(request))
                       .setVoiceData(buildVoiceData(request))
                       .setPrinterData(buildPrintData(request))
                       .setNotifyData(buildNotifyData(request))
-                      .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
-                                    .setMacAddress(NetHelper.getLocalMacAddress())
-                                    .build())
                       .build().toByteArray();
 
         return Base64.getEncoder().encode(pack);
@@ -53,6 +52,12 @@ public class ECRHubProtobufHelper {
             log.error("Invalid ProtocolBuffer Message:", e);
             throw new ECRHubException("Invalid ProtocolBuffer Message:", e);
         }
+    }
+
+    public static ECRHubRequestProto.RequestDeviceData buildDeviceData() {
+        return ECRHubRequestProto.RequestDeviceData.newBuilder()
+                .setMacAddress(NetHelper.getLocalMacAddress())
+                .build();
     }
 
     public static ECRHubRequestProto.RequestBizData buildBizData(ECRHubRequest request) throws ECRHubException {
