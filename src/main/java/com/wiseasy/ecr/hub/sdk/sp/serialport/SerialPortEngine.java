@@ -227,8 +227,8 @@ public class SerialPortEngine {
                 } else {
                     ThreadUtil.safeSleep(10);
                     if (System.currentTimeMillis() - startTime > config.getConnTimeout()) {
+                        log.error("Serial port[{}] handshake connection timeout", serialPortName);
                         SerialPortEngine.this.close();
-                        log.error("Serial port[{}] handshake connection failed", serialPortName);
                         throw new ECRHubTimeoutException("Serial port["+ serialPortName +"] handshake connection timeout");
                     }
                 }
@@ -240,7 +240,7 @@ public class SerialPortEngine {
             try {
                 write(byteMsg, config.getWriteTimeout(), TimeUnit.MILLISECONDS);
             } catch (ECRHubException e) {
-                log.error("Serial port[{}] handshake connection failed, {}", serialPortName, e.getMessage());
+                log.error("Serial port[{}] handshake connection failed, reason: {}", serialPortName, e.getMessage());
                 SerialPortEngine.this.close();
                 throw e;
             }
