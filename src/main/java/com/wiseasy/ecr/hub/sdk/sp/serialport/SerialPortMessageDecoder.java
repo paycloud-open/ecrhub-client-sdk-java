@@ -40,9 +40,8 @@ public class SerialPortMessageDecoder {
                 continue;
             }
 
-            // Calculate the length of valid data
-            int dataLenIndex = SerialPortMessage.MESSAGE_STX_LENGTH + SerialPortMessage.MESSAGE_TYPE_LENGTH +
-                               SerialPortMessage.MESSAGE_ACK_LENGTH + SerialPortMessage.MESSAGE_ID_LENGTH;
+            // Parse the length of valid data
+            int dataLenIndex = SerialPortMessage.MESSAGE_DATA_LENGTH_INDEX;
             int dataLen = SerialPortMessage.parseDataLen(buffer[cursor + dataLenIndex], buffer[cursor + dataLenIndex + 1]);
 
             // Calculate the total packet length

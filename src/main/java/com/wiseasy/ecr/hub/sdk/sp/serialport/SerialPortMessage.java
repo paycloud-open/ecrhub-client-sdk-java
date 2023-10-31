@@ -29,7 +29,8 @@ public class SerialPortMessage {
     public static final int MESSAGE_DATA_LENGTH = 2;//Message data length
     public static final int MESSAGE_CRC_LENGTH = 1;//Message CRC length
     public static final int MESSAGE_ETX_LENGTH = 2;//Message end text length
-    public static final int MESSAGE_HEADER_LENGTH = MESSAGE_STX_LENGTH + MESSAGE_TYPE_LENGTH + MESSAGE_ACK_LENGTH + MESSAGE_ID_LENGTH + MESSAGE_DATA_LENGTH;//Protocol header length, length before valid data
+    public static final int MESSAGE_DATA_LENGTH_INDEX = MESSAGE_STX_LENGTH + MESSAGE_TYPE_LENGTH + MESSAGE_ACK_LENGTH + MESSAGE_ID_LENGTH;
+    public static final int MESSAGE_HEADER_LENGTH = MESSAGE_DATA_LENGTH_INDEX + MESSAGE_DATA_LENGTH;//Protocol header length, length before valid data
 
     private static final AtomicInteger COUNTER = new AtomicInteger(0);
 
@@ -94,7 +95,7 @@ public class SerialPortMessage {
 
     public static byte[] getDataLen(byte[] pack) {
         byte[] dataLen = new byte[MESSAGE_DATA_LENGTH];
-        System.arraycopy(pack, MESSAGE_STX_LENGTH + MESSAGE_TYPE_LENGTH + MESSAGE_ACK_LENGTH + MESSAGE_ID_LENGTH, dataLen, 0, MESSAGE_DATA_LENGTH);
+        System.arraycopy(pack, MESSAGE_DATA_LENGTH_INDEX, dataLen, 0, MESSAGE_DATA_LENGTH);
         return dataLen;
     }
 
