@@ -65,7 +65,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         engine.write(request.toByteArray(), startTime, timeout);
 
         byte[] buffer = engine.read(request.getRequestId(), startTime, timeout);
-        return ECRHubProtobufHelper.unpack(buffer);
+        return ECRHubProtobufHelper.parseRespFrom(buffer);
     }
 
     @Override

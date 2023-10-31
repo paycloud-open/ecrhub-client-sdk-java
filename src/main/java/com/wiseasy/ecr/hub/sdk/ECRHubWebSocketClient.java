@@ -83,7 +83,7 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
         engine.send(request.toByteArray());
 
         byte[] buffer = engine.receive(request.getRequestId(), startTime, timeout);
-        return ECRHubProtobufHelper.unpack(buffer);
+        return ECRHubProtobufHelper.parseRespFrom(buffer);
     }
 
     @Override

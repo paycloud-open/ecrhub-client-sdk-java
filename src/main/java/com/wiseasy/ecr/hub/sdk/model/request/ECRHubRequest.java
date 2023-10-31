@@ -13,18 +13,19 @@ import java.util.Map;
 public abstract class ECRHubRequest<T extends ECRHubResponse> {
 
     /**
-     * Transaction request ID, used to receive the corresponding response. The caller needs to remain unique.
-     */
-    @JSONField(name = "requestId")
-    private String request_id;
-    /**
      * Version number, temporarily fixed: 1.0
      */
     @JSONField(name = "version")
     private String version = "1.0";
     /**
+     * Transaction request ID, used to receive the corresponding response. The caller needs to remain unique.
+     */
+    @JSONField(name = "requestId")
+    private String request_id;
+    /**
      * Payment Application Id
      */
+    @JSONField(name = "appId")
     private String app_id;
     /**
      * Extended parameters
@@ -35,22 +36,23 @@ public abstract class ECRHubRequest<T extends ECRHubResponse> {
      * Voice data object
      */
     @JSONField(name = "voiceData")
-    private VoiceData voice_data = new VoiceData();
+    private VoiceData voice_data;
     /**
      * Printer data object
      */
     @JSONField(name = "printerData")
-    private PrinterData printer_data = new PrinterData();
+    private PrinterData printer_data;
     /**
      * Notify data object
      */
     @JSONField(name = "notifyData")
-    private NotifyData notify_data = new NotifyData();
+    private NotifyData notify_data;
     /**
      * Request config object
      */
     private ECRHubConfig config;
 
+    @JSONField(serialize = false)
     public Class<T> getResponseClass() {
         return (Class<T>) ClassUtil.getTypeArgument(getClass());
     }

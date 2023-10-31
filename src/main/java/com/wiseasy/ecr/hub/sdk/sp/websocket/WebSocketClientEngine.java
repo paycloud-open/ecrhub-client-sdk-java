@@ -56,7 +56,7 @@ public class WebSocketClientEngine extends WebSocketClient {
         }
         ECRHubResponseProto.ECRHubResponse resp;
         try {
-            resp = ECRHubProtobufHelper.unpack(bytes);
+            resp = ECRHubProtobufHelper.parseRespFrom(bytes);
         } catch (ECRHubException e) {
             throw new RuntimeException(e);
         }

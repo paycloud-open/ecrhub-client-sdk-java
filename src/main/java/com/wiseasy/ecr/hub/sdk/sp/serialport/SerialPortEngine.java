@@ -410,7 +410,7 @@ public class SerialPortEngine {
             }
             ECRHubResponseProto.ECRHubResponse response = null;
             try {
-                response = ECRHubProtobufHelper.unpack(data);
+                response = ECRHubProtobufHelper.parseRespFrom(data);
             } catch (Exception e) {
                 log.warn(e.getMessage(), e);
             }
