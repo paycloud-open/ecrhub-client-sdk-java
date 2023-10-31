@@ -74,7 +74,7 @@ public class RefundRequest extends ECRHubRequest<RefundResponse> {
      * For example: 3
      */
     @JSONField(name = "transType")
-    private String trans_type = ETransType.REFUND.getCode();
+    private String trans_type = ETransType.CANCEL.getCode();
     /**
      * Payment Methods Category
      *
