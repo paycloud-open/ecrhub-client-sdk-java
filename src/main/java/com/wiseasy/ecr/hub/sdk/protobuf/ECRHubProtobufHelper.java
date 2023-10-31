@@ -10,7 +10,6 @@ import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Base64;
 import java.util.Optional;
 
 public class ECRHubProtobufHelper {
@@ -18,26 +17,23 @@ public class ECRHubProtobufHelper {
     private static final Logger log = LoggerFactory.getLogger(ECRHubProtobufHelper.class);
 
     public static byte[] pack(ECRHubRequest request) throws ECRHubException {
-        byte[] pack = ECRHubRequestProto.ECRHubRequest.newBuilder()
-                      .setTimestamp(String.valueOf(System.currentTimeMillis()))
-                      .setRequestId(request.getRequest_id())
-                      .setVersion(request.getVersion())
-                      .setAppId(Optional.ofNullable(request.getApp_id()).orElse(""))
-                      .setTopic(request.getTopic())
-                      .setDeviceData(buildDeviceData())
-                      .setBizData(buildBizData(request))
-                      .setVoiceData(buildVoiceData(request))
-                      .setPrinterData(buildPrintData(request))
-                      .setNotifyData(buildNotifyData(request))
-                      .build().toByteArray();
-
-        return Base64.getEncoder().encode(pack);
+        return ECRHubRequestProto.ECRHubRequest.newBuilder()
+                .setTimestamp(String.valueOf(System.currentTimeMillis()))
+                .setRequestId(request.getRequest_id())
+                .setVersion(request.getVersion())
+                .setAppId(Optional.ofNullable(request.getApp_id()).orElse(""))
+                .setTopic(request.getTopic())
+                .setDeviceData(buildDeviceData())
+                .setBizData(buildBizData(request))
+                .setVoiceData(buildVoiceData(request))
+                .setPrinterData(buildPrintData(request))
+                .setNotifyData(buildNotifyData(request))
+                .build().toByteArray();
     }
 
     public static ECRHubResponseProto.ECRHubResponse unpack(byte[] pack) throws ECRHubException {
         try {
-            byte[] byteMsg = Base64.getDecoder().decode(pack);
-            return ECRHubResponseProto.ECRHubResponse.parseFrom(byteMsg);
+            return ECRHubResponseProto.ECRHubResponse.parseFrom(pack);
         } catch (Exception e) {
             log.error("Invalid ProtocolBuffer Message:", e);
             throw new ECRHubException("Invalid ProtocolBuffer Message:", e);

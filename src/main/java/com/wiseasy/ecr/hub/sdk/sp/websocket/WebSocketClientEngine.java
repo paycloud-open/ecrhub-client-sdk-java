@@ -2,24 +2,26 @@ package com.wiseasy.ecr.hub.sdk.sp.websocket;
 
 import cn.hutool.cache.impl.FIFOCache;
 import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.util.ArrayUtil;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto;
+import com.wiseasy.ecr.hub.sdk.utils.HexUtil;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URI;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
 public class WebSocketClientEngine extends WebSocketClient {
 
     private static final Logger log = LoggerFactory.getLogger(WebSocketClientEngine.class);
 
-    private final FIFOCache<String, String> MSG_CACHE = new FIFOCache<>(20, 10 * 60 * 1000);
+    private final FIFOCache<String, byte[]> MSG_CACHE = new FIFOCache<>(20, 10 * 60 * 1000);
 
     public WebSocketClientEngine(URI serverUri) {
         super(serverUri);
@@ -43,22 +45,28 @@ public class WebSocketClientEngine extends WebSocketClient {
     @Override
     public void onMessage(String message) {
         byte[] bytes = message.getBytes(StandardCharsets.UTF_8);
+        onMessage(ByteBuffer.wrap(bytes));
+    }
+
+    @Override
+    public void onMessage(ByteBuffer buffer) {
+        byte[] bytes = buffer.array();
         if (log.isDebugEnabled()) {
-            log.debug("onMessage:{}", message);
+            log.debug("onMessage:{}", HexUtil.byte2hex(bytes));
         }
-        ECRHubResponseProto.ECRHubResponse respProto;
+        ECRHubResponseProto.ECRHubResponse resp;
         try {
-            respProto = ECRHubProtobufHelper.unpack(bytes);
+            resp = ECRHubProtobufHelper.unpack(bytes);
         } catch (ECRHubException e) {
             throw new RuntimeException(e);
         }
-        MSG_CACHE.put(respProto.getRequestId(), message);
+        MSG_CACHE.put(resp.getRequestId(), bytes);
     }
 
-    public String receive(String requestId, long startTime, long timeout) throws ECRHubTimeoutException {
+    public byte[] receive(String requestId, long startTime, long timeout) throws ECRHubTimeoutException {
         while (true) {
-            String msg = MSG_CACHE.get(requestId);
-            if (StrUtil.isNotBlank(msg)) {
+            byte[] msg = MSG_CACHE.get(requestId);
+            if (ArrayUtil.isNotEmpty(msg)) {
                 MSG_CACHE.remove(requestId);
                 return msg;
             } else {

@@ -2,6 +2,7 @@ package com.wiseasy.ecr.hub.sdk.sp.websocket;
 
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.StrUtil;
+import com.wiseasy.ecr.hub.sdk.utils.HexUtil;
 import com.wiseasy.ecr.hub.sdk.utils.NetHelper;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 
 public class WebSocketServerEngine extends WebSocketServer {
 
@@ -63,6 +65,16 @@ public class WebSocketServerEngine extends WebSocketServer {
     public void onMessage(WebSocket conn, String message) {
         if (log.isDebugEnabled()) {
             log.debug("socket onMessage. {}", message);
+        }
+        if (null != clientListener) {
+            clientListener.onMessage(conn, message);
+        }
+    }
+
+    @Override
+    public void onMessage(WebSocket conn, ByteBuffer message) {
+        if (log.isDebugEnabled()) {
+            log.debug("socket onMessage. {}", HexUtil.byte2hex(message.array()));
         }
         if (null != clientListener) {
             clientListener.onMessage(conn, message);

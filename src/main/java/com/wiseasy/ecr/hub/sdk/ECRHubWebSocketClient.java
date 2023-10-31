@@ -12,8 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URI;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
@@ -82,10 +80,10 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
     protected ECRHubResponseProto.ECRHubResponse sendReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
         long timeout = getConfig().getSocketConfig().getConnTimeout();
 
-        engine.send(new String(Base64.getEncoder().encode(request.toByteArray())));
+        engine.send(request.toByteArray());
 
-        String msg = engine.receive(request.getRequestId(), startTime, timeout);
-        return ECRHubProtobufHelper.unpack(msg.getBytes(StandardCharsets.UTF_8));
+        byte[] buffer = engine.receive(request.getRequestId(), startTime, timeout);
+        return ECRHubProtobufHelper.unpack(buffer);
     }
 
     @Override
@@ -99,7 +97,7 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
         ECRHubConfig config = Optional.ofNullable(request.getConfig()).orElse(super.getConfig());
         long timeout = config.getSocketConfig().getReadTimeout();
 
-        String msg = engine.receive(request.getRequest_id(), System.currentTimeMillis(), timeout);
-        return buildResp(request.getResponseClass(), msg.getBytes(StandardCharsets.UTF_8));
+        byte[] buffer = engine.receive(request.getRequest_id(), System.currentTimeMillis(), timeout);
+        return buildResp(request.getResponseClass(), buffer);
     }
 }

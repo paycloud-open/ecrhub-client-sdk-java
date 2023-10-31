@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -170,7 +171,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             WebSocketClientEngine engine = new WebSocketClientEngine(new URI(wsAddress));
             engine.connectBlocking(30, TimeUnit.SECONDS);
             String msgId = IdUtil.fastSimpleUUID();
-            engine.send(new String(ECRHubRequestProto.ECRHubRequest.newBuilder()
+            engine.send(ECRHubRequestProto.ECRHubRequest.newBuilder()
                     .setTopic(ETopic.UN_PAIR.getVal())
                     .setRequestId(msgId)
                     .setDeviceData(ECRHubRequestProto.RequestDeviceData.newBuilder()
@@ -178,11 +179,11 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
                             .build())
                     .build()
                     .toByteArray()
-            ));
+            );
 
             // The default wait is 60s
-            String receive = engine.receive(msgId, System.currentTimeMillis(), 60 * 1000);
-            ECRHubResponseProto.ECRHubResponse ecrHubResponse = ECRHubResponseProto.ECRHubResponse.parseFrom(receive.getBytes(StandardCharsets.UTF_8));
+            byte[] buffer = engine.receive(msgId, System.currentTimeMillis(), 60 * 1000);
+            ECRHubResponseProto.ECRHubResponse ecrHubResponse = ECRHubResponseProto.ECRHubResponse.parseFrom(buffer);
             if (ecrHubResponse.getSuccess()) {
                 // unpaired succeeded
                 doUnpaired(device);
@@ -230,10 +231,16 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
 
     @Override
     public void onMessage(WebSocket conn, String message) {
+        byte[] bytes = message.getBytes(StandardCharsets.UTF_8);
+        onMessage(conn, ByteBuffer.wrap(bytes));
+    }
+
+    @Override
+    public void onMessage(WebSocket conn, ByteBuffer message) {
 
         ECRHubRequestProto.ECRHubRequest ecrHubRequest;
         try {
-            ecrHubRequest = ECRHubRequestProto.ECRHubRequest.parseFrom(message.getBytes(StandardCharsets.UTF_8));
+            ecrHubRequest = ECRHubRequestProto.ECRHubRequest.parseFrom(message.array());
         } catch (InvalidProtocolBufferException e) {
             throw new RuntimeException(e);
         }
@@ -261,28 +268,28 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
                 storage.addPairedDevice(device.getTerminal_sn());
             }
 
-            socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
+            socket.send(ECRHubResponseProto.ECRHubResponse.newBuilder()
                     .setRequestId(IdUtil.fastSimpleUUID())
                     .setTopic(ETopic.PAIR.getVal())
                     .setSuccess(success)
-                    .build().toByteArray()));
+                    .build().toByteArray());
         } else {
             // The default pairing is not set successfully
             storage.addPairedDevice(device.getTerminal_sn());
-            socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
+            socket.send(ECRHubResponseProto.ECRHubResponse.newBuilder()
                     .setRequestId(IdUtil.fastSimpleUUID())
                     .setTopic(ETopic.PAIR.getVal())
                     .setSuccess(true)
-                    .build().toByteArray()));
+                    .build().toByteArray());
         }
     }
 
     private void cancelPair(WebSocket socket, ECRHubDevice device) {
-        socket.send(new String(ECRHubResponseProto.ECRHubResponse.newBuilder()
+        socket.send(ECRHubResponseProto.ECRHubResponse.newBuilder()
                 .setRequestId(IdUtil.fastSimpleUUID())
                 .setTopic(ETopic.UN_PAIR.getVal())
                 .setSuccess(true)
-                .build().toByteArray()));
+                .build().toByteArray());
 
         storage.removePairedDevice(device.getTerminal_sn());
         if (null != ecrHubDeviceEventListener) {

@@ -85,21 +85,6 @@ public class SerialPortEngine {
         }
     }
 
-    private void startScheduledTask() {
-        if (scheduledExecutor == null) {
-            scheduledExecutor = ThreadUtil.createScheduledExecutor(2);
-            scheduledExecutor.scheduleAtFixedRate(new SendHeartbeatThread(), 0, SEND_HEART_INTERVAL, TimeUnit.MILLISECONDS);
-            scheduledExecutor.scheduleAtFixedRate(new CheckHeartbeatThread(), CHECK_HEART_INTERVAL, CHECK_HEART_INTERVAL, TimeUnit.MILLISECONDS);
-        }
-    }
-
-    private void shutdownScheduledTask() {
-        if (scheduledExecutor != null && !scheduledExecutor.isShutdown()) {
-            scheduledExecutor.shutdown();
-            scheduledExecutor = null;
-        }
-    }
-
     private boolean isOpen() {
         return serialPort.isOpen();
     }
@@ -128,7 +113,7 @@ public class SerialPortEngine {
         }
     }
 
-    public void refreshLastReceivedHeartTime() {
+    private void refreshLastReceivedHeartTime() {
         this.lastReceivedHeartTime = System.currentTimeMillis();
     }
 
@@ -214,6 +199,21 @@ public class SerialPortEngine {
         return buffer;
     }
 
+    private void startScheduledTask() {
+        if (scheduledExecutor == null) {
+            scheduledExecutor = ThreadUtil.createScheduledExecutor(2);
+            scheduledExecutor.scheduleAtFixedRate(new SendHeartbeatThread(), 0, SEND_HEART_INTERVAL, TimeUnit.MILLISECONDS);
+            scheduledExecutor.scheduleAtFixedRate(new CheckHeartbeatThread(), CHECK_HEART_INTERVAL, CHECK_HEART_INTERVAL, TimeUnit.MILLISECONDS);
+        }
+    }
+
+    private void shutdownScheduledTask() {
+        if (scheduledExecutor != null && !scheduledExecutor.isShutdown()) {
+            scheduledExecutor.shutdown();
+            scheduledExecutor = null;
+        }
+    }
+
     private class HandshakeHandler {
 
         private final byte[] byteMsg = new SerialPortMessage.HandshakeMessage().encode();
@@ -270,8 +270,8 @@ public class SerialPortEngine {
 
         private void sendHeartbeat() {
             try {
-                write(byteMsg, 1, TimeUnit.SECONDS);
                 log.debug("Send heartbeat message:{}", message.getHexMessage());
+                write(byteMsg, 800, TimeUnit.MILLISECONDS);
             } catch (Exception e) {
                 // do nothing
             }
@@ -359,7 +359,7 @@ public class SerialPortEngine {
                     break;
                 case SerialPortMessage.MESSAGE_TYPE_COMMON:
                     // Common message
-                    handleCommonPack(message);
+                    handleCommonMessage(message);
                     break;
                 default:
                     // Other message, ignore
@@ -367,7 +367,7 @@ public class SerialPortEngine {
             }
         }
 
-        private void handleCommonPack(SerialPortMessage message) {
+        private void handleCommonMessage(SerialPortMessage message) {
             String hexMessage = message.getHexMessage();
             byte messageAck = message.getMessageAck();
             byte messageId = message.getMessageId();
@@ -397,7 +397,7 @@ public class SerialPortEngine {
         private void sendAck(byte id) {
             SerialPortMessage message = new SerialPortMessage.AckMessage(id);
             try {
-                write(message.encode(), 1, TimeUnit.SECONDS);
+                write(message.encode(), 800, TimeUnit.MILLISECONDS);
                 log.info("Send ack message:{}", message.getHexMessage());
             } catch (Exception e) {
                 // do nothing

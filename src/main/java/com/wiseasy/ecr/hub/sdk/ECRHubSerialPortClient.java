@@ -8,7 +8,6 @@ import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto;
 import com.wiseasy.ecr.hub.sdk.sp.serialport.SerialPortEngine;
 
-import java.util.Base64;
 import java.util.Optional;
 
 public class ECRHubSerialPortClient extends ECRHubAbstractClient {
@@ -63,11 +62,10 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     protected ECRHubResponseProto.ECRHubResponse sendReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
         long timeout = getConfig().getSerialPortConfig().getConnTimeout();
 
-        byte[] sendBuffer = Base64.getEncoder().encode(request.toByteArray());
-        engine.write(sendBuffer, startTime, timeout);
+        engine.write(request.toByteArray(), startTime, timeout);
 
-        byte[] readBuffer = engine.read(request.getRequestId(), startTime, timeout);
-        return ECRHubProtobufHelper.unpack(readBuffer);
+        byte[] buffer = engine.read(request.getRequestId(), startTime, timeout);
+        return ECRHubProtobufHelper.unpack(buffer);
     }
 
     @Override
