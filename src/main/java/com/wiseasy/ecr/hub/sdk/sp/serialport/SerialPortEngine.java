@@ -33,7 +33,7 @@ public class SerialPortEngine {
     private static final Logger log = LoggerFactory.getLogger(SerialPortEngine.class);
 
     private static final long SEND_HEART_INTERVAL = 1000;
-    private static final long HEART_WAIT_TIMEOUT = 3000;
+    private static final long HEART_WAIT_TIMEOUT = SEND_HEART_INTERVAL * 3;
     private static final long CHECK_HEART_INTERVAL = 30 * 1000;
 
     private final Lock lock = new ReentrantLock();
