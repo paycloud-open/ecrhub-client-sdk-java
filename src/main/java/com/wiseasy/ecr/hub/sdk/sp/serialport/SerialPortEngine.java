@@ -32,8 +32,8 @@ public class SerialPortEngine {
 
     private static final Logger log = LoggerFactory.getLogger(SerialPortEngine.class);
 
-    private static final long SEND_HEART_INTERVAL = 1000;
-    private static final long CHECK_HEART_INTERVAL = 30 * 1000;
+    private static final long SEND_HEART_PERIOD = 1000;
+    private static final long CHECK_HEART_PERIOD = 30 * 1000;
     private static final long HEART_TIMEOUT = 3000;
 
     private final Lock lock = new ReentrantLock();
@@ -202,8 +202,8 @@ public class SerialPortEngine {
     private void startScheduledTask() {
         if (scheduledExecutor == null) {
             scheduledExecutor = ThreadUtil.createScheduledExecutor(2);
-            scheduledExecutor.scheduleAtFixedRate(new SendHeartbeatThread(), 5, SEND_HEART_INTERVAL, TimeUnit.MILLISECONDS);
-            scheduledExecutor.scheduleAtFixedRate(new CheckHeartbeatThread(), CHECK_HEART_INTERVAL, CHECK_HEART_INTERVAL, TimeUnit.MILLISECONDS);
+            scheduledExecutor.scheduleAtFixedRate(new SendHeartbeatThread(), 5, SEND_HEART_PERIOD, TimeUnit.MILLISECONDS);
+            scheduledExecutor.scheduleAtFixedRate(new CheckHeartbeatThread(), CHECK_HEART_PERIOD, CHECK_HEART_PERIOD, TimeUnit.MILLISECONDS);
         }
     }
 
@@ -280,14 +280,13 @@ public class SerialPortEngine {
 
     private class CheckHeartbeatThread implements Runnable {
 
-        private static final long CONN_KEEPALIVE_TIMEOUT = 30 * 1000;
         private static final long MAX_RECONN_TIMES = 5;
 
         @Override
         public void run() {
             long nowTime = System.currentTimeMillis();
             long intervalTime = nowTime - lastReceivedHeartTime;
-            if (intervalTime < CONN_KEEPALIVE_TIMEOUT) {
+            if (intervalTime < CHECK_HEART_PERIOD) {
                 return;
             }
             if (reconnectTimes.get() < MAX_RECONN_TIMES) {
