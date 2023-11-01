@@ -202,7 +202,7 @@ public class SerialPortEngine {
     private void startScheduledTask() {
         if (scheduledExecutor == null) {
             scheduledExecutor = ThreadUtil.createScheduledExecutor(2);
-            scheduledExecutor.scheduleAtFixedRate(new SendHeartbeatThread(), 0, SEND_HEART_INTERVAL, TimeUnit.MILLISECONDS);
+            scheduledExecutor.scheduleAtFixedRate(new SendHeartbeatThread(), 5, SEND_HEART_INTERVAL, TimeUnit.MILLISECONDS);
             scheduledExecutor.scheduleAtFixedRate(new CheckHeartbeatThread(), CHECK_HEART_INTERVAL, CHECK_HEART_INTERVAL, TimeUnit.MILLISECONDS);
         }
     }
