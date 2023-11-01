@@ -32,9 +32,9 @@ public class SerialPortEngine {
 
     private static final Logger log = LoggerFactory.getLogger(SerialPortEngine.class);
 
-    private static final long SEND_HEART_PERIOD = 1000;
-    private static final long CHECK_HEART_PERIOD = 30 * 1000;
-    private static final long HEART_TIMEOUT = 3000;
+    private static final long SEND_HEART_INTERVAL = 1000;
+    private static final long HEART_WAIT_TIMEOUT = 3000;
+    private static final long CHECK_CONNECT_INTERVAL = 30 * 1000;
 
     private final Lock lock = new ReentrantLock();
     private final SerialPortConfig config;
@@ -120,7 +120,7 @@ public class SerialPortEngine {
     public boolean isReceivedHeart() {
         long nowTime = System.currentTimeMillis();
         long intervalTime = nowTime - lastReceivedHeartTime;
-        return intervalTime < HEART_TIMEOUT;
+        return intervalTime < HEART_WAIT_TIMEOUT;
     }
 
     public boolean isConnected() {
@@ -202,8 +202,8 @@ public class SerialPortEngine {
     private void startScheduledTask() {
         if (scheduledExecutor == null) {
             scheduledExecutor = ThreadUtil.createScheduledExecutor(2);
-            scheduledExecutor.scheduleAtFixedRate(new SendHeartbeatThread(), 5, SEND_HEART_PERIOD, TimeUnit.MILLISECONDS);
-            scheduledExecutor.scheduleAtFixedRate(new CheckHeartbeatThread(), CHECK_HEART_PERIOD, CHECK_HEART_PERIOD, TimeUnit.MILLISECONDS);
+            scheduledExecutor.scheduleAtFixedRate(new SendHeartbeatThread(), 5, SEND_HEART_INTERVAL, TimeUnit.MILLISECONDS);
+            scheduledExecutor.scheduleAtFixedRate(new CheckHeartbeatThread(), CHECK_CONNECT_INTERVAL, CHECK_CONNECT_INTERVAL, TimeUnit.MILLISECONDS);
         }
     }
 
@@ -280,16 +280,16 @@ public class SerialPortEngine {
 
     private class CheckHeartbeatThread implements Runnable {
 
-        private static final long MAX_RECONN_TIMES = 5;
+        private static final long MAX_RECONNECT_TIMES = 5;
 
         @Override
         public void run() {
             long nowTime = System.currentTimeMillis();
             long intervalTime = nowTime - lastReceivedHeartTime;
-            if (intervalTime < CHECK_HEART_PERIOD) {
+            if (intervalTime < CHECK_CONNECT_INTERVAL) {
                 return;
             }
-            if (reconnectTimes.get() < MAX_RECONN_TIMES) {
+            if (reconnectTimes.get() < MAX_RECONNECT_TIMES) {
                 log.info("Not received heartbeat message from POS terminal cashier App, try to reconnect");
                 reconnect();
                 reconnectTimes.incrementAndGet();
