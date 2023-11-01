@@ -35,33 +35,33 @@ public class SerialPortMessageDecoder {
         while (currentLen >= SerialPortMessage.MESSAGE_HEADER_LENGTH) {
             // Read the header start character, any data before the start character will be discarded
             if (!(buffer[cursor] == SerialPortMessage.MESSAGE_STX1 && buffer[cursor + 1] == SerialPortMessage.MESSAGE_STX2)) {
+                // Header start character not taken, packet length -1, pointer shifted back 1 bit
                 --currentLen;
                 ++cursor;
-                continue;
+            } else {
+                // Parse the length of valid data
+                int dataLenIndex = SerialPortMessage.MESSAGE_DATA_LENGTH_INDEX;
+                int dataLen = SerialPortMessage.parseDataLen(buffer[cursor + dataLenIndex], buffer[cursor + dataLenIndex + 1]);
+
+                // Calculate the total packet length
+                int packLen = SerialPortMessage.MESSAGE_HEADER_LENGTH + dataLen +
+                              SerialPortMessage.MESSAGE_CRC_LENGTH + SerialPortMessage.MESSAGE_ETX_LENGTH;
+
+                // If the current length of the packet is less than the length of the whole packet,
+                // jump out of the loop and continue to receive data.
+                if (currentLen < packLen) {
+                    break;
+                }
+
+                // Handle packet
+                byte[] pack = new byte[packLen];
+                System.arraycopy(buffer, cursor, pack, 0, packLen);
+                messageHandler.handle(pack);
+
+                // The cursor moves to the end of the packet with the length of the remaining data
+                currentLen -= packLen;
+                cursor += packLen;
             }
-
-            // Parse the length of valid data
-            int dataLenIndex = SerialPortMessage.MESSAGE_DATA_LENGTH_INDEX;
-            int dataLen = SerialPortMessage.parseDataLen(buffer[cursor + dataLenIndex], buffer[cursor + dataLenIndex + 1]);
-
-            // Calculate the total packet length
-            int packLen = SerialPortMessage.MESSAGE_HEADER_LENGTH + dataLen +
-                          SerialPortMessage.MESSAGE_CRC_LENGTH + SerialPortMessage.MESSAGE_ETX_LENGTH;
-
-            // If the current length of the packet is less than the length of the whole packet,
-            // jump out of the loop and continue to receive data.
-            if (currentLen < packLen) {
-                break;
-            }
-
-            // Handle packet
-            byte[] pack = new byte[packLen];
-            System.arraycopy(buffer, cursor, pack, 0, packLen);
-            messageHandler.handle(pack);
-
-            // The cursor moves to the end of the packet with the length of the remaining data
-            currentLen -= packLen;
-            cursor += packLen;
         }
 
         // The remaining bytes are put into the buffer
