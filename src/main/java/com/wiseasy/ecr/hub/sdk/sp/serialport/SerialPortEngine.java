@@ -34,7 +34,7 @@ public class SerialPortEngine {
 
     private static final long SEND_HEART_INTERVAL = 1000;
     private static final long HEART_WAIT_TIMEOUT = 3000;
-    private static final long CHECK_CONNECT_INTERVAL = 30 * 1000;
+    private static final long CHECK_HEART_INTERVAL = 30 * 1000;
 
     private final Lock lock = new ReentrantLock();
     private final SerialPortConfig config;
@@ -203,7 +203,7 @@ public class SerialPortEngine {
         if (scheduledExecutor == null) {
             scheduledExecutor = ThreadUtil.createScheduledExecutor(2);
             scheduledExecutor.scheduleAtFixedRate(new SendHeartbeatThread(), 5, SEND_HEART_INTERVAL, TimeUnit.MILLISECONDS);
-            scheduledExecutor.scheduleAtFixedRate(new CheckHeartbeatThread(), CHECK_CONNECT_INTERVAL, CHECK_CONNECT_INTERVAL, TimeUnit.MILLISECONDS);
+            scheduledExecutor.scheduleAtFixedRate(new CheckHeartbeatThread(), CHECK_HEART_INTERVAL, CHECK_HEART_INTERVAL, TimeUnit.MILLISECONDS);
         }
     }
 
@@ -286,7 +286,7 @@ public class SerialPortEngine {
         public void run() {
             long nowTime = System.currentTimeMillis();
             long intervalTime = nowTime - lastReceivedHeartTime;
-            if (intervalTime < CHECK_CONNECT_INTERVAL) {
+            if (intervalTime < CHECK_HEART_INTERVAL) {
                 return;
             }
             if (reconnectTimes.get() < MAX_RECONNECT_TIMES) {
