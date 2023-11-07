@@ -77,7 +77,7 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
     }
 
     @Override
-    protected ECRHubResponseProto.ECRHubResponse sendReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
+    protected ECRHubResponseProto.ECRHubResponse send(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
         long timeout = getConfig().getSocketConfig().getConnTimeout();
 
         engine.send(request.toByteArray());

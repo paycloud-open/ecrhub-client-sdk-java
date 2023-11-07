@@ -2,7 +2,6 @@ package com.wiseasy.ecr.hub.sdk.sp.serialport;
 
 import cn.hutool.cache.impl.FIFOCache;
 import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
@@ -41,7 +40,7 @@ public class SerialPortEngine {
     private final SerialPort serialPort;
     private final String serialPortName;
     private final Map<Byte, Integer> ackMap;
-    private final FIFOCache<String, byte[]> msgCache;
+    private final FIFOCache<String, SerialPortMessage> msgCache;
     private final AtomicInteger reconnectTimes;
     private ScheduledExecutorService scheduledExecutor;
     private volatile long lastReceivedHeartTime;
@@ -169,7 +168,7 @@ public class SerialPortEngine {
         byte[] byteMsg = message.encode();
         log.info("Send data message:{}", message.getHexMessage());
 
-        ackMap.put(message.messageId, 0);
+        ackMap.put(message.messageId, 1);
 
         while (isWorking && ackMap.containsKey(message.messageId)) {
             write(byteMsg, timeout, TimeUnit.MILLISECONDS);
@@ -182,21 +181,42 @@ public class SerialPortEngine {
     }
 
     public byte[] read(String requestId, long startTime, long timeout) throws ECRHubException {
-        byte[] buffer = new byte[0];
+        SerialPortMessage message = readMessage(requestId, startTime, timeout);
+        if (message != null) {
+            return message.getMessageData();
+        } else {
+            return new byte[0];
+        }
+    }
+
+    public SerialPortMessage readMessage(String requestId, long startTime, long timeout) throws ECRHubException {
+        SerialPortMessage message = null;
         while (isWorking) {
-            byte[] msg = msgCache.get(requestId);
-            if (ArrayUtil.isNotEmpty(msg)) {
+             message = msgCache.get(requestId);
+            if (message != null) {
                 msgCache.remove(requestId);
-                buffer = msg;
                 break;
-            } else {
-                ThreadUtil.safeSleep(20);
-                if (System.currentTimeMillis() - startTime > timeout) {
-                    throw new ECRHubTimeoutException("Read timeout");
-                }
+            }
+            ThreadUtil.safeSleep(20);
+            if (System.currentTimeMillis() - startTime > timeout) {
+                throw new ECRHubTimeoutException("Read timeout");
             }
         }
-        return buffer;
+        return message;
+    }
+
+    public byte[] send(String requestId, byte[] bytes, long writeTimeout, long readTimeout) throws ECRHubException {
+        // Write message
+        log.info("Send data message:{}", HexUtil.byte2hex(bytes));
+        write(bytes, writeTimeout, TimeUnit.MILLISECONDS);
+
+        // Read message
+        SerialPortMessage message = readMessage(requestId, System.currentTimeMillis(), readTimeout);
+        if (message != null) {
+            return HexUtil.hex2byte(message.getHexMessage());
+        } else {
+            return new byte[0];
+        }
     }
 
     private void startScheduledTask() {
@@ -291,8 +311,8 @@ public class SerialPortEngine {
             }
             if (reconnectTimes.get() < MAX_RECONNECT_TIMES) {
                 log.info("Not received heartbeat message from POS terminal cashier App, try to reconnect");
-                reconnect();
                 reconnectTimes.incrementAndGet();
+                reconnect();
             }
         }
 
@@ -387,8 +407,8 @@ public class SerialPortEngine {
                     log.info("Received data message:{}", hexMessage);
                     // Send data ACK message
                     sendAck(messageId);
-                    // Cache data
-                    putCache(message.getMessageData());
+                    // Cache message
+                    putCache(message);
                 }
             }
         }
@@ -403,7 +423,8 @@ public class SerialPortEngine {
             }
         }
 
-        private void putCache(byte[] data) {
+        private void putCache(SerialPortMessage message) {
+            byte[] data = message.getMessageData();
             if (data == null || data.length == 0) {
                 return;
             }
@@ -419,7 +440,7 @@ public class SerialPortEngine {
             String requestId = response.getRequestId();
             if (StrUtil.isNotBlank(requestId) && !requestId.equals(lastReceivedRequestId)) {
                 lastReceivedRequestId = requestId;
-                msgCache.put(requestId, data);
+                msgCache.put(requestId, message);
             }
         }
     }

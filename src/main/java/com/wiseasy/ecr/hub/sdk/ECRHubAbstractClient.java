@@ -70,10 +70,10 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
 
     protected abstract <T extends ECRHubResponse> T getResp(ECRHubRequest<T> request) throws ECRHubException;
 
-    protected abstract ECRHubResponseProto.ECRHubResponse sendReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException;
+    protected abstract ECRHubResponseProto.ECRHubResponse send(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException;
 
     protected ECRHubResponse pair(long startTime) throws ECRHubException {
-        ECRHubResponseProto.ECRHubResponse resp = sendReq(buildPairReq(), startTime);
+        ECRHubResponseProto.ECRHubResponse resp = send(buildPairReq(), startTime);
         ECRHubResponse response = buildResp(ECRHubResponse.class, resp);
         if (!response.isSuccess()) {
             throw new ECRHubException(response.getError_msg());
@@ -99,11 +99,11 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
     }
 
     protected <T extends ECRHubResponse> T buildResp(Class<T> respClass, byte[] respBuffer) throws ECRHubException {
-        if (respBuffer == null) {
-            return null;
-        } else {
+        if (respBuffer != null) {
             ECRHubResponseProto.ECRHubResponse resp = ECRHubProtobufHelper.parseRespFrom(respBuffer);
             return buildResp(respClass, resp);
+        } else {
+            return null;
         }
     }
 

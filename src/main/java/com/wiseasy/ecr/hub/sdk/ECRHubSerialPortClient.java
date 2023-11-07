@@ -58,8 +58,13 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
         }
     }
 
+    public byte[] send(String requestId, byte[] buffer) throws ECRHubException {
+        ECRHubConfig.SerialPortConfig conf = getConfig().getSerialPortConfig();
+        return engine.send(requestId, buffer, conf.getWriteTimeout(), conf.getReadTimeout());
+    }
+
     @Override
-    protected ECRHubResponseProto.ECRHubResponse sendReq(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
+    protected ECRHubResponseProto.ECRHubResponse send(ECRHubRequestProto.ECRHubRequest request, long startTime) throws ECRHubException {
         long timeout = getConfig().getSerialPortConfig().getConnTimeout();
 
         engine.write(request.toByteArray(), startTime, timeout);
