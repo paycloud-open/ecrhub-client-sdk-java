@@ -60,6 +60,7 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
 
     public byte[] send(String requestId, byte[] buffer) throws ECRHubException {
         ECRHubConfig.SerialPortConfig conf = getConfig().getSerialPortConfig();
+        autoConnect();
         return engine.send(requestId, buffer, conf.getWriteTimeout(), conf.getReadTimeout());
     }
 
