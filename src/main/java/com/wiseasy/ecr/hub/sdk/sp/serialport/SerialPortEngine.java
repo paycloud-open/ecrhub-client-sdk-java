@@ -192,7 +192,7 @@ public class SerialPortEngine {
     public SerialPortMessage readMessage(String requestId, long startTime, long timeout) throws ECRHubException {
         SerialPortMessage message = null;
         while (isWorking) {
-             message = msgCache.get(requestId);
+            message = msgCache.get(requestId);
             if (message != null) {
                 msgCache.remove(requestId);
                 break;
