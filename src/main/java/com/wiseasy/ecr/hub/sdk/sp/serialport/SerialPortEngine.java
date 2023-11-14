@@ -32,7 +32,7 @@ public class SerialPortEngine {
     private static final Logger log = LoggerFactory.getLogger(SerialPortEngine.class);
 
     private static final long SEND_HEART_INTERVAL = 1000;
-    private static final long RECV_HEART_TIMEOUT = 3000;
+    private static final long RECV_HEART_TIMEOUT = 1200;
     private static final long CHECK_HEART_INTERVAL = 30 * 1000;
 
     private final Lock lock = new ReentrantLock();
@@ -44,7 +44,7 @@ public class SerialPortEngine {
     private final AtomicInteger reconnectTimes;
     private ScheduledExecutorService scheduledExecutor;
     private volatile long lastReceivedHeartTime;
-    private volatile boolean isConnected;
+    private volatile boolean isHandshakeSuccess;
     private volatile boolean isWorking;
 
     public SerialPortEngine(String portName, SerialPortConfig config) throws ECRHubException {
@@ -77,9 +77,7 @@ public class SerialPortEngine {
             open();
             // Handshake connect
             new HandshakeHandler().handshake(startTime);
-            // Refresh last received heart time
-            refreshLastReceivedHeartTime();
-            // Reset the reconnection times is zero
+            // Reset the reconnection times
             reconnectTimes.set(0);
         }
     }
@@ -108,22 +106,12 @@ public class SerialPortEngine {
             log.info("Close the serial port[{}]", serialPortName);
             serialPort.removeDataListener();
             serialPort.closePort();
-            isConnected = false;
+            isHandshakeSuccess = false;
         }
     }
 
-    private void refreshLastReceivedHeartTime() {
-        this.lastReceivedHeartTime = System.currentTimeMillis();
-    }
-
-    public boolean isReceivedHeart() {
-        long nowTime = System.currentTimeMillis();
-        long intervalTime = nowTime - lastReceivedHeartTime;
-        return intervalTime < RECV_HEART_TIMEOUT;
-    }
-
     public boolean isConnected() {
-        return isConnected;
+        return isOpen() && isHandshakeSuccess;
     }
 
     public void disconnect() {
@@ -139,6 +127,24 @@ public class SerialPortEngine {
             log.info("Serial port[{}] disconnect successful", serialPortName);
         } finally {
             lock.unlock();
+        }
+    }
+
+    private void refreshLastReceivedHeartTime() {
+        this.lastReceivedHeartTime = System.currentTimeMillis();
+    }
+
+    public boolean isReceivedHeart() {
+        long startTime = System.currentTimeMillis();
+        while (true) {
+            long intervalTime = lastReceivedHeartTime - startTime;
+            if (intervalTime >= 0) {
+                return true;
+            }
+            ThreadUtil.safeSleep(5);
+            if (System.currentTimeMillis() - startTime > RECV_HEART_TIMEOUT) {
+                return false;
+            }
         }
     }
 
@@ -266,7 +272,7 @@ public class SerialPortEngine {
             }
             // Read handshake confirm message
             long startTime = System.currentTimeMillis();
-            while (!isConnected) {
+            while (!isHandshakeSuccess) {
                 ThreadUtil.safeSleep(5);
                 if (System.currentTimeMillis() - startTime > 1000) {
                     return false;
@@ -374,7 +380,7 @@ public class SerialPortEngine {
             switch (message.messageType) {
                 case SerialPortMessage.MESSAGE_TYPE_HANDSHAKE_CONFIRM:
                     // Handshake confirm message
-                    SerialPortEngine.this.isConnected = true;
+                    SerialPortEngine.this.isHandshakeSuccess = true;
                     break;
                 case SerialPortMessage.MESSAGE_TYPE_COMMON:
                     // Common message
