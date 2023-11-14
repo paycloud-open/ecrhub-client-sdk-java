@@ -4,6 +4,7 @@ import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.wiseasy.ecr.hub.sdk.enums.ETopic;
+import com.wiseasy.ecr.hub.sdk.enums.ETransStatus;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
 import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
@@ -115,8 +116,11 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
         }
 
         ResponseBizData respBizData = resp.getBizData();
-        JSONObject respDataJson = ECRHubProtobufHelper.toJson(respBizData);
+        if (ETransStatus.TIMEOUT.getCode().equals(respBizData.getTransStatus())) {
+            throw new ECRHubTimeoutException(resp.getErrorMsg());
+        }
 
+        JSONObject respDataJson = ECRHubProtobufHelper.toJson(respBizData);
         T response = respDataJson.toJavaObject(respClass);
         response.setRequest_id(resp.getRequestId());
         response.setSuccess(resp.getSuccess());
