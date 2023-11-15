@@ -3,6 +3,7 @@ package com.wiseasy.ecr.hub.sdk.sp.serialport;
 import cn.hutool.core.util.StrUtil;
 import com.fazecast.jSerialComm.SerialPort;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubConnectionException;
+import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class SerialPortHelper {
 
-    public static SerialPort getSerialPort(String portName, String portNameKeyword) throws ECRHubConnectionException {
+    public static SerialPort getSerialPort(String portName, String portNameKeyword) throws ECRHubException {
         if (StrUtil.isNotBlank(portName)) {
             // Specify the serial port name
             try {

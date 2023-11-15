@@ -87,7 +87,7 @@ public class SerialPortEngine {
         return serialPort.isOpen();
     }
 
-    private void open() throws ECRHubConnectionException {
+    private void open() throws ECRHubException {
         log.info("Serial port[{}] opening...", serialPortName);
         boolean success = serialPort.openPort(10);
         if (success) {
