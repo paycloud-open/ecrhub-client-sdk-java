@@ -218,6 +218,10 @@ public class SerialPortEngine {
         write(bytes, writeTimeout, TimeUnit.MILLISECONDS);
 
         // Read message
+        if (StrUtil.isBlank(requestId)) {
+            return new byte[0];
+        }
+
         SerialPortMessage message = readMessage(requestId, System.currentTimeMillis(), readTimeout);
         if (message != null) {
             return HexUtil.hex2byte(message.getHexMessage());
