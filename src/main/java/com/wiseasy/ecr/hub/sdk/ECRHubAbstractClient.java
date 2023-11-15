@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.wiseasy.ecr.hub.sdk.enums.ETopic;
 import com.wiseasy.ecr.hub.sdk.enums.ETransStatus;
+import com.wiseasy.ecr.hub.sdk.exception.ECRHubConnectionException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
 import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
@@ -77,7 +78,7 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
         ECRHubResponseProto.ECRHubResponse resp = send(buildPairReq(), startTime);
         ECRHubResponse response = buildResp(ECRHubResponse.class, resp);
         if (!response.isSuccess()) {
-            throw new ECRHubException(response.getError_msg());
+            throw new ECRHubConnectionException(response.getError_msg());
         }
         return response;
     }

@@ -1,5 +1,6 @@
 package com.wiseasy.ecr.hub.sdk;
 
+import com.wiseasy.ecr.hub.sdk.exception.ECRHubConnectionException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.model.request.ECRHubRequest;
 import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
@@ -48,12 +49,12 @@ public class ECRHubSerialPortClient extends ECRHubAbstractClient {
     protected void autoConnect() throws ECRHubException {
         if (engine.isConnected()) {
             if (!engine.isReceivedHeart()) {
-                throw new ECRHubException("Serial port is not connected, " +
+                throw new ECRHubConnectionException("Serial port is not connected, " +
                         "please check the USB cable is connected and POS terminal cashier App is launched");
             }
         } else {
             if (!this.connect()) {
-                throw new ECRHubException("Serial port connection failed");
+                throw new ECRHubConnectionException("Serial port connection failed");
             }
         }
     }

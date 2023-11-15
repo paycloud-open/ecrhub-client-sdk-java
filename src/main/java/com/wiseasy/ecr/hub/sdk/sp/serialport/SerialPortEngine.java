@@ -7,6 +7,7 @@ import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 import com.wiseasy.ecr.hub.sdk.ECRHubConfig.SerialPortConfig;
+import com.wiseasy.ecr.hub.sdk.exception.ECRHubConnectionException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubProtobufHelper;
@@ -86,7 +87,7 @@ public class SerialPortEngine {
         return serialPort.isOpen();
     }
 
-    private void open() throws ECRHubException {
+    private void open() throws ECRHubConnectionException {
         log.info("Serial port[{}] opening...", serialPortName);
         boolean success = serialPort.openPort(10);
         if (success) {
@@ -97,7 +98,7 @@ public class SerialPortEngine {
             log.info("Serial port[{}] open successful", serialPortName);
         } else {
             log.error("Serial port[{}] open failed", serialPortName);
-            throw new ECRHubException("Serial port[" + serialPortName + "] open failed");
+            throw new ECRHubConnectionException("Serial port[" + serialPortName + "] open failed");
         }
     }
 
@@ -255,7 +256,7 @@ public class SerialPortEngine {
                     if (System.currentTimeMillis() - startTime > config.getConnTimeout()) {
                         log.error("Serial port[{}] handshake connection timeout", serialPortName);
                         SerialPortEngine.this.close();
-                        throw new ECRHubTimeoutException("Serial port["+ serialPortName +"] handshake connection timeout");
+                        throw new ECRHubConnectionException("Serial port["+ serialPortName +"] handshake connection timeout");
                     }
                 }
             }
@@ -268,7 +269,7 @@ public class SerialPortEngine {
             } catch (ECRHubException e) {
                 log.error("Serial port[{}] handshake connection failed, reason: {}", serialPortName, e.getMessage());
                 SerialPortEngine.this.close();
-                throw e;
+                throw new ECRHubConnectionException(e.getMessage());
             }
             // Read handshake confirm message
             long startTime = System.currentTimeMillis();
@@ -372,7 +373,7 @@ public class SerialPortEngine {
                 }
             } catch (Exception e) {
                 String hexMsg = HexUtil.byte2hex(buffer);
-                log.warn("Handle message["+ hexMsg +"] error: ", e);
+                log.error("Handle message["+ hexMsg +"] error: ", e);
             }
         }
 
@@ -438,7 +439,7 @@ public class SerialPortEngine {
             try {
                 response = ECRHubProtobufHelper.parseRespFrom(data);
             } catch (Exception e) {
-                log.warn(e.getMessage(), e);
+                log.error(e.getMessage(), e);
             }
             if (response == null) {
                 return;
