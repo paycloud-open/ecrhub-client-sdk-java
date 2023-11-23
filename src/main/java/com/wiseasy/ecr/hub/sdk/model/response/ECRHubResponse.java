@@ -12,15 +12,15 @@ public class ECRHubResponse {
     @JSONField(name = "requestId")
     private String request_id;
     /**
-     * Execution status, true:success, false:failure
+     * Response Code, 000:success, other:failure
      */
-    @JSONField(name = "success")
-    private boolean success;
+    @JSONField(name = "responseCode")
+    private String response_code;
     /**
-     * Error message, this msg contains an error message when an error occurs
+     * Response message, this msg contains an error message when an error occurs
      */
-    @JSONField(name = "errorMsg")
-    private String error_msg;
+    @JSONField(name = "responseMsg")
+    private String response_msg;
     /**
      * Extended parameters
      */
@@ -40,20 +40,20 @@ public class ECRHubResponse {
         this.request_id = request_id;
     }
 
-    public boolean isSuccess() {
-        return success;
+    public String getResponse_code() {
+        return response_code;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setResponse_code(String response_code) {
+        this.response_code = response_code;
     }
 
-    public String getError_msg() {
-        return error_msg;
+    public String getResponse_msg() {
+        return response_msg;
     }
 
-    public void setError_msg(String error_msg) {
-        this.error_msg = error_msg;
+    public void setResponse_msg(String response_msg) {
+        this.response_msg = response_msg;
     }
 
     public DeviceData getDevice_data() {

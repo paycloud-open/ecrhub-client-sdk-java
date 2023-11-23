@@ -34,7 +34,8 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
 
     @Override
     public boolean connect() throws ECRHubException {
-        return connect2().isSuccess();
+         this.connect2();
+         return true;
     }
 
     @Override
@@ -54,7 +55,7 @@ public class ECRHubWebSocketClient extends ECRHubAbstractClient {
         }
 
         ECRHubResponse response = pair(startTime);
-        connected = response.isSuccess();
+        connected = true;
         log.info("Connection successful");
 
         return response;

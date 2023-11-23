@@ -3,8 +3,8 @@ package com.wiseasy.ecr.hub.sdk;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson2.JSONObject;
+import com.wiseasy.ecr.hub.sdk.enums.EResponseCode;
 import com.wiseasy.ecr.hub.sdk.enums.ETopic;
-import com.wiseasy.ecr.hub.sdk.enums.ETransStatus;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubConnectionException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubTimeoutException;
@@ -77,8 +77,8 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
     protected ECRHubResponse pair(long startTime) throws ECRHubException {
         ECRHubResponseProto.ECRHubResponse resp = send(buildPairReq(), startTime);
         ECRHubResponse response = buildResp(ECRHubResponse.class, resp);
-        if (!response.isSuccess()) {
-            throw new ECRHubConnectionException(response.getError_msg());
+        if (!EResponseCode.SUCCESS.getCode().equals(response.getResponse_code())) {
+            throw new ECRHubConnectionException("["+response.getResponse_code()+"]" + response.getResponse_msg());
         }
         return response;
     }
@@ -110,6 +110,10 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
     }
 
     protected <T extends ECRHubResponse> T buildResp(Class<T> respClass, ECRHubResponseProto.ECRHubResponse resp) throws ECRHubException {
+        if (EResponseCode.TIMEOUT.getCode().equals(resp.getResponseCode())) {
+            throw new ECRHubTimeoutException(resp.getResponseMsg());
+        }
+
         DeviceData deviceData = null;
         if (resp.hasDeviceData()) {
             JSONObject json = ECRHubProtobufHelper.toJson(resp.getDeviceData());
@@ -117,15 +121,12 @@ public abstract class ECRHubAbstractClient implements ECRHubClient {
         }
 
         ResponseBizData respBizData = resp.getBizData();
-        if (ETransStatus.TIMEOUT.getCode().equals(respBizData.getTransStatus())) {
-            throw new ECRHubTimeoutException(resp.getErrorMsg());
-        }
-
         JSONObject respDataJson = ECRHubProtobufHelper.toJson(respBizData);
+
         T response = respDataJson.toJavaObject(respClass);
         response.setRequest_id(resp.getRequestId());
-        response.setSuccess(resp.getSuccess());
-        response.setError_msg(resp.getErrorMsg());
+        response.setResponse_code(resp.getResponseCode());
+        response.setResponse_msg(resp.getResponseMsg());
         response.setDevice_data(deviceData);
         return response;
     }

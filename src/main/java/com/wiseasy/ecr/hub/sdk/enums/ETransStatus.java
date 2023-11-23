@@ -6,10 +6,6 @@ public enum ETransStatus {
      */
     PREORDER("9"),
     /**
-     * Order timeout
-     */
-    TIMEOUT("-1"),
-    /**
      * Order has been created or paying or refunding
      */
     CREATED("0"),

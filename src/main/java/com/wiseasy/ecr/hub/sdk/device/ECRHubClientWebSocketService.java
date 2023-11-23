@@ -8,9 +8,9 @@ import com.alibaba.fastjson2.JSONObject;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.wiseasy.ecr.hub.sdk.ECRHubClient;
 import com.wiseasy.ecr.hub.sdk.ECRHubClientFactory;
+import com.wiseasy.ecr.hub.sdk.enums.EResponseCode;
 import com.wiseasy.ecr.hub.sdk.enums.ETopic;
 import com.wiseasy.ecr.hub.sdk.exception.ECRHubException;
-import com.wiseasy.ecr.hub.sdk.model.response.ECRHubResponse;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubRequestProto;
 import com.wiseasy.ecr.hub.sdk.protobuf.ECRHubResponseProto;
 import com.wiseasy.ecr.hub.sdk.sp.websocket.WebSocketClientEngine;
@@ -137,8 +137,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
         }
         ECRHubClient ecrHubClient = ECRHubClientFactory.create(device.getWs_address());
         try {
-            ECRHubResponse ecrHubResponse = ecrHubClient.connect2();
-            boolean success = ecrHubResponse.isSuccess();
+            boolean success = ecrHubClient.connect();
             if (success) {
                 storage.addPairedDevice(device.getTerminal_sn());
                 if (null != ecrHubDeviceEventListener) {
@@ -184,7 +183,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             // The default wait is 60s
             byte[] buffer = engine.receive(msgId, System.currentTimeMillis(), 60 * 1000);
             ECRHubResponseProto.ECRHubResponse ecrHubResponse = ECRHubResponseProto.ECRHubResponse.parseFrom(buffer);
-            if (ecrHubResponse.getSuccess()) {
+            if (EResponseCode.SUCCESS.equals(ecrHubResponse.getResponseCode())) {
                 // unpaired succeeded
                 doUnpaired(device);
             }
@@ -271,7 +270,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             socket.send(ECRHubResponseProto.ECRHubResponse.newBuilder()
                     .setRequestId(IdUtil.fastSimpleUUID())
                     .setTopic(ETopic.PAIR.getVal())
-                    .setSuccess(success)
+                    .setResponseCode(success ? EResponseCode.SUCCESS.getCode() : "")
                     .build().toByteArray());
         } else {
             // The default pairing is not set successfully
@@ -279,7 +278,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
             socket.send(ECRHubResponseProto.ECRHubResponse.newBuilder()
                     .setRequestId(IdUtil.fastSimpleUUID())
                     .setTopic(ETopic.PAIR.getVal())
-                    .setSuccess(true)
+                    .setResponseCode(EResponseCode.SUCCESS.getCode())
                     .build().toByteArray());
         }
     }
@@ -288,7 +287,7 @@ public class ECRHubClientWebSocketService implements WebSocketClientListener, EC
         socket.send(ECRHubResponseProto.ECRHubResponse.newBuilder()
                 .setRequestId(IdUtil.fastSimpleUUID())
                 .setTopic(ETopic.UN_PAIR.getVal())
-                .setSuccess(true)
+                .setResponseCode(EResponseCode.SUCCESS.getCode())
                 .build().toByteArray());
 
         storage.removePairedDevice(device.getTerminal_sn());

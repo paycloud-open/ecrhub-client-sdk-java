@@ -18,11 +18,11 @@ message ECRHubResponse {
   /**
   status
  */
-  bool success = 4;
+  string response_code = 4;
   /**
   error message
   */
-  string error_msg = 5;
+  string response_msg = 5;
   /**
   Response Business Data
   */
